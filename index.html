@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RPG Job Tree Wiki</title>
+    <title>RPG Job Tree Mobile Friendly</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        /* --- CSS Section --- */
         :root {
             --bg-color: #0f172a;
             --sidebar-color: #1e293b;
@@ -13,7 +13,6 @@
             --text-primary: #f1f5f9;
             --text-secondary: #94a3b8;
             --special-color: #fbbf24;
-            --danger-color: #ef4444;
         }
 
         body {
@@ -23,306 +22,233 @@
             color: var(--text-primary);
             display: flex;
             height: 100vh;
-            overflow: hidden;
+            flex-direction: row; /* Desktop: แนวนอน */
         }
 
-        /* Sidebar Styling */
+        /* --- Sidebar & Navigation --- */
         .sidebar {
-            width: 320px;
+            width: 300px;
             background-color: var(--sidebar-color);
             border-right: 1px solid #334155;
             display: flex;
             flex-direction: column;
             padding: 20px;
             overflow-y: auto;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            z-index: 1001;
+            cursor: pointer;
         }
 
         h2.category {
             font-size: 1.1rem;
             color: var(--accent-color);
             margin-top: 20px;
-            margin-bottom: 10px;
             border-bottom: 2px solid #334155;
             padding-bottom: 5px;
         }
 
-        .note {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-
-        /* Job Tree Indentation */
-        .tree-level-1 { padding-left: 0px; }
-        .tree-level-2 { padding-left: 15px; border-left: 1px solid #475569; }
-        .tree-level-3 { padding-left: 15px; border-left: 1px dashed #475569; }
-        .tree-level-4 { padding-left: 15px; border-left: 1px dotted #475569; }
+        .tree-level { margin-left: 10px; border-left: 1px solid #475569; padding-left: 10px; }
 
         button.job-btn {
             width: 100%;
             text-align: left;
-            padding: 8px 12px;
+            padding: 10px;
             margin: 2px 0;
             background: transparent;
             border: 1px solid transparent;
             color: var(--text-primary);
             cursor: pointer;
-            border-radius: 4px;
-            transition: 0.2s;
+            font-size: 0.95rem;
         }
 
-        button.job-btn:hover {
-            background: rgba(56, 189, 248, 0.1);
-            border-color: var(--accent-color);
-        }
+        button.job-btn:hover { background: rgba(56, 189, 248, 0.1); color: var(--accent-color); }
 
         .weapon-tab-btn {
-            margin-top: 30px;
+            margin-top: 20px;
             background: var(--accent-color) !important;
             color: var(--bg-color) !important;
             font-weight: bold;
             text-align: center !important;
+            border-radius: 8px;
         }
 
-        /* Content Area */
+        /* --- Content Area --- */
         .main-content {
             flex: 1;
-            padding: 40px;
+            padding: 20px;
             overflow-y: auto;
             display: flex;
             justify-content: center;
         }
 
         .card {
-            max-width: 800px;
+            max-width: 700px;
             width: 100%;
             background: #1e293b;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            border: 1px solid #334155;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
             height: fit-content;
+            margin-bottom: 80px; /* กันโดนปุ่มเมนูบัง */
         }
 
-        .job-title {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-        }
+        .job-title { color: var(--accent-color); font-size: 2rem; margin-top: 0; }
+        .section-title { color: var(--special-color); font-weight: bold; margin-top: 20px; }
+        .info-box { background: rgba(15, 23, 42, 0.4); padding: 12px; border-radius: 8px; margin-top: 8px; line-height: 1.5; }
 
-        .section-title {
-            font-size: 1.2rem;
-            color: var(--special-color);
-            margin-top: 25px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.9rem; }
+        th, td { padding: 10px; border-bottom: 1px solid #334155; text-align: left; }
 
-        .info-box {
-            background: rgba(15, 23, 42, 0.5);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            line-height: 1.6;
-        }
+        /* --- RESPONSIVE SETTINGS --- */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
+            .sidebar {
+                position: fixed;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                transform: translateX(-100%); /* ซ่อนเมนูด้านซ้าย */
+                width: 260px;
+            }
 
-        th, td {
-            text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid #334155;
-        }
+            .sidebar.active {
+                transform: translateX(0); /* แสดงเมนู */
+            }
 
-        th { color: var(--accent-color); }
+            .menu-toggle {
+                display: block; /* แสดงปุ่มเปิดเมนูบนมือถือ */
+            }
 
-        .welcome-screen {
-            text-align: center;
-            align-self: center;
+            .main-content {
+                padding: 15px;
+            }
+
+            .job-title { font-size: 1.6rem; }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <nav class="sidebar">
-        <h2 class="category">🚩 นักผจญภัย</h2>
-        <p class="note">(หัวข้อพื้นฐาน)</p>
+    <button class="menu-toggle" onclick="toggleMenu()">☰ อาชีพ</button>
 
-        <div class="tree-level-1">
-            <button class="job-btn" onclick="renderJob('app_warrior')">นักรบฝึกหัด</button>
-            <div class="tree-level-2">
-                <button class="job-btn" onclick="renderJob('warrior')">นักรบ</button>
-                <div class="tree-level-3">
-                    <button class="job-btn" onclick="renderJob('app_knight')">อัศวินฝึกหัด</button>
-                    <button class="job-btn" onclick="renderJob('knight')">อัศวิน</button>
-                    <div class="tree-level-4">
-                        <button class="job-btn" onclick="renderJob('app_paladin')">พาลาดินฝึกหัด</button>
-                        <button class="job-btn" onclick="renderJob('paladin')">พาลาดิน</button>
-                        <button class="job-btn" onclick="renderJob('app_sword')">จอมดาบฝึกหัด</button>
-                        <button class="job-btn" onclick="renderJob('sword')">จอมดาบ</button>
-                        <button class="job-btn" onclick="renderJob('app_beat')">บีทไนท์ฝึกหัด</button>
-                        <button class="job-btn" onclick="renderJob('beat')">บีทไนท์</button>
-                    </div>
-                </div>
-                <div class="tree-level-3">
-                    <button class="job-btn" onclick="renderJob('app_hunter')">นายพรานฝึกหัด</button>
-                    <button class="job-btn" onclick="renderJob('hunter')">นายพราน</button>
-                    <div class="tree-level-4">
-                        <button class="job-btn" onclick="renderJob('app_sin')">นักฆ่าฝึกหัด</button>
-                        <button class="job-btn" onclick="renderJob('sin')">นักฆ่า</button>
-                        <button class="job-btn" onclick="renderJob('app_sniper')">นักแม่นฝึกหัด</button>
-                        <button class="job-btn" onclick="renderJob('sniper')">นักแม่น</button>
-                        <button class="job-btn" onclick="renderJob('app_sum')">ซัมมอนเนอร์ฝึกหัด</button>
-                        <button class="job-btn" onclick="renderJob('sum')">ซัมมอนเนอร์</button>
+    <nav class="sidebar" id="sidebar">
+        <h2 style="color: white; margin-top: 0;">RPG Wiki</h2>
+        
+        <h2 class="category">🚩 สายนักรบ</h2>
+        <div class="tree-level">
+            <button class="job-btn" onclick="selectJob('app_warrior')">นักรบฝึกหัด</button>
+            <div class="tree-level">
+                <button class="job-btn" onclick="selectJob('warrior')">นักรบ</button>
+                <div class="tree-level">
+                    <button class="job-btn" onclick="selectJob('knight')">อัศวิน</button>
+                    <div class="tree-level">
+                        <button class="job-btn" onclick="selectJob('paladin')">พาลาดิน</button>
+                        <button class="job-btn" onclick="selectJob('swordmaster')">จอมดาบ</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="tree-level-1">
-            <button class="job-btn" onclick="renderJob('app_mage')">ผู้ใช้เวทย์ฝึกหัด</button>
-            <div class="tree-level-2">
-                <button class="job-btn" onclick="renderJob('mage')">ผู้ใช้เวทย์</button>
-                <div class="tree-level-3">
-                    <button class="job-btn" onclick="renderJob('app_priest')">บาทหลวงฝึกหัด</button>
-                    <button class="job-btn" onclick="renderJob('priest')">บาทหลวง</button>
-                    <div class="tree-level-4">
-                        <button class="job-btn" onclick="renderJob('app_bishop')">สังฆราชฝึกหัด</button>
-                        <button class="job-btn" onclick="renderJob('bishop')">สังฆราช</button>
-                        <button class="job-btn" onclick="renderJob('app_monk')">นักพรตฝึกหัด</button>
-                        <button class="job-btn" onclick="renderJob('monk')">นักพรต</button>
-                        <button class="job-btn" onclick="renderJob('app_servant')">เซอร์แวนฝึกหัด</button>
-                        <button class="job-btn" onclick="renderJob('servant')">เซอร์แวน</button>
-                    </div>
-                </div>
-                <div class="tree-level-3">
-                    <button class="job-btn" onclick="renderJob('app_wizard')">จอมเวทย์ฝึกหัด</button>
-                    <button class="job-btn" onclick="renderJob('wizard')">จอมเวทย์</button>
-                    <div class="tree-level-4">
-                        <button class="job-btn" onclick="renderJob('app_enchanter')">จอมขมังเวทย์ฝึกหัด</button>
-                        <button class="job-btn" onclick="renderJob('enchanter')">จอมขมังเวทย์</button>
-                        <button class="job-btn" onclick="renderJob('app_sage')">ผู้วิเศษฝึกหัด</button>
-                        <button class="job-btn" onclick="renderJob('sage')">ผู้วิเศษ</button>
-                        <button class="job-btn" onclick="renderJob('app_necro')">เนโครแมนเซอร์ฝึกหัด</button>
-                        <button class="job-btn" onclick="renderJob('necro')">เนโครแมนเซอร์</button>
-                    </div>
-                </div>
+        <h2 class="category">✨ สายเวทย์</h2>
+        <div class="tree-level">
+            <button class="job-btn" onclick="selectJob('app_mage')">ผู้ใช้เวทย์ฝึกหัด</button>
             </div>
-        </div>
 
-        <h2 class="category">🌟 สายพิเศษ (LV100++)</h2>
-        <p class="note">* ทุกอาชีพเป็นได้เมื่อเลเวล 100+</p>
-        <button class="job-btn" onclick="renderJob('ninja')">นินจา</button>
-        <button class="job-btn" onclick="renderJob('samurai')">ซามุไร</button>
-        <button class="job-btn" onclick="renderJob('minstrel')">นักดนตรี</button>
-        <button class="job-btn" onclick="renderJob('alchemist')">นักเล่นแร่แปรธาตุ</button>
+        <h2 class="category">🌟 สายพิเศษ (100+)</h2>
+        <button class="job-btn" onclick="selectJob('ninja')">นินจา</button>
+        <button class="job-btn" onclick="selectJob('samurai')">ซามุไร</button>
 
-        <button class="job-btn weapon-tab-btn" onclick="renderWeaponStats()">📊 ข้อมูลอาวุธ & สเตตัส</button>
+        <button class="job-btn weapon-tab-btn" onclick="selectWeaponStats()">📊 ข้อมูลอาวุธ</button>
     </nav>
 
-    <main class="main-content" id="view-port">
-        <div class="welcome-screen">
-            <h1>RPG Job Encyclopedia</h1>
-            <p>กรุณาเลือกอาชีพจากเมนูด้านซ้ายเพื่ออ่านรายละเอียด</p>
+    <main class="main-content">
+        <div id="display" class="card">
+            <h1 class="job-title">เลือกอาชีพ</h1>
+            <p>แตะปุ่ม "☰ อาชีพ" เพื่อเลือกดูข้อมูล</p>
         </div>
     </main>
 
     <script>
-        /* --- JavaScript Section --- */
-
-        // ฐานข้อมูลอาชีพ (ตัวอย่างข้อมูลเบื้องต้น)
-        const jobData = {
+        const jobs = {
             'app_warrior': {
                 name: "นักรบฝึกหัด",
-                skills: "• Double Attack: โจมตี 2 ครั้งซ้อน<br>• Hard Hit: โจมตีรุนแรงพร้อมโอกาสติด Stun",
-                stats: "เน้น STR (พลังโจมตี) และ VIT (เลือด)",
-                obtain: "รับภารกิจเปลี่ยนอาชีพได้ที่หมู่บ้านเริ่มต้น"
+                skill: "• Bash: โจมตีหนัก<br>• Battle Cry: เพิ่มพลังโจมตีชั่วคราว",
+                stat: "STR 30+, VIT 20+",
+                how: "เปลี่ยนอาชีพได้ที่ NPC ฝึกสอนกลางเมือง"
             },
             'paladin': {
                 name: "พาลาดิน",
-                skills: "• Guardian: ดึงความสนใจมอนสเตอร์มาที่ตัวเอง<br>• Holy Shield: ลดความเสียหายที่ได้รับลงอย่างมาก",
-                stats: "เน้น VIT (มากที่สุด) และ INT (เพื่อใช้สกิลรักษา)",
-                obtain: "เปลี่ยนจากพาลาดินฝึกหัดเมื่อเลเวล 140"
+                skill: "• Guardian: รับความเสียหายแทนเพื่อน<br>• Heal: ฟื้นฟูเลือด",
+                stat: "เน้น VIT เป็นหลัก และ INT รอง",
+                how: "เลเวล 140 จากอัศวินฝึกหัด และทดสอบความดี"
             },
             'ninja': {
                 name: "นินจา",
-                skills: "• Clone: สร้างร่างแยกหลบการโจมตี<br>• Dance of Death: โจมตีต่อเนื่องด้วยความเร็วสูง",
-                stats: "เน้น AGI (หลบหลีก) และ CRT (คริติคอล)",
-                obtain: "ต้องมีเลเวล 100 ขึ้นไป และทำเควสที่หมู่บ้านลับ"
+                skill: "• Utsusemi: สร้างร่างแยกหลบการโจมตี<br>• Fire Scroll: พ่นไฟใส่ศัตรู",
+                stat: "AGI และ CRT",
+                how: "เลเวล 100+ ไปที่หมู่บ้านนินจาทางตอนใต้"
             }
-            // สามารถเพิ่มข้อมูลอาชีพอื่นที่เหลือได้ในรูปแบบเดียวกันนี้
+            // เพิ่มข้อมูลอาชีพอื่นๆ ได้ที่นี่
         };
 
-        const weaponStats = [
-            { type: "ดาบ (Sword)", stat: "STR / VIT", effect: "เพิ่มพลังโจมตีกายภาพและเลือด" },
-            { type: "ธนู (Bow)", stat: "DEX / AGI", effect: "เพิ่มความแม่นยำและความเร็วโจมตี" },
-            { type: "คทา (Staff)", stat: "INT", effect: "เพิ่มพลังโจมตีเวทย์และมานา" },
-            { type: "กงเล็บ (Claw)", stat: "AGI / CRT", effect: "เน้นการหลบหลีกและคริติคอล" },
-            { type: "หนังสือ (Book)", stat: "INT / DEX", effect: "เพิ่มพลังเวทย์และลดเวลาร่าย" }
-        ];
-
-        function renderJob(id) {
-            const job = jobData[id];
-            const viewport = document.getElementById('view-port');
-
-            if (!job) {
-                viewport.innerHTML = `
-                    <div class="card">
-                        <h1 class="job-title">กำลังรวบรวมข้อมูล...</h1>
-                        <p>อาชีพนี้อยู่ในรายการอัปเดตข้อมูลเร็วๆ นี้</p>
-                    </div>`;
-                return;
-            }
-
-            viewport.innerHTML = `
-                <div class="card">
-                    <h1 class="job-title">${job.name}</h1>
-                    <div class="section-title">⚔️ ข้อมูลสกิล</div>
-                    <div class="info-box">${job.skills}</div>
-                    
-                    <div class="section-title">📊 สเตตัสที่แนะนำ</div>
-                    <div class="info-box">${job.stats}</div>
-                    
-                    <div class="section-title">📜 วิธีที่จะได้รับสกิลมา</div>
-                    <div class="info-box">${job.obtain}</div>
-                </div>
-            `;
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
         }
 
-        function renderWeaponStats() {
-            const viewport = document.getElementById('view-port');
-            let rows = weaponStats.map(w => `
-                <tr>
-                    <td>${w.type}</td>
-                    <td><b>${w.stat}</b></td>
-                    <td>${w.effect}</td>
-                </tr>
-            `).join('');
+        function selectJob(id) {
+            const data = jobs[id];
+            const area = document.getElementById('display');
+            
+            if (data) {
+                area.innerHTML = `
+                    <h1 class="job-title">${data.name}</h1>
+                    <div class="section-title">⚔️ ข้อมูลสกิล</div>
+                    <div class="info-box">${data.skill}</div>
+                    <div class="section-title">📊 สเตตัสที่แนะนำ</div>
+                    <div class="info-box">${data.stat}</div>
+                    <div class="section-title">📜 วิธีได้รับ</div>
+                    <div class="info-box">${data.how}</div>
+                `;
+            } else {
+                area.innerHTML = `<h1 class="job-title">กำลังอัปเดตข้อมูล...</h1>`;
+            }
 
-            viewport.innerHTML = `
-                <div class="card">
-                    <h1 class="job-title">📊 ความสัมพันธ์อาวุธ</h1>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ประเภทอาวุธ</th>
-                                <th>สเตตัสที่ส่งผล</th>
-                                <th>ความสามารถหลัก</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${rows}
-                        </tbody>
-                    </table>
-                </div>
+            // ถ้าอยู่ในมือถือ ให้ปิดเมนูหลังจากเลือกเสร็จ
+            if (window.innerWidth <= 768) {
+                toggleMenu();
+            }
+        }
+
+        function selectWeaponStats() {
+            const area = document.getElementById('display');
+            area.innerHTML = `
+                <h1 class="job-title">📊 สเตตัส & อาวุธ</h1>
+                <table>
+                    <tr><th>อาวุธ</th><th>สเตตัสหลัก</th></tr>
+                    <tr><td>ดาบ/ขวาน</td><td>STR (โจมตี)</td></tr>
+                    <tr><td>ธนู</td><td>DEX (แม่นยำ)</td></tr>
+                    <tr><td>คทา</td><td>INT (เวทย์)</td></tr>
+                    <tr><td>กงเล็บ</td><td>AGI (หลบ/ไว)</td></tr>
+                </table>
             `;
+            if (window.innerWidth <= 768) toggleMenu();
         }
     </script>
 </body>
