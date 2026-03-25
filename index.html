@@ -133,6 +133,60 @@
   }
   .divider span { color: var(--gold); font-size: 14px; }
 
+  /* side bar */
+  .sidebar {
+  width: 280px;
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--accent);
+  border-right: 1px solid rgba(255,255,255,0.1);
+  padding: 16px;
+}
+
+.tree {
+  list-style: none;
+  font-size: 14px;
+}
+
+.tree ul {
+  list-style: none;
+  margin-left: 16px;
+  padding-left: 12px;
+  border-left: 1px solid rgba(255,255,255,0.15);
+}
+
+.tree li {
+  margin: 6px 0;
+  cursor: pointer;
+  position: relative;
+  color: var(--crimson);
+}
+
+.tree li:hover {
+  color:  var(--deep2);
+}
+
+.tree ul {
+  display: none;
+}
+
+
+.tree li.open > ul {
+  display: block;
+}
+
+.tree li::before {
+  content: "▶";
+  font-size: 10px;
+  margin-right: 6px;
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.tree li.open::before {
+  transform: rotate(90deg);
+}
+
   /* Mobile */
   @media (max-width: 560px) {
     .card { padding: 24px 18px; }
@@ -140,9 +194,9 @@
     .q-text { font-size: 15px; }
   }
 </style>
+</head>
 
   
-</head>
 <body>
 <div id="stars"></div>
 <div class="container">
@@ -158,6 +212,98 @@
     </p>
     <div class="divider"><span>✦</span></div>
   </div>
+</div>
+
+<div class="sidebar">
+  <ul class="tree">
+    <li>นักผจญภัย
+      <ul>
+        <li>นักรบฝึกหัด
+          <ul>
+            <li>นักรบ
+              <ul>
+                <li>อัศวินฝึกหัด
+                  <ul>
+                    <li>อัศวิน
+                      <ul>
+                        <li>พาลาดินฝึกหัด</li>
+                        <li>พาลาดิน</li>
+                        <li>จอมดาบฝึกหัด</li>
+                        <li>จอมดาบ</li>
+                        <li>บีทไนท์ฝึกหัด</li>
+                        <li>บีทไนท์</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>นายพรานฝึกหัด
+                  <ul>
+                    <li>นายพราน
+                      <ul>
+                        <li>นักฆ่าฝึกหัด</li>
+                        <li>นักฆ่า</li>
+                        <li>นักแม่นฝึกหัด</li>
+                        <li>นักแม่น</li>
+                        <li>ซัมมอนเนอร์ฝึกหัด</li>
+                        <li>ซัมมอนเนอร์</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <li>ผู้ใช้เวทย์ฝึกหัด
+          <ul>
+            <li>ผู้ใช้เวทย์
+              <ul>
+                <li>บาทหลวงฝึกหัด
+                  <ul>
+                    <li>บาทหลวง
+                      <ul>
+                        <li>สังฆราชฝึกหัด</li>
+                        <li>สังฆราช</li>
+                        <li>นักพรตฝึกหัด</li>
+                        <li>นักพรต</li>
+                        <li>เซอร์แวนฝึกหัด</li>
+                        <li>เซอร์แวน</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>จอมเวทย์ฝึกหัด
+                  <ul>
+                    <li>จอมเวทย์
+                      <ul>
+                        <li>จอมขมังเวทย์ฝึกหัด</li>
+                        <li>จอมขมังเวทย์</li>
+                        <li>ผู้วิเศษฝึกหัด</li>
+                        <li>ผู้วิเศษ</li>
+                        <li>เนโครแมนเซอร์ฝึกหัด</li>
+                        <li>เนโครแมนเซอร์</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <li>สายพิเศษ (LV100++)
+          <ul>
+            <li>นินจา</li>
+            <li>ซามุไร</li>
+            <li>นักดนตรี</li>
+            <li>นักเล่นแร่แปรธาตุ</li>
+          </ul>
+        </li>
+
+      </ul>
+    </li>
+  </ul>
 </div>
 
 
@@ -311,6 +457,13 @@ const CLASSES = {
     stats: { atk: 50, def: 30, support: 88, mobility: 50, complexity: 75, party: 90 }
   }
 };
+
+  document.querySelectorAll('.tree li').forEach(item => {
+  item.addEventListener('click', function(e) {
+    e.stopPropagation();
+    this.classList.toggle('open');
+  });
+});
 
 </script>
 </body>
