@@ -133,39 +133,58 @@
   }
   .divider span { color: var(--gold); font-size: 14px; }
 
-.card {
-            max-width: 800px;
-            width: 100%;
-            background: #1e293b;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            border: 1px solid #334155;
-            height: fit-content;
-        }
+.card {   max-width: 800px;
+          width: 100%;
+          background: #1e293b;
+          padding: 30px;
+          border-radius: 12px;
+          box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+          border: 1px solid #334155;
+          height: fit-content;
+      }
 
-        .job-title {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-        }
+      .job-title {
+          font-size: 2.5rem;
+          color: var(--accent-color);
+          margin-bottom: 20px;
+      }
 
-        .section-title {
-            font-size: 1.2rem;
-            color: var(--special-color);
-            margin-top: 25px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+      .section-title {
+          font-size: 1.2rem;
+          color: var(--special-color);
+          margin-top: 25px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+      }
 
-        .info-box {
-            background: rgba(15, 23, 42, 0.5);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            line-height: 1.6;
-        }
+      .info-box {
+          background: rgba(15, 23, 42, 0.5);
+          padding: 15px;
+          border-radius: 8px;
+          margin-top: 10px;
+          line-height: 1.6;
+      }
+
+  /* Sidebar */
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  background: rgba(17,13,30,0.9);
+  backdrop-filter: blur(10px);
+
+  border-right: 1px solid rgba(212,168,67,0.2);
+  padding: 20px 14px;
+
+  overflow-y: auto;
+  z-index: 2;
+}
+
+  
 
   /* Mobile */
   @media (max-width: 560px) {
@@ -196,22 +215,22 @@
 
 <nav class="sidebar">
   <h2 class="hero-title"> เส้นทางอาชีพสู่อาชีพ... </h2>
-  <button onclick="showJob('paladin')">พาลาดิน</button>
-  <button onclick="showJob('Gladiator')">จอมดาบ</button>
-  <button onclick="showJob('Beast Knight')">บีทไนท์</button>
-  <button onclick="showJob('Assassin')">นักฆ่า</button>
-  <button onclick="showJob('Sniper')">นักแม่น</button>
-  <button onclick="showJob('Summoner')">ซัมมอนเนอร์</button>
-  <button onclick="showJob('Bishop')">สังฆราช</button>
-  <button onclick="showJob('Monk')">นักพรต</button>
-  <button onclick="showJob('Servant')">เซอร์แวน</button>
-  <button onclick="showJob('Enchanter')">ผู้วิเศษ</button>
-  <button onclick="showJob('High Wizard')">จอมขมังเวทย์</button>
-  <button onclick="showJob('Necromancer')">หมอผี</button>
-  <button onclick="showJob('Ninja')">นินจา</button>
-  <button onclick="showJob('Samurai')">ซามุไร</button>
-  <button onclick="showJob('Minstrel')">นักดนตรี</button>
-  <button onclick="showJob('Alchemist')">นักเล่นแร่แปรธาตุ</button>
+  <button class="job-btn" onclick="renderJob('paladin')">พาลาดิน</button>
+  <button class="job-btn" onclick="renderJob('Gladiator')">จอมดาบ</button>
+  <button class="job-btn" onclick="renderJob('Beast Knight')">บีทไนท์</button>
+  <button class="job-btn" onclick="renderJob('Assassin')">นักฆ่า</button>
+  <button class="job-btn" onclick="renderJob('Sniper')">นักแม่น</button>
+  <button class="job-btn" onclick="renderJob('Summoner')">ซัมมอนเนอร์</button>
+  <button class="job-btn" onclick="renderJob('Bishop')">สังฆราช</button>
+  <button class="job-btn" onclick="renderJob('Monk')">นักพรต</button>
+  <button class="job-btn" onclick="renderJob('Servant')">เซอร์แวน</button>
+  <button class="job-btn" onclick="renderJob('Enchanter')">ผู้วิเศษ</button>
+  <button class="job-btn" onclick="renderJob('High Wizard')">จอมขมังเวทย์</button>
+  <button class="job-btn" onclick="renderJob('Necromancer')">หมอผี</button>
+  <button class="job-btn" onclick="renderJob('Ninja')">นินจา</button>
+  <button class="job-btn" onclick="renderJob('Samurai')">ซามุไร</button>
+  <button class="job-btn" onclick="renderJob('Minstrel')">นักดนตรี</button>
+  <button class="job-btn" onclick="renderJob('Alchemist')">นักเล่นแร่แปรธาตุ</button>
       
 </nav>
 
