@@ -9,15 +9,8 @@
   :root {
     --gold: #d4a843;
     --gold-light: #f0c96a;
-    --gold-dim: #8a6d28;
+    --accent: #3fc8f9;
     --deep: #0a0812;
-    --deep2: #110d1e;
-    --purple: #1a0f2e;
-    --accent: #7c3aed;
-    --accent2: #a855f7;
-    --crimson: #dc2626;
-    --teal: #0891b2;
-    --emerald: #059669;
     --text: #e8e0f0;
     --text-dim: #9d8fb8;
   }
@@ -28,272 +21,289 @@
     background: var(--deep);
     color: var(--text);
     font-family: 'Noto Sans Thai', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
   }
 
-  /* ──────── STARFIELD ──────── */
   #stars {
-    position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    background:
-      radial-gradient(ellipse at 20% 50%, rgba(124,58,237,0.12) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 10%, rgba(212,168,67,0.08) 0%, transparent 50%),
-      radial-gradient(ellipse at 60% 90%, rgba(8,145,178,0.08) 0%, transparent 50%);
-  }
-  #stars::before, #stars::after {
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
-      radial-gradient(1px 1px at 30% 45%, rgba(255,255,255,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 55% 20%, rgba(255,255,255,0.5) 0%, transparent 100%),
-      radial-gradient(1px 1px at 75% 65%, rgba(255,255,255,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 90% 35%, rgba(255,255,255,0.6) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 15% 75%, rgba(212,168,67,0.7) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 45% 85%, rgba(212,168,67,0.5) 0%, transparent 100%),
-      radial-gradient(1px 1px at 65% 5%, rgba(255,255,255,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 85% 90%, rgba(255,255,255,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 5% 50%, rgba(168,85,247,0.6) 0%, transparent 100%);
-    background-size: 300px 300px;
-  }
-  #stars::after { background-size: 500px 500px; opacity: 0.5; }
-
-  /* ──────── LAYOUT ──────── */
-  .container {
-    position: relative; z-index: 1;
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 40px 24px 80px;
+    position: fixed; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(124,58,237,0.12) 0%, transparent 60%);
   }
 
-  /* ──────── HEADER ──────── */
   .hero {
     text-align: center;
-    padding: 60px 20px 50px;
+    padding: 60px 20px 40px;
     position: relative;
+    z-index: 1;
   }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(212,168,67,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .crest {
-    display: inline-block;
-    font-size: 56px;
-    margin-bottom: 16px;
-    filter: drop-shadow(0 0 20px rgba(212,168,67,0.5));
-    animation: floatCrest 4s ease-in-out infinite;
-  }
-  @keyframes floatCrest {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
-  .hero-subtitle {
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    letter-spacing: 6px;
-    color: var(--gold-dim);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
+
   .hero-title {
     font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(22px, 5vw, 38px);
-    font-weight: 900;
-    line-height: 1.2;
-    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, #b8860b 100%);
+    font-size: 36px;
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: none;
-    margin-bottom: 12px;
-    filter: drop-shadow(0 2px 8px rgba(212,168,67,0.3));
+    margin-bottom: 8px;
   }
+
   .hero-desc {
     color: var(--text-dim);
-    font-size: 14px;
-    line-height: 1.8;
-    max-width: 500px;
-    margin: 0 auto 32px;
+    margin-bottom: 30px;
   }
 
-  .divider {
-    display: flex; align-items: center; gap: 12px;
-    margin: 24px 0;
-    opacity: 0.4;
+  .main-wrapper {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
   }
-  .divider::before, .divider::after {
-    content: ''; flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-  .divider span { color: var(--gold); font-size: 14px; }
-  
-  button.job-btn {
-            width: 100%;
-            text-align: left;
-            padding: 8px 12px;
-            margin: 2px 0;
-            background: transparent;
-            border: 1px solid transparent;
-            color: var(--text-primary);
-            cursor: pointer;
-            border-radius: 4px;
-            transition: 0.2s;
-        }
 
-  button.job-btn:hover {
-      background: rgba(56, 189, 248, 0.1);
-      border-color: var(--accent-color);
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+  }
+
+  .sidebar h2 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 16px;
+    color: var(--gold);
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(212, 168, 67, 0.3);
+    padding-bottom: 12px;
+  }
+
+  .job-btn {
+    text-align: left;
+    padding: 12px 14px;
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(51, 65, 85, 0.6);
+    color: var(--text);
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s;
+    font-size: 13px;
+  }
+
+  .job-btn:hover, .job-btn.active {
+    background: rgba(63, 200, 249, 0.15);
+    border-color: var(--accent);
+    color: var(--accent);
   }
 
   .card {
-            max-width: 800px;
-            width: 100%;
-            background: #1e293b;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            border: 1px solid #334155;
-            height: fit-content;
-        }
-
-        .job-title {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            font-size: 1.2rem;
-            color: var(--special-color);
-            margin-top: 25px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .info-box {
-            background: rgba(15, 23, 42, 0.5);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            line-height: 1.6;
-        }
-
-  
-
-  /* Mobile */
-  @media (max-width: 560px) {
-    .card { padding: 24px 18px; }
-    .result-stats { grid-template-columns: repeat(3,1fr); }
-    .q-text { font-size: 15px; }
+    background: rgba(30, 41, 59, 0.8);
+    padding: 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(51, 65, 85, 0.8);
   }
 
+  .job-title {
+    font-size: 28px;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .job-desc {
+    color: var(--text-dim);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    color: var(--gold);
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 10px;
+  }
+
+  .info-box {
+    background: rgba(15, 23, 42, 0.8);
+    padding: 14px;
+    border-radius: 6px;
+    border-left: 3px solid rgba(63, 200, 249, 0.5);
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .req-item {
+    padding: 6px 0;
+  }
+
+  .skill-item {
+    background: rgba(15, 23, 42, 0.5);
+    padding: 12px;
+    border-radius: 4px;
+    margin: 8px 0;
+  }
+
+  .skill-name {
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .skill-desc {
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+
+  @media (max-width: 1024px) {
+    .main-wrapper {
+      grid-template-columns: 1fr;
+    }
+    .sidebar {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 8px;
+      position: static;
+    }
+    .sidebar h2 {
+      grid-column: 1 / -1;
+    }
+  }
 </style>
 </head>
 
-  
 <body>
 <div id="stars"></div>
-<div class="container">
 
-<!-- ──── START SCREEN ──── -->
-<div id="screen-start">
-  <div class="hero">
-    <div class="crest">🐺</div>
-    <div class="hero-subtitle">Iruna Online</div>
-    <h1 class="hero-title">ยินดีตอนรับเหล่านักผจญภัย<br>สู่ห้องสมุดแห่งอาชีพ</h1>
-    <p class="hero-desc">
-      แหล่งรวบรวมข้อมูลภาษาไทย<br>เกี่ยวกับทุกอาชีพในเกม
-    </p>
-    <div class="divider"><span>✦</span></div>
-  </div>
+<div class="hero">
+  <h1 class="hero-title">🐺 Iruna Online</h1>
+  <p class="hero-desc">ห้องสมุดแห่งอาชีพ | บทความข้อมูลภาษาไทย</p>
 </div>
 
-<nav class="sidebar">
-  <h2 class="hero-title"> เส้นทางอาชีพสู่อาชีพ... </h2>
-  <button class="job-btn" onclick="renderJob('paladin')">พาลาดิน</button>
-  <button class="job-btn" onclick="renderJob('Gladiator')">จอมดาบ</button>
-  <button class="job-btn" onclick="renderJob('Beast Knight')">บีทไนท์</button>
-  <button class="job-btn" onclick="renderJob('Assassin')">นักฆ่า</button>
-  <button class="job-btn" onclick="renderJob('Sniper')">นักแม่น</button>
-  <button class="job-btn" onclick="renderJob('Summoner')">ซัมมอนเนอร์</button>
-  <button class="job-btn" onclick="renderJob('Bishop')">สังฆราช</button>
-  <button class="job-btn" onclick="renderJob('Monk')">นักพรต</button>
-  <button class="job-btn" onclick="renderJob('Servant')">เซอร์แวน</button>
-  <button class="job-btn" onclick="renderJob('Enchanter')">ผู้วิเศษ</button>
-  <button class="job-btn" onclick="renderJob('High Wizard')">จอมขมังเวทย์</button>
-  <button class="job-btn" onclick="renderJob('Necromancer')">หมอผี</button>
-  <button class="job-btn" onclick="renderJob('Ninja')">นินจา</button>
-  <button class="job-btn" onclick="renderJob('Samurai')">ซามุไร</button>
-  <button class="job-btn" onclick="renderJob('Minstrel')">นักดนตรี</button>
-  <button class="job-btn" onclick="renderJob('Alchemist')">นักเล่นแร่แปรธาตุ</button>
-      
-</nav>
-<div id="view-port"></div>
+<div class="main-wrapper">
+  <nav class="sidebar">
+    <h2>เส้นทางอาชีพ</h2>
+    <button class="job-btn" onclick="renderJob('paladin', this)">พาลาดิน</button>
+    <button class="job-btn" onclick="renderJob('gladiator', this)">จอมดาบ</button>
+    <button class="job-btn" onclick="renderJob('ninja', this)">นินจา</button>
+    <button class="job-btn" onclick="renderJob('summoner', this)">ซัมมอนเนอร์</button>
+    <button class="job-btn" onclick="renderJob('bishop', this)">สังฆราช</button>
+    <button class="job-btn" onclick="renderJob('wizard', this)">จอมขมังเวทย์</button>
+    <button class="job-btn" onclick="renderJob('assassin', this)">นักฆ่า</button>
+    <button class="job-btn" onclick="renderJob('sniper', this)">นักแม่น</button>
+  </nav>
 
-
-
+  <div id="view-port"></div>
+</div>
 
 <script>
-        // ฐานข้อมูลอาชีพ (ตัวอย่างข้อมูลเบื้องต้น)
-        const jobData = {
-            'app_warrior': {
-                name: "นักรบฝึกหัด",
-                skills: "• Double Attack: โจมตี 2 ครั้งซ้อน<br>• Hard Hit: โจมตีรุนแรงพร้อมโอกาสติด Stun",
-                stats: "เน้น STR (พลังโจมตี) และ VIT (เลือด)",
-                obtain: "รับภารกิจเปลี่ยนอาชีพได้ที่หมู่บ้านเริ่มต้น"
-            },
-            'paladin': {
-                name: "พาลาดิน",
-                skills: "• Guardian: ดึงความสนใจมอนสเตอร์มาที่ตัวเอง<br>• Holy Shield: ลดความเสียหายที่ได้รับลงอย่างมาก",
-                stats: "เน้น VIT (มากที่สุด) และ INT (เพื่อใช้สกิลรักษา)",
-                obtain: "เปลี่ยนจากพาลาดินฝึกหัดเมื่อเลเวล 140"
-            },
-            'ninja': {
-                name: "นินจา",
-                skills: "• Clone: สร้างร่างแยกหลบการโจมตี<br>• Dance of Death: โจมตีต่อเนื่องด้วยความเร็วสูง",
-                stats: "เน้น AGI (หลบหลีก) และ CRT (คริติคอล)",
-                obtain: "ต้องมีเลเวล 100 ขึ้นไป และทำเควสที่หมู่บ้านลับ"
-            }
+  const jobData = {
+    'summoner': {
+      name: "ซัมมอนเนอร์",
+      desc: "ผู้เรียกอสูรสามารถสั่งการอสูรที่เรียกออกมาได้หลากหลายวิธี คำสั่งเหล่านั้นมีตั้งแต่การโจมตีที่รุนแรงไปจนถึงทักษะสนับสนุนที่ไม่เพียงแต่เป็นประโยชน์ต่อผู้เรียกอสูรเท่านั้น แต่ยังเป็นประโยชน์ต่อเพื่อนร่วมทีมอีกด้วย",
+      obtain: ["นักรบ -> นายพราน -> ซัมมอนเนอร์ "],
+      prereq: ["Must be Apprentice Summoner", "Must be Lv140"],
+      skills: [
+        { name: "Command: Skill 1", type: "Active", desc: "Direct use of Skill 1" },
+        { name: "Command: Skill 2", type: "Active", desc: "Direct use of Skill 2" }
+      ]
+    },
+    'paladin': {
+      name: "พาลาดิน",
+      desc: "ผู้รักษากิจธรรมชาติด้วยมหาศักติ์ เป็นนักรบที่ทรงพลังแน่นอนในการปกป้องทีม",
+      obtain: "เปลี่ยนจากพาลาดินฝึกหัด",
+      prereq: ["เป็นพาลาดินฝึกหัด", "Lv140"],
+      skills: [
+        { name: "Guardian", type: "Active", desc: "ดึงความสนใจมอนสเตอร์ เพิ่มเกราะป้องกัน" },
+        { name: "Holy Shield", type: "Active", desc: "ลดความเสียหายลงอย่างมาก" }
+      ]
+    },
+    'ninja': {
+      name: "นินจา",
+      desc: "นักฆ่าในเงาที่ทำการโจมตีด้วยความเร็วสูง สามารถหลบเลี่ยงได้อย่างนุ่มนวล",
+      obtain: "ทำเควสเมื่อ Lv100+",
+      prereq: ["เป็นนินจาฝึกหัด", "Lv140"],
+      skills: [
+        { name: "Clone", type: "Active", desc: "สร้างร่างแยกตนเอง" },
+        { name: "Dance of Death", type: "Active", desc: "โจมตีต่อเนื่องความเร็วสูง" }
+      ]
+    },
+    'gladiator': {
+      name: "จอมดาบ",
+      desc: "ผู้ควบคุมดาบได้อย่างชำนาญ สร้างความเสียหายสูงมากและเดินทางรวดเร็ว",
+      obtain: "เปลี่ยนจากจอมดาบฝึกหัด",
+      prereq: ["เป็นจอมดาบฝึกหัด", "Lv140"],
+      skills: []
+    },
+    'bishop': {
+      name: "สังฆราช",
+      desc: "ศาสตราจารย์แห่งศาสตร์บริหุหารวิทยา ผู้มีความสามารถในการรักษาและสนับสนุน",
+      obtain: "เปลี่ยนจากสังฆราชฝึกหัด",
+      prereq: ["เป็นสังฆราชฝึกหัด", "Lv140"],
+      skills: []
+    },
+    'wizard': {
+      name: "จอมขมังเวทย์",
+      desc: "จอมเวทย์ที่ควบคุมองค์ธาตุได้อย่างสมบูรณ์ สร้างเสียหายสูงและครอบคลุมพื้นที่กว้าง",
+      obtain: "เปลี่ยนจากจอมขมังเวทย์ฝึกหัด",
+      prereq: ["เป็นจอมขมังเวทย์ฝึกหัด", "Lv140"],
+      skills: []
+    },
+    'assassin': {
+      name: "นักฆ่า",
+      desc: "นักสังหารที่เชี่ยวชาญการโจมตีแบบใกล้ชิด สร้างความเสียหายร้ายแรง",
+      obtain: "เปลี่ยนจากนักฆ่าฝึกหัด",
+      prereq: ["เป็นนักฆ่าฝึกหัด", "Lv140"],
+      skills: []
+    },
+    'sniper': {
+      name: "นักแม่น",
+      desc: "นักธนูที่มีความแม่นยำสูง โจมตีจากระยะไกลอย่างมีประสิทธิ์",
+      obtain: "เปลี่ยนจากนักแม่นฝึกหัด",
+      prereq: ["เป็นนักแม่นฝึกหัด", "Lv140"],
+      skills: []
+    }
+  };
 
-        };
+  function renderJob(id, btn) {
+    const job = jobData[id];
+    const viewport = document.getElementById('view-port');
 
-      
+    document.querySelectorAll('.job-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
 
-        function renderJob(id) {
-            const job = jobData[id];
-            const viewport = document.getElementById('view-port');
+    let skillsHTML = '';
+    if (job.skills.length > 0) {
+      skillsHTML = job.skills.map(s => `
+        <div class="skill-item">
+          <div class="skill-name">🔷 ${s.name}</div>
+          <div style="font-size: 12px; color: var(--text-dim); margin-bottom: 4px;"><strong>สถานะ:</strong> ${s.type}</div>
+          <div class="skill-desc">${s.desc}</div>
+        </div>
+      `).join('');
+    }
 
-            if (!job) {
-                viewport.innerHTML = `
-                    <div class="card">
-                        <h1 class="job-title">กำลังรวบรวมข้อมูล...</h1>
-                        <p>อาชีพนี้อยู่ในรายการอัปเดตข้อมูลเร็วๆ นี้</p>
-                    </div>`;
-                return;
-            }
+    viewport.innerHTML = `
+      <div class="card">
+        <h1 class="job-title">${job.name}</h1>
+        <p class="job-desc">${job.desc}</p>
 
-            viewport.innerHTML = `
-                <div class="card">
-                    <h1 class="job-title">${job.name}</h1>
-                    <div class="section-title">⚔️ ข้อมูลสกิล</div>
-                    <div class="info-box">${job.skills}</div>
-                    
-                    <div class="section-title">📊 สเตตัสที่แนะนำ</div>
-                    <div class="info-box">${job.stats}</div>
-                    
-                    <div class="section-title">📜 วิธีที่จะได้รับสกิลมา</div>
-                    <div class="info-box">${job.obtain}</div>
-                </div>
-            `;
-        }
+        <div class="section-title">หนทางสู่อาชีพนี้...</div>
+        <div class="info-box">${job.obtain}</div>
 
+        <div class="section-title">✓ ข้อกำหนดเบื้องต้น</div>
+        <div class="info-box">
+          ${job.prereq.map(r => `<div class="req-item">• ${r}</div>`).join('')}
+        </div>
+
+        ${skillsHTML ? `<div class="section-title">⚔️ สกิล</div><div>${skillsHTML}</div>` : ''}
+      </div>
+    `;
+  }
+
+  window.addEventListener('load', () => {
+    document.querySelector('.job-btn').click();
+  });
 </script>
 </body>
 </html>
