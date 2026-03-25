@@ -133,59 +133,39 @@
   }
   .divider span { color: var(--gold); font-size: 14px; }
 
-  /* side bar */
-  .sidebar {
-  width: 280px;
-  height: 100vh;
-  overflow-y: auto;
-  background: var(--accent);
-  border-right: 1px solid rgba(255,255,255,0.1);
-  padding: 16px;
-}
+.card {
+            max-width: 800px;
+            width: 100%;
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 1px solid #334155;
+            height: fit-content;
+        }
 
-.tree {
-  list-style: none;
-  font-size: 14px;
-}
+        .job-title {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
 
-.tree ul {
-  list-style: none;
-  margin-left: 16px;
-  padding-left: 12px;
-  border-left: 1px solid rgba(255,255,255,0.15);
-}
+        .section-title {
+            font-size: 1.2rem;
+            color: var(--special-color);
+            margin-top: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-.tree li {
-  margin: 6px 0;
-  cursor: pointer;
-  position: relative;
-  color: var(--crimson);
-}
-
-.tree li:hover {
-  color:  var(--deep2);
-}
-
-.tree ul {
-  display: none;
-}
-
-
-.tree li.open > ul {
-  display: block;
-}
-
-.tree li::before {
-  content: "▶";
-  font-size: 10px;
-  margin-right: 6px;
-  display: inline-block;
-  transition: transform 0.2s;
-}
-
-.tree li.open::before {
-  transform: rotate(90deg);
-}
+        .info-box {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
 
   /* Mobile */
   @media (max-width: 560px) {
@@ -214,256 +194,83 @@
   </div>
 </div>
 
-<div class="sidebar">
-  <ul class="tree">
-    <li>นักผจญภัย
-      <ul>
-        <li>นักรบฝึกหัด
-          <ul>
-            <li>นักรบ
-              <ul>
-                <li>อัศวินฝึกหัด
-                  <ul>
-                    <li>อัศวิน
-                      <ul>
-                        <li>พาลาดินฝึกหัด</li>
-                        <li>พาลาดิน</li>
-                        <li>จอมดาบฝึกหัด</li>
-                        <li>จอมดาบ</li>
-                        <li>บีทไนท์ฝึกหัด</li>
-                        <li>บีทไนท์</li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li>นายพรานฝึกหัด
-                  <ul>
-                    <li>นายพราน
-                      <ul>
-                        <li>นักฆ่าฝึกหัด</li>
-                        <li>นักฆ่า</li>
-                        <li>นักแม่นฝึกหัด</li>
-                        <li>นักแม่น</li>
-                        <li>ซัมมอนเนอร์ฝึกหัด</li>
-                        <li>ซัมมอนเนอร์</li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-
-        <li>ผู้ใช้เวทย์ฝึกหัด
-          <ul>
-            <li>ผู้ใช้เวทย์
-              <ul>
-                <li>บาทหลวงฝึกหัด
-                  <ul>
-                    <li>บาทหลวง
-                      <ul>
-                        <li>สังฆราชฝึกหัด</li>
-                        <li>สังฆราช</li>
-                        <li>นักพรตฝึกหัด</li>
-                        <li>นักพรต</li>
-                        <li>เซอร์แวนฝึกหัด</li>
-                        <li>เซอร์แวน</li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li>จอมเวทย์ฝึกหัด
-                  <ul>
-                    <li>จอมเวทย์
-                      <ul>
-                        <li>จอมขมังเวทย์ฝึกหัด</li>
-                        <li>จอมขมังเวทย์</li>
-                        <li>ผู้วิเศษฝึกหัด</li>
-                        <li>ผู้วิเศษ</li>
-                        <li>เนโครแมนเซอร์ฝึกหัด</li>
-                        <li>เนโครแมนเซอร์</li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-
-        <li>สายพิเศษ (LV100++)
-          <ul>
-            <li>นินจา</li>
-            <li>ซามุไร</li>
-            <li>นักดนตรี</li>
-            <li>นักเล่นแร่แปรธาตุ</li>
-          </ul>
-        </li>
-
-      </ul>
-    </li>
-  </ul>
-</div>
+<nav class="sidebar">
+  <h2 class="hero-title"> เส้นทางอาชีพสู่อาชีพ... </h2>
+  <button onclick="showJob('paladin')">พาลาดิน</button>
+  <button onclick="showJob('Gladiator')">จอมดาบ</button>
+  <button onclick="showJob('Beast Knight')">บีทไนท์</button>
+  <button onclick="showJob('Assassin')">นักฆ่า</button>
+  <button onclick="showJob('Sniper')">นักแม่น</button>
+  <button onclick="showJob('Summoner')">ซัมมอนเนอร์</button>
+  <button onclick="showJob('Bishop')">สังฆราช</button>
+  <button onclick="showJob('Monk')">นักพรต</button>
+  <button onclick="showJob('Servant')">เซอร์แวน</button>
+  <button onclick="showJob('Enchanter')">ผู้วิเศษ</button>
+  <button onclick="showJob('High Wizard')">จอมขมังเวทย์</button>
+  <button onclick="showJob('Necromancer')">หมอผี</button>
+  <button onclick="showJob('Ninja')">นินจา</button>
+  <button onclick="showJob('Samurai')">ซามุไร</button>
+  <button onclick="showJob('Minstrel')">นักดนตรี</button>
+  <button onclick="showJob('Alchemist')">นักเล่นแร่แปรธาตุ</button>
+      
+</nav>
 
 
 
 
 <script>
-/* ──────── DATA ──────── */
-const CLASSES = {
-  paladin: {
-    name: 'Paladin',
-    nameTH: 'พาลาดิน — ผู้พิทักษ์แห่งแสง',
-    emoji: '🛡️',
-    tags: ['tank','support','melee'],
-    desc: 'Paladin คือ front-liner ตัวหลักของปาร์ตี้ ดูดดาเมจแทนเพื่อนได้ดีที่สุด ในขณะเดียวกันก็ฮีลและบัฟให้ทีมได้ด้วย เหมาะกับคนที่อยากเป็น "กำแพง" ที่น่าพึ่งพา และรู้สึกมีความสุขเมื่อทีมรอดจากสถานการณ์วิกฤต',
-    playstyle: 'เน้น VIT + INT สูง สวมเกราะหนัก ใช้สกิล Provoke ดึง aggro ออกจากเพื่อนร่วมปาร์ตี้ ในขณะเดียวกันก็ฮีลตัวเองและทีมได้เมื่อจำเป็น ไม่ต้องการ damage output สูงมาก แต่ต้องมีความอดทนและอ่านเกมเก่ง',
-    stats: { atk: 40, def: 95, support: 70, mobility: 30, complexity: 60, party: 90 }
-  },
-  gladiator: {
-    name: 'Gladiator',
-    nameTH: 'จอมดาบ — นักรบสายดาเมจ',
-    emoji: '⚔️',
-    tags: ['dps','melee'],
-    desc: 'Gladiator คือ pure offensive powerhouse ระยะประชิด ใช้สกิล Berserk เพื่อโจมตีที่ความเร็วสูงสุด ดีลดาเมจสูงมากและไม่กลัวตาย เหมาะกับผู้เล่นที่ชอบ "ลุย" ตรงๆ ไม่ซับซ้อน และอยากเห็นตัวเลขดาเมจที่สูงลิ่ว',
-    playstyle: 'เน้น STR + AGI + CRT สูง ไม่ต้องการ AGI สำหรับ ASPD เพราะ Berserk จัดการแทน ชาร์จ MP อย่างต่อเนื่อง เกือบ solo ได้แต่ต้องการ healer เพราะรับดาเมจสูง',
-    stats: { atk: 95, def: 50, support: 10, mobility: 55, complexity: 45, party: 60 }
-  },
-  knight: {
-    name: 'Beast Knight',
-    nameTH: 'บีทไนท์ — นักรบป้องกัน',
-    emoji: '🗡️',
-    tags: ['tank','dps','melee'],
-    desc: 'Knight เป็นคลาสระยะประชิดที่สมดุลระหว่าง offense และ defense มี defense buffs มากมาย จะ DPS หรือ Tank ก็ทำได้ดีทั้งคู่ เหมาะกับคนที่เพิ่งเริ่มเล่นและอยากมีคลาสที่ยืดหยุ่น',
-    playstyle: 'DPS Knight เน้น STR+AGI+CRT / Tank Knight เน้น VIT+INT มี Warcry บัฟทีม Guard ป้องกัน และ Hard Hit โจมตีพิเศษ เป็นคลาสที่เรียนรู้ได้ง่าย แนะนำสำหรับผู้เล่นใหม่',
-    stats: { atk: 65, def: 75, support: 45, mobility: 40, complexity: 40, party: 70 }
-  },
-  assassin: {
-    name: 'Assassin',
-    nameTH: 'แอสแซสซิน — เงาแห่งความตาย',
-    emoji: '🗡️',
-    tags: ['dps','melee','solo'],
-    desc: 'Assassin เชี่ยวชาญการหลบหลีกและกลลวง ใช้ AGI สูงเพื่อเพิ่ม EVA หลบดาเมจได้เยอะมาก เหมาะกับผู้เล่นที่ชอบสไตล์ "ตีแล้วหนี" ใช้กลยุทธ์มากกว่าพลัง และรู้สึกพอใจเมื่อหลบดาเมจแบบ highlight',
-    playstyle: 'เน้น AGI สูงสุดเพื่อ EVA จนเกือบไม่โดนตี damage stat ขึ้นอยู่กับอาวุธ (INT สำหรับ Throwing Weapons) เป็น solo class ที่ดีเยี่ยม แต่มีบทบาทจำกัดในปาร์ตี้',
-    stats: { atk: 80, def: 35, support: 15, mobility: 90, complexity: 70, party: 40 }
-  },
-  sniper: {
-    name: 'Sniper',
-    nameTH: 'สไนเปอร์ — นักยิงระยะไกล',
-    emoji: '🏹',
-    tags: ['dps','range'],
-    desc: 'Sniper คือ long-range damage dealer ที่สามารถสังหารศัตรูก่อนที่มันจะเข้ามาใกล้ มักฆ่าได้ก่อนโดนตีด้วยซ้ำ เหมาะกับผู้เล่นที่ชอบความปลอดภัย ไม่อยากโดนตี และรู้สึก satisfying กับการ one-shot ศัตรูจากระยะไกล',
-    playstyle: 'เน้น DEX + AGI + CRT (หรือ DEX+STR สำหรับ Arrow Rain) ระยะยิงไกลมาก ต้องใช้ Arrow อย่างต่อเนื่อง เหมาะ solo มาก แต่ก็มีประโยชน์ในปาร์ตี้',
-    stats: { atk: 85, def: 30, support: 20, mobility: 60, complexity: 55, party: 55 }
-  },
-  hunter: {
-    name: 'Hunter',
-    nameTH: 'ฮันเตอร์ — นักล่าอเนกประสงค์',
-    emoji: '🏹',
-    tags: ['dps','range'],
-    desc: 'Hunter เป็นนักล่าระยะไกลที่มีเทคนิคหลากหลาย ทั้ง boost attack และใช้ status ailments ใส่ศัตรู เหมาะกับคนที่ชอบ control มากกว่า brute force และสนุกกับการใช้สกิลหลายอย่างพร้อมกัน',
-    playstyle: 'เน้น DEX + AGI + CRT มี Venom Attack วางยาพิษ และสกิล utility ต่างๆ สามารถ solo ได้ดี เป็นพื้นฐานสู่ Assassin และ Sniper',
-    stats: { atk: 70, def: 35, support: 30, mobility: 70, complexity: 55, party: 50 }
-  },
-  highwizard: {
-    name: 'High Wizard',
-    nameTH: 'ไฮ วิซาร์ด — จอมเวทย์สายสังหาร',
-    emoji: '🔥',
-    tags: ['dps','magic'],
-    desc: 'High Wizard คือ elemental magic DPS ที่รุนแรงที่สุด ใช้ Fire, Ice, Thunder ทำดาเมจสูงมาก แลกกับการต้องใช้ MP สูงและป้องกันตัวเองน้อย เหมาะกับคนที่ชอบ "เวทมนตร์" และความรู้สึกของการระเบิดหน้าจอ',
-    playstyle: 'INT + DEX สูง ต้องบริหาร MP ตลอดเวลา เปราะบางมากถ้าถูกศัตรูเข้ามา ใช้ได้ดีในปาร์ตี้ที่มี tank คุ้มกัน skill rotation สำคัญมาก',
-    stats: { atk: 90, def: 20, support: 15, mobility: 35, complexity: 75, party: 65 }
-  },
-  enchanter: {
-    name: 'Enchanter',
-    nameTH: 'เอนแชนเตอร์ — นักเวทย์หุ้มเกราะ',
-    emoji: '✨',
-    tags: ['dps','magic','tank'],
-    desc: 'Enchanter คือ magic class ที่ใช้ Stone Skin เพื่อ absorb damage ทำให้แข็งแกร่งกว่า magic class อื่น ดาเมจสูง และยังมี counterattack skill ที่ชนะด้วยการรับหมัด เหมาะกับคนที่อยากเป็น mage แต่ไม่อยาก fragile',
-    playstyle: 'Magic Sword + INT สูง ใช้ Stone Skin ป้องกัน มีทั้ง melee-based และ magic attack path สกิล counter attack ทำให้เกมเพลย์ unique มาก อุปกรณ์แพงแต่คุ้มค่า',
-    stats: { atk: 80, def: 55, support: 25, mobility: 40, complexity: 80, party: 60 }
-  },
-  bishop: {
-    name: 'Bishop',
-    nameTH: 'บิชอป — นักบวชแห่งแสงศักดิ์สิทธิ์',
-    emoji: '✝️',
-    tags: ['support','magic'],
-    desc: 'Bishop คือ healer ที่ทรงพลังที่สุดในเกม ฮีลได้มากที่สุด ยัง resurrect เพื่อน restore HP/MP ลดดาเมจที่รับได้ เป็นที่ต้องการมากที่สุดในทุกปาร์ตี้ เหมาะกับคนที่รู้สึกมีความสุขเมื่อช่วยให้ทีมรอด',
-    playstyle: 'INT + VIT + DEX สูง solo ได้ไม่ดีเท่าไร แต่ in-demand สูงมาก ไม่มีปัญหาหาปาร์ตี้ สกิล Divine Bless บัฟทีมทั้งหมด Resurrection ช่วยทีมได้ยามวิกฤต',
-    stats: { atk: 25, def: 45, support: 95, mobility: 30, complexity: 65, party: 100 }
-  },
-  monk: {
-    name: 'Monk',
-    nameTH: 'มังก์ — นักรบกำปั้นสายคริต',
-    emoji: '👊',
-    tags: ['dps','melee','solo'],
-    desc: 'Monk เป็น solo class ที่โจมตีเร็ว critical สูง ใช้กรงเล็บ (Claws) เป็นอาวุธหลัก ดาเมจสูงมากโดยเฉพาะหลัง level 180 ที่ได้สกิล Geo Breaker เหมาะกับคนที่ชอบ grind solo และอยากเล่นคนเดียวได้สบาย',
-    playstyle: 'เน้น AGI + CRT สำหรับ critical attack สูง ใช้กรงเล็บ เป็น solo ที่ดีกว่า ninja และ support ปาร์ตี้ได้บ้าง ต้องอดทนช่วง early game ที่ยังดาเมจต่ำ',
-    stats: { atk: 88, def: 40, support: 20, mobility: 75, complexity: 60, party: 45 }
-  },
-  beastknight: {
-    name: 'Beast Knight',
-    nameTH: 'บีสท์ไนท์ — นักรบสายสัตว์ป่า',
-    emoji: '🐺',
-    tags: ['dps','tank','melee'],
-    desc: 'Beast Knight ใช้สไตล์การต่อสู้แบบ Diel ที่ VIT มีผลต่อ ASPD เวลาใช้ Sword หรือ Claws สามารถ support ทีมด้วย Warcry และยัง tank ได้ด้วย Fear Howl เป็นคลาสที่แข็งแกร่งและมีเอกลักษณ์ชัดเจน',
-    playstyle: 'VIT สูงผิดปกติสำหรับ DPS class เพราะมีผลต่อ ASPD ใช้ Beast Slash + Double Attack ดาเมจสูง Warcry บัฟ ATK/MaxHP ทีม ไม่ค่อยได้เจอในเกมทำให้ดู unique',
-    stats: { atk: 78, def: 65, support: 50, mobility: 55, complexity: 70, party: 65 }
-  },
-  wizard: {
-    name: 'Wizard',
-    nameTH: 'จอมขมังเวทย์ — พ่อมดสายธาตุ',
-    emoji: '🧙',
-    tags: ['dps','magic'],
-    desc: 'Wizard เป็น offensive magic class ที่เน้น elemental attacks มีทั้ง Fire Lance, Ice Spear, Thunderbolt เหมาะกับคนที่ชอบ magic damage แบบ straightforward และต้องการพื้นฐานที่ดีก่อนขึ้น High Wizard',
-    playstyle: 'INT + DEX สูง ดาเมจต่อ cast สูงมาก แต่ต้องระวัง MP และความปลอดภัย เป็นพื้นฐานสู่ High Wizard และ Enchanter',
-    stats: { atk: 80, def: 20, support: 15, mobility: 35, complexity: 55, party: 55 }
-  },
-  cleric: {
-    name: 'Cleric',
-    nameTH: 'เคลอริก — นักบวชสายฮีล',
-    emoji: '💚',
-    tags: ['support','magic'],
-    desc: 'Cleric เป็น healing and buffing class ที่สมดุล ฮีลตัวเองและทีมได้ดี เหมาะกับคนที่อยากลอง support role ก่อนขึ้น Bishop หรือ Monk ไม่ต้องการ gear แพงมากในช่วงแรก',
-    playstyle: 'INT + VIT + DEX สมดุล มี Heal และ Buff สกิลพื้นฐาน เป็นหนึ่งในคลาสที่ party-friendly ที่สุดในช่วงกลางเกม',
-    stats: { atk: 35, def: 50, support: 80, mobility: 35, complexity: 45, party: 85 }
-  },
-  samurai: {
-    name: 'Samurai',
-    nameTH: 'ซามูไร — นักดาบแห่งเกียรติยศ',
-    emoji: '⛩️',
-    tags: ['dps','melee','special'],
-    desc: 'Samurai คือ specialty class ที่เปลี่ยนได้หลัง level 100 เป็นนักดาบที่มีเทคนิคชั้นสูง ต้องทิ้งสกิลเดิมทั้งหมดเพื่อเริ่มต้นใหม่บนเส้นทางนักดาบ เหมาะกับคนที่อยากท้าทายตัวเอง และมองหาความแตกต่าง',
-    playstyle: 'เป็น specialty class ที่มีสกิล unique ไม่เหมือนใคร ต้อง plan ล่วงหน้าเพราะเปลี่ยนกลับไม่ได้ (เว้นแต่เปลี่ยนเป็น specialty อื่น) ต้องการผู้เล่นที่มี commitment สูง',
-    stats: { atk: 85, def: 55, support: 30, mobility: 65, complexity: 85, party: 55 }
-  },
-  ninja: {
-    name: 'Ninja',
-    nameTH: 'นินจา — เงาพลิ้วไหว',
-    emoji: '🥷',
-    tags: ['dps','melee','special'],
-    desc: 'Ninja ใช้สกิล Dance of Clones ทำ burst damage สูงมาก แต่ต้องรักษา HP ให้ต่ำเพื่อเพิ่มดาเมจ เปราะบางมากต่อ status ailments เหมาะกับผู้เล่นที่ชอบ high risk high reward และ challenge ตัวเอง',
-    playstyle: 'ต้องรักษา HP ต่ำโดยเจตนาเพื่อ maximize ดาเมจจาก Dance of Clones ต้องระวัง poison/stun/paralysis อย่างมาก ใช้ MP สูง เป็น glass cannon สุดขีด',
-    stats: { atk: 92, def: 15, support: 10, mobility: 88, complexity: 90, party: 35 }
-  },
-  minstrel: {
-    name: 'Minstrel',
-    nameTH: 'มินสเทรล — นักดนตรีสายเวทย์',
-    emoji: '🎵',
-    tags: ['support','magic','special'],
-    desc: 'Minstrel คือ specialty class ที่ unique ที่สุดในเกม ใช้ดนตรีและเพลงเป็นอาวุธในการ buff, debuff และ deal damage เป็นคลาสที่ playful มาก เหมาะกับคนที่ต้องการประสบการณ์ที่แตกต่างอย่างสิ้นเชิง',
-    playstyle: 'เป็น support/utility class ที่ไม่เหมือนใคร มี aoe buffs เพลงที่บัฟทีมได้ดีมาก เหมาะ party play เป็นที่หายากและ in-demand สำหรับกลุ่มที่ต้องการ',
-    stats: { atk: 50, def: 30, support: 88, mobility: 50, complexity: 75, party: 90 }
-  }
-};
+        // ฐานข้อมูลอาชีพ (ตัวอย่างข้อมูลเบื้องต้น)
+        const jobData = {
+            'app_warrior': {
+                name: "นักรบฝึกหัด",
+                skills: "• Double Attack: โจมตี 2 ครั้งซ้อน<br>• Hard Hit: โจมตีรุนแรงพร้อมโอกาสติด Stun",
+                stats: "เน้น STR (พลังโจมตี) และ VIT (เลือด)",
+                obtain: "รับภารกิจเปลี่ยนอาชีพได้ที่หมู่บ้านเริ่มต้น"
+            },
+            'paladin': {
+                name: "พาลาดิน",
+                skills: "• Guardian: ดึงความสนใจมอนสเตอร์มาที่ตัวเอง<br>• Holy Shield: ลดความเสียหายที่ได้รับลงอย่างมาก",
+                stats: "เน้น VIT (มากที่สุด) และ INT (เพื่อใช้สกิลรักษา)",
+                obtain: "เปลี่ยนจากพาลาดินฝึกหัดเมื่อเลเวล 140"
+            },
+            'ninja': {
+                name: "นินจา",
+                skills: "• Clone: สร้างร่างแยกหลบการโจมตี<br>• Dance of Death: โจมตีต่อเนื่องด้วยความเร็วสูง",
+                stats: "เน้น AGI (หลบหลีก) และ CRT (คริติคอล)",
+                obtain: "ต้องมีเลเวล 100 ขึ้นไป และทำเควสที่หมู่บ้านลับ"
+            }
 
-  document.querySelectorAll('.tree li').forEach(item => {
-  item.addEventListener('click', function(e) {
-    e.stopPropagation();
-    this.classList.toggle('open');
-  });
-});
+        };
+
+      
+
+        function renderJob(id) {
+            const job = jobData[id];
+            const viewport = document.getElementById('view-port');
+
+            if (!job) {
+                viewport.innerHTML = `
+                    <div class="card">
+                        <h1 class="job-title">กำลังรวบรวมข้อมูล...</h1>
+                        <p>อาชีพนี้อยู่ในรายการอัปเดตข้อมูลเร็วๆ นี้</p>
+                    </div>`;
+                return;
+            }
+
+            viewport.innerHTML = `
+                <div class="card">
+                    <h1 class="job-title">${job.name}</h1>
+                    <div class="section-title">⚔️ ข้อมูลสกิล</div>
+                    <div class="info-box">${job.skills}</div>
+                    
+                    <div class="section-title">📊 สเตตัสที่แนะนำ</div>
+                    <div class="info-box">${job.stats}</div>
+                    
+                    <div class="section-title">📜 วิธีที่จะได้รับสกิลมา</div>
+                    <div class="info-box">${job.obtain}</div>
+                </div>
+            `;
+        }
 
 </script>
 </body>
