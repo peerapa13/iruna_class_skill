@@ -160,6 +160,17 @@
     font-size: 13px;
   }
 
+  .skill-lv {
+  display: inline-block;
+  background: rgba(63, 200, 249, 0.15);
+  color: var(--accent);
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
   @media (max-width: 1024px) {
     .main-wrapper {
       grid-template-columns: 1fr;
@@ -302,6 +313,7 @@
       skillsHTML = job.skills.map(s => `
         <div class="skill-item">
           <div class="skill-name">${s.image ? `<img src="${s.image}" alt="${s.name}" onerror="this.outerHTML='🅿️'">` : '🅿️'} ${s.name}</div>
+          <div class="skill-lv">LV ${s.lv}</div>
           <div style="font-size: 12px; color: var(--text-dim); margin-bottom: 4px;"><strong>สถานะ:</strong> ${s.type}</div>
           <div class="skill-desc">${s.desc}</div>
         </div>
@@ -311,19 +323,19 @@
     viewport.innerHTML = `
       <div class="card">
         <h1 class="job-title">${job.name}</h1>
-        <h2 class="job-desc">${job.lv}</h2>
         <p class="job-desc">${job.desc}</p>
  
         <div class="section-title">หนทางสู่อาชีพนี้...</div>
-        <div class="info-box">${job.obtain}</div>
- 
-        <div class="info-box">
-          ${job.prereq.map(r => '<div class="req-item">• ' + r + '</div>').join("")}
-        </div>
-        <div class="section-title">✓ ข้อกำหนดเบื้องต้น</div>
+        <div class="info-box">${job.obtain}</div>        
  
         ${skillsHTML ? `<div class="section-title">⚔️ สกิล</div><div>${skillsHTML}</div>` : '<div class="section-title">⚔️ สกิล</div><div class="info-box">ยังไม่มีข้อมูล</div>'}
       </div>
+
+      <div class="section-title">✓ คำแนะนำสำหรับอาชีพ </div>
+        <div class="info-box">
+          ${job.prereq.map(r => '<div class="req-item">• ' + r + '</div>').join("")}
+        </div>
+        
     `;
   }
  
