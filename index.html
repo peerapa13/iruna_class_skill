@@ -204,14 +204,22 @@
 <div class="main-wrapper">
   <nav class="sidebar">
     <h2>เส้นทางอาชีพ</h2>
-    <button class="job-btn" data-job="summoner">ซัมมอนเนอร์</button>
     <button class="job-btn" data-job="paladin">พาลาดิน</button>
     <button class="job-btn" data-job="gladiator">จอมดาบ</button>
-    <button class="job-btn" data-job="ninja">นินจา</button>
-    <button class="job-btn" data-job="bishop">สังฆราช</button>
-    <button class="job-btn" data-job="wizard">จอมขมังเวทย์</button>
+    <button class="job-btn" data-job="Beast Knight">บีทไนท์</button>
     <button class="job-btn" data-job="assassin">นักฆ่า</button>
-    <button class="job-btn" data-job="sniper">นักแม่น</button>
+    <button class="job-btn" data-job="Sniper">นักแม่น</button>
+    <button class="job-btn" data-job="summoner">ซัมมอนเนอร์</button>
+    <button class="job-btn" data-job="bishop">สังฆราช</button>
+    <button class="job-btn" data-job="Monk">นักพรต</button>
+    <button class="job-btn" data-job="Servant">เซอร์แวน</button>
+    <button class="job-btn" data-job="Enchanter">ผู้วิเศษ</button>
+    <button class="job-btn" data-job="wizard">จอมขมังเวทย์</button>
+    <button class="job-btn" data-job="Necromancer">เนโครแมนเซอร์</button>
+    <button class="job-btn" data-job="ninja">นินจา</button>
+    <button class="job-btn" data-job="Samurai">ซามุไร</button>
+    <button class="job-btn" data-job="Minstrel">นักดนตรี</button>
+    <button class="job-btn" data-job="Alchemist">นักเล่นแร่แปรธาตุ</button>
   </nav>
  
   <div id="view-port"></div>
@@ -262,7 +270,111 @@
     },
     'paladin': {
       name: "พาลาดิน",
-      desc: "ผู้รักษากิจธรรมชาติด้วยมหาศักติ์ เป็นนักรบที่ทรงพลังแน่นอนในการปกป้องทีม",
+      desc: "อํสวินศักดิ์สิทธิ์",
+      obtain: "รอข้อมูลอัพเดต",
+      prereq: ["รอข้อมูลอัพเดต", "เร็วๆนี้"],
+      skills: [
+      ]
+    },
+    'Gladiator': {
+      name: "จอมดาบ",
+      desc: "อัสวินบ้าคลั่ง",
+      obtain: "รอข้อมูลอัพเดต",
+      prereq: ["รอข้อมูลอัพเดต", "เร็วๆนี้"],
+      skills: [
+      ]
+    },
+    'Beast Knight': {
+      name: "บีทไนท์",
+      desc: "อัศวินแห่งผืนป่า",
+      obtain: "รอข้อมูลอัพเดต",
+      prereq: ["รอข้อมูลอัพเดต", "เร็วๆนี้"],
+      skills: [
+      ]
+    },
+    ' Assassin': {
+      name: "นักฆ่า",
+      desc: "ผู้ล่าลอบสังหาร",
+      obtain: "รอข้อมูลอัพเดต",
+      prereq: ["รอข้อมูลอัพเดต", "เร็วๆนี้"],
+      skills: [
+      ]
+    },
+    'Sniper': {
+      name: "นักแม่น",
+      desc: "",
+      obtain: "รอข้อมูลอัพเดต",
+      prereq: ["รอข้อมูลอัพเดต", "เร็วๆนี้"],
+      skills: [
+      ]
+    },
+    'Bishop': {
+      name: "สังฆราช",
+      desc: "ผู้รักษาแห่งแสง",
+      obtain: "รอข้อมูลอัพเดต",
+      prereq: ["รอข้อมูลอัพเดต", "เร็วๆนี้"],
+      skills: [
+      ]
+    },
+    'Monk': {
+      name: "นักพรต",
+      desc: "วิชาหมัดเมา",
+      obtain: "รอข้อมูลอัพเดต",
+      prereq: ["รอข้อมูลอัพเดต", "เร็วๆนี้"],
+      skills: [
+      ]
+    },
+    'Servant': {
+      name: "เซอร์แวน",
+      desc: "ผ้รับใช้",
+      obtain: "รอข้อมูลอัพเดต",
+      prereq: ["รอข้อมูลอัพเดต", "เร็วๆนี้"],
+      skills: [
+      ]
+    },
+    ' Enchanter': {
+      name: "ผู้วิเศษ",
+      desc: "สแปมเวทไม่ยั้ง",
+      obtain: "รอข้อมูลอัพเดต",
+      prereq: ["รอข้อมูลอัพเดต", "เร็วๆนี้"],
+      skills: [
+      ]
+    },
+    'High Wizard': {
+      name: "จอมขมังเวทย์",
+      desc: "เวทย์มนต์สุดอลัง",
+      obtain: "รอข้อมูลอัพเดต",
+      prereq: ["รอข้อมูลอัพเดต", "เร็วๆนี้"],
+      skills: [
+      ]
+    },
+    'Necromancer': {
+      name: "เนโครแมนเซอร์",
+      desc: "หมอผีผู้เชี่ยวชาญศาสตร์มืด",
+      obtain: "รอข้อมูลอัพเดต",
+      prereq: ["รอข้อมูลอัพเดต", "เร็วๆนี้"],
+      skills: [
+      ]
+    },
+    'Samurai': {
+      name: "ซามุไร",
+      desc: "ผู้ช่ำชองในดาบคาตานะ",
+      obtain: "รอข้อมูลอัพเดต",
+      prereq: ["รอข้อมูลอัพเดต", "เร็วๆนี้"],
+      skills: [
+      ]
+    },
+    'Minstrel': {
+      name: "นักดนตรี",
+      desc: "ทุกหนแห่งยอมมีเสียงเพลง",
+      obtain: "รอข้อมูลอัพเดต",
+      prereq: ["รอข้อมูลอัพเดต", "เร็วๆนี้"],
+      skills: [
+      ]
+    },
+    ' Alchemist': {
+      name: "นักเล่นแร่แปรธาตุ",
+      desc: "ผู้แปรผันเศษหินเป็นทองก้อน",
       obtain: "รอข้อมูลอัพเดต",
       prereq: ["รอข้อมูลอัพเดต", "เร็วๆนี้"],
       skills: [
@@ -270,49 +382,13 @@
     },
     'ninja': {
       name: "นินจา",
-      desc: "นักฆ่าในเงาที่ทำการโจมตีด้วยความเร็วสูง สามารถหลบเลี่ยงได้อย่างนุ่มนวล",
-      obtain: "ทำเควสเมื่อ Lv100+",
-      prereq: ["เป็นนินจาฝึกหัด", "Lv140"],
+      desc: "นักล่าจากมินาอุระ",
+      obtain: "รอข้อมูลอัพเดต",
+      prereq: ["รอข้อมูลอัพเดต", "เร็วๆนี้"],
       skills: [
-        { name: "Clone", type: "Active", desc: "สร้างร่างแยกตนเอง" },
-        { name: "Dance of Death", type: "Active", desc: "โจมตีต่อเนื่องความเร็วสูง" }
       ]
     },
-    'gladiator': {
-      name: "จอมดาบ",
-      desc: "ผู้ควบคุมดาบได้อย่างชำนาญ สร้างความเสียหายสูงมากและเดินทางรวดเร็ว",
-      obtain: "เปลี่ยนจากจอมดาบฝึกหัด",
-      prereq: ["เป็นจอมดาบฝึกหัด", "Lv140"],
-      skills: []
-    },
-    'bishop': {
-      name: "สังฆราช",
-      desc: "ศาสตราจารย์แห่งศาสตร์บริหุหารวิทยา ผู้มีความสามารถในการรักษาและสนับสนุน",
-      obtain: "เปลี่ยนจากสังฆราชฝึกหัด",
-      prereq: ["เป็นสังฆราชฝึกหัด", "Lv140"],
-      skills: []
-    },
-    'wizard': {
-      name: "จอมขมังเวทย์",
-      desc: "จอมเวทย์ที่ควบคุมองค์ธาตุได้อย่างสมบูรณ์ สร้างเสียหายสูงและครอบคลุมพื้นที่กว้าง",
-      obtain: "เปลี่ยนจากจอมขมังเวทย์ฝึกหัด",
-      prereq: ["เป็นจอมขมังเวทย์ฝึกหัด", "Lv140"],
-      skills: []
-    },
-    'assassin': {
-      name: "นักฆ่า",
-      desc: "นักสังหารที่เชี่ยวชาญการโจมตีแบบใกล้ชิด สร้างความเสียหายร้ายแรง",
-      obtain: "เปลี่ยนจากนักฆ่าฝึกหัด",
-      prereq: ["เป็นนักฆ่าฝึกหัด", "Lv140"],
-      skills: []
-    },
-    'sniper': {
-      name: "นักแม่น",
-      desc: "นักธนูที่มีความแม่นยำสูง โจมตีจากระยะไกลอย่างมีประสิทธิ์",
-      obtain: "เปลี่ยนจากนักแม่นฝึกหัด",
-      prereq: ["เป็นนักแม่นฝึกหัด", "Lv140"],
-      skills: []
-    }
+    
   };
 
  function renderJob(jobId) {
