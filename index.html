@@ -299,7 +299,7 @@
     if (job.skills && job.skills.length > 0) {
       skillsHTML = job.skills.map(s => `
         <div class="skill-item">
-          <div class="skill-name">⚔️ ${s.name}</div>
+          <div class="skill-name">${s.image ? `<img src="${s.image}" alt="${s.name}" onerror="this.outerHTML='⚔️'">` : '⚔️'} ${s.name}</div>
           <div style="font-size: 12px; color: var(--text-dim); margin-bottom: 4px;"><strong>สถานะ:</strong> ${s.type}</div>
           <div class="skill-desc">${s.desc}</div>
         </div>
