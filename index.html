@@ -220,6 +220,7 @@
         { name: "แอโรว์เรน", type: "สกิลโจมตีเดี่ยว", desc: "ใช้ได้เฉพาะตอนถือธนู <br>-ความแรงขึ้นอยู่กับจำนวนที่โดน จำนวนที่โดนสูงสุด = 3 + เลเวลสกิล <br>-ความแรงขึ้นอยู่กับระยะห่างยิ่งห่างมายิ่งแรงขึ้น <br>-ระยะสกิลสูงสุด 12 <br>-ใช้MP 16 + (16 x เลเวลสกิล)<br><br>*ยังไม่ทราบสูตรคำนวนดราเมจที่แน่ชัด" ,image: "https://irunawiki.com/_next/image?url=https%3A%2F%2Fv1.irunawiki.com%2Fimages%2Fgame_icon%2F9013.dat&w=64&q=75"},
         { name: "เซอร์ไววัล", type: "สกิลติดตัว", desc: "เพิ่มการฟื้นฟูHPและMPอัตโนมัติ = [(เลเวลสกิล x 5) + 5]" },
         { name: "เอเนซิส", type: "สกิลบัพ(เป้าหมายทั้งปาร์ตี้)", desc: "ภูมิคุ้มกันอัมพาต + 1 <br>-ถ้าอัมพาตจะเป็นการรักษาอัมพาต<br>-ใช้MP 64  " ,image: "https://irunawiki.com/_next/image?url=https%3A%2F%2Fv1.irunawiki.com%2Fimages%2Fgame_icon%2F9014.dat&w=64&q=75"},
+        { name: "เบบี้วูฟ", type: "สกิลติดตัว", desc: "อัญเชิญเบบี้วูฟ ใช้MP 1%  ของMPสูงสุดต่อ 1 ตัวอัญเชิญ(ถ้ามี2ตัวใช้2%ถ้ามี3ตัวใช้3%) ทุกๆ 5 วิเพื่อรักษาสภาพการอัญเชิญ หากMP ไม่พอจะยกเลิกการอัญเชิญในส่วนที่ไม่พอทันที (ยกตัวอย่าง มีmp100 อัญเชิญ 3 ตัว ใช้ ถ้ามานาเหลือ 4 อีก 5 วิถัดไปจะมานาจะเหลือ 1 ซึ่งยังเพียงพอสำหรับซัมมอน 1 ตัวก็จะคงสภาพไว้ได้1ตัว จนกว่าMpในการคงสภาพจะไม่พอ" },
       ]
       
     },
@@ -291,7 +292,7 @@
     if (job.skills.length > 0) {
       skillsHTML = job.skills.map(s => `
         <div class="skill-item">
-          <div class="skill-name">${s.image ? `<img src="${s.image}" alt="${s.name}" onerror="this.outerHTML='${s.icon || '⚔️'}'">` : (s.icon || '⚔️')} ${s.name}</div>
+          <div class="skill-name">${s.image ? `<img src="${s.image}" alt="${s.name}" onerror="this.outerHTML='${s.icon || '🅿️'}'">` : (s.icon || '🅿️')} ${s.name}</div>
           <div style="font-size: 12px; color: var(--text-dim); margin-bottom: 4px;"><strong>สถานะ:</strong> ${s.type}</div>
           <div class="skill-desc">${s.desc}</div>
         </div>
