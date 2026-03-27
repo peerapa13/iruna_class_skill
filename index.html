@@ -437,7 +437,7 @@ function renderJob(jobId) {
 
       if (s.lv) {
         const lvArray = s.lv.split(',');
-        const locArray = s.loc ? s.loc.split(',') : []; 
+        const locArray = s.loc ? s.loc.split(',') : [];
 
         lvHTML = lvArray.map((val, index) => {
           const locationInfo = locArray[index] ? locArray[index].trim() : "รอการอัปเดตสถานที่";
@@ -452,7 +452,7 @@ function renderJob(jobId) {
 
       return `
         <div class="skill-item">
-          <div class="skill-name"> 
+          <div class="skill-name">
             ${s.image ? `<img src="${s.image}" style="width:24px;vertical-align:middle;margin-right:8px;">` : '🅿️'} 
             ${s.name}
           </div>
@@ -463,25 +463,22 @@ function renderJob(jobId) {
       `;
     }).join('');
   }
- 
-   viewport.innerHTML = `
+
+  viewport.innerHTML = `
     <div class="card">
       <h1 class="job-title">${job.name}</h1>
       <p class="job-desc">${job.desc}</p>
-
       <div class="section-title">หนทางสู่อาชีพนี้...</div>
       <div class="info-box">${job.obtain}</div>     
-
       ${skillsHTML ? `<div class="section-title">⚔️ รายละเอียดสกิล</div><div>${skillsHTML}</div>` : 
       '<div class="section-title">⚔️ สกิล</div><div class="info-box">ยังไม่มีข้อมูลสกิลในฐานข้อมูล</div>'}
-      
       <div class="section-title">✓ คำแนะนำสำหรับอาชีพ</div>
       <div class="info-box">
         ${job.prereq.map(r => `<div class="req-item">• ${r}</div>`).join("")}
       </div>
     </div>
-    `;
-  }
+  `;
+}
   
   function openSkillModal(skillName, lv, info) {
   const modal = document.getElementById('skillModal');
