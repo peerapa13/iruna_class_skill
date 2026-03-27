@@ -193,14 +193,21 @@
   }
   /* ปรับปุ่มเลเวลให้ดูเหมือนกดได้ */
   .skill-lv-row {
+    padding: 8px;
+    margin: 4px 0;
+    background: rgba(212, 168, 67, 0.05);
+    border: 1px dashed rgba(212, 168, 67, 0.3);
+    border-radius: 4px;
+    font-size: 13px;
     cursor: pointer;
-    transition: transform 0.1s;
-  }
-  .skill-lv-row:hover {
-    background: var(--gold);
-    color: var(--deep);
-    transform: scale(1.05);
-  }
+    transition: 0.2s;
+}
+
+.skill-lv-row:hover {
+    background: rgba(212, 168, 67, 0.2);
+    border-style: solid;
+    color: var(--gold-light);
+}
 
   
 
@@ -509,13 +516,13 @@ function renderJob(jobId) {
   });
 </script>
 
-<dialog id="skillModal" class="modal">
-  <div class="modal-header">
-    <span id="modalTitle">รายละเอียดการรับสกิล</span>
-    <button class="close-modal" onclick="document.getElementById('skillModal').close()">✕</button>
-  </div>
-  <div id="modalContent"></div>
-</dialog>
-  
+  <dialog id="skillModal" class="modal">
+    <div class="modal-header">
+      <span id="modalTitle">รายละเอียดการรับสกิล</span>
+      <button class="close-modal" onclick="document.getElementById('skillModal').close()">✕</button>
+    </div>
+    <div id="modalContent"></div>
+  </dialog>
+
 </body>
 </html>
