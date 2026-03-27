@@ -419,82 +419,84 @@
     
   };
 
- function renderJob(jobId) {
-    const job = jobData[jobId];
-    if (!job) return;
- 
-    const viewport = document.getElementById('view-port');
- 
-    // อัปเดต active state ของปุ่ม
-    document.querySelectorAll('.job-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector(`[data-job="${jobId}"]`).classList.add('active');
- 
+function renderJob(jobId) {
+  const job = jobData[jobId];
+  if (!job) return;
 
-let skillsHTML = '';
+  const viewport = document.getElementById('view-port');
 
-if (job.skills && job.skills.length > 0) {
-  skillsHTML = job.skills.map(s => {
-    let lvHTML = '';
+  document.querySelectorAll('.job-btn').forEach(b => b.classList.remove('active'));
+  const activeBtn = document.querySelector(`[data-job="${jobId}"]`);
+  if (activeBtn) activeBtn.classList.add('active');
 
-    if (s.lv) {
-      const lvArray = s.lv.split(',');
-      const locArray = s.loc ? s.loc.split(',') : []; // ดึงข้อมูลสถานที่
+  let skillsHTML = '';
 
-      lvHTML = lvArray.map((val, index) => {
-        const locationInfo = locArray[index] || "ยังไม่มีข้อมูลสถานที่";
-        return `
-          <div class="skill-lv-row" 
-               onclick="openSkillModal('${s.name}', '${index + 1}', '${locationInfo}')">
-            Lv ${index + 1} : ${val}
+  if (job.skills && job.skills.length > 0) {
+    skillsHTML = job.skills.map(s => {
+      let lvHTML = '';
+
+      if (s.lv) {
+        const lvArray = s.lv.split(',');
+        const locArray = s.loc ? s.loc.split(',') : []; 
+
+        lvHTML = lvArray.map((val, index) => {
+          const locationInfo = locArray[index] ? locArray[index].trim() : "รอการอัปเดตสถานที่";
+          return `
+            <div class="skill-lv-row" 
+                 onclick="openSkillModal('${s.name}', '${index + 1}', '${locationInfo}')">
+              Lv ${index + 1} : เลเวลตัวละคร ${val.trim()}
+            </div>
+          `;
+        }).join('');
+      }
+
+      return `
+        <div class="skill-item">
+          <div class="skill-name"> 
+            ${s.image ? `<img src="${s.image}" style="width:24px;vertical-align:middle;margin-right:8px;">` : '🅿️'} 
+            ${s.name}
           </div>
-        `;
-      }).join('');
-    }
-
-    return `
-      <div class="skill-item">
-        <div class="skill-name"> ${s.image ? `<img src="${s.image}" style="width:24px;vertical-align:middle;">` : '🅿️'} ${s.name}</div>
-        <div class="skill-lv-box"> ${lvHTML}</div>
-        <div style="font-size: 12px; color: var(--text-dim); margin-bottom: 4px;"><strong>สถานะ:</strong> ${s.type}</div>
-        <div class="skill-desc">${s.desc}</div>
-      </div>
-    `;
-  }).join('');
-}
- 
-    viewport.innerHTML = `
-      <div class="card">
-        <h1 class="job-title">${job.name}</h1>
-        <p class="job-desc">${job.desc}</p>
- 
-        <div class="section-title">หนทางสู่อาชีพนี้...</div>
-        <div class="info-box">${job.obtain}</div>        
- 
-        ${skillsHTML ? `<div class="section-title">⚔️ สกิล</div><div>${skillsHTML}</div>` : '<div class="section-title">⚔️ สกิล</div><div class="info-box">ยังไม่มีข้อมูล</div>'}
-      </div>
-
-      <div class="section-title">✓ คำแนะนำสำหรับอาชีพ </div>
-        <div class="info-box">
-          ${job.prereq.map(r => '<div class="req-item">• ' + r + '</div>').join("")}
+          <div class="skill-lv-box">${lvHTML}</div>
+          <div style="font-size: 12px; color: var(--text-dim); margin: 8px 0 4px;"><strong>ประเภท:</strong> ${s.type}</div>
+          <div class="skill-desc">${s.desc}</div>
         </div>
-        
+      `;
+    }).join('');
+  }
+ 
+   viewport.innerHTML = `
+    <div class="card">
+      <h1 class="job-title">${job.name}</h1>
+      <p class="job-desc">${job.desc}</p>
+
+      <div class="section-title">หนทางสู่อาชีพนี้...</div>
+      <div class="info-box">${job.obtain}</div>     
+
+      ${skillsHTML ? `<div class="section-title">⚔️ รายละเอียดสกิล</div><div>${skillsHTML}</div>` : 
+      '<div class="section-title">⚔️ สกิล</div><div class="info-box">ยังไม่มีข้อมูลสกิลในฐานข้อมูล</div>'}
+      
+      <div class="section-title">✓ คำแนะนำสำหรับอาชีพ</div>
+      <div class="info-box">
+        ${job.prereq.map(r => `<div class="req-item">• ${r}</div>`).join("")}
+      </div>
+    </div>
     `;
   }
   
   function openSkillModal(skillName, lv, info) {
-    const modal = document.getElementById('skillModal');
-    const title = document.getElementById('modalTitle');
-    const content = document.getElementById('modalContent');
+  const modal = document.getElementById('skillModal');
+  const title = document.getElementById('modalTitle');
+  const content = document.getElementById('modalContent');
 
-    title.innerText = `${skillName} [เลเวล ${lv}]`;
-    content.innerHTML = `
-        <div style="margin-bottom:10px; color: var(--text-dim);">วิธีได้รับ / สถานที่รับสกิล:</div>
-        <div class="info-box" style="border-left: 3px solid var(--gold);">
-            📍 ${info}
-        </div>
-    `;
-    
-    modal.showModal(); // คำสั่งเปิด dialog
+  title.innerText = `${skillName} [Level ${lv}]`;
+  content.innerHTML = `
+      <div style="margin-bottom:10px; color: var(--text-dim);">วิธีได้รับ / ภารกิจที่เกี่ยวข้อง:</div>
+      <div class="info-box" style="border-left: 3px solid var(--gold); color: #fff;">
+          📍 ${info}
+      </div>
+  `;
+  modal.showModal();
+}
  
   // เพิ่ม Event Listeners เมื่อ DOM โหลดเสร็จ
   document.addEventListener('DOMContentLoaded', function() {
