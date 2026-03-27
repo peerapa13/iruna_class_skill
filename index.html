@@ -480,6 +480,21 @@ if (job.skills && job.skills.length > 0) {
         
     `;
   }
+  
+  function openSkillModal(skillName, lv, info) {
+    const modal = document.getElementById('skillModal');
+    const title = document.getElementById('modalTitle');
+    const content = document.getElementById('modalContent');
+
+    title.innerText = `${skillName} [เลเวล ${lv}]`;
+    content.innerHTML = `
+        <div style="margin-bottom:10px; color: var(--text-dim);">วิธีได้รับ / สถานที่รับสกิล:</div>
+        <div class="info-box" style="border-left: 3px solid var(--gold);">
+            📍 ${info}
+        </div>
+    `;
+    
+    modal.showModal(); // คำสั่งเปิด dialog
  
   // เพิ่ม Event Listeners เมื่อ DOM โหลดเสร็จ
   document.addEventListener('DOMContentLoaded', function() {
