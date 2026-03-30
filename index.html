@@ -288,46 +288,6 @@
     color: var(--gold-light);
 }
 
-  /* สไตล์สำหรับ Dialog สุ่มอาชีพ */
-#random-dialog {
-    background: rgba(15, 23, 42, 0.95);
-    border: 2px solid var(--accent);
-    border-radius: 15px;
-    color: var(--text);
-    padding: 30px;
-    margin: auto;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-    box-shadow: 0 0 30px rgba(63, 200, 249, 0.4);
-}
-#random-dialog::backdrop {
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(5px);
-}
-.random-result-name {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 28px;
-    color: var(--gold-light);
-    margin: 15px 0;
-    text-shadow: 0 0 10px rgba(212, 168, 67, 0.5);
-}
-.random-btn-confirm {
-    margin-top: 20px;
-    padding: 10px 25px;
-    background: var(--accent);
-    border: none;
-    border-radius: 5px;
-    color: var(--deep);
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-.random-btn-confirm:hover {
-    background: var(--gold-light);
-    transform: scale(1.05);
-}
-
   
 
   @media (max-width: 1024px) {
@@ -361,7 +321,7 @@
   
   <div class="job-group">
   <div class="group-header"🎡 สุ่มอาชีพ </div>
-    <div class="group-header" onclick="randomJob()" style="justify-content: center; background: linear-gradient(45deg, rgba(212,168,67,0.2), rgba(63,200,249,0.2)); border: 1px solid var(--accent);">🎡 คลิกเพื่อสุ่มอาชีพ </div>
+    <div class="group-header" onclick="toggleGroup(this)">⚔️ นักรบ <span class="arrow">▼</span></div>
     <div class="group-content">
       <div class="sub-label">อัศวิน</div>
       <button class="job-btn" data-job="Paladin">พาลาดิน</button>
@@ -741,28 +701,6 @@ function renderJob(jobId) {
         renderJob(jobId);
       });
     });
-
-
-    //สุ่มอาชีพ
-        let currentRandomJobId = "";
-    function randomJob() {
-        const jobs = Object.keys(jobData); 
-        const randomIndex = Math.floor(Math.random() * jobs.length);
-        const jobId = jobs[randomIndex];
-        const job = jobData[jobId];
-        currentRandomJobId = jobId; 
-        document.getElementById('random-result').innerText = job.name;
-        document.getElementById('random-desc').innerText = job.desc;
-        document.getElementById('random-dialog').showModal();
-    }
-    function goToRandomJob() {
-        document.getElementById('random-dialog').close();
-        renderJob(currentRandomJobId);
-        document.getElementById('view-port').scrollIntoView({ behavior: 'smooth' });
-    }
-    function toggleGroup(header) {
-        header.parentElement.classList.toggle('active');
-    }
  
     // แสดงตามค่าเริ่มต้น
     renderJob('Summoner');
@@ -776,14 +714,6 @@ function renderJob(jobId) {
     </div>
     <div id="modalContent"></div>
   </dialog>
-
-  <dialog id="random-dialog">
-  <div style="font-size: 14px; color: var(--text-dim);">โชคชะตาเลือกให้คุณเป็น...</div>
-  <div id="random-result" class="random-result-name">???</div>
-  <p id="random-desc" style="font-size: 14px; margin-bottom: 15px;"></p>
-  <button class="random-btn-confirm" onclick="goToRandomJob()">ดูรายละเอียดอาชีพนี้</button>
-  <button onclick="document.getElementById('random-dialog').close()" style="background:none; border:none; color:var(--text-dim); display:block; margin: 10px auto; cursor:pointer; font-size:12px;">ปิดหน้าต่าง</button>
-</dialog>
   
 
 </body>
