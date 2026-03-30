@@ -320,7 +320,7 @@
   <h2>เส้นทางอาชีพ</h2>
   
   <div class="job-group">
-  <div class="group-header" onclick="openSpinModal()">🎡 สุ่มอาชีพ <span class="arrow">▶</span></div>
+  <div class="group-header" onclick="location.href='spinner.html'; showSpinner();">🎡 สุ่มอาชีพ <span class="arrow">▶</span></div>
     <div class="group-header" onclick="toggleGroup(this)">⚔️ นักรบ <span class="arrow">▼</span></div>
     <div class="group-content">
       <div class="sub-label">อัศวิน</div>
@@ -701,10 +701,6 @@ function renderJob(jobId) {
         renderJob(jobId);
       });
     });
-
-    function openSpinModal() {
-        document.getElementById('spinModal').showModal();
-    }
  
     // แสดงตามค่าเริ่มต้น
     renderJob('Summoner');
@@ -718,15 +714,6 @@ function renderJob(jobId) {
     </div>
     <div id="modalContent"></div>
   </dialog>
-
-
-  <dialog id="spinModal" style="width: 400px; height: 300px; border: 2px solid #d4a843; border-radius: 15px; background: #0a0812; padding: 0; overflow: hidden;">
-    <div style="text-align: right; padding: 5px; background: #1a1a2e;">
-        <button onclick="document.getElementById('spinModal').close()" style="color: white; background: none; border: none; cursor: pointer;">✕</button>
-    </div>
-    <iframe src="spinner.html" style="width: 100%; height: 100%; border: none;"></iframe>
-</dialog>
-  
 
 </body>
 </html>
