@@ -79,6 +79,46 @@
     padding-bottom: 12px;
   }
 
+  /* การจัดกลุ่มใน Sidebar */
+.job-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.group-label {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(212, 168, 67, 0.2);
+  margin-bottom: 5px;
+}
+
+.sub-group {
+  margin-left: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-left: 1px solid rgba(63, 200, 249, 0.3);
+  padding-left: 10px;
+}
+
+.sub-label {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 5px;
+  opacity: 0.8;
+}
+
+.sidebar .job-btn {
+  padding: 8px 12px; 
+  font-size: 12px;
+}
+
   .job-btn {
     text-align: left;
     padding: 12px 14px;
@@ -238,24 +278,48 @@
 
 <div class="main-wrapper">
   <nav class="sidebar">
-    <h2>เส้นทางอาชีพ</h2>
-    <button class="job-btn" data-job="Paladin">พาลาดิน</button>
-    <button class="job-btn" data-job="Gladiator">จอมดาบ</button>
-    <button class="job-btn" data-job="Beast Knight">บีทไนท์</button>
-    <button class="job-btn" data-job="Assassin">นักฆ่า</button>
-    <button class="job-btn" data-job="Sniper">นักแม่น</button>
-    <button class="job-btn" data-job="Summoner">ซัมมอนเนอร์</button>
-    <button class="job-btn" data-job="Bishop">สังฆราช</button>
-    <button class="job-btn" data-job="Monk">นักพรต</button>
-    <button class="job-btn" data-job="Servant">เซอร์แวน</button>
-    <button class="job-btn" data-job="Enchanter">ผู้วิเศษ</button>
-    <button class="job-btn" data-job="High Wizard">จอมขมังเวทย์</button>
-    <button class="job-btn" data-job="Necromancer">เนโครแมนเซอร์</button>
+  <h2>เส้นทางอาชีพ</h2>
+  
+  <div class="job-group">
+    <div class="group-label">⚔️ นักรบ</div>
+    <div class="sub-group">
+      <div class="sub-label">อัศวิน</div>
+      <button class="job-btn" data-job="Paladin">พาลาดิน</button>
+      <button class="job-btn" data-job="Gladiator">จอมดาบ</button>
+      <button class="job-btn" data-job="Beast Knight">บีทไนท์</button>
+    </div>
+    <div class="sub-group">
+      <div class="sub-label">นายพราน</div>
+      <button class="job-btn" data-job="Sniper">นักแม่นธนู</button>
+      <button class="job-btn" data-job="Assassin">นักฆ่า</button>
+      <button class="job-btn" data-job="Summoner">ซัมมอนเนอร์</button>
+    </div>
+  </div>
+
+  <div class="job-group">
+    <div class="group-label">🔮 นักเวทย์</div>
+    <div class="sub-group">
+      <div class="sub-label">จอมเวทย์</div>
+      <button class="job-btn" data-job="High Wizard">จอมขมังเวทย์</button>
+      <button class="job-btn" data-job="Necromancer">เนโครแมนเซอร์</button>
+      <button class="job-btn" data-job="Enchanter">ผู้วิเศษ</button>
+    </div>
+    <div class="sub-group">
+      <div class="sub-label">บาทหลวง</div>
+      <button class="job-btn" data-job="Bishop">สังฆราช</button>
+      <button class="job-btn" data-job="Monk">นักพรต</button>
+      <button class="job-btn" data-job="Servant">เซอร์แวน</button>
+    </div>
+  </div>
+
+  <div class="job-group">
+    <div class="group-label">✨ พิเศษ</div>
     <button class="job-btn" data-job="Ninja">นินจา</button>
     <button class="job-btn" data-job="Samurai">ซามุไร</button>
     <button class="job-btn" data-job="Minstrel">นักดนตรี</button>
     <button class="job-btn" data-job="Alchemist">นักเล่นแร่แปรธาตุ</button>
-  </nav>
+  </div>
+</nav>
  
   <div id="view-port"></div>
 </div>
