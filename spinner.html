@@ -138,7 +138,7 @@
     <div id="stars"></div>
 
     <div class="header">
-        <h1 class="title">Fortune Wheel</h1>
+        <h1 class="title">iruna online</h1>
         <p style="color: #9d8fb8;">สุ่มเลือกอาชีพของคุณ</p>
     </div>
 
@@ -208,7 +208,7 @@
 
         function spin() {
             spinBtn.disabled = true;
-            resultDiv.innerText = "กำลังทำนาย...";
+            resultDiv.innerText = "กำลังสุ่ม...";
             
             const extraSpins = Math.floor(Math.random() * 5) + 5; // หมุนอย่างน้อย 5-10 รอบ
             const randomAngle = Math.random() * (2 * Math.PI);
@@ -248,7 +248,7 @@
             const finalPointerAngle = pointerAngle < 0 ? pointerAngle + 2 * Math.PI : pointerAngle;
             
             const winningIndex = Math.floor(finalPointerAngle / arcSize);
-            resultDiv.innerText = "ดวงของคุณคือ: " + jobs[winningIndex];
+            resultDiv.innerText = "ผลลัพธ์ของคุณคือ: " + jobs[winningIndex];
         }
 
         spinBtn.addEventListener("click", spin);
