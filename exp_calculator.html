@@ -615,30 +615,15 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
       <div class="stat-label">EXP ที่ต้องการอีก</div>
       <div class="stat-value" id="exp-needed">—</div>
     </div>
+    <div class="stat-card amber">
+      <div class="stat-label">EXP สะสมปัจจุบัน (รวม % bar)</div>
+      <div class="stat-value" id="cum-current">—</div>
+    </div>
     <div class="stat-card blue">
       <div class="stat-label">EXP สะสมรวมถึงเป้า</div>
       <div class="stat-value" id="cum-goal">—</div>
     </div>
-    <div class="stat-card amber">
-      <div class="stat-label">EXP/Lv ที่เป้าหมาย</div>
-      <div class="stat-value" id="exp-at-goal">—</div>
-    </div>
   </div>
-
-  <!-- ── Progress ── -->
- <!-- <div class="panel">
-    <div class="panel-title">ความคืบหน้า</div>
-    <div class="prog-section">
-      <div class="prog-header">
-        <span>เลเวลปัจจุบัน → เป้าหมาย</span>
-        <span id="prog-pct-text">0%</span>
-      </div>
-      <div class="prog-track">
-        <div class="prog-fill" id="prog-fill" style="width:0%"></div>
-      </div>
-      <div class="prog-detail" id="prog-detail">0 / 0 EXP</div>
-    </div>
-  </div> -->
 
   <!-- ── Farm Estimator ── -->
   <div class="panel">
@@ -744,13 +729,7 @@ function calc(){
   const expNeeded=Math.max(0,(goalD.cum-curD.cum)-curExpInLv);
   document.getElementById('exp-needed').textContent=fmt(expNeeded);
   document.getElementById('cum-goal').textContent=fmt(goalD.cum);
-  document.getElementById('exp-at-goal').textContent=fmt(goalD.exp);
-
-  const totalRange=goalD.cum-curD.cum;
-  const progPct=totalRange>0?Math.min(100,Math.round(curExpInLv/totalRange*100)):0;
-  document.getElementById('prog-fill').style.width=progPct+'%';
-  document.getElementById('prog-pct-text').textContent=progPct+'%';
-  document.getElementById('prog-detail').textContent=`${fmt(curExpInLv)} / ${fmt(totalRange)} EXP`;
+  document.getElementById('cum-current').textContent=fmt(curD.cum+curExpInLv);
 
   const kills=Math.ceil(expNeeded/mobExp);
   const sec=kills*killTime;
