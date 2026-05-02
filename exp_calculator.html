@@ -626,7 +626,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
   </div>
 
   <!-- ── Progress ── -->
-  <div class="panel">
+ <!-- <div class="panel">
     <div class="panel-title">ความคืบหน้า</div>
     <div class="prog-section">
       <div class="prog-header">
@@ -638,7 +638,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
       </div>
       <div class="prog-detail" id="prog-detail">0 / 0 EXP</div>
     </div>
-  </div>
+  </div> -->
 
   <!-- ── Farm Estimator ── -->
   <div class="panel">
@@ -778,10 +778,6 @@ function renderTable(){
     html+=`<tr class="${cls}"><td>${lv}${est}</td><td>${fmt(d.exp)}${badge}</td><td>${fmt(d.cum)}</td></tr>`;
   }
   tbody.innerHTML=html;
-  if(tableMode==='range'){
-    const row=tbody.querySelector('tr.row-cur');
-    if(row)setTimeout(()=>row.scrollIntoView({block:'nearest'}),50);
-  }
 }
 
 calc();
