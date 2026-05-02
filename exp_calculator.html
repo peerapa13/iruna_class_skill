@@ -539,7 +539,37 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <p>คำนวณ EXP ที่ต้องการ • เลเวล 1 – 405</p>
   </header>
 
-  <a class="back-link" href="https://peerapa13.github.io/iruna_class_skill/">กลับหน้าหลัก</a>
+  <div style="display:flex;gap:8px;align-items:center;margin-bottom:20px;flex-wrap:wrap">
+    <a class="back-link" style="margin-bottom:0" href="https://peerapa13.github.io/iruna_class_skill/">กลับหน้าหลัก</a>
+    <button class="qbtn" id="lookup-toggle-btn" onclick="toggleLookup()" style="padding:6px 14px;font-family:'Sarabun',sans-serif;font-size:13px;">🔍 หา Lv จาก EXP สะสม</button>
+  </div>
+
+  <!-- ── Lookup Panel ── -->
+  <div id="lookup-panel" class="panel" style="display:none;border-color:var(--gold-dim);background:rgba(201,168,76,0.04)">
+    <div class="panel-title">หาเลเวลจาก EXP สะสม</div>
+    <p style="font-size:13px;color:var(--text-sec);margin-bottom:14px;line-height:1.6">กรอก EXP สะสมรวมที่มีอยู่ (เช่น จากการดูในเมนูสถิติ หรือคำนวณจากที่อื่น) แล้วระบบจะบอกว่าอยู่ Lv ไหน และ progress bar อยู่ที่เท่าไหร่</p>
+    <div class="field" style="margin-bottom:14px">
+      <label>EXP สะสมปัจจุบัน</label>
+      <input type="number" id="lookup-exp" min="0" value="" placeholder="เช่น 78830442" oninput="doLookup()" style="font-size:15px">
+    </div>
+    <div id="lookup-result" style="display:none">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+        <div class="stat-card green">
+          <div class="stat-label">เลเวลปัจจุบัน</div>
+          <div class="stat-value" id="lk-level">—</div>
+        </div>
+        <div class="stat-card amber">
+          <div class="stat-label">% progress bar</div>
+          <div class="stat-value" id="lk-pct">—</div>
+        </div>
+        <div class="stat-card blue">
+          <div class="stat-label">EXP ที่ใช้ขึ้น Lv นี้</div>
+          <div class="stat-value" id="lk-exp-lv">—</div>
+        </div>
+      </div>
+      <button class="qbtn" onclick="applyLookup()" style="margin-top:12px;font-family:'Sarabun',sans-serif;font-size:13px;color:var(--teal);border-color:var(--teal-dim)">↓ ใช้ค่านี้ในเครื่องคำนวณด้านล่าง</button>
+    </div>
+  </div>
 
   <div class="hint">
     <span class="hint-icon">💡</span>
@@ -615,13 +645,13 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
       <div class="stat-label">EXP ที่ต้องการอีก</div>
       <div class="stat-value" id="exp-needed">—</div>
     </div>
-    <div class="stat-card amber">
-      <div class="stat-label">EXP สะสมปัจจุบัน (รวม % bar)</div>
-      <div class="stat-value" id="cum-current">—</div>
-    </div>
     <div class="stat-card blue">
       <div class="stat-label">EXP สะสมรวมถึงเป้า</div>
       <div class="stat-value" id="cum-goal">—</div>
+    </div>
+    <div class="stat-card amber">
+      <div class="stat-label">EXP สะสมปัจจุบัน (รวม % bar)</div>
+      <div class="stat-value" id="cum-current">—</div>
     </div>
   </div>
 
@@ -757,6 +787,46 @@ function renderTable(){
     html+=`<tr class="${cls}"><td>${lv}${est}</td><td>${fmt(d.exp)}${badge}</td><td>${fmt(d.cum)}</td></tr>`;
   }
   tbody.innerHTML=html;
+}
+
+function toggleLookup(){
+  const p=document.getElementById("lookup-panel");
+  const btn=document.getElementById("lookup-toggle-btn");
+  const open=p.style.display==="none";
+  p.style.display=open?"block":"none";
+  btn.classList.toggle("active",open);
+  if(open)document.getElementById("lookup-exp").focus();
+}
+function doLookup(){
+  const expInput=parseInt(document.getElementById("lookup-exp").value)||0;
+  if(expInput<=0){document.getElementById("lookup-result").style.display="none";return;}
+  let foundLv=1;
+  for(let lv=1;lv<=404;lv++){
+    const next=RAW[String(lv+1)];
+    if(!next){foundLv=lv;break;}
+    if(expInput>=RAW[String(lv)].cum && expInput<next.cum){foundLv=lv;break;}
+  }
+  if(expInput>=RAW["405"].cum)foundLv=405;
+  const d=RAW[String(foundLv)];
+  const expIntoLv=expInput-d.cum;
+  const pct=d.exp>0?Math.min(99,Math.floor(expIntoLv/d.exp*100)):0;
+  document.getElementById("lk-level").textContent=foundLv;
+  document.getElementById("lk-pct").textContent=pct+"%";
+  document.getElementById("lk-exp-lv").textContent=fmt(expIntoLv)+" / "+fmt(d.exp);
+  document.getElementById("lookup-result").style.display="block";
+  document.getElementById("lookup-panel").dataset.lv=foundLv;
+  document.getElementById("lookup-panel").dataset.pct=pct;
+}
+function applyLookup(){
+  const lv=parseInt(document.getElementById("lookup-panel").dataset.lv)||1;
+  const pct=parseInt(document.getElementById("lookup-panel").dataset.pct)||0;
+  document.getElementById("cur-lv").value=lv;
+  document.getElementById("exp-pct").value=pct;
+  document.getElementById("pct-label").textContent=pct+"%";
+  calc();
+  document.getElementById("lookup-panel").style.display="none";
+  document.getElementById("lookup-toggle-btn").classList.remove("active");
+  document.getElementById("cur-lv").scrollIntoView({behavior:"smooth",block:"center"});
 }
 
 calc();
