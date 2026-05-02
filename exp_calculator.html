@@ -6,38 +6,6 @@
 <title>EXP Calculator — Iruna Online TH</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<div id="export-card" style="position: fixed; top: -10000px; left: -10000px; width: 400px; background: #1e1e1e; color: #fff; padding: 25px; border-radius: 16px; font-family: sans-serif; box-sizing: border-box; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
-    <div style="text-align: center; margin-bottom: 20px; font-size: 20px; font-weight: bold; color: #4db8ff;">
-        Iruna EXP Calculator
-    </div>
-    
-    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 8px;">
-        <div style="font-size: 32px; font-weight: bold;">LV. <span id="exp-cur-lv">100</span></div>
-        <div style="font-size: 18px; color: #aaa; margin-bottom: 4px;">เป้าหมาย: <span style="color: #fff;">LV. <span id="exp-goal-lv">101</span></span></div>
-    </div>
-
-    <div style="margin-bottom: 20px;">
-        <div style="width: 100%; background: #333; height: 12px; border-radius: 6px; overflow: hidden;">
-            <div id="exp-bar-fill" style="width: 0%; background: linear-gradient(90deg, #4caf50, #81c784); height: 100%; border-radius: 6px;"></div>
-        </div>
-    </div>
-    <div style="background: #2a2a2a; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-        <div style="margin-bottom: 12px; font-size: 16px;">
-            ต้องการ EXP อีก: <strong style="color: #ff9800; font-size: 20px;" id="exp-need-val">0</strong>
-        </div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 15px; color: #ddd; background: #1e1e1e; padding: 10px; border-radius: 8px;">
-            <div>⚔️ ตีมอน: <strong id="exp-kills-val" style="color: #fff;">0</strong> ตัว</div>
-            <div>⏱️ เวลา: <strong id="exp-time-val" style="color: #fff;">0</strong></div>
-        </div>
-    </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #333; padding-top: 15px;">
-        <div style="font-size: 11px; color: #888; max-width: 250px; word-wrap: break-word;">
-            สแกนเพื่อคำนวณ EXP ของคุณ<br>
-            <span style="color: #4db8ff;">peerapa13.github.io/iruna_class_skill/exp_calculator</span>
-        </div>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://peerapa13.github.io/iruna_class_skill/exp_calculator&margin=2" width="70" height="70" style="border-radius: 6px; background: white; padding: 3px;">
-    </div>
-</div>
 <style>
 :root {
   --bg-deep:    #0a0c10;
@@ -616,11 +584,11 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <div class="input-grid">
       <div class="field">
         <label>เลเวลปัจจุบัน</label>
-        <input type="number" id="cur-lv" min="1" max="404" value="100" oninput="calc()">
+        <input type="number" id="cur-lv" min="1" max="404" value="1" oninput="calc()">
       </div>
       <div class="field">
         <label>เลเวลเป้าหมาย</label>
-        <input type="number" id="goal-lv" min="2" max="405" value="200" oninput="calc()">
+        <input type="number" id="goal-lv" min="2" max="405" value="405" oninput="calc()">
       </div>
     </div>
 
@@ -694,7 +662,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <div class="input-grid" style="margin-bottom:14px">
       <div class="field">
         <label>EXP ต่อ kill</label>
-        <input type="number" id="mob-exp" min="1" value="50000" oninput="calc()">
+        <input type="number" id="mob-exp" min="1" value="0" oninput="calc()">
       </div>
       <div class="field">
         <label>วินาที / kill</label>
@@ -745,9 +713,55 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <a href="https://peerapa13.github.io/iruna_class_skill/" style="color:var(--gold-dim);text-decoration:none;margin-top:6px;display:inline-block;">← กลับ Iruna Class Skill Library</a>
   </footer>
 </div>
-<button id="btn-save-image" onclick="saveImage()" style="margin-top: 20px; width: 100%; padding: 12px; background: #4CAF50; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold; transition: 0.3s;">
-  💾 บันทึกผลลัพธ์เป็นรูปภาพ
+
+
+<button id="btn-save-image" onclick="saveImage()" style="margin-top: 24px; width: 100%; padding: 16px; background: linear-gradient(135deg, #2dd4a0, #1a7a5e); color: white; border: none; border-radius: 8px; font-family: 'Cinzel', serif; font-size: 16px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 15px rgba(45, 212, 160, 0.3); transition: 0.3s;">
+  บันทึกผลลัพธ์เป็นรูปภาพ
 </button>
+
+<div id="export-card" style="position: fixed; top: -2000px; left: -2000px; width: 450px; background: #0a0c10; color: #e8e4d8; padding: 30px; border: 2px solid #3d5080; border-radius: 12px; font-family: 'Sarabun', sans-serif;">
+    <div style="text-align: center; border-bottom: 1px solid #c9a84c; padding-bottom: 15px; margin-bottom: 20px;">
+        <div style="font-family: 'Cinzel', serif; color: #c9a84c; font-size: 22px; letter-spacing: 2px; font-weight: bold;">IRUNA ONLINE TH</div>
+        <div style="font-size: 14px; color: #8a8fa8;">EXP CALCULATOR RESULT</div>
+    </div>
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; background: rgba(61, 80, 128, 0.1); padding: 15px; border-radius: 8px;">
+        <div style="text-align: center; flex: 1;">
+            <div style="font-size: 12px; color: #8a8fa8; margin-bottom: 5px;">ปัจจุบัน</div>
+            <div style="font-family: 'Cinzel', serif; font-size: 28px; color: #2dd4a0; font-weight: bold;">LV. <span id="exp-cur-lv">100</span></div>
+        </div>
+        <div style="font-size: 24px; color: #c9a84c;">➜</div>
+        <div style="text-align: center; flex: 1;">
+            <div style="font-size: 12px; color: #8a8fa8; margin-bottom: 5px;">เป้าหมาย</div>
+            <div style="font-family: 'Cinzel', serif; font-size: 28px; color: #5b9cf6; font-weight: bold;">LV. <span id="exp-goal-lv">200</span></div>
+        </div>
+    </div>
+
+    <div style="margin-bottom: 25px;">
+        <div style="font-size: 13px; color: #8a8fa8; margin-bottom: 8px; display: flex; justify-content: space-between;">
+            <span>EXP ที่ต้องกาาร</span>
+            <span id="exp-need-val" style="color: #c9a84c; font-weight: bold; font-size: 16px;">0</span>
+        </div>
+        <div style="background: #161a22; padding: 15px; border-radius: 8px; border: 1px solid #2a3045;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span style="font-size: 14px; color: #8a8fa8;">จำนวนที่ต้องล่า:</span>
+                <span id="exp-kills-val" style="color: #fff; font-weight: bold;">0</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <span style="font-size: 14px; color: #8a8fa8;">เวลาโดยประมาณ:</span>
+                <span id="exp-time-val" style="color: #fff; font-weight: bold;">0</span>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #2a3045; padding-top: 20px;">
+        <div style="font-size: 11px; color: #555b72;">
+            Calculated at:<br>
+            <span style="color: #8a8fa8;">peerapa13.github.io/iruna_class_skill/</span>
+        </div>
+        <div id="qrcode-canvas" style="background: white; padding: 5px; border-radius: 4px;"></div>
+    </div>
+</div>
 
 <script>
 let RAW = {};
@@ -899,38 +913,51 @@ async function loadDataAndInit() {
 function saveImage() {
     const btn = document.getElementById('btn-save-image');
     const originalText = btn.innerHTML;
-    btn.innerHTML = '⏳ กำลังสร้างรูปภาพ...';
+    btn.innerHTML = '⏳ GENERATING IMAGE...';
     btn.disabled = true;
+
     document.getElementById('exp-cur-lv').textContent = document.getElementById('cur-lv').value;
     document.getElementById('exp-goal-lv').textContent = document.getElementById('goal-lv').value;
-    
-    const pct = document.getElementById('exp-pct').value;
-    document.getElementById('exp-pct-val').textContent = pct;
     document.getElementById('exp-need-val').textContent = document.getElementById('exp-needed').textContent;
     document.getElementById('exp-kills-val').textContent = document.getElementById('kills').textContent;
     document.getElementById('exp-time-val').textContent = document.getElementById('farm-time').textContent;
 
-    const card = document.getElementById('export-card');
-
-    html2canvas(card, {
-        backgroundColor: '#1e1e1e', 
-        scale: 2, 
-        useCORS: true 
-    }).then(canvas => {
-        const link = document.createElement('a');
-        const curLv = document.getElementById('cur-lv').value;
-        const goalLv = document.getElementById('goal-lv').value;
-        link.download = `Iruna_EXP_LV${curLv}_to_${goalLv}.png`; 
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-        btn.innerHTML = originalText;
-        btn.disabled = false;
-    }).catch(err => {
-        console.error("Error generating image:", err);
-        alert("เกิดข้อผิดพลาดในการบันทึกรูปภาพ กรุณาลองใหม่อีกครั้ง");
-        btn.innerHTML = originalText;
-        btn.disabled = false;
+    const qrContainer = document.getElementById('qrcode-canvas');
+    qrContainer.innerHTML = ""; 
+    new QRCode(qrContainer, {
+        text: "https://peerapa13.github.io/iruna_class_skill/exp_calculator",
+        width: 70,
+        height: 70,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
     });
+
+    setTimeout(() => {
+        const card = document.getElementById('export-card');
+        
+        html2canvas(card, {
+            backgroundColor: '#0a0c10',
+            scale: 2, 
+            useCORS: true
+        }).then(canvas => {
+            const link = document.createElement('a');
+            const curLv = document.getElementById('cur-lv').value;
+            const goalLv = document.getElementById('goal-lv').value;
+            
+            link.download = `Iruna_EXP_LV${curLv}_TO_${goalLv}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }).catch(err => {
+            console.error("Save Error:", err);
+            alert("ไม่สามารถบันทึกรูปภาพได้");
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        });
+    }, 200); 
 }
 
 loadDataAndInit();
