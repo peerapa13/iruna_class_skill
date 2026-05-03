@@ -946,6 +946,36 @@ function applyLookup() {
   document.getElementById('cur-lv').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
+/* ── Pre-build QR on page load ── */
+function initQR() {
+  const wrap = document.getElementById('ec-qr');
+  wrap.innerHTML = '';
+  const tempDiv = document.createElement('div');
+  tempDiv.style.cssText = 'position:absolute;visibility:hidden;top:0;left:0;';
+  document.body.appendChild(tempDiv);
+
+  new QRCode(tempDiv, {
+    text: 'https://peerapa13.github.io/iruna_class_skill/exp_calculator',
+    width: 80, height: 80,
+    colorDark: '#000000', colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+
+  setTimeout(() => {
+    const qrCanvas = tempDiv.querySelector('canvas');
+    if (qrCanvas) {
+      const img = document.createElement('img');
+      img.src = qrCanvas.toDataURL('image/png');
+      img.width = 80;
+      img.height = 80;
+      img.style.display = 'block';
+      wrap.innerHTML = '';
+      wrap.appendChild(img);
+    }
+    document.body.removeChild(tempDiv);
+  }, 300);
+}
+
 /* ── Load data ── */
 async function loadDataAndInit() {
   try {
@@ -956,6 +986,7 @@ async function loadDataAndInit() {
   } catch (error) {
     console.error('Failed to load EXP data:', error);
   }
+  initQR();
 }
 
 /* ── Save Image ── */
@@ -1021,22 +1052,19 @@ function saveImage() {
     btn.disabled = false;
     btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> บันทึกผลลัพธ์เป็นรูปภาพ';
   };
-
-  // Build QR first
- buildQR().then(() => {
-  return html2canvas(document.getElementById('export-card'), {
+  html2canvas(document.getElementById('export-card'), {
     backgroundColor: '#0a0c10',
     scale: 2,
     useCORS: true,
     allowTaint: true,
     logging: false,
     onclone: (doc) => {
-      doc.getElementById('export-card').style.position = 'relative';
-      doc.getElementById('export-card').style.top = '0';
-      doc.getElementById('export-card').style.left = '0';
+      const card = doc.getElementById('export-card');
+      card.style.position = 'relative';
+      card.style.top = '0';
+      card.style.left = '0';
     }
-  });
-}).then(canvas => {
+  }).then(canvas => {
     const link = document.createElement('a');
     link.download = `Iruna_EXP_LV${cur}_TO_${goal}.png`;
     link.href = canvas.toDataURL('image/png');
