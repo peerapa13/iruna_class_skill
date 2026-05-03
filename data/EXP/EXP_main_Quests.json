@@ -3,841 +3,862 @@
     {
       "ep": 1,
       "name": "Episode 1",
-      "from": 1,
-      "to": 10
+      "chapters": [
+        {
+          "chapter": 1,
+          "name": "บทที่1 ",
+          "missions": [
+            {
+              "num": 1,
+              "name": "จอกศักดิ์สิทธิ์ของเทพธิดา",
+              "exp": 300
+            },
+            {
+              "num": 2,
+              "name": "ข่าวลือแห่งความมืด",
+              "exp": 20
+            },
+            {
+              "num": 3,
+              "name": "หน่วยปราบมอนเตอร์",
+              "exp": 40
+            },
+            {
+              "num": 4,
+              "name": "Supply Route Shadows",
+              "exp": 80
+            },
+            {
+              "num": 5,
+              "name": "Shadows in the Forest",
+              "exp": 160
+            },
+            {
+              "num": 6,
+              "name": "Mine Disaster",
+              "exp": 320
+            },
+            {
+              "num": 7,
+              "name": "Goddess Statue at the Mine",
+              "exp": 640
+            },
+            {
+              "num": 8,
+              "name": "Forgotten Shadow",
+              "exp": 1280
+            },
+            {
+              "num": 9,
+              "name": "Unclaimed Quest",
+              "exp": 2560
+            },
+            {
+              "num": 10,
+              "name": "Formless Being",
+              "exp": 5120
+            }
+          ]
+        }
+      ]
     },
     {
       "ep": 2,
       "name": "Episode 2",
-      "from": 11,
-      "to": 21
+      "chapters": [
+        {
+          "chapter": 1,
+          "name": "Episode 2",
+          "missions": [
+            {
+              "num": 11,
+              "name": "Ancient Writings",
+              "exp": 7000
+            },
+            {
+              "num": 12,
+              "name": "The Place of Darkness",
+              "exp": 10000
+            },
+            {
+              "num": 13,
+              "name": "Obstructing the Alliance",
+              "exp": 30000
+            },
+            {
+              "num": 14,
+              "name": "Labyrinth of Fire Dragon",
+              "exp": 52000
+            },
+            {
+              "num": 15,
+              "name": "Ancient Chalice",
+              "exp": 91000
+            },
+            {
+              "num": 16,
+              "name": "Encroaching Darkness",
+              "exp": 100000
+            },
+            {
+              "num": 17,
+              "name": "Battling the Dragon Lord",
+              "exp": 110000
+            },
+            {
+              "num": 18,
+              "name": "The Ruler",
+              "exp": 120000
+            },
+            {
+              "num": 19,
+              "name": "A Witch's Honor",
+              "exp": 140000
+            },
+            {
+              "num": 20,
+              "name": "Goddess of Darkness",
+              "exp": 165000
+            },
+            {
+              "num": 21,
+              "name": "Tears",
+              "exp": 200000
+            }
+          ]
+        }
+      ]
     },
     {
       "ep": 3,
       "name": "Episode 3",
-      "from": 22,
-      "to": 37
+      "chapters": [
+        {
+          "chapter": 1,
+          "name": "Episode 3",
+          "missions": [
+            {
+              "num": 22,
+              "name": "The Two Consuls",
+              "exp": 100000
+            },
+            {
+              "num": 23,
+              "name": "In the Shadow of the Capital",
+              "exp": 120000
+            },
+            {
+              "num": 24,
+              "name": "Wetland Battle",
+              "exp": 150000
+            },
+            {
+              "num": 25,
+              "name": "Hole Lot of Wind",
+              "exp": 210000
+            },
+            {
+              "num": 26,
+              "name": "Two Tales",
+              "exp": 180000
+            },
+            {
+              "num": 27,
+              "name": "Little Robber Girls Tears",
+              "exp": 230000
+            },
+            {
+              "num": 28,
+              "name": "Sea of Intrigue",
+              "exp": 250000
+            },
+            {
+              "num": 29,
+              "name": "Fort of Intrigue",
+              "exp": 300000
+            },
+            {
+              "num": 30,
+              "name": "Highway of the Devil Plants",
+              "exp": 360000
+            },
+            {
+              "num": 31,
+              "name": "The Burning Flatlands",
+              "exp": 400000
+            },
+            {
+              "num": 32,
+              "name": "The Great Tree and The Dragon",
+              "exp": 520000
+            },
+            {
+              "num": 33,
+              "name": "The Disappearing Lake",
+              "exp": 550000
+            },
+            {
+              "num": 34,
+              "name": "Dust Cloud Dreams",
+              "exp": 570000
+            },
+            {
+              "num": 35,
+              "name": "From Ice to Water",
+              "exp": 640000
+            },
+            {
+              "num": 36,
+              "name": "Highland Camp",
+              "exp": 680000
+            },
+            {
+              "num": 37,
+              "name": "Awaiting Orders",
+              "exp": 740000
+            }
+          ]
+        }
+      ]
     },
     {
       "ep": 4,
       "name": "Episode 4",
-      "from": 38,
-      "to": 50
+      "chapters": [
+        {
+          "chapter": 1,
+          "name": "Episode 4",
+          "missions": [
+            {
+              "num": 38,
+              "name": "To a New Future",
+              "exp": 300000
+            },
+            {
+              "num": 39,
+              "name": "The Mystery Deepens",
+              "exp": 320000
+            },
+            {
+              "num": 40,
+              "name": "The Toils of War",
+              "exp": 790000
+            },
+            {
+              "num": 41,
+              "name": "The Inje Idol",
+              "exp": 970000
+            },
+            {
+              "num": 42,
+              "name": "Slebinian Shadow",
+              "exp": 1200000
+            },
+            {
+              "num": 43,
+              "name": "Holy Child",
+              "exp": 1500000
+            },
+            {
+              "num": 44,
+              "name": "God-Killing Trap",
+              "exp": 1850000
+            },
+            {
+              "num": 45,
+              "name": "Chain Crisis",
+              "exp": 2860000
+            },
+            {
+              "num": 46,
+              "name": "Hot Sand, Fierce Fight",
+              "exp": 3150000
+            },
+            {
+              "num": 47,
+              "name": "Sinister Scheme Setback",
+              "exp": 3850000
+            },
+            {
+              "num": 48,
+              "name": "Teaus Reconciliation",
+              "exp": 4100000
+            },
+            {
+              "num": 49,
+              "name": "Victory at Zalsim",
+              "exp": 4300000
+            },
+            {
+              "num": 50,
+              "name": "Beyond the Mountains of Darkness",
+              "exp": 4650000
+            }
+          ]
+        }
+      ]
     },
     {
       "ep": 5,
       "name": "Episode 5",
-      "from": 51,
-      "to": 65
+      "chapters": [
+        {
+          "chapter": 1,
+          "name": "Episode 5",
+          "missions": [
+            {
+              "num": 51,
+              "name": "Peculiar Place",
+              "exp": 4900000
+            },
+            {
+              "num": 52,
+              "name": "The Labyrinth of Leaves",
+              "exp": 5200000
+            },
+            {
+              "num": 53,
+              "name": "Frenzied Fight in the Former City",
+              "exp": 2700000
+            },
+            {
+              "num": 54,
+              "name": "Treetop Metropolis",
+              "exp": 4500000
+            },
+            {
+              "num": 55,
+              "name": "Palatial Trail",
+              "exp": 1500000
+            },
+            {
+              "num": 56,
+              "name": "Reconciliation of the Gods",
+              "exp": 5300000
+            },
+            {
+              "num": 57,
+              "name": "Background to a Blunder",
+              "exp": 5600000
+            },
+            {
+              "num": 58,
+              "name": "The Old Man and His Research",
+              "exp": 6200000
+            },
+            {
+              "num": 59,
+              "name": "Father and Daughter At Odds",
+              "exp": 6200000
+            },
+            {
+              "num": 60,
+              "name": "To the Source of Strife",
+              "exp": 6850000
+            },
+            {
+              "num": 61,
+              "name": "Water People Samurai",
+              "exp": 7200000
+            },
+            {
+              "num": 62,
+              "name": "The Minase and the Sanki",
+              "exp": 7600000
+            },
+            {
+              "num": 63,
+              "name": "Divine Sword",
+              "exp": 8000000
+            },
+            {
+              "num": 64,
+              "name": "Deserted Village",
+              "exp": 10270000
+            },
+            {
+              "num": 65,
+              "name": "Departure from the Other World",
+              "exp": 10000000
+            }
+          ]
+        }
+      ]
     },
     {
       "ep": 6,
       "name": "Episode 6",
-      "from": 66,
-      "to": 75
+      "chapters": [
+        {
+          "chapter": 1,
+          "name": "Episode 6",
+          "missions": [
+            {
+              "num": 66,
+              "name": "Defiant Harbor",
+              "exp": 10750000
+            },
+            {
+              "num": 67,
+              "name": "Village Lockdown",
+              "exp": 11500000
+            },
+            {
+              "num": 68,
+              "name": "Community in Crisis",
+              "exp": 12000000
+            },
+            {
+              "num": 69,
+              "name": "Highland Devastation",
+              "exp": 12600000
+            },
+            {
+              "num": 70,
+              "name": "The Power that Starves",
+              "exp": 13450000
+            },
+            {
+              "num": 71,
+              "name": "Collapsed Plains",
+              "exp": 14370000
+            },
+            {
+              "num": 72,
+              "name": "Fort of Chaos",
+              "exp": 15300000
+            },
+            {
+              "num": 73,
+              "name": "The Mournful Empress",
+              "exp": 16200000
+            },
+            {
+              "num": 74,
+              "name": "The Final Battle, and…",
+              "exp": 17000000
+            },
+            {
+              "num": 75,
+              "name": "Beyond the Adventure",
+              "exp": 10000000
+            }
+          ]
+        }
+      ]
     },
     {
       "ep": 7,
       "name": "Episode 7",
-      "from": 76,
-      "to": 90
+      "chapters": [
+        {
+          "chapter": 1,
+          "name": "Episode 7",
+          "missions": [
+            {
+              "num": 76,
+              "name": "A Sudden Start",
+              "exp": 17800000
+            },
+            {
+              "num": 77,
+              "name": "The Dragonewt Realm: Bleudraf",
+              "exp": 18300000
+            },
+            {
+              "num": 78,
+              "name": "The God of Justice's Lament",
+              "exp": 19200000
+            },
+            {
+              "num": 79,
+              "name": "Blighted Village",
+              "exp": 20400000
+            },
+            {
+              "num": 80,
+              "name": "Mutant Dragonewts",
+              "exp": 24700000
+            },
+            {
+              "num": 81,
+              "name": "Dragonewt Feedlot",
+              "exp": 26000000
+            },
+            {
+              "num": 82,
+              "name": "The Lograth Rebellion",
+              "exp": 27200000
+            },
+            {
+              "num": 83,
+              "name": "City of Survivors",
+              "exp": 27800000
+            },
+            {
+              "num": 84,
+              "name": "The End of Ambition",
+              "exp": 28800000
+            },
+            {
+              "num": 85,
+              "name": "The Disappearing Gods",
+              "exp": 29900000
+            },
+            {
+              "num": 86,
+              "name": "The Overworld",
+              "exp": 31600000
+            },
+            {
+              "num": 87,
+              "name": "Other World Dragon",
+              "exp": 33400000
+            },
+            {
+              "num": 88,
+              "name": "The Dragonewt Priests",
+              "exp": 34000000
+            },
+            {
+              "num": 89,
+              "name": "The Dragonewts' Secret",
+              "exp": 35200000
+            },
+            {
+              "num": 90,
+              "name": "An Unexpected Encounter",
+              "exp": 36500000
+            }
+          ]
+        }
+      ]
     },
     {
       "ep": 8,
       "name": "Episode 8",
-      "from": 91,
-      "to": 101
+      "chapters": [
+        {
+          "chapter": 1,
+          "name": "Episode 8",
+          "missions": [
+            {
+              "num": 91,
+              "name": "The Brothers Kidnapped",
+              "exp": 43000000
+            },
+            {
+              "num": 92,
+              "name": "Demons, Gods and Emperors",
+              "exp": 44800000
+            },
+            {
+              "num": 93,
+              "name": "Noyevere, The New World",
+              "exp": 47000000
+            },
+            {
+              "num": 94,
+              "name": "The Road to Xeltzam",
+              "exp": 48800000
+            },
+            {
+              "num": 95,
+              "name": "Mutated Predators",
+              "exp": 50500000
+            },
+            {
+              "num": 96,
+              "name": "The Shrine of Geyanetiel",
+              "exp": 53100000
+            },
+            {
+              "num": 97,
+              "name": "Mindless Wisdom",
+              "exp": 55800000
+            },
+            {
+              "num": 98,
+              "name": "The Price of Greed",
+              "exp": 56700000
+            },
+            {
+              "num": 99,
+              "name": "Souls of the Soulless",
+              "exp": 58600000
+            },
+            {
+              "num": 100,
+              "name": "Futile Emotions",
+              "exp": 70000000
+            },
+            {
+              "num": 101,
+              "name": "Departure from the Dragonewt Realm",
+              "exp": 37500000
+            }
+          ]
+        }
+      ]
     },
     {
       "ep": 9,
       "name": "Episode 9",
-      "from": 102,
-      "to": 130
+      "chapters": [
+        {
+          "chapter": 1,
+          "name": "Episode 9",
+          "missions": [
+            {
+              "num": 102,
+              "name": "The Bandaged Girl and the Mysterious Warriors",
+              "exp": 65000000
+            },
+            {
+              "num": 103,
+              "name": "Familiar Faces and New Enemies",
+              "exp": 67000000
+            },
+            {
+              "num": 104,
+              "name": "Apostolia and the God's Fragments",
+              "exp": 69000000
+            },
+            {
+              "num": 105,
+              "name": "God's Fragments and the Ancient Dragon",
+              "exp": 71500000
+            },
+            {
+              "num": 106,
+              "name": "The God's Fragments and Gido's Small Box",
+              "exp": 74000000
+            },
+            {
+              "num": 107,
+              "name": "The God's Fragments and Dragon Priestess",
+              "exp": 76000000
+            },
+            {
+              "num": 108,
+              "name": "President and Al Crysta",
+              "exp": 77000000
+            },
+            {
+              "num": 109,
+              "name": "The Mountain Dragon and God's Fragments",
+              "exp": 79700000
+            },
+            {
+              "num": 110,
+              "name": "Unchosen and Ineligible",
+              "exp": 83200000
+            },
+            {
+              "num": 111,
+              "name": "The Lake Dragon and Bandit Girl",
+              "exp": 86100000
+            },
+            {
+              "num": 112,
+              "name": "Evil Prophet and Temple",
+              "exp": 88800000
+            },
+            {
+              "num": 113,
+              "name": "The Crisis Under Sateria",
+              "exp": 92800000
+            },
+            {
+              "num": 114,
+              "name": "The Three Trials and Wild Dragon",
+              "exp": 94000000
+            },
+            {
+              "num": 116,
+              "name": "The Heavy Armor Knights and Deep Mystery",
+              "exp": 98500000
+            },
+            {
+              "num": 117,
+              "name": "The God's Fragments and Magic Circle",
+              "exp": 100000000
+            },
+            {
+              "num": 118,
+              "name": "Innocence and Chain Reaction",
+              "exp": 103000000
+            },
+            {
+              "num": 119,
+              "name": "The Sacred Plains and National Ruin",
+              "exp": 106000000
+            },
+            {
+              "num": 120,
+              "name": "The Desolated City and Ouvel's Shadow",
+              "exp": 114000000
+            },
+            {
+              "num": 121,
+              "name": "The Underground Town and Monsters' Den",
+              "exp": 117000000
+            },
+            {
+              "num": 122,
+              "name": "The Sea Dragon and Devil's Island",
+              "exp": 121000000
+            },
+            {
+              "num": 123,
+              "name": "The Betrayer and Dragon Priestess",
+              "exp": 124000000
+            },
+            {
+              "num": 124,
+              "name": "The True Identity of Zolte and End of the Knights",
+              "exp": 128000000
+            },
+            {
+              "num": 125,
+              "name": "The Emperor and Evil Dragon",
+              "exp": 131000000
+            },
+            {
+              "num": 126,
+              "name": "The Palace of Greed and Monster Field",
+              "exp": 135000000
+            },
+            {
+              "num": 127,
+              "name": "The God's Fragments and Evil Desire",
+              "exp": 139000000
+            },
+            {
+              "num": 128,
+              "name": "The Angels' Garden and New Dragon King",
+              "exp": 142000000
+            },
+            {
+              "num": 129,
+              "name": "Inconsistency and Identity",
+              "exp": 146000000
+            },
+            {
+              "num": 130,
+              "name": "The End and a New Beginning",
+              "exp": 86000000
+            }
+          ]
+        }
+      ]
     },
     {
       "ep": 10,
       "name": "Episode 10",
-      "from": 131,
-      "to": 149
-    }
-  ],
-  "main": [
-    {
-      "num": 1,
-      "name": "The Goddess's Chalice",
-      "exp": 10
-    },
-    {
-      "num": 2,
-      "name": "Dark Rumors",
-      "exp": 20
-    },
-    {
-      "num": 3,
-      "name": "Monster Task Force",
-      "exp": 40
-    },
-    {
-      "num": 4,
-      "name": "Supply Route Shadows",
-      "exp": 80
-    },
-    {
-      "num": 5,
-      "name": "Shadows in the Forest",
-      "exp": 160
-    },
-    {
-      "num": 6,
-      "name": "Mine Disaster",
-      "exp": 320
-    },
-    {
-      "num": 7,
-      "name": "Goddess Statue at the Mine",
-      "exp": 640
-    },
-    {
-      "num": 8,
-      "name": "Forgotten Shadow",
-      "exp": 1280
-    },
-    {
-      "num": 9,
-      "name": "Unclaimed Quest",
-      "exp": 2560
-    },
-    {
-      "num": 10,
-      "name": "Formless Being",
-      "exp": 5120
-    },
-    {
-      "num": 11,
-      "name": "Ancient Writings",
-      "exp": 7000
-    },
-    {
-      "num": 12,
-      "name": "The Place of Darkness",
-      "exp": 10000
-    },
-    {
-      "num": 13,
-      "name": "Obstructing the Alliance",
-      "exp": 30000
-    },
-    {
-      "num": 14,
-      "name": "Labyrinth of Fire Dragon",
-      "exp": 52000
-    },
-    {
-      "num": 15,
-      "name": "Ancient Chalice",
-      "exp": 91000
-    },
-    {
-      "num": 16,
-      "name": "Encroaching Darkness",
-      "exp": 100000
-    },
-    {
-      "num": 17,
-      "name": "Battling the Dragon Lord",
-      "exp": 110000
-    },
-    {
-      "num": 18,
-      "name": "The Ruler",
-      "exp": 120000
-    },
-    {
-      "num": 19,
-      "name": "A Witch's Honor",
-      "exp": 140000
-    },
-    {
-      "num": 20,
-      "name": "Goddess of Darkness",
-      "exp": 165000
-    },
-    {
-      "num": 21,
-      "name": "Tears",
-      "exp": 200000
-    },
-    {
-      "num": 22,
-      "name": "The Two Consuls",
-      "exp": 100000
-    },
-    {
-      "num": 23,
-      "name": "In the Shadow of the Capital",
-      "exp": 120000
-    },
-    {
-      "num": 24,
-      "name": "Wetland Battle",
-      "exp": 150000
-    },
-    {
-      "num": 25,
-      "name": "Hole Lot of Wind",
-      "exp": 210000
-    },
-    {
-      "num": 26,
-      "name": "Two Tales",
-      "exp": 180000
-    },
-    {
-      "num": 27,
-      "name": "Little Robber Girls Tears",
-      "exp": 230000
-    },
-    {
-      "num": 28,
-      "name": "Sea of Intrigue",
-      "exp": 250000
-    },
-    {
-      "num": 29,
-      "name": "Fort of Intrigue",
-      "exp": 300000
-    },
-    {
-      "num": 30,
-      "name": "Highway of the Devil Plants",
-      "exp": 360000
-    },
-    {
-      "num": 31,
-      "name": "The Burning Flatlands",
-      "exp": 400000
-    },
-    {
-      "num": 32,
-      "name": "The Great Tree and The Dragon",
-      "exp": 520000
-    },
-    {
-      "num": 33,
-      "name": "The Disappearing Lake",
-      "exp": 550000
-    },
-    {
-      "num": 34,
-      "name": "Dust Cloud Dreams",
-      "exp": 570000
-    },
-    {
-      "num": 35,
-      "name": "From Ice to Water",
-      "exp": 640000
-    },
-    {
-      "num": 36,
-      "name": "Highland Camp",
-      "exp": 680000
-    },
-    {
-      "num": 37,
-      "name": "Awaiting Orders",
-      "exp": 740000
-    },
-    {
-      "num": 38,
-      "name": "To a New Future",
-      "exp": 300000
-    },
-    {
-      "num": 39,
-      "name": "The Mystery Deepens",
-      "exp": 320000
-    },
-    {
-      "num": 40,
-      "name": "The Toils of War",
-      "exp": 790000
-    },
-    {
-      "num": 41,
-      "name": "The Inje Idol",
-      "exp": 970000
-    },
-    {
-      "num": 42,
-      "name": "Slebinian Shadow",
-      "exp": 1200000
-    },
-    {
-      "num": 43,
-      "name": "Holy Child",
-      "exp": 1500000
-    },
-    {
-      "num": 44,
-      "name": "God-Killing Trap",
-      "exp": 1850000
-    },
-    {
-      "num": 45,
-      "name": "Chain Crisis",
-      "exp": 2860000
-    },
-    {
-      "num": 46,
-      "name": "Hot Sand, Fierce Fight",
-      "exp": 3150000
-    },
-    {
-      "num": 47,
-      "name": "Sinister Scheme Setback",
-      "exp": 3850000
-    },
-    {
-      "num": 48,
-      "name": "Teaus Reconciliation",
-      "exp": 4100000
-    },
-    {
-      "num": 49,
-      "name": "Victory at Zalsim",
-      "exp": 4300000
-    },
-    {
-      "num": 50,
-      "name": "Beyond the Mountains of Darkness",
-      "exp": 4650000
-    },
-    {
-      "num": 51,
-      "name": "Peculiar Place",
-      "exp": 4900000
-    },
-    {
-      "num": 52,
-      "name": "The Labyrinth of Leaves",
-      "exp": 5200000
-    },
-    {
-      "num": 53,
-      "name": "Frenzied Fight in the Former City",
-      "exp": 2700000
-    },
-    {
-      "num": 54,
-      "name": "Treetop Metropolis",
-      "exp": 4500000
-    },
-    {
-      "num": 55,
-      "name": "Palatial Trail",
-      "exp": 1500000
-    },
-    {
-      "num": 56,
-      "name": "Reconciliation of the Gods",
-      "exp": 5300000
-    },
-    {
-      "num": 57,
-      "name": "Background to a Blunder",
-      "exp": 5600000
-    },
-    {
-      "num": 58,
-      "name": "The Old Man and His Research",
-      "exp": 6200000
-    },
-    {
-      "num": 59,
-      "name": "Father and Daughter At Odds",
-      "exp": 6200000
-    },
-    {
-      "num": 60,
-      "name": "To the Source of Strife",
-      "exp": 6850000
-    },
-    {
-      "num": 61,
-      "name": "Water People Samurai",
-      "exp": 7200000
-    },
-    {
-      "num": 62,
-      "name": "The Minase and the Sanki",
-      "exp": 7600000
-    },
-    {
-      "num": 63,
-      "name": "Divine Sword",
-      "exp": 8000000
-    },
-    {
-      "num": 64,
-      "name": "Deserted Village",
-      "exp": 10270000
-    },
-    {
-      "num": 65,
-      "name": "Departure from the Other World",
-      "exp": 10000000
-    },
-    {
-      "num": 66,
-      "name": "Defiant Harbor",
-      "exp": 10750000
-    },
-    {
-      "num": 67,
-      "name": "Village Lockdown",
-      "exp": 11500000
-    },
-    {
-      "num": 68,
-      "name": "Community in Crisis",
-      "exp": 12000000
-    },
-    {
-      "num": 69,
-      "name": "Highland Devastation",
-      "exp": 12600000
-    },
-    {
-      "num": 70,
-      "name": "The Power that Starves",
-      "exp": 13450000
-    },
-    {
-      "num": 71,
-      "name": "Collapsed Plains",
-      "exp": 14370000
-    },
-    {
-      "num": 72,
-      "name": "Fort of Chaos",
-      "exp": 15300000
-    },
-    {
-      "num": 73,
-      "name": "The Mournful Empress",
-      "exp": 16200000
-    },
-    {
-      "num": 74,
-      "name": "The Final Battle, and…",
-      "exp": 17000000
-    },
-    {
-      "num": 75,
-      "name": "Beyond the Adventure",
-      "exp": 10000000
-    },
-    {
-      "num": 76,
-      "name": "A Sudden Start",
-      "exp": 17800000
-    },
-    {
-      "num": 77,
-      "name": "The Dragonewt Realm: Bleudraf",
-      "exp": 18300000
-    },
-    {
-      "num": 78,
-      "name": "The God of Justice's Lament",
-      "exp": 19200000
-    },
-    {
-      "num": 79,
-      "name": "Blighted Village",
-      "exp": 20400000
-    },
-    {
-      "num": 80,
-      "name": "Mutant Dragonewts",
-      "exp": 24700000
-    },
-    {
-      "num": 81,
-      "name": "Dragonewt Feedlot",
-      "exp": 26000000
-    },
-    {
-      "num": 82,
-      "name": "The Lograth Rebellion",
-      "exp": 27200000
-    },
-    {
-      "num": 83,
-      "name": "City of Survivors",
-      "exp": 27800000
-    },
-    {
-      "num": 84,
-      "name": "The End of Ambition",
-      "exp": 28800000
-    },
-    {
-      "num": 85,
-      "name": "The Disappearing Gods",
-      "exp": 29900000
-    },
-    {
-      "num": 86,
-      "name": "The Overworld",
-      "exp": 31600000
-    },
-    {
-      "num": 87,
-      "name": "Other World Dragon",
-      "exp": 33400000
-    },
-    {
-      "num": 88,
-      "name": "The Dragonewt Priests",
-      "exp": 34000000
-    },
-    {
-      "num": 89,
-      "name": "The Dragonewts' Secret",
-      "exp": 35200000
-    },
-    {
-      "num": 90,
-      "name": "An Unexpected Encounter",
-      "exp": 36500000
-    },
-    {
-      "num": 91,
-      "name": "The Brothers Kidnapped",
-      "exp": 43000000
-    },
-    {
-      "num": 92,
-      "name": "Demons, Gods and Emperors",
-      "exp": 44800000
-    },
-    {
-      "num": 93,
-      "name": "Noyevere, The New World",
-      "exp": 47000000
-    },
-    {
-      "num": 94,
-      "name": "The Road to Xeltzam",
-      "exp": 48800000
-    },
-    {
-      "num": 95,
-      "name": "Mutated Predators",
-      "exp": 50500000
-    },
-    {
-      "num": 96,
-      "name": "The Shrine of Geyanetiel",
-      "exp": 53100000
-    },
-    {
-      "num": 97,
-      "name": "Mindless Wisdom",
-      "exp": 55800000
-    },
-    {
-      "num": 98,
-      "name": "The Price of Greed",
-      "exp": 56700000
-    },
-    {
-      "num": 99,
-      "name": "Souls of the Soulless",
-      "exp": 58600000
-    },
-    {
-      "num": 100,
-      "name": "Futile Emotions",
-      "exp": 70000000
-    },
-    {
-      "num": 101,
-      "name": "Departure from the Dragonewt Realm",
-      "exp": 37500000
-    },
-    {
-      "num": 102,
-      "name": "The Bandaged Girl and the Mysterious Warriors",
-      "exp": 65000000
-    },
-    {
-      "num": 103,
-      "name": "Familiar Faces and New Enemies",
-      "exp": 67000000
-    },
-    {
-      "num": 104,
-      "name": "Apostolia and the God's Fragments",
-      "exp": 69000000
-    },
-    {
-      "num": 105,
-      "name": "God's Fragments and the Ancient Dragon",
-      "exp": 71500000
-    },
-    {
-      "num": 106,
-      "name": "The God's Fragments and Gido's Small Box",
-      "exp": 74000000
-    },
-    {
-      "num": 107,
-      "name": "The God's Fragments and Dragon Priestess",
-      "exp": 76000000
-    },
-    {
-      "num": 108,
-      "name": "President and Al Crysta",
-      "exp": 77000000
-    },
-    {
-      "num": 109,
-      "name": "The Mountain Dragon and God's Fragments",
-      "exp": 79700000
-    },
-    {
-      "num": 110,
-      "name": "Unchosen and Ineligible",
-      "exp": 83200000
-    },
-    {
-      "num": 111,
-      "name": "The Lake Dragon and Bandit Girl",
-      "exp": 86100000
-    },
-    {
-      "num": 112,
-      "name": "Evil Prophet and Temple",
-      "exp": 88800000
-    },
-    {
-      "num": 113,
-      "name": "The Crisis Under Sateria",
-      "exp": 92800000
-    },
-    {
-      "num": 114,
-      "name": "The Three Trials and Wild Dragon",
-      "exp": 94000000
-    },
-    {
-      "num": 116,
-      "name": "The Heavy Armor Knights and Deep Mystery",
-      "exp": 98500000
-    },
-    {
-      "num": 117,
-      "name": "The God's Fragments and Magic Circle",
-      "exp": 100000000
-    },
-    {
-      "num": 118,
-      "name": "Innocence and Chain Reaction",
-      "exp": 103000000
-    },
-    {
-      "num": 119,
-      "name": "The Sacred Plains and National Ruin",
-      "exp": 106000000
-    },
-    {
-      "num": 120,
-      "name": "The Desolated City and Ouvel's Shadow",
-      "exp": 114000000
-    },
-    {
-      "num": 121,
-      "name": "The Underground Town and Monsters' Den",
-      "exp": 117000000
-    },
-    {
-      "num": 122,
-      "name": "The Sea Dragon and Devil's Island",
-      "exp": 121000000
-    },
-    {
-      "num": 123,
-      "name": "The Betrayer and Dragon Priestess",
-      "exp": 124000000
-    },
-    {
-      "num": 124,
-      "name": "The True Identity of Zolte and End of the Knights",
-      "exp": 128000000
-    },
-    {
-      "num": 125,
-      "name": "The Emperor and Evil Dragon",
-      "exp": 131000000
-    },
-    {
-      "num": 126,
-      "name": "The Palace of Greed and Monster Field",
-      "exp": 135000000
-    },
-    {
-      "num": 127,
-      "name": "The God's Fragments and Evil Desire",
-      "exp": 139000000
-    },
-    {
-      "num": 128,
-      "name": "The Angels' Garden and New Dragon King",
-      "exp": 142000000
-    },
-    {
-      "num": 129,
-      "name": "Inconsistency and Identity",
-      "exp": 146000000
-    },
-    {
-      "num": 130,
-      "name": "The End and a New Beginning",
-      "exp": 86000000
-    },
-    {
-      "num": 131,
-      "name": "The Missing People",
-      "exp": 87000000
-    },
-    {
-      "num": 132,
-      "name": "The Unknown Girl",
-      "exp": 166000000
-    },
-    {
-      "num": 133,
-      "name": "The Mark and Singing Voice",
-      "exp": 171000000
-    },
-    {
-      "num": 134,
-      "name": "The Blind Dragon",
-      "exp": 175000000
-    },
-    {
-      "num": 135,
-      "name": "The Promise",
-      "exp": 179000000
-    },
-    {
-      "num": 136,
-      "name": "Eternal Friendship",
-      "exp": 183000000
-    },
-    {
-      "num": 137,
-      "name": "The Invisible Injury",
-      "exp": 187000000
-    },
-    {
-      "num": 138,
-      "name": "The Tender Lie and Witch's Lamps",
-      "exp": 191000000
-    },
-    {
-      "num": 139,
-      "name": "Ahead of the Light",
-      "exp": 195000000
-    },
-    {
-      "num": 140,
-      "name": "Wish for Happy Moment",
-      "exp": 205000000
-    },
-    {
-      "num": 141,
-      "name": "The Broken Clay Doll",
-      "exp": 210000000
-    },
-    {
-      "num": 142,
-      "name": "In the Sunken Town",
-      "exp": 215000000
-    },
-    {
-      "num": 143,
-      "name": "The Collapsing Dream",
-      "exp": 220000000
-    },
-    {
-      "num": 144,
-      "name": "The Collapsing Area",
-      "exp": 226000000
-    },
-    {
-      "num": 145,
-      "name": "The Result of the Desire",
-      "exp": 232000000
-    },
-    {
-      "num": 146,
-      "name": "To the Future",
-      "exp": 261000000
-    },
-    {
-      "num": 147,
-      "name": "A Guide from Another World",
-      "exp": 145000000
-    },
-    {
-      "num": 148,
-      "name": "The King of Night",
-      "exp": 145000000
-    },
-    {
-      "num": 149,
-      "name": "The Fallen Beast",
-      "exp": 273000000
-    }
-  ],
-  "scenario": [
-    {
-      "num": 1,
-      "name": "City of Artificial Human",
-      "exp": 8400000
-    },
-    {
-      "num": 2,
-      "name": "Great Wizard's Castle",
-      "exp": 9380000
-    },
-    {
-      "num": 3,
-      "name": "Darkan's Roots",
-      "exp": 10400000
-    },
-    {
-      "num": 4,
-      "name": "Shadows in the Bamboo Grove",
-      "exp": 8800000
-    },
-    {
-      "num": 5,
-      "name": "Judgment Machine",
-      "exp": 16600000
-    },
-    {
-      "num": 6,
-      "name": "Spiritual Lives in Danger",
-      "exp": 85000000
-    },
-    {
-      "num": 7,
-      "name": "The Invader",
-      "exp": 90000000
+      "chapters": [
+        {
+          "chapter": 1,
+          "name": "Episode 10",
+          "missions": [
+            {
+              "num": 131,
+              "name": "The Missing People",
+              "exp": 87000000
+            },
+            {
+              "num": 132,
+              "name": "The Unknown Girl",
+              "exp": 166000000
+            },
+            {
+              "num": 133,
+              "name": "The Mark and Singing Voice",
+              "exp": 171000000
+            },
+            {
+              "num": 134,
+              "name": "The Blind Dragon",
+              "exp": 175000000
+            },
+            {
+              "num": 135,
+              "name": "The Promise",
+              "exp": 179000000
+            },
+            {
+              "num": 136,
+              "name": "Eternal Friendship",
+              "exp": 183000000
+            },
+            {
+              "num": 137,
+              "name": "The Invisible Injury",
+              "exp": 187000000
+            },
+            {
+              "num": 138,
+              "name": "The Tender Lie and Witch's Lamps",
+              "exp": 191000000
+            },
+            {
+              "num": 139,
+              "name": "Ahead of the Light",
+              "exp": 195000000
+            },
+            {
+              "num": 140,
+              "name": "Wish for Happy Moment",
+              "exp": 205000000
+            },
+            {
+              "num": 141,
+              "name": "The Broken Clay Doll",
+              "exp": 210000000
+            },
+            {
+              "num": 142,
+              "name": "In the Sunken Town",
+              "exp": 215000000
+            },
+            {
+              "num": 143,
+              "name": "The Collapsing Dream",
+              "exp": 220000000
+            },
+            {
+              "num": 144,
+              "name": "The Collapsing Area",
+              "exp": 226000000
+            },
+            {
+              "num": 145,
+              "name": "The Result of the Desire",
+              "exp": 232000000
+            },
+            {
+              "num": 146,
+              "name": "To the Future",
+              "exp": 261000000
+            },
+            {
+              "num": 147,
+              "name": "A Guide from Another World",
+              "exp": 145000000
+            },
+            {
+              "num": 148,
+              "name": "The King of Night",
+              "exp": 145000000
+            },
+            {
+              "num": 149,
+              "name": "The Fallen Beast",
+              "exp": 273000000
+            }
+          ]
+        }
+      ]
     }
   ]
 }
