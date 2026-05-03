@@ -980,8 +980,15 @@ function buildQR() {
         wrap.innerHTML = '';
         wrap.appendChild(img);
       }
-      resolve();
-    }, 150);
+      img.onload = () => {
+          wrap.innerHTML = '';
+          wrap.appendChild(img);
+          resolve();
+        };
+      } else {
+        resolve();
+      }
+    }, 300);
   });
 }
 
