@@ -19,11 +19,13 @@
         },
         {
           "chapter": 2,
-          "name": "บทที่ 2 ภายใต้เงาของเถ้าถ่าน",
+          "name": "บทที่ 2 พานพบเหล่าผู้ไร้ลักษณ์",
           "missions": [
-            { "num": 8, "name": "Forgotten Shadow", "exp": 1280 },
-            { "num": 9, "name": "Unclaimed Quest", "exp": 2560 },
-            { "num": 10, "name": "Formless Being", "exp": 5120 }
+            { "num": 8, "name": "เงาที่ถูกลืม", "exp": 23000 },
+            { "num": 9, "name": "ตราสัญลักษณ์หลัก", "exp": 24000 },
+            { "num": 10, "name": "สู่ผู้ไร้รูปร่าง", "exp": 25000 },
+            { "num": 11, "name": "ข้อความโบราณ", "exp": 28000 },
+            { "num": 12, "name": "ที่อยู่ของความมืดมิด", "exp": 28500 }
           ]
         }
       ]
@@ -36,8 +38,6 @@
           "chapter": 1,
           "name": "Episode 2",
           "missions": [
-            { "num": 11, "name": "Ancient Writings", "exp": 7000 },
-            { "num": 12, "name": "The Place of Darkness", "exp": 10000 },
             { "num": 13, "name": "Obstructing the Alliance", "exp": 30000 },
             { "num": 14, "name": "Labyrinth of Fire Dragon", "exp": 52000 },
             { "num": 15, "name": "Ancient Chalice", "exp": 91000 },
