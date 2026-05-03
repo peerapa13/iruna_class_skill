@@ -977,7 +977,7 @@ async function saveImage() {
   const btn = document.getElementById('btn-save-image');
   if (!btn) return;
   btn.disabled = true;
-  btn.textContent = '⏳ กำลังสร้างภาพ…';
+  btn.textContent = '⏳ กำลังบันทึกภาพ…';
   const cur  = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1));
   const goal = Math.min(405, Math.max(cur + 1, parseInt(document.getElementById('goal-lv').value) || cur + 1));
   const pct  = Math.min(99, Math.max(0, parseInt(document.getElementById('exp-pct').value) || 0));
@@ -1022,7 +1022,7 @@ if (qrDiv) {
     alert('เกิดข้อผิดพลาดในการบันทึกรูป'); 
   } finally {
     btn.disabled = false;
-    btn.textContent = '📸 บันทึกเป็นรูปภาพ';
+    btn.textContent = 'บันทึกผลลัพธ์เป็นรูปภาพ';
   }
 }
 
