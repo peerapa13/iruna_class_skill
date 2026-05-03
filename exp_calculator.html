@@ -980,7 +980,6 @@ async function saveImage() {
   btn.disabled = true;
   btn.textContent = '⏳ กำลังสร้างภาพ…';
 
-  // เตรียมข้อมูลใน Export Card
   const cur  = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1));
   const goal = Math.min(405, Math.max(cur + 1, parseInt(document.getElementById('goal-lv').value) || cur + 1));
   const pct  = Math.min(99, Math.max(0, parseInt(document.getElementById('exp-pct').value) || 0));
@@ -1002,10 +1001,17 @@ async function saveImage() {
     '  ' + now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
 
   const qrDiv = document.getElementById('ec-qr');
-  if (qrDiv) {
-    qrDiv.innerHTML = "";
-    new QRCode(qrDiv, { text: window.location.href, width: 40, height: 40 });
-  }
+if (qrDiv) {
+    qrDiv.innerHTML = ""; 
+    new QRCode(qrDiv, {
+        text: "https://peerapa13.github.io/iruna_class_skill/exp_calculator",
+        width: 40,
+        height: 40,
+        colorDark : "#c9a84c", 
+        colorLight : "transparent", 
+        correctLevel : QRCode.CorrectLevel.L 
+    });
+}
 
   try {
     const canvas = await html2canvas(document.getElementById('export-card'), { 
