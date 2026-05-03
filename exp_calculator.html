@@ -969,26 +969,8 @@ function buildQR() {
       colorDark: '#000000', colorLight: '#ffffff',
       correctLevel: QRCode.CorrectLevel.H
     });
-
-    setTimeout(() => {
-      const qrCanvas = wrap.querySelector('canvas');
-      if (qrCanvas) {
-        const dataUrl = qrCanvas.toDataURL('image/png');
-        const img = new Image();
-        img.width = 80; img.height = 80;
-        img.style.display = 'block';
-        
-        img.onload = () => {
-          wrap.innerHTML = '';
-          wrap.appendChild(img);
-          resolve();
-        };
-        img.src = dataUrl;
-      } else {
-        resolve();
-      }
-    }, 300); 
-  }); 
+    setTimeout(resolve, 400);
+  });
 }
 
 function saveImage() {
@@ -1022,14 +1004,20 @@ function saveImage() {
   };
 
   // Build QR first
-  buildQR().then(() => {
-    return html2canvas(document.getElementById('export-card'), {
-      backgroundColor: '#0a0c10',
-      scale: 2,
-      useCORS: true,
-      allowTaint: true
-    });
-  }).then(canvas => {
+ buildQR().then(() => {
+  return html2canvas(document.getElementById('export-card'), {
+    backgroundColor: '#0a0c10',
+    scale: 2,
+    useCORS: true,
+    allowTaint: true,
+    logging: false,
+    onclone: (doc) => {
+      doc.getElementById('export-card').style.position = 'relative';
+      doc.getElementById('export-card').style.top = '0';
+      doc.getElementById('export-card').style.left = '0';
+    }
+  });
+}).then(canvas => {
     const link = document.createElement('a');
     link.download = `Iruna_EXP_LV${cur}_TO_${goal}.png`;
     link.href = canvas.toDataURL('image/png');
