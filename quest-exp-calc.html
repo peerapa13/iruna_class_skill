@@ -349,8 +349,8 @@ let RAW = {}, EP_MAP = [], QUEST_A = [];
 
 async function loadData() {
   const [expRes, questRes] = await Promise.all([
-    fetch('data/exp.json'),
-    fetch('data/quests.json')
+    fetch('data/EXP/EXP_per_Level.json'),
+    fetch('data/EXP/EXP_main_Quests.json')
   ]);
   RAW      = await expRes.json();
   const q  = await questRes.json();
