@@ -274,10 +274,19 @@ let ALL_MS = [];    // flat mission list [{ep,chapter,num,name,exp}]
 // ─── Flatten helper ───────────────────────────────────────────────────
 function buildFlatList() {
   ALL_MS = [];
+  // ใช้ ?? [] เพื่อป้องกันกรณีข้อมูล chapters หรือ missions เป็น null/undefined
   for (const ep of EPISODES) {
-    for (const ch of ep.chapters) {
-      for (const ms of ch.missions) {
-        ALL_MS.push({ ep: ep.ep, epName: ep.name, chapter: ch.chapter, chName: ch.name, num: ms.num, name: ms.name, exp: ms.exp });
+    for (const ch of (ep.chapters ?? [])) { 
+      for (const ms of (ch.missions ?? [])) {
+        ALL_MS.push({ 
+          ep: ep.ep, 
+          epName: ep.name, 
+          chapter: ch.chapter, 
+          chName: ch.name, 
+          num: ms.num, 
+          name: ms.name, 
+          exp: ms.exp 
+        });
       }
     }
   }
