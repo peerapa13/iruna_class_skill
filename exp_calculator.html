@@ -6,6 +6,7 @@
 <title>EXP Calculator — Iruna Online TH</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
 :root {
   --bg-deep:    #0a0c10;
@@ -193,6 +194,7 @@ body::before {
 .field input[type=number]::-webkit-inner-spin-button,
 .field input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 
+/* comma-formatted text input — same look as number input */
 .field input.comma-input {
   width: 100%;
   background: var(--bg-card);
@@ -475,6 +477,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
 .hint-icon { color: var(--gold); font-size: 15px; flex-shrink: 0; margin-top: 1px; }
 .hint strong { color: var(--gold-light); font-weight: 600; }
 
+/* ── Save Button ── */
 .save-btn-wrap {
   display: flex;
   justify-content: center;
@@ -501,7 +504,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
 .save-btn:active { transform: scale(0.97); }
 .save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* Export card (off-screen) */
+/* ── Export card (off-screen, for html2canvas) ── */
 #export-card {
   position: fixed;
   top: -9999px; left: -9999px;
@@ -664,6 +667,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <div class="input-grid" style="margin-bottom:14px">
       <div class="field">
         <label>EXP ต่อ kill</label>
+        <!-- ใช้ text input เพื่อแสดง comma -->
         <input type="text" id="mob-exp" class="comma-input" inputmode="numeric"
                value="0" oninput="onMobExpInput(this)">
       </div>
@@ -688,7 +692,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     </div>
   </div>
 
-  <!-- Save Result Button -->
+  <!-- ── Save Result Button ── -->
   <div class="save-btn-wrap">
     <button class="save-btn" id="btn-save-image" onclick="saveImage()">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -729,7 +733,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
   </footer>
 </div>
 
-<!-- Export card (off-screen, for html2canvas) -->
+<!-- Export card (hidden, rendered by html2canvas) -->
 <div id="export-card">
   <!-- Header -->
   <div style="text-align:center;border-bottom:1px solid #c9a84c;padding-bottom:14px;margin-bottom:20px;">
@@ -742,6 +746,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <div style="text-align:center;flex:1;">
       <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลปัจจุบัน</div>
       <div style="font-family:'Cinzel',serif;font-size:30px;color:#2dd4a0;font-weight:700;line-height:1;">Lv <span id="ec-cur-lv">—</span></div>
+      <!-- progress bar -->
       <div style="margin-top:8px;">
         <div style="font-size:10px;color:#555b72;margin-bottom:4px;">% EXP in level</div>
         <div style="height:6px;background:#161a22;border:1px solid #2a3045;border-radius:3px;overflow:hidden;">
@@ -797,7 +802,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
       <div style="font-size:10px;color:#555b72;">peerapa13.github.io/iruna_class_skill/exp_calculator</div>
     </div>
     <div style="text-align:center;">
-      <div id="ec-qr" style="background:#fff;padding:4px;border-radius:4px;display:inline-block;width:88px;height:88px;"></div>
+      <div id="ec-qr" style="background:#fff;padding:4px;border-radius:4px;display:inline-block;"></div>
       <div style="font-size:9px;color:#555b72;margin-top:3px;">สแกนเพื่อเข้าเว็บ</div>
     </div>
   </div>
@@ -806,55 +811,14 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
 <script>
 let RAW = {};
 
-let _qrDataUrl = null;
-
-function initQR() {
-  return new Promise(resolve => {
-    const tempDiv = document.createElement('div');
-    tempDiv.style.cssText = 'position:fixed;top:-9999px;left:-9999px;visibility:hidden;';
-    document.body.appendChild(tempDiv);
-
-    new QRCode(tempDiv, {
-      text: 'https://peerapa13.github.io/iruna_class_skill/exp_calculator',
-      width: 80,
-      height: 80,
-      colorDark: '#000000',
-      colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.H
-    });
-
-    setTimeout(() => {
-      const qrCanvas = tempDiv.querySelector('canvas');
-      if (qrCanvas) {
-        _qrDataUrl = qrCanvas.toDataURL('image/png');
-      }
-      document.body.removeChild(tempDiv);
-      resolve();
-    }, 300);
-  });
-}
-
-function injectQRToExportCard() {
-  const wrap = document.getElementById('ec-qr');
-  wrap.innerHTML = '';
-  if (_qrDataUrl) {
-    const img = new Image();
-    img.src = _qrDataUrl;
-    img.width = 80;
-    img.height = 80;
-    img.style.display = 'block';
-    wrap.appendChild(img);
-  }
-}
-
 /* ── Helpers ── */
 function fmt(n) { return Math.round(n).toLocaleString(); }
 function fmtTime(sec) {
   if (!isFinite(sec) || sec <= 0) return '—';
   const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60);
-  if (h >= 8760) return `~${Math.round(h/8760)} ปี`;
-  if (h >= 720)  return `~${Math.round(h/720)} เดือน`;
-  if (h >= 24)   { const d = Math.floor(h/24), hr = h % 24; return `${d} วัน ${hr} ชม. ${m} นาที`; }
+  if (h > 8760) return `~${Math.round(h/8760)} ปี`;
+  if (h > 720)  return `~${Math.round(h/720)} เดือน`;
+  if (h > 24)   return `~${Math.round(h/24)} วัน ${m} ชม.`;
   return `${h} ชม. ${m} นาที`;
 }
 
@@ -870,6 +834,7 @@ function onMobExpInput(el) {
   if (!digits) { el.value = ''; calc(); return; }
   const formatted = parseInt(digits).toLocaleString();
   el.value = formatted;
+  // adjust cursor for added/removed commas
   const commasOld = (oldVal.slice(0, pos).match(/,/g) || []).length;
   const commasNew = (formatted.match(/,/g) || []).length;
   try { el.setSelectionRange(pos + commasNew - commasOld, pos + commasNew - commasOld); } catch(e) {}
@@ -916,9 +881,9 @@ function calc() {
 
   const kills = Math.ceil(expNeeded / mobExp);
   const sec   = kills * killTime;
-  document.getElementById('kills').textContent     = fmt(kills);
+  document.getElementById('kills').textContent    = fmt(kills);
   document.getElementById('farm-time').textContent = fmtTime(sec);
-  document.getElementById('exp-hr').textContent    = fmt(Math.round(mobExp * (3600 / killTime)));
+  document.getElementById('exp-hr').textContent   = fmt(Math.round(mobExp * (3600 / killTime)));
 
   renderTable(cur, goal);
 }
@@ -983,69 +948,8 @@ function applyLookup() {
   document.getElementById('cur-lv').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-/* ── Save Image ── */
-function saveImage() {
-  const btn = document.getElementById('btn-save-image');
-  btn.disabled = true;
-  btn.textContent = '⏳ กำลังสร้างภาพ…';
-
-  const cur  = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1));
-  const goal = Math.min(405, Math.max(cur + 1, parseInt(document.getElementById('goal-lv').value) || cur + 1));
-  const pct  = Math.min(99, Math.max(0, parseInt(document.getElementById('exp-pct').value) || 0));
-
-  document.getElementById('ec-cur-lv').textContent     = cur;
-  document.getElementById('ec-goal-lv').textContent    = goal;
-  document.getElementById('ec-pct-txt').textContent    = pct + '%';
-  document.getElementById('ec-pbar').style.width       = pct + '%';
-  document.getElementById('ec-exp-needed').textContent = document.getElementById('exp-needed').textContent;
-  document.getElementById('ec-mob-exp').textContent    = document.getElementById('mob-exp').value || '0';
-  document.getElementById('ec-kill-time').textContent  = document.getElementById('kill-time').value + ' วิ';
-  document.getElementById('ec-kills').textContent      = document.getElementById('kills').textContent;
-  document.getElementById('ec-farm-time').textContent  = document.getElementById('farm-time').textContent;
-  document.getElementById('ec-exp-hr').textContent     = document.getElementById('exp-hr').textContent;
-
-  const now = new Date();
-  document.getElementById('ec-ts').textContent =
-    now.toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' }) +
-    '  ' + now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
-
-
-  injectQRToExportCard();
-
-  const restoreBtn = () => {
-    btn.disabled = false;
-    btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> บันทึกผลลัพธ์เป็นรูปภาพ';
-  };
-
-  setTimeout(() => {
-    html2canvas(document.getElementById('export-card'), {
-      backgroundColor: '#0a0c10',
-      scale: 2,
-      useCORS: true,
-      allowTaint: true,
-      logging: false,
-      onclone: (doc) => {
-        const card = doc.getElementById('export-card');
-        card.style.position = 'relative';
-        card.style.top = '0';
-        card.style.left = '0';
-      }
-    }).then(canvas => {
-      const link = document.createElement('a');
-      link.download = `Iruna_EXP_LV${cur}_TO_${goal}.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    }).catch(err => {
-      console.error('Save error:', err);
-      alert('ไม่สามารถบันทึกรูปภาพได้: ' + err.message);
-    }).finally(restoreBtn);
-  }, 300);
-}
-
-/* ── Load EXP data + init QR ── */
+/* ── Load data ── */
 async function loadDataAndInit() {
-  await initQR();
-
   try {
     const response = await fetch('data/EXP/EXP_per_Level.json');
     if (!response.ok) throw new Error('Network response was not ok');
@@ -1054,6 +958,68 @@ async function loadDataAndInit() {
   } catch (error) {
     console.error('Failed to load EXP data:', error);
   }
+}
+
+/* ── Save Image ── */
+let qrBuilt = false;
+function buildQR() {
+  if (qrBuilt) return;
+  document.getElementById('ec-qr').innerHTML = '';
+  new QRCode(document.getElementById('ec-qr'), {
+    text: 'https://peerapa13.github.io/iruna_class_skill/exp_calculator',
+    width: 72, height: 72,
+    colorDark: '#000000', colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+  qrBuilt = true;
+}
+
+function saveImage() {
+  const btn = document.getElementById('btn-save-image');
+  btn.disabled = true;
+  btn.textContent = '⏳ กำลังสร้างภาพ…';
+
+  // populate export card
+  const cur      = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1));
+  const goal     = Math.min(405, Math.max(cur + 1, parseInt(document.getElementById('goal-lv').value) || cur + 1));
+  const pct      = Math.min(99, Math.max(0, parseInt(document.getElementById('exp-pct').value) || 0));
+
+  document.getElementById('ec-cur-lv').textContent    = cur;
+  document.getElementById('ec-goal-lv').textContent   = goal;
+  document.getElementById('ec-pct-txt').textContent   = pct + '%';
+  document.getElementById('ec-pbar').style.width      = pct + '%';
+  document.getElementById('ec-exp-needed').textContent = document.getElementById('exp-needed').textContent;
+  document.getElementById('ec-mob-exp').textContent   = document.getElementById('mob-exp').value || '0';
+  document.getElementById('ec-kill-time').textContent = document.getElementById('kill-time').value + ' วิ';
+  document.getElementById('ec-kills').textContent     = document.getElementById('kills').textContent;
+  document.getElementById('ec-farm-time').textContent = document.getElementById('farm-time').textContent;
+  document.getElementById('ec-exp-hr').textContent    = document.getElementById('exp-hr').textContent;
+
+  const now = new Date();
+  document.getElementById('ec-ts').textContent =
+    now.toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' }) +
+    '  ' + now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+
+  buildQR();
+
+  setTimeout(() => {
+    html2canvas(document.getElementById('export-card'), {
+      backgroundColor: '#0a0c10',
+      scale: 2,
+      useCORS: true
+    }).then(canvas => {
+      const link = document.createElement('a');
+      link.download = `Iruna_EXP_LV${cur}_TO_${goal}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }).catch(err => {
+      console.error('Save error:', err);
+      alert('ไม่สามารถบันทึกรูปภาพได้: ' + err.message);
+    }).finally(() => {
+      btn.disabled = false;
+      btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> บันทึกผลลัพธ์เป็นรูปภาพ';
+    });
+  }, 300);
 }
 
 loadDataAndInit();
