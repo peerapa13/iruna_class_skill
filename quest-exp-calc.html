@@ -28,24 +28,13 @@
   --text-dim:   #555b72;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: 'Sarabun', sans-serif;
-  background: var(--bg-deep);
-  color: var(--text-pri);
-  min-height: 100vh;
-}
+body { font-family: 'Sarabun', sans-serif; background: var(--bg-deep); color: var(--text-pri); min-height: 100vh; }
 body::before {
-  content: '';
-  position: fixed; inset: 0;
-  background-image:
-    linear-gradient(rgba(93,123,185,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(93,123,185,0.04) 1px, transparent 1px);
-  background-size: 32px 32px;
-  pointer-events: none; z-index: 0;
+  content: ''; position: fixed; inset: 0;
+  background-image: linear-gradient(rgba(93,123,185,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(93,123,185,0.04) 1px, transparent 1px);
+  background-size: 32px 32px; pointer-events: none; z-index: 0;
 }
 .wrap { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 16px 60px; }
-
-/* Header */
 .site-header { padding: 32px 0 24px; text-align: center; border-bottom: 1px solid var(--border); margin-bottom: 28px; position: relative; }
 .site-header::after { content: ''; position: absolute; bottom: -1px; left: 50%; transform: translateX(-50%); width: 120px; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
 .header-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(201,168,76,0.1); border: 1px solid var(--gold-dim); border-radius: 4px; padding: 4px 14px; font-family: 'Cinzel', serif; font-size: 11px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
@@ -53,35 +42,18 @@ body::before {
 .header-badge::after  { content: '✦'; font-size: 9px; }
 .site-header h1 { font-family: 'Cinzel', serif; font-size: clamp(20px,4vw,30px); font-weight: 700; color: var(--gold-light); letter-spacing: 1px; text-shadow: 0 0 40px rgba(201,168,76,0.3); margin-bottom: 6px; }
 .site-header p { font-size: 13px; color: var(--text-sec); }
-
-/* Panel */
 .panel { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 6px; padding: 20px; margin-bottom: 16px; position: relative; }
 .panel::before { content: ''; position: absolute; top: 0; left: 20px; right: 20px; height: 1px; background: linear-gradient(90deg, transparent, var(--border-glow), transparent); }
 .panel-title { font-family: 'Cinzel', serif; font-size: 11px; font-weight: 600; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
 .panel-title::before { content: ''; display: block; width: 3px; height: 14px; background: var(--gold); border-radius: 2px; }
-
-/* Input grid */
 .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
-.input-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 14px; }
 .field label { display: block; font-size: 11px; font-weight: 500; color: var(--text-sec); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
-.field input[type=number] {
-  width: 100%; background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px;
-  padding: 9px 12px; font-family: 'Sarabun', sans-serif; font-size: 15px; font-weight: 500;
-  color: var(--text-pri); outline: none; transition: border-color .2s, box-shadow .2s;
-  -moz-appearance: textfield;
-}
+.field input[type=number] { width: 100%; background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 9px 12px; font-family: 'Sarabun', sans-serif; font-size: 15px; font-weight: 500; color: var(--text-pri); outline: none; transition: border-color .2s, box-shadow .2s; -moz-appearance: textfield; }
 .field input[type=number]:focus { border-color: var(--gold-dim); box-shadow: 0 0 0 2px rgba(201,168,76,0.1); }
-.field input[type=number]::-webkit-inner-spin-button,
-.field input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
-.field select {
-  width: 100%; background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px;
-  padding: 9px 12px; font-family: 'Sarabun', sans-serif; font-size: 14px; font-weight: 500;
-  color: var(--text-pri); outline: none; cursor: pointer; transition: border-color .2s;
-}
+.field input[type=number]::-webkit-inner-spin-button, .field input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+.field select { width: 100%; background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 9px 12px; font-family: 'Sarabun', sans-serif; font-size: 14px; font-weight: 500; color: var(--text-pri); outline: none; cursor: pointer; transition: border-color .2s; }
 .field select:focus { border-color: var(--gold-dim); }
 .field select option { background: var(--bg-card); }
-
-/* Slider */
 .slider-section { margin-bottom: 14px; }
 .slider-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .slider-label-row span:first-child { font-size: 11px; color: var(--text-sec); letter-spacing: 1px; text-transform: uppercase; }
@@ -89,10 +61,6 @@ body::before {
 input[type=range] { -webkit-appearance: none; width: 100%; height: 6px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 3px; outline: none; cursor: pointer; margin-bottom: 4px; }
 input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--gold); border: 2px solid var(--bg-deep); box-shadow: 0 0 8px rgba(201,168,76,0.5); cursor: pointer; }
 input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--gold); border: 2px solid var(--bg-deep); }
-
-/* Stat cards */
-.stat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 16px; }
-.stat-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
 .stat-grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 16px; }
 .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 5px; padding: 13px 14px; position: relative; overflow: hidden; }
 .stat-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; border-radius: 0 0 5px 5px; }
@@ -100,30 +68,17 @@ input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 
 .stat-card.blue::after   { background: var(--blue); }
 .stat-card.amber::after  { background: var(--gold); }
 .stat-card.purple::after { background: var(--purple); }
-.stat-card.red::after    { background: var(--red); }
 .stat-label { font-size: 10px; font-weight: 500; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
 .stat-value { font-family: 'Cinzel', serif; font-size: 15px; font-weight: 600; word-break: break-all; line-height: 1.2; }
 .stat-card.green .stat-value  { color: var(--teal); }
 .stat-card.blue .stat-value   { color: var(--blue); }
 .stat-card.amber .stat-value  { color: var(--gold-light); }
 .stat-card.purple .stat-value { color: var(--purple); }
-.stat-card.red .stat-value    { color: var(--red); }
-
-/* Big result box */
-.result-box {
-  background: linear-gradient(135deg, rgba(45,212,160,0.05), rgba(91,156,246,0.05));
-  border: 1px solid var(--teal-dim);
-  border-radius: 8px;
-  padding: 20px 24px;
-  margin-bottom: 16px;
-  text-align: center;
-}
+.result-box { background: linear-gradient(135deg, rgba(45,212,160,0.05), rgba(91,156,246,0.05)); border: 1px solid var(--teal-dim); border-radius: 8px; padding: 20px 24px; margin-bottom: 16px; text-align: center; }
 .result-box .lv-big { font-family: 'Cinzel', serif; font-size: 48px; font-weight: 700; color: var(--teal); line-height: 1; text-shadow: 0 0 40px rgba(45,212,160,0.4); }
 .result-box .lv-label { font-size: 12px; color: var(--text-sec); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
 .result-box .lv-gain { font-size: 14px; color: var(--gold); margin-top: 8px; }
 .result-box .lv-pct { font-size: 13px; color: var(--text-sec); margin-top: 4px; }
-
-/* Quest table */
 .table-wrap { max-height: 300px; overflow-y: auto; border: 1px solid var(--border); border-radius: 5px; scrollbar-width: thin; scrollbar-color: var(--border-glow) var(--bg-card); }
 .table-wrap::-webkit-scrollbar { width: 6px; }
 .table-wrap::-webkit-scrollbar-track { background: var(--bg-card); }
@@ -137,47 +92,60 @@ tbody tr.last-q td  { background: rgba(91,156,246,0.06); }
 td.num-col { font-family: 'Cinzel', serif; font-weight: 600; font-size: 11px; color: var(--text-dim); width: 40px; }
 td.exp-col { color: var(--gold); text-align: right; font-family: 'Cinzel', serif; font-size: 12px; }
 td.cum-col { color: var(--teal); text-align: right; font-size: 11px; }
-
-/* Tabs */
 .tab-row { display: flex; gap: 4px; margin-bottom: 14px; }
 .tbtn { cursor: pointer; font-size: 12px; padding: 6px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; color: var(--text-sec); transition: all .15s; font-family: 'Sarabun', sans-serif; }
 .tbtn:hover { border-color: var(--border-glow); color: var(--text-pri); }
 .tbtn.active { background: rgba(201,168,76,0.1); border-color: var(--gold-dim); color: var(--gold); }
-
-/* Divider */
 .div-label { font-size: 11px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; margin: 16px 0 12px; display: flex; align-items: center; gap: 10px; }
 .div-label::before, .div-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-/* Arrow connector */
-.arrow-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-.arrow-row .arrow { color: var(--gold); font-size: 18px; flex-shrink: 0; }
-.arrow-row .ep-label { font-size: 12px; color: var(--text-sec); flex-shrink: 0; min-width: 60px; }
-
-/* Quick buttons */
 .quick-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; align-items: center; }
 .quick-label { font-size: 11px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
 .qbtn { cursor: pointer; font-size: 11px; padding: 4px 10px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 3px; color: var(--text-sec); transition: all .15s; font-family: 'Cinzel', serif; }
 .qbtn:hover { border-color: var(--gold-dim); color: var(--gold); }
-
-/* Progress bar */
 .prog-track { height: 10px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 5px; overflow: hidden; margin: 8px 0; }
 .prog-fill { height: 100%; background: linear-gradient(90deg, var(--teal-dim), var(--teal)); border-radius: 5px; transition: width .4s cubic-bezier(.4,0,.2,1); }
-
+/* Loading overlay */
+#loading-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: var(--bg-deep);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+}
+.loading-spinner {
+  width: 40px; height: 40px;
+  border: 3px solid var(--border);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text { font-family: 'Cinzel', serif; font-size: 12px; color: var(--gold-dim); letter-spacing: 2px; text-transform: uppercase; }
+.error-box { display: none; background: rgba(224,82,82,0.08); border: 1px solid var(--red); border-radius: 6px; padding: 16px 20px; margin-bottom: 16px; font-size: 13px; color: var(--red); line-height: 1.6; }
 @media (max-width: 560px) {
-  .input-grid, .input-grid-3, .stat-grid, .stat-grid-4 { grid-template-columns: 1fr 1fr; }
+  .input-grid, .stat-grid-4 { grid-template-columns: 1fr 1fr; }
 }
 </style>
 </head>
 <body>
-<div class="wrap">
 
+<!-- Loading overlay -->
+<div id="loading-overlay">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">กำลังโหลดข้อมูล…</div>
+</div>
+
+<div class="wrap">
 <header class="site-header">
   <div class="header-badge">Iruna Online TH</div>
   <h1>Quest EXP Level Calculator</h1>
   <p>คำนวณเลเวลที่ได้จาก Main Quest • Lv 1–405</p>
 </header>
 
-<!-- ─── Step 1: ตัวละครเริ่มต้น ─── -->
+<!-- Error box -->
+<div class="error-box" id="err-box">
+  ⚠️ โหลดข้อมูลไม่สำเร็จ — กรุณาตรวจสอบว่าไฟล์ <code>data/EXP/EXP_per_Level.json</code> และ <code>data/EXP/EXP_main_Quests.json</code> อยู่ถูกที่ และเปิดหน้านี้ผ่าน web server (ไม่ใช่เปิดไฟล์ตรงๆ)
+</div>
+
+<!-- Step 1 -->
 <div class="panel">
   <div class="panel-title">Step 1 — ตัวละครเริ่มต้น</div>
   <div class="input-grid">
@@ -197,7 +165,6 @@ td.cum-col { color: var(--teal); text-align: right; font-size: 11px; }
     </div>
     <input type="range" id="pct-slider" min="0" max="99" value="0" oninput="syncPctInput()">
   </div>
-
   <div class="quick-row">
     <span class="quick-label">% ด่วน</span>
     <button class="qbtn" onclick="setPct(0)">0%</button>
@@ -211,126 +178,75 @@ td.cum-col { color: var(--teal); text-align: right; font-size: 11px; }
     <button class="qbtn" onclick="setPct(80)">80%</button>
     <button class="qbtn" onclick="setPct(90)">90%</button>
   </div>
-
-  <!-- Current EXP display -->
   <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center">
     <span style="font-size:12px;color:var(--text-sec)">EXP สะสมปัจจุบัน</span>
     <span id="cur-cum-exp" style="font-family:'Cinzel',serif;font-size:15px;color:var(--gold-light)">—</span>
   </div>
 </div>
 
-<!-- ─── Step 2: เลือก Quest ─── -->
+<!-- Step 2 -->
 <div class="panel">
   <div class="panel-title">Step 2 — เลือกช่วง Main Quest</div>
-
   <div class="tab-row">
     <button class="tbtn active" id="tab-ep" onclick="setMode('ep')">ค้นหา Episode × บท</button>
     <button class="tbtn" id="tab-num" onclick="setMode('num')">เลข Quest # ตรงๆ</button>
   </div>
-
-  <!-- Mode: Episode × Chapter -->
   <div id="mode-ep">
-    <p style="font-size:12px;color:var(--text-dim);margin-bottom:12px;line-height:1.6">เลือก Episode และ บท (Chapter) ของเควสเริ่มต้นและสุดท้าย แล้วระบบจะคำนวณ EXP รวมให้</p>
-
+    <p style="font-size:12px;color:var(--text-dim);margin-bottom:12px;line-height:1.6">เลือก Episode และ บท (Chapter) ของเควสเริ่มต้นและสุดท้าย</p>
     <div class="div-label">เริ่มที่</div>
     <div class="input-grid">
-      <div class="field">
-        <label>Episode เริ่ม</label>
-        <select id="ep-from" onchange="onEpChange('from')"></select>
-      </div>
-      <div class="field">
-        <label>บทที่ (Chapter) เริ่ม</label>
-        <select id="ch-from" onchange="onAnyChange()"></select>
-      </div>
+      <div class="field"><label>Episode เริ่ม</label><select id="ep-from" onchange="onEpChange('from')"></select></div>
+      <div class="field"><label>บทที่ (Chapter) เริ่ม</label><select id="ch-from" onchange="onAnyChange()"></select></div>
     </div>
-
     <div class="div-label">จบที่</div>
     <div class="input-grid">
-      <div class="field">
-        <label>Episode สุดท้าย</label>
-        <select id="ep-to" onchange="onEpChange('to')"></select>
-      </div>
-      <div class="field">
-        <label>บทที่ (Chapter) สุดท้าย</label>
-        <select id="ch-to" onchange="onAnyChange()"></select>
-      </div>
+      <div class="field"><label>Episode สุดท้าย</label><select id="ep-to" onchange="onEpChange('to')"></select></div>
+      <div class="field"><label>บทที่ (Chapter) สุดท้าย</label><select id="ch-to" onchange="onAnyChange()"></select></div>
     </div>
-
     <div id="ep-quest-range-info" style="font-size:12px;color:var(--teal);min-height:18px;margin-bottom:6px"></div>
   </div>
-
-  <!-- Mode: Direct quest number -->
   <div id="mode-num" style="display:none">
     <div class="input-grid">
-      <div class="field">
-        <label>Quest # เริ่ม</label>
-        <input type="number" id="q-from-num" min="1" max="149" value="1" oninput="onAnyChange()">
-      </div>
-      <div class="field">
-        <label>Quest # สุดท้าย</label>
-        <input type="number" id="q-to-num" min="1" max="149" value="20" oninput="onAnyChange()">
-      </div>
+      <div class="field"><label>Quest # เริ่ม</label><input type="number" id="q-from-num" min="1" max="149" value="1" oninput="onAnyChange()"></div>
+      <div class="field"><label>Quest # สุดท้าย</label><input type="number" id="q-to-num" min="1" max="149" value="20" oninput="onAnyChange()"></div>
     </div>
     <div id="num-quest-range-info" style="font-size:12px;color:var(--teal);min-height:18px;margin-bottom:6px"></div>
   </div>
 </div>
 
-<!-- ─── Result ─── -->
-<div class="panel" id="result-panel">
+<!-- Result -->
+<div class="panel">
   <div class="panel-title">ผลลัพธ์</div>
-
   <div class="result-box">
     <div class="lv-label">เลเวลที่จะได้หลังทำเควสครบ</div>
     <div class="lv-big" id="res-lv">—</div>
     <div class="lv-gain" id="res-gain"></div>
     <div class="lv-pct" id="res-pct"></div>
   </div>
-
   <div class="stat-grid-4">
-    <div class="stat-card green">
-      <div class="stat-label">EXP จากเควส</div>
-      <div class="stat-value" id="res-quest-exp">—</div>
-    </div>
-    <div class="stat-card amber">
-      <div class="stat-label">จำนวนเควส</div>
-      <div class="stat-value" id="res-count">—</div>
-    </div>
-    <div class="stat-card blue">
-      <div class="stat-label">EXP สะสมหลังจบ</div>
-      <div class="stat-value" id="res-new-cum">—</div>
-    </div>
-    <div class="stat-card purple">
-      <div class="stat-label">เลเวลเพิ่มขึ้น</div>
-      <div class="stat-value" id="res-lv-gain">—</div>
-    </div>
+    <div class="stat-card green"><div class="stat-label">EXP จากเควส</div><div class="stat-value" id="res-quest-exp">—</div></div>
+    <div class="stat-card amber"><div class="stat-label">จำนวนเควส</div><div class="stat-value" id="res-count">—</div></div>
+    <div class="stat-card blue"><div class="stat-label">EXP สะสมหลังจบ</div><div class="stat-value" id="res-new-cum">—</div></div>
+    <div class="stat-card purple"><div class="stat-label">เลเวลเพิ่มขึ้น</div><div class="stat-value" id="res-lv-gain">—</div></div>
   </div>
-
-  <!-- Progress bar -->
   <div style="margin-bottom:16px">
     <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-sec);margin-bottom:4px">
-      <span>% EXP ใน Lv ใหม่</span>
-      <span id="res-bar-pct-label">—</span>
+      <span>% EXP ใน Lv ใหม่</span><span id="res-bar-pct-label">—</span>
     </div>
     <div class="prog-track"><div class="prog-fill" id="res-bar" style="width:0%"></div></div>
   </div>
-
-  <!-- Quest list toggle -->
   <div style="margin-bottom:8px">
     <button class="tbtn" id="qlist-btn" onclick="toggleQList()" style="font-size:11px">▼ ดูรายชื่อเควสในช่วงที่เลือก</button>
   </div>
   <div id="qlist-wrap" style="display:none">
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Episode</th>
-            <th>บท</th>
-            <th style="min-width:200px">ชื่อเควส</th>
-            <th style="text-align:right">EXP</th>
-            <th style="text-align:right">EXP สะสม</th>
-          </tr>
-        </thead>
+        <thead><tr>
+          <th>#</th><th>Episode</th><th>บท</th>
+          <th style="min-width:200px">ชื่อเควส</th>
+          <th style="text-align:right">EXP</th>
+          <th style="text-align:right">EXP สะสม</th>
+        </tr></thead>
         <tbody id="qlist-body"></tbody>
       </table>
     </div>
@@ -338,71 +254,43 @@ td.cum-col { color: var(--teal); text-align: right; font-size: 11px; }
 </div>
 
 <footer style="text-align:center;padding-top:24px;border-top:1px solid var(--border);font-size:12px;color:var(--text-dim);letter-spacing:.5px">
-  ✦ ข้อมูล EXP Lv 371–405 เป็นค่าประมาณจากแพทเทิร์น ✦<br>
   <a href="https://peerapa13.github.io/iruna_class_skill/" style="color:var(--gold-dim);text-decoration:none;margin-top:6px;display:inline-block">← กลับ Iruna Class Skill Library</a>
 </footer>
 </div>
 
 <script>
-// ─── EXP Table ───────────────────────────────────────────────────────
-let RAW = {}, EP_MAP = [], QUEST_A = [];
+let RAW    = {};   // from EXP_per_Level
+let EP_MAP = [];   // from EXP_main_Quests
+let QUEST  = [];   // from EXP_main_Quests
 
-async function loadData() {
-  const [expRes, questRes] = await Promise.all([
-    fetch('data/EXP/EXP_per_Level.json'),
-    fetch('data/EXP/EXP_main_Quests.json')
-  ]);
-  RAW      = await expRes.json();
-  const q  = await questRes.json();
-  EP_MAP   = q.episodes;
-  QUEST_A  = q.main;
-  QUEST_B  = q.scenario;
-  // init UI after data loaded
-  buildEpisodeSelects();
-  calc();
-  calcQuest();
-}
-
-let QUEST_B = [];
-
-// ─── Helpers ────────────────────────────────────────────────────────
-function fmt(n){ return Math.round(n).toLocaleString('th-TH'); }
+// ────────────────────────────────────────────────────────────
+const fmt = n => Math.round(n).toLocaleString('th-TH');
 
 function getEpForQuest(qnum) {
   for (const e of EP_MAP) if (qnum >= e.from && qnum <= e.to) return e;
   return EP_MAP[EP_MAP.length - 1];
 }
-
 function getChapterInEp(qnum) {
   const ep = getEpForQuest(qnum);
   return qnum - ep.from + 1;
 }
-
-function totalChaptersInEp(epNum) {
-  const ep = EP_MAP.find(e => e.ep === epNum);
-  if (!ep) return 0;
-  return ep.to - ep.from + 1;
-}
-
 function questNumFromEpCh(epNum, ch) {
   const ep = EP_MAP.find(e => e.ep === epNum);
   if (!ep) return null;
-  const q = ep.from + ch - 1;
-  if (q > ep.to) return ep.to;
-  return q;
+  return Math.min(ep.to, ep.from + ch - 1);
 }
-
 function expToLevel(totalExp) {
   for (let lv = 1; lv <= 404; lv++) {
+    const cur  = RAW[String(lv)];
     const next = RAW[String(lv + 1)];
-    if (!next) return { lv, expInLv: totalExp - RAW[String(lv)].cum };
-    if (totalExp >= RAW[String(lv)].cum && totalExp < next.cum)
-      return { lv, expInLv: totalExp - RAW[String(lv)].cum };
+    if (!next) return { lv, expInLv: totalExp - cur.cum };
+    if (totalExp >= cur.cum && totalExp < next.cum)
+      return { lv, expInLv: totalExp - cur.cum };
   }
   return { lv: 405, expInLv: totalExp - RAW['405'].cum };
 }
 
-// ─── UI state ────────────────────────────────────────────────────────
+// ─── UI───────────────────────────────────────────────────────
 let inputMode = 'ep';
 
 function setMode(m) {
@@ -414,59 +302,47 @@ function setMode(m) {
   onAnyChange();
 }
 
-// Build Episode selects
 function buildEpSelects() {
   const fromSel = document.getElementById('ep-from');
   const toSel   = document.getElementById('ep-to');
+  fromSel.innerHTML = ''; toSel.innerHTML = '';
   EP_MAP.forEach(e => {
-    const opt1 = new Option(`${e.name} (Q${e.from}–Q${e.to})`, e.ep);
-    const opt2 = new Option(`${e.name} (Q${e.from}–Q${e.to})`, e.ep);
-    fromSel.add(opt1); toSel.add(opt2);
+    fromSel.add(new Option(`${e.name} (Q${e.from}–Q${e.to})`, e.ep));
+    toSel.add(new Option(`${e.name} (Q${e.from}–Q${e.to})`, e.ep));
   });
   toSel.value = EP_MAP[EP_MAP.length - 1].ep;
-  buildChSelects();
-}
-
-function buildChSelects() {
   buildChSelect('from');
   buildChSelect('to');
 }
 
 function buildChSelect(side) {
   const epNum = parseInt(document.getElementById('ep-' + side).value);
-  const ep = EP_MAP.find(e => e.ep === epNum);
-  const sel = document.getElementById('ch-' + side);
+  const ep    = EP_MAP.find(e => e.ep === epNum);
+  const sel   = document.getElementById('ch-' + side);
   sel.innerHTML = '';
   if (!ep) return;
-  const count = ep.to - ep.from + 1;
-  for (let ch = 1; ch <= count; ch++) {
+  for (let ch = 1; ch <= ep.to - ep.from + 1; ch++) {
     const qnum = ep.from + ch - 1;
-    const q = QUEST_A.find(q => q.num === qnum);
-    const name = q ? q.name : '(ไม่มีข้อมูล)';
-    sel.add(new Option(`บทที่ ${ch} — ${name}`, ch));
+    const q    = QUEST.find(q => q.num === qnum);
+    sel.add(new Option(`บทที่ ${ch} — ${q ? q.name : '(ไม่มีข้อมูล)'}`, ch));
   }
-  if (side === 'to') sel.value = count; // default last chapter
+  if (side === 'to') sel.value = ep.to - ep.from + 1;
 }
 
-function onEpChange(side) {
-  buildChSelect(side);
-  onAnyChange();
-}
+function onEpChange(side) { buildChSelect(side); onAnyChange(); }
 
 function setPct(v) {
-  document.getElementById('pct-slider').value = v;
+  document.getElementById('pct-slider').value    = v;
   document.getElementById('cur-pct-input').value = v;
   document.getElementById('pct-label').textContent = v + '%';
   onAnyChange();
 }
-
 function syncSlider() {
   const v = Math.min(99, Math.max(0, parseInt(document.getElementById('cur-pct-input').value) || 0));
   document.getElementById('pct-slider').value = v;
   document.getElementById('pct-label').textContent = v + '%';
   onAnyChange();
 }
-
 function syncPctInput() {
   const v = parseInt(document.getElementById('pct-slider').value) || 0;
   document.getElementById('cur-pct-input').value = v;
@@ -474,8 +350,10 @@ function syncPctInput() {
   onAnyChange();
 }
 
-// ─── Main Calc ───────────────────────────────────────────────────────
+// ─── Main Calc ────────────────────────────────────────────────────────
 function onAnyChange() {
+  if (!Object.keys(RAW).length || !EP_MAP.length || !QUEST.length) return;
+
   const curLv  = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1));
   const curPct = Math.min(99, Math.max(0, parseInt(document.getElementById('pct-slider').value) || 0));
   const curD   = RAW[String(curLv)] || { exp: 0, cum: 0 };
@@ -485,21 +363,16 @@ function onAnyChange() {
   document.getElementById('cur-cum-exp').textContent = fmt(curTotal) + ' EXP';
 
   let qFrom, qTo;
-
   if (inputMode === 'ep') {
     const epFromNum = parseInt(document.getElementById('ep-from').value);
     const chFrom    = parseInt(document.getElementById('ch-from').value) || 1;
     const epToNum   = parseInt(document.getElementById('ep-to').value);
     const chTo      = parseInt(document.getElementById('ch-to').value) || 1;
-
     qFrom = questNumFromEpCh(epFromNum, chFrom);
     qTo   = questNumFromEpCh(epToNum, chTo);
-
-    // Ensure qFrom <= qTo
-    if (qFrom > qTo) { const tmp = qFrom; qFrom = qTo; qTo = tmp; }
-
-    const qF = QUEST_A.find(q => q.num === qFrom);
-    const qT = QUEST_A.find(q => q.num === qTo);
+    if (qFrom > qTo) { const t = qFrom; qFrom = qTo; qTo = t; }
+    const qF  = QUEST.find(q => q.num === qFrom);
+    const qT  = QUEST.find(q => q.num === qTo);
     const epF = EP_MAP.find(e => e.ep === epFromNum);
     const epT = EP_MAP.find(e => e.ep === epToNum);
     if (qF && qT && epF && epT)
@@ -508,50 +381,48 @@ function onAnyChange() {
   } else {
     qFrom = Math.min(149, Math.max(1, parseInt(document.getElementById('q-from-num').value) || 1));
     qTo   = Math.min(149, Math.max(qFrom, parseInt(document.getElementById('q-to-num').value) || qFrom));
-    const qF = QUEST_A.find(q => q.num === qFrom);
-    const qT = QUEST_A.find(q => q.num === qTo);
+    const qF = QUEST.find(q => q.num === qFrom);
+    const qT = QUEST.find(q => q.num === qTo);
     if (qF && qT)
       document.getElementById('num-quest-range-info').textContent =
         `Q${qFrom} "${qF.name}" → Q${qTo} "${qT.name}"`;
   }
 
-  const questList = QUEST_A.filter(q => q.num >= qFrom && q.num <= qTo);
+  const questList    = QUEST.filter(q => q.num >= qFrom && q.num <= qTo);
   const totalQuestExp = questList.reduce((s, q) => s + q.exp, 0);
-  const newTotal = curTotal + totalQuestExp;
+  const newTotal      = curTotal + totalQuestExp;
 
   const { lv: newLv, expInLv: newExpInLv } = expToLevel(newTotal);
   const newD   = RAW[String(newLv)] || { exp: 1, cum: 0 };
   const newPct = newD.exp > 0 ? Math.min(99, Math.floor(newExpInLv / newD.exp * 100)) : 0;
   const lvGain = newLv - curLv;
 
-  // Update result UI
-  document.getElementById('res-lv').textContent = newLv;
-  document.getElementById('res-gain').textContent = lvGain > 0 ? `⬆ เพิ่มขึ้น ${lvGain} เลเวล` : 'เลเวลไม่เปลี่ยนแปลง';
-  document.getElementById('res-pct').textContent = `bar ${newPct}% ใน Lv ${newLv}`;
-  document.getElementById('res-quest-exp').textContent = fmt(totalQuestExp);
-  document.getElementById('res-count').textContent = questList.length;
-  document.getElementById('res-new-cum').textContent = fmt(newTotal);
-  document.getElementById('res-lv-gain').textContent = lvGain > 0 ? '+' + lvGain : lvGain;
-  document.getElementById('res-bar').style.width = newPct + '%';
+  document.getElementById('res-lv').textContent          = newLv;
+  document.getElementById('res-gain').textContent        = lvGain > 0 ? `⬆ เพิ่มขึ้น ${lvGain} เลเวล` : 'เลเวลไม่เปลี่ยนแปลง';
+  document.getElementById('res-pct').textContent         = `bar ${newPct}% ใน Lv ${newLv}`;
+  document.getElementById('res-quest-exp').textContent   = fmt(totalQuestExp);
+  document.getElementById('res-count').textContent       = questList.length;
+  document.getElementById('res-new-cum').textContent     = fmt(newTotal);
+  document.getElementById('res-lv-gain').textContent     = lvGain > 0 ? '+' + lvGain : lvGain;
+  document.getElementById('res-bar').style.width         = newPct + '%';
   document.getElementById('res-bar-pct-label').textContent = newPct + '%';
 
   renderQuestList(questList, qFrom, qTo);
 }
 
-// ─── Quest List Table ─────────────────────────────────────────────────
 function renderQuestList(list, qFrom, qTo) {
-  const tbody = document.getElementById('qlist-body');
-  let html = '';
-  let running = 0;
+  let html = '', running = 0;
   list.forEach(q => {
     running += q.exp;
-    const ep = getEpForQuest(q.num);
-    const ch = getChapterInEp(q.num);
+    const ep      = getEpForQuest(q.num);
+    const ch      = getChapterInEp(q.num);
     const isFirst = q.num === qFrom;
     const isLast  = q.num === qTo;
-    const cls = isFirst ? 'first-q' : isLast ? 'last-q' : '';
-    const badge = isFirst ? '<span style="font-size:9px;padding:1px 5px;background:rgba(45,212,160,0.15);border:1px solid var(--teal-dim);border-radius:2px;color:var(--teal);margin-left:4px">START</span>'
-                : isLast  ? '<span style="font-size:9px;padding:1px 5px;background:rgba(91,156,246,0.15);border:1px solid var(--blue-dim);border-radius:2px;color:var(--blue);margin-left:4px">END</span>' : '';
+    const cls     = isFirst ? 'first-q' : isLast ? 'last-q' : '';
+    const badge   = isFirst
+      ? '<span style="font-size:9px;padding:1px 5px;background:rgba(45,212,160,0.15);border:1px solid var(--teal-dim);border-radius:2px;color:var(--teal);margin-left:4px">START</span>'
+      : isLast
+      ? '<span style="font-size:9px;padding:1px 5px;background:rgba(91,156,246,0.15);border:1px solid var(--blue-dim);border-radius:2px;color:var(--blue);margin-left:4px">END</span>' : '';
     html += `<tr class="${cls}">
       <td class="num-col">${q.num}</td>
       <td style="padding:7px 12px;color:var(--text-dim);font-size:11px">Ep${ep.ep} บท ${ch}</td>
@@ -560,7 +431,7 @@ function renderQuestList(list, qFrom, qTo) {
       <td class="cum-col">${fmt(running)}</td>
     </tr>`;
   });
-  tbody.innerHTML = html;
+  document.getElementById('qlist-body').innerHTML = html;
 }
 
 let qlistOpen = false;
@@ -570,9 +441,34 @@ function toggleQList() {
   document.getElementById('qlist-btn').textContent = (qlistOpen ? '▲' : '▼') + ' ดูรายชื่อเควสในช่วงที่เลือก';
 }
 
-// ─── Init ────────────────────────────────────────────────────────────
-buildEpSelects();
-onAnyChange();
+// ─── Bootstrap: fetch JSON  ───────────────────────────────────────
+(async function bootstrap() {
+  try {
+    const [expRes, questRes] = await Promise.all([
+      fetch('data/EXP/EXP_per_Level.json'),
+      fetch('data/EXP/EXP_main_Quests.json')
+    ]);
+    if (!expRes.ok)   throw new Error(`EXP_per_Level.json: ${expRes.status}`);
+    if (!questRes.ok) throw new Error(`EXP_main_Quests.json: ${questRes.status}`);
+
+    RAW = await expRes.json();
+    const questData = await questRes.json();
+
+    EP_MAP = questData.episodes;
+    QUEST  = questData.main;
+
+    // Hide overlay → build UI
+    document.getElementById('loading-overlay').style.display = 'none';
+    buildEpSelects();
+    onAnyChange();
+  } catch (err) {
+    console.error('Bootstrap failed:', err);
+    document.getElementById('loading-overlay').style.display = 'none';
+    const eb = document.getElementById('err-box');
+    eb.style.display = 'block';
+    eb.innerHTML = `⚠️ โหลดข้อมูลไม่สำเร็จ — <code>${err.message}</code>`;
+  }
+})();
 </script>
 </body>
 </html>
