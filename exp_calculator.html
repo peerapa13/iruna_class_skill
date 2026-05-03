@@ -6,6 +6,7 @@
 <title>EXP Calculator — Iruna Online TH</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
 :root {
   --bg-deep:    #0a0c10;
@@ -39,7 +40,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Background grid texture */
 body::before {
   content: '';
   position: fixed;
@@ -60,7 +60,6 @@ body::before {
   padding: 0 16px 60px;
 }
 
-/* ── Header ── */
 .site-header {
   padding: 32px 0 24px;
   text-align: center;
@@ -107,7 +106,6 @@ body::before {
   letter-spacing: 0.5px;
 }
 
-/* ── Back link ── */
 .back-link {
   display: inline-flex;
   align-items: center;
@@ -124,7 +122,6 @@ body::before {
 .back-link:hover { color: var(--gold); border-color: var(--gold-dim); }
 .back-link::before { content: '←'; }
 
-/* ── Panels ── */
 .panel {
   background: var(--bg-panel);
   border: 1px solid var(--border);
@@ -161,7 +158,6 @@ body::before {
   border-radius: 2px;
 }
 
-/* ── Form inputs ── */
 .input-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -198,7 +194,25 @@ body::before {
 .field input[type=number]::-webkit-inner-spin-button,
 .field input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 
-/* ── Quick buttons ── */
+/* comma-formatted text input — same look as number input */
+.field input.comma-input {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 9px 12px;
+  font-family: 'Sarabun', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-pri);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.field input.comma-input:focus {
+  border-color: var(--gold-dim);
+  box-shadow: 0 0 0 2px rgba(201,168,76,0.1);
+}
+
 .quick-row {
   display: flex;
   flex-wrap: wrap;
@@ -231,7 +245,6 @@ body::before {
 .qbtn.max { border-color: var(--teal-dim); color: var(--teal); }
 .qbtn.max:hover { background: rgba(45,212,160,0.08); border-color: var(--teal); }
 
-/* ── EXP % slider ── */
 .slider-section { margin-bottom: 4px; }
 .slider-label-row {
   display: flex;
@@ -275,9 +288,7 @@ input[type=range]::-webkit-slider-thumb {
   cursor: pointer;
   transition: box-shadow .15s;
 }
-input[type=range]:hover::-webkit-slider-thumb {
-  box-shadow: 0 0 14px rgba(201,168,76,0.8);
-}
+input[type=range]:hover::-webkit-slider-thumb { box-shadow: 0 0 14px rgba(201,168,76,0.8); }
 input[type=range]::-moz-range-thumb {
   width: 18px; height: 18px;
   border-radius: 50%;
@@ -294,7 +305,6 @@ input[type=range]::-moz-range-thumb {
   letter-spacing: 0.5px;
 }
 
-/* EXP from pct display */
 .exp-derived {
   display: flex;
   align-items: center;
@@ -309,7 +319,6 @@ input[type=range]::-moz-range-thumb {
 .exp-derived-val { font-family: 'Cinzel', serif; font-size: 17px; font-weight: 600; color: var(--teal); }
 .exp-derived-unit { font-size: 12px; color: var(--text-dim); }
 
-/* ── Stat cards ── */
 .stat-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -355,52 +364,12 @@ input[type=range]::-moz-range-thumb {
 .stat-card.amber .stat-value  { color: var(--gold-light); }
 .stat-card.white .stat-value  { color: var(--text-pri); }
 
-/* ── Progress bar ── */
-.prog-section { margin-bottom: 4px; }
-.prog-header {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
-  color: var(--text-sec);
-  margin-bottom: 8px;
-}
-.prog-track {
-  height: 12px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  overflow: hidden;
-  margin-bottom: 6px;
-  position: relative;
-}
-.prog-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--teal-dim), var(--teal));
-  border-radius: 6px;
-  transition: width .4s cubic-bezier(.4,0,.2,1);
-  position: relative;
-}
-.prog-fill::after {
-  content: '';
-  position: absolute;
-  top: 0; right: 0;
-  width: 20px; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2));
-}
-.prog-detail {
-  text-align: right;
-  font-size: 11px;
-  color: var(--text-dim);
-}
-
-/* ── Farm estimator ── */
 .farm-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 }
 
-/* ── EXP Table ── */
 .table-controls {
   display: flex;
   justify-content: space-between;
@@ -493,7 +462,6 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
 .row-cur .row-badge  { background: rgba(45,212,160,0.2); color: var(--teal); border: 1px solid var(--teal-dim); }
 .row-goal .row-badge { background: rgba(91,156,246,0.2); color: var(--blue); border: 1px solid var(--blue-dim); }
 
-/* ── Hint box ── */
 .hint {
   display: flex;
   gap: 10px;
@@ -509,7 +477,46 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
 .hint-icon { color: var(--gold); font-size: 15px; flex-shrink: 0; margin-top: 1px; }
 .hint strong { color: var(--gold-light); font-weight: 600; }
 
-/* ── Footer ── */
+/* ── Save Button ── */
+.save-btn-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 4px 0 16px;
+}
+.save-btn {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 11px 28px;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid var(--gold-dim);
+  border-radius: 5px;
+  color: var(--gold);
+  transition: all .2s;
+}
+.save-btn:hover { border-color: var(--gold); color: var(--gold-light); background: rgba(201,168,76,0.15); }
+.save-btn:active { transform: scale(0.97); }
+.save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Export card (off-screen, for html2canvas) ── */
+#export-card {
+  position: fixed;
+  top: -9999px; left: -9999px;
+  width: 480px;
+  background: #0a0c10;
+  color: #e8e4d8;
+  padding: 28px 24px 24px;
+  border: 2px solid #3d5080;
+  border-radius: 12px;
+  font-family: 'Sarabun', sans-serif;
+}
+
 .site-footer {
   text-align: center;
   padding-top: 32px;
@@ -520,7 +527,6 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
   letter-spacing: 0.5px;
 }
 
-/* ── Responsive ── */
 @media (max-width: 560px) {
   .input-grid, .stat-grid, .farm-grid { grid-template-columns: 1fr 1fr; }
   .stat-grid { grid-template-columns: 1fr 1fr 1fr; }
@@ -545,7 +551,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <button class="qbtn" id="lookup-toggle-btn" onclick="toggleLookup()" style="padding:6px 14px;font-family:'Sarabun',sans-serif;font-size:13px;">🔍 หา Lv จาก EXP สะสม</button>
   </div>
 
-  <!-- ── Lookup Panel ── -->
+  <!-- Lookup Panel -->
   <div id="lookup-panel" class="panel" style="display:none;border-color:var(--gold-dim);background:rgba(201,168,76,0.04)">
     <div class="panel-title">หาเลเวลจาก EXP สะสม</div>
     <p style="font-size:13px;color:var(--text-sec);margin-bottom:14px;line-height:1.6">กรอก EXP สะสมรวมที่มีอยู่ (เช่น จากการดูในเมนูสถิติ หรือคำนวณจากที่อื่น) แล้วระบบจะบอกว่าอยู่ Lv ไหน และ progress bar อยู่ที่เท่าไหร่</p>
@@ -577,10 +583,9 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <span>เกมไม่แสดงตัวเลข EXP ตรงๆ แต่มี <strong>progress bar แบ่ง 10 ส่วน</strong> ใต้แถบ HP/MP — ประมาณ % แล้วลาก slider ด้านล่าง เครื่องคำนวณจะแปลงเป็นตัวเลขให้เอง</span>
   </div>
 
-  <!-- ── Input Panel ── -->
+  <!-- Input Panel -->
   <div class="panel">
     <div class="panel-title">ตัวละครของคุณ</div>
-
     <div class="input-grid">
       <div class="field">
         <label>เลเวลปัจจุบัน</label>
@@ -640,7 +645,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     </div>
   </div>
 
-  <!-- ── Stats ── -->
+  <!-- Stats -->
   <div class="stat-grid">
     <div class="stat-card green">
       <div class="stat-label">EXP ที่ต้องการอีก</div>
@@ -656,13 +661,15 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     </div>
   </div>
 
-  <!-- ── Farm Estimator ── -->
+  <!-- Farm Estimator -->
   <div class="panel">
     <div class="panel-title">ประมาณเวลาฟาร์ม</div>
     <div class="input-grid" style="margin-bottom:14px">
       <div class="field">
         <label>EXP ต่อ kill</label>
-        <input type="number" id="mob-exp" min="1" value="0" oninput="calc()">
+        <!-- ใช้ text input เพื่อแสดง comma -->
+        <input type="text" id="mob-exp" class="comma-input" inputmode="numeric"
+               value="0" oninput="onMobExpInput(this)">
       </div>
       <div class="field">
         <label>วินาที / kill</label>
@@ -685,7 +692,19 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     </div>
   </div>
 
-  <!-- ── EXP Table ── -->
+  <!-- ── Save Result Button ── -->
+  <div class="save-btn-wrap">
+    <button class="save-btn" id="btn-save-image" onclick="saveImage()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      บันทึกผลลัพธ์เป็นรูปภาพ
+    </button>
+  </div>
+
+  <!-- EXP Table -->
   <div class="panel">
     <div class="table-controls">
       <div class="panel-title" style="margin:0">ตาราง EXP รายเลเวล</div>
@@ -714,250 +733,293 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
   </footer>
 </div>
 
+<!-- Export card (hidden, rendered by html2canvas) -->
+<div id="export-card">
+  <!-- Header -->
+  <div style="text-align:center;border-bottom:1px solid #c9a84c;padding-bottom:14px;margin-bottom:20px;">
+    <div style="font-family:'Cinzel',serif;color:#c9a84c;font-size:20px;letter-spacing:2px;font-weight:700;">✦ IRUNA ONLINE TH ✦</div>
+    <div style="font-size:12px;color:#8a8fa8;letter-spacing:1px;margin-top:4px;">EXP CALCULATOR RESULT</div>
+  </div>
 
-<button id="btn-save-image" onclick="saveImage()" style="margin-top: 24px; width: 100%; padding: 16px; background: linear-gradient(135deg, #2dd4a0, #1a7a5e); color: white; border: none; border-radius: 8px; font-family: 'Cinzel', serif; font-size: 16px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 15px rgba(45, 212, 160, 0.3); transition: 0.3s;">
-  บันทึกผลลัพธ์เป็นรูปภาพ
-</button>
+  <!-- Lv current → goal -->
+  <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(61,80,128,0.12);border:1px solid #2a3045;border-radius:8px;padding:16px 20px;margin-bottom:16px;">
+    <div style="text-align:center;flex:1;">
+      <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลปัจจุบัน</div>
+      <div style="font-family:'Cinzel',serif;font-size:30px;color:#2dd4a0;font-weight:700;line-height:1;">Lv <span id="ec-cur-lv">—</span></div>
+      <!-- progress bar -->
+      <div style="margin-top:8px;">
+        <div style="font-size:10px;color:#555b72;margin-bottom:4px;">% EXP in level</div>
+        <div style="height:6px;background:#161a22;border:1px solid #2a3045;border-radius:3px;overflow:hidden;">
+          <div id="ec-pbar" style="height:100%;background:linear-gradient(90deg,#1a7a5e,#2dd4a0);border-radius:3px;width:0%;"></div>
+        </div>
+        <div id="ec-pct-txt" style="font-family:'Cinzel',serif;font-size:13px;color:#2dd4a0;margin-top:3px;">0%</div>
+      </div>
+    </div>
+    <div style="font-size:22px;color:#c9a84c;padding:0 16px;">➜</div>
+    <div style="text-align:center;flex:1;">
+      <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลเป้าหมาย</div>
+      <div style="font-family:'Cinzel',serif;font-size:30px;color:#5b9cf6;font-weight:700;line-height:1;">Lv <span id="ec-goal-lv">—</span></div>
+    </div>
+  </div>
 
-<div id="export-card" style="position: fixed; top: -2000px; left: -2000px; width: 450px; background: #0a0c10; color: #e8e4d8; padding: 30px; border: 2px solid #3d5080; border-radius: 12px; font-family: 'Sarabun', sans-serif;">
-    <div style="text-align: center; border-bottom: 1px solid #c9a84c; padding-bottom: 15px; margin-bottom: 20px;">
-        <div style="font-family: 'Cinzel', serif; color: #c9a84c; font-size: 22px; letter-spacing: 2px; font-weight: bold;">IRUNA ONLINE TH</div>
-        <div style="font-size: 14px; color: #8a8fa8;">EXP CALCULATOR RESULT</div>
-    </div>
-    
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; background: rgba(61, 80, 128, 0.1); padding: 15px; border-radius: 8px;">
-        <div style="text-align: center; flex: 1;">
-            <div style="font-size: 12px; color: #8a8fa8; margin-bottom: 5px;">ปัจจุบัน</div>
-            <div style="font-family: 'Cinzel', serif; font-size: 28px; color: #2dd4a0; font-weight: bold;">LV. <span id="exp-cur-lv">100</span></div>
-        </div>
-        <div style="font-size: 24px; color: #c9a84c;">➜</div>
-        <div style="text-align: center; flex: 1;">
-            <div style="font-size: 12px; color: #8a8fa8; margin-bottom: 5px;">เป้าหมาย</div>
-            <div style="font-family: 'Cinzel', serif; font-size: 28px; color: #5b9cf6; font-weight: bold;">LV. <span id="exp-goal-lv">200</span></div>
-        </div>
-    </div>
+  <!-- EXP needed -->
+  <div style="background:#161a22;border:1px solid #2a3045;border-radius:6px;padding:12px 16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
+    <span style="font-size:13px;color:#8a8fa8;">EXP ที่ต้องการอีก</span>
+    <span id="ec-exp-needed" style="font-family:'Cinzel',serif;font-size:18px;color:#c9a84c;font-weight:700;">—</span>
+  </div>
 
-    <div style="margin-bottom: 25px;">
-        <div style="font-size: 13px; color: #8a8fa8; margin-bottom: 8px; display: flex; justify-content: space-between;">
-            <span>EXP ที่ต้องกาาร</span>
-            <span id="exp-need-val" style="color: #c9a84c; font-weight: bold; font-size: 16px;">0</span>
-        </div>
-        <div style="background: #161a22; padding: 15px; border-radius: 8px; border: 1px solid #2a3045;">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                <span style="font-size: 14px; color: #8a8fa8;">จำนวนที่ต้องล่า:</span>
-                <span id="exp-kills-val" style="color: #fff; font-weight: bold;">0</span>
-            </div>
-            <div style="display: flex; justify-content: space-between;">
-                <span style="font-size: 14px; color: #8a8fa8;">เวลาโดยประมาณ:</span>
-                <span id="exp-time-val" style="color: #fff; font-weight: bold;">0</span>
-            </div>
-        </div>
+  <!-- Farm stats -->
+  <div style="background:#161a22;border:1px solid #2a3045;border-radius:6px;padding:14px 16px;margin-bottom:16px;">
+    <div style="font-size:10px;color:#555b72;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">ประมาณเวลาฟาร์ม</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;">
+      <div style="display:flex;justify-content:space-between;">
+        <span style="font-size:12px;color:#8a8fa8;">EXP / Kill</span>
+        <span id="ec-mob-exp" style="font-size:12px;color:#e8e4d8;font-weight:600;">—</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;">
+        <span style="font-size:12px;color:#8a8fa8;">วินาที / Kill</span>
+        <span id="ec-kill-time" style="font-size:12px;color:#e8e4d8;font-weight:600;">—</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;">
+        <span style="font-size:12px;color:#8a8fa8;">จำนวน Kill</span>
+        <span id="ec-kills" style="font-size:12px;color:#e8e4d8;font-weight:600;">—</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;">
+        <span style="font-size:12px;color:#8a8fa8;">EXP / ชั่วโมง</span>
+        <span id="ec-exp-hr" style="font-size:12px;color:#e8e4d8;font-weight:600;">—</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;grid-column:1/-1;">
+        <span style="font-size:12px;color:#8a8fa8;">เวลาโดยประมาณ</span>
+        <span id="ec-farm-time" style="font-size:12px;color:#e8c96a;font-weight:700;">—</span>
+      </div>
     </div>
+  </div>
 
-    <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #2a3045; padding-top: 20px;">
-        <div style="font-size: 11px; color: #555b72;">
-            Calculated at:<br>
-            <span style="color: #8a8fa8;">peerapa13.github.io/iruna_class_skill/</span>
-        </div>
-        <div id="qrcode-canvas" style="background: white; padding: 5px; border-radius: 4px;"></div>
+  <!-- Footer: timestamp + QR -->
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #2a3045;padding-top:14px;">
+    <div>
+      <div style="font-size:10px;color:#555b72;margin-bottom:3px;" id="ec-ts">—</div>
+      <div style="font-size:10px;color:#555b72;">peerapa13.github.io/iruna_class_skill/exp_calculator</div>
     </div>
+    <div style="text-align:center;">
+      <div id="ec-qr" style="background:#fff;padding:4px;border-radius:4px;display:inline-block;"></div>
+      <div style="font-size:9px;color:#555b72;margin-top:3px;">สแกนเพื่อเข้าเว็บ</div>
+    </div>
+  </div>
 </div>
 
 <script>
 let RAW = {};
 
-function fmt(n) { return Math.round(n).toLocaleString() }
+/* ── Helpers ── */
+function fmt(n) { return Math.round(n).toLocaleString(); }
 function fmtTime(sec) {
-  if(!isFinite(sec)||sec<=0) return '—';
-  const h=Math.floor(sec/3600), m=Math.floor((sec%3600)/60);
-  if(h>8760) return `~${Math.round(h/8760)} ปี`;
-  if(h>720) return `~${Math.round(h/720)} เดือน`;
-  if(h>24) return `~${Math.round(h/24)} วัน ${m} ชม.`;
+  if (!isFinite(sec) || sec <= 0) return '—';
+  const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60);
+  if (h > 8760) return `~${Math.round(h/8760)} ปี`;
+  if (h > 720)  return `~${Math.round(h/720)} เดือน`;
+  if (h > 24)   return `~${Math.round(h/24)} วัน ${m} ชม.`;
   return `${h} ชม. ${m} นาที`;
 }
 
+/* ── Comma input for mob-exp ── */
+function getMobExp() {
+  const raw = document.getElementById('mob-exp').value.replace(/,/g, '');
+  return Math.max(1, parseInt(raw) || 1);
+}
+function onMobExpInput(el) {
+  const pos = el.selectionStart;
+  const oldVal = el.value;
+  const digits = oldVal.replace(/[^0-9]/g, '');
+  if (!digits) { el.value = ''; calc(); return; }
+  const formatted = parseInt(digits).toLocaleString();
+  el.value = formatted;
+  // adjust cursor for added/removed commas
+  const commasOld = (oldVal.slice(0, pos).match(/,/g) || []).length;
+  const commasNew = (formatted.match(/,/g) || []).length;
+  try { el.setSelectionRange(pos + commasNew - commasOld, pos + commasNew - commasOld); } catch(e) {}
+  calc();
+}
+
+/* ── Core calc ── */
 let tableMode = 'range';
 function setTableMode(m) {
   tableMode = m;
-  document.getElementById('tbtn-range').classList.toggle('active', m==='range');
-  document.getElementById('tbtn-all').classList.toggle('active', m==='all');
+  document.getElementById('tbtn-range').classList.toggle('active', m === 'range');
+  document.getElementById('tbtn-all').classList.toggle('active', m === 'all');
   renderTable();
 }
-
-function setPct(v) { document.getElementById('exp-pct').value=v; onSlider(); }
-function setGoal(v) { document.getElementById('goal-lv').value=v; calc(); }
-
+function setPct(v) { document.getElementById('exp-pct').value = v; onSlider(); }
+function setGoal(v) { document.getElementById('goal-lv').value = v; calc(); }
 function onSlider() {
-  const p = parseInt(document.getElementById('exp-pct').value)||0;
+  const p = parseInt(document.getElementById('exp-pct').value) || 0;
   document.getElementById('pct-label').textContent = p + '%';
   calc();
 }
 
 function calc() {
-  if (Object.keys(RAW).length === 0) return; 
+  if (Object.keys(RAW).length === 0) return;
 
-  const cur = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value)||1));
-  const goal = Math.min(405, Math.max(cur+1, parseInt(document.getElementById('goal-lv').value)||cur+1));
-  const pct = Math.min(99, Math.max(0, parseInt(document.getElementById('exp-pct').value)||0));
-  const mobExp = Math.max(1, parseInt(document.getElementById('mob-exp').value)||1);
-  const killTime = Math.max(1, parseInt(document.getElementById('kill-time').value)||1);
+  const cur      = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1));
+  const goal     = Math.min(405, Math.max(cur + 1, parseInt(document.getElementById('goal-lv').value) || cur + 1));
+  const pct      = Math.min(99, Math.max(0, parseInt(document.getElementById('exp-pct').value) || 0));
+  const mobExp   = getMobExp();
+  const killTime = Math.max(1, parseInt(document.getElementById('kill-time').value) || 1);
 
   document.getElementById('pct-label').textContent = pct + '%';
 
-  const curD = RAW[String(cur)] || {exp:0, cum:0};
-  const goalD = RAW[String(goal)] || {exp:0, cum:0};
+  const curD  = RAW[String(cur)]  || { exp: 0, cum: 0 };
+  const goalD = RAW[String(goal)] || { exp: 0, cum: 0 };
 
-  const curExpInLv = Math.round(curD.exp * (pct/100));
+  const curExpInLv = Math.round(curD.exp * (pct / 100));
   document.getElementById('exp-from-pct').textContent = fmt(curExpInLv);
 
   const expNeeded = Math.max(0, (goalD.cum - curD.cum) - curExpInLv);
-  document.getElementById('exp-needed').textContent = fmt(expNeeded);
-  document.getElementById('cum-goal').textContent = fmt(goalD.cum);
+  document.getElementById('exp-needed').textContent  = fmt(expNeeded);
+  document.getElementById('cum-goal').textContent    = fmt(goalD.cum);
   document.getElementById('cum-current').textContent = fmt(curD.cum + curExpInLv);
 
-  const kills = Math.ceil(expNeeded/mobExp);
-  const sec = kills * killTime;
-  document.getElementById('kills').textContent = fmt(kills);
+  const kills = Math.ceil(expNeeded / mobExp);
+  const sec   = kills * killTime;
+  document.getElementById('kills').textContent    = fmt(kills);
   document.getElementById('farm-time').textContent = fmtTime(sec);
-  document.getElementById('exp-hr').textContent = fmt(Math.round(mobExp*(3600/killTime)));
+  document.getElementById('exp-hr').textContent   = fmt(Math.round(mobExp * (3600 / killTime)));
 
   renderTable(cur, goal);
 }
 
 function renderTable() {
-  const curLv = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value)||1));
-  const goalLv = Math.min(405, Math.max(curLv+1, parseInt(document.getElementById('goal-lv').value)||curLv+1));
-  const tbody = document.getElementById('table-body');
+  const curLv  = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1));
+  const goalLv = Math.min(405, Math.max(curLv + 1, parseInt(document.getElementById('goal-lv').value) || curLv + 1));
+  const tbody  = document.getElementById('table-body');
   let html = '';
-  
   const keys = tableMode === 'range'
-    ? Array.from({length: goalLv - curLv + 1}, (_, i) => curLv + i)
-    : Array.from({length: 405}, (_, i) => i + 1);
-    
+    ? Array.from({ length: goalLv - curLv + 1 }, (_, i) => curLv + i)
+    : Array.from({ length: 405 }, (_, i) => i + 1);
   for (const lv of keys) {
-    const d = RAW[String(lv)];
-    if (!d) continue;
-    
+    const d = RAW[String(lv)]; if (!d) continue;
     const isCur = lv === curLv, isGoal = lv === goalLv;
-    const cls = isCur ? 'row-cur' : isGoal ? 'row-goal' : '';
+    const cls   = isCur ? 'row-cur' : isGoal ? 'row-goal' : '';
     const badge = isCur ? `<span class="row-badge">ปัจจุบัน</span>` : isGoal ? `<span class="row-badge">เป้าหมาย</span>` : '';
-    const est = lv > 370 ? `<span class="tag-est">~</span>` : '';
-    
+    const est   = lv > 370 ? `<span class="tag-est">~</span>` : '';
     html += `<tr class="${cls}"><td>${lv}${est}</td><td>${fmt(d.exp)}${badge}</td><td>${fmt(d.cum)}</td></tr>`;
   }
   tbody.innerHTML = html;
 }
 
 function toggleLookup() {
-  const p = document.getElementById("lookup-panel");
-  const btn = document.getElementById("lookup-toggle-btn");
-  const open = p.style.display === "none";
-  p.style.display = open ? "block" : "none";
-  btn.classList.toggle("active", open);
-  if (open) document.getElementById("lookup-exp").focus();
+  const p   = document.getElementById('lookup-panel');
+  const btn = document.getElementById('lookup-toggle-btn');
+  const open = p.style.display === 'none';
+  p.style.display = open ? 'block' : 'none';
+  btn.classList.toggle('active', open);
+  if (open) document.getElementById('lookup-exp').focus();
 }
-
 function doLookup() {
-  if (Object.keys(RAW).length === 0) return; 
-
-  const expInput = parseInt(document.getElementById("lookup-exp").value)||0;
-  if (expInput <= 0) { document.getElementById("lookup-result").style.display="none"; return; }
-  
+  if (Object.keys(RAW).length === 0) return;
+  const expInput = parseInt(document.getElementById('lookup-exp').value) || 0;
+  if (expInput <= 0) { document.getElementById('lookup-result').style.display = 'none'; return; }
   let foundLv = 1;
-  for (let lv=1; lv<=404; lv++) {
-    const next = RAW[String(lv+1)];
+  for (let lv = 1; lv <= 404; lv++) {
+    const next = RAW[String(lv + 1)];
     if (!next) { foundLv = lv; break; }
     if (expInput >= RAW[String(lv)].cum && expInput < next.cum) { foundLv = lv; break; }
   }
-  if (expInput >= RAW["405"].cum) foundLv = 405;
-  
+  if (expInput >= RAW['405'].cum) foundLv = 405;
   const d = RAW[String(foundLv)];
   const expIntoLv = expInput - d.cum;
-  const pct = d.exp > 0 ? Math.min(99, Math.floor(expIntoLv/d.exp*100)) : 0;
-  
-  document.getElementById("lk-level").textContent = foundLv;
-  document.getElementById("lk-pct").textContent = pct + "%";
-  document.getElementById("lk-exp-lv").textContent = fmt(expIntoLv) + " / " + fmt(d.exp);
-  document.getElementById("lookup-result").style.display = "block";
-  document.getElementById("lookup-panel").dataset.lv = foundLv;
-  document.getElementById("lookup-panel").dataset.pct = pct;
+  const pct = d.exp > 0 ? Math.min(99, Math.floor(expIntoLv / d.exp * 100)) : 0;
+  document.getElementById('lk-level').textContent  = foundLv;
+  document.getElementById('lk-pct').textContent    = pct + '%';
+  document.getElementById('lk-exp-lv').textContent = fmt(expIntoLv) + ' / ' + fmt(d.exp);
+  document.getElementById('lookup-result').style.display = 'block';
+  document.getElementById('lookup-panel').dataset.lv  = foundLv;
+  document.getElementById('lookup-panel').dataset.pct = pct;
 }
-
 function applyLookup() {
-  const lv = parseInt(document.getElementById("lookup-panel").dataset.lv)||1;
-  const pct = parseInt(document.getElementById("lookup-panel").dataset.pct)||0;
-  document.getElementById("cur-lv").value = lv;
-  document.getElementById("exp-pct").value = pct;
-  document.getElementById("pct-label").textContent = pct + "%";
+  const lv  = parseInt(document.getElementById('lookup-panel').dataset.lv)  || 1;
+  const pct = parseInt(document.getElementById('lookup-panel').dataset.pct) || 0;
+  document.getElementById('cur-lv').value = lv;
+  document.getElementById('exp-pct').value = pct;
+  document.getElementById('pct-label').textContent = pct + '%';
   calc();
-  document.getElementById("lookup-panel").style.display = "none";
-  document.getElementById("lookup-toggle-btn").classList.remove("active");
-  document.getElementById("cur-lv").scrollIntoView({behavior:"smooth", block:"center"});
+  document.getElementById('lookup-panel').style.display = 'none';
+  document.getElementById('lookup-toggle-btn').classList.remove('active');
+  document.getElementById('cur-lv').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-
+/* ── Load data ── */
 async function loadDataAndInit() {
   try {
     const response = await fetch('data/EXP/EXP_per_Level.json');
     if (!response.ok) throw new Error('Network response was not ok');
     RAW = await response.json();
-   
     calc();
   } catch (error) {
     console.error('Failed to load EXP data:', error);
-  
   }
 }
 
-// ฟังก์ชันสำหรับดึงข้อมูลปัจจุบันและบันทึกเป็นรูปภาพ
+/* ── Save Image ── */
+let qrBuilt = false;
+function buildQR() {
+  if (qrBuilt) return;
+  document.getElementById('ec-qr').innerHTML = '';
+  new QRCode(document.getElementById('ec-qr'), {
+    text: 'https://peerapa13.github.io/iruna_class_skill/exp_calculator',
+    width: 72, height: 72,
+    colorDark: '#000000', colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+  qrBuilt = true;
+}
+
 function saveImage() {
-    const btn = document.getElementById('btn-save-image');
-    const originalText = btn.innerHTML;
-    btn.innerHTML = '⏳ GENERATING IMAGE...';
-    btn.disabled = true;
+  const btn = document.getElementById('btn-save-image');
+  btn.disabled = true;
+  btn.textContent = '⏳ กำลังสร้างภาพ…';
 
-    document.getElementById('exp-cur-lv').textContent = document.getElementById('cur-lv').value;
-    document.getElementById('exp-goal-lv').textContent = document.getElementById('goal-lv').value;
-    document.getElementById('exp-need-val').textContent = document.getElementById('exp-needed').textContent;
-    document.getElementById('exp-kills-val').textContent = document.getElementById('kills').textContent;
-    document.getElementById('exp-time-val').textContent = document.getElementById('farm-time').textContent;
+  // populate export card
+  const cur      = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1));
+  const goal     = Math.min(405, Math.max(cur + 1, parseInt(document.getElementById('goal-lv').value) || cur + 1));
+  const pct      = Math.min(99, Math.max(0, parseInt(document.getElementById('exp-pct').value) || 0));
 
-    const qrContainer = document.getElementById('qrcode-canvas');
-    qrContainer.innerHTML = ""; 
-    new QRCode(qrContainer, {
-        text: "https://peerapa13.github.io/iruna_class_skill/exp_calculator",
-        width: 70,
-        height: 70,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
+  document.getElementById('ec-cur-lv').textContent    = cur;
+  document.getElementById('ec-goal-lv').textContent   = goal;
+  document.getElementById('ec-pct-txt').textContent   = pct + '%';
+  document.getElementById('ec-pbar').style.width      = pct + '%';
+  document.getElementById('ec-exp-needed').textContent = document.getElementById('exp-needed').textContent;
+  document.getElementById('ec-mob-exp').textContent   = document.getElementById('mob-exp').value || '0';
+  document.getElementById('ec-kill-time').textContent = document.getElementById('kill-time').value + ' วิ';
+  document.getElementById('ec-kills').textContent     = document.getElementById('kills').textContent;
+  document.getElementById('ec-farm-time').textContent = document.getElementById('farm-time').textContent;
+  document.getElementById('ec-exp-hr').textContent    = document.getElementById('exp-hr').textContent;
+
+  const now = new Date();
+  document.getElementById('ec-ts').textContent =
+    now.toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' }) +
+    '  ' + now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+
+  buildQR();
+
+  setTimeout(() => {
+    html2canvas(document.getElementById('export-card'), {
+      backgroundColor: '#0a0c10',
+      scale: 2,
+      useCORS: true
+    }).then(canvas => {
+      const link = document.createElement('a');
+      link.download = `Iruna_EXP_LV${cur}_TO_${goal}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }).catch(err => {
+      console.error('Save error:', err);
+      alert('ไม่สามารถบันทึกรูปภาพได้: ' + err.message);
+    }).finally(() => {
+      btn.disabled = false;
+      btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> บันทึกผลลัพธ์เป็นรูปภาพ';
     });
-
-    setTimeout(() => {
-        const card = document.getElementById('export-card');
-        
-        html2canvas(card, {
-            backgroundColor: '#0a0c10',
-            scale: 2, 
-            useCORS: true
-        }).then(canvas => {
-            const link = document.createElement('a');
-            const curLv = document.getElementById('cur-lv').value;
-            const goalLv = document.getElementById('goal-lv').value;
-            
-            link.download = `Iruna_EXP_LV${curLv}_TO_${goalLv}.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-            
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-        }).catch(err => {
-            console.error("Save Error:", err);
-            alert("ไม่สามารถบันทึกรูปภาพได้");
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-        });
-    }, 200); 
+  }, 300);
 }
 
 loadDataAndInit();
