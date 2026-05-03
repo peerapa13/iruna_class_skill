@@ -667,9 +667,6 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <div class="input-grid" style="margin-bottom:14px">
       <div class="field">
         <label>EXP ต่อ kill</label>
-        <!-- ใช้ text input เพื่อแสดง comma -->
-        <input type="text" id="mob-exp" class="comma-input" inputmode="numeric"
-               value="0" oninput="onMobExpInput(this)">
       </div>
       <div class="field">
         <label>วินาที / kill</label>
@@ -821,26 +818,6 @@ function fmtTime(sec) {
   if (h >= 24)   { const d = Math.floor(h/24), hr = h % 24; return `${d} วัน ${hr} ชม. ${m} นาที`; }
   return `${h} ชม. ${m} นาที`;
 }
-
-/* ── Comma input for mob-exp ── */
-function getMobExp() {
-  const raw = document.getElementById('mob-exp').value.replace(/,/g, '');
-  return Math.max(1, parseInt(raw) || 1);
-}
-function onMobExpInput(el) {
-  const pos = el.selectionStart;
-  const oldVal = el.value;
-  const digits = oldVal.replace(/[^0-9]/g, '');
-  if (!digits) { el.value = ''; calc(); return; }
-  const formatted = parseInt(digits).toLocaleString();
-  el.value = formatted;
-  // adjust cursor for added/removed commas
-  const commasOld = (oldVal.slice(0, pos).match(/,/g) || []).length;
-  const commasNew = (formatted.match(/,/g) || []).length;
-  try { el.setSelectionRange(pos + commasNew - commasOld, pos + commasNew - commasOld); } catch(e) {}
-  calc();
-}
-
 /* ── Core calc ── */
 let tableMode = 'range';
 function setTableMode(m) {
@@ -967,7 +944,7 @@ function buildQR() {
     wrap.innerHTML = '';
     new QRCode(wrap, {
       text: 'https://peerapa13.github.io/iruna_class_skill/exp_calculator',
-      width: 80, height: 80,
+      width: 60, height: 60,
       colorDark: '#000000', colorLight: '#ffffff',
       correctLevel: QRCode.CorrectLevel.H
     });
