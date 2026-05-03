@@ -963,13 +963,32 @@ function buildQR() {
   return new Promise(resolve => {
     const wrap = document.getElementById('ec-qr');
     wrap.innerHTML = '';
-    new QRCode(wrap, {
+    const tempDiv = document.createElement('div');
+    tempDiv.style.cssText = 'position:absolute;visibility:hidden;top:0;left:0;';
+    document.body.appendChild(tempDiv);
+
+    new QRCode(tempDiv, {
       text: 'https://peerapa13.github.io/iruna_class_skill/exp_calculator',
       width: 80, height: 80,
       colorDark: '#000000', colorLight: '#ffffff',
       correctLevel: QRCode.CorrectLevel.H
     });
-    setTimeout(resolve, 400);
+
+    setTimeout(() => {
+      const qrCanvas = tempDiv.querySelector('canvas');
+      if (qrCanvas) {
+        const dataUrl = qrCanvas.toDataURL('image/png');
+        wrap.innerHTML = '';
+        const img = document.createElement('img');
+        img.src = dataUrl;
+        img.width = 80;
+        img.height = 80;
+        img.style.display = 'block';
+        wrap.appendChild(img);
+      }
+      document.body.removeChild(tempDiv);
+      resolve();
+    }, 300);
   });
 }
 
