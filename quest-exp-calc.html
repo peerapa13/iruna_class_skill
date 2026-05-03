@@ -356,7 +356,7 @@ function buildMsSelects(side) {
   const sel   = document.getElementById('sel-ms-' + side);
   sel.innerHTML = '';
   if (!ch) return;
-  ch.missions.forEach((ms, i) => sel.add(new Option(`M${ms.num} — ${ms.name}`, i)));
+  ch.missions.forEach((ms, i) => sel.add(new Option(`${ms.name}`, i)));
   if (side === 'to') sel.value = ch.missions.length - 1;
 }
 
