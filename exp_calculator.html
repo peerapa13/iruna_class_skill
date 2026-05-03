@@ -969,6 +969,7 @@ function buildQR() {
       colorDark: '#000000', colorLight: '#ffffff',
       correctLevel: QRCode.CorrectLevel.H
     });
+
     setTimeout(() => {
       const qrCanvas = wrap.querySelector('canvas');
       if (qrCanvas) {
@@ -976,20 +977,18 @@ function buildQR() {
         const img = new Image();
         img.width = 80; img.height = 80;
         img.style.display = 'block';
-        img.src = dataUrl;
-        wrap.innerHTML = '';
-        wrap.appendChild(img);
-      }
-      img.onload = () => {
+        
+        img.onload = () => {
           wrap.innerHTML = '';
           wrap.appendChild(img);
           resolve();
         };
+        img.src = dataUrl;
       } else {
         resolve();
       }
-    }, 300);
-  });
+    }, 300); 
+  }); +
 }
 
 function saveImage() {
