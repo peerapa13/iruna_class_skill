@@ -961,78 +961,83 @@ async function loadDataAndInit() {
 }
 
 /* ── Save Image ── */
-function buildQR() {
-  return new Promise(resolve => {
-    const wrap = document.getElementById('ec-qr');
-    wrap.innerHTML = '';
-    new QRCode(wrap, {
-      text: 'https://peerapa13.github.io/iruna_class_skill/exp_calculator',
-      width: 80, height: 80,
-      colorDark: '#000000', colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.H
-    });
-    setTimeout(() => {
-      const qrCanvas = wrap.querySelector('canvas');
-      if (qrCanvas) {
-        const dataUrl = qrCanvas.toDataURL('image/png');
-        const img = new Image();
-        img.width = 80; img.height = 80;
-        img.style.display = 'block';
-        img.src = dataUrl;
-        wrap.innerHTML = '';
-        wrap.appendChild(img);
-      }
-      resolve();
-    }, 150);
-  });
-}
-
 function saveImage() {
-  const btn = document.getElementById('btn-save-image');
-  btn.disabled = true;
-  btn.textContent = '⏳ กำลังสร้างภาพ…';
+  const btn = document.getElementById('btn-save-image');
+  btn.disabled = true;
+  const originalText = btn.innerHTML;
+  btn.innerHTML = 'กำลังประมวลผล...';
 
-  const cur  = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1));
-  const goal = Math.min(405, Math.max(cur + 1, parseInt(document.getElementById('goal-lv').value) || cur + 1));
-  const pct  = Math.min(99, Math.max(0, parseInt(document.getElementById('exp-pct').value) || 0));
+  // ดึงข้อมูลปัจจุบันไปใส่ใน Export Card ที่ซ่อนอยู่
+  document.getElementById('ec-cur-lv').textContent = document.getElementById('cur-lv').value;
+  document.getElementById('ec-goal-lv').textContent = document.getElementById('goal-lv').value;
+  
+  const pct = document.getElementById('exp-pct').value;
+  document.getElementById('ec-pbar').style.width = pct + '%';
+  document.getElementById('ec-pct-txt').textContent = pct + '%';
 
-  document.getElementById('ec-cur-lv').textContent     = cur;
-  document.getElementById('ec-goal-lv').textContent    = goal;
-  document.getElementById('ec-pct-txt').textContent    = pct + '%';
-  document.getElementById('ec-pbar').style.width       = pct + '%';
-  document.getElementById('ec-exp-needed').textContent = document.getElementById('exp-needed').textContent;
-  document.getElementById('ec-mob-exp').textContent    = document.getElementById('mob-exp').value || '0';
-  document.getElementById('ec-kill-time').textContent  = document.getElementById('kill-time').value + ' วิ';
-  document.getElementById('ec-kills').textContent      = document.getElementById('kills').textContent;
-  document.getElementById('ec-farm-time').textContent  = document.getElementById('farm-time').textContent;
-  document.getElementById('ec-exp-hr').textContent     = document.getElementById('exp-hr').textContent;
+  document.getElementById('ec-exp-needed').textContent = document.getElementById('exp-needed').textContent;
+  document.getElementById('ec-mob-exp').textContent = document.getElementById('mob-exp').value || '0';
+  document.getElementById('ec-kill-time').textContent = document.getElementById('kill-time').value;
+  document.getElementById('ec-kills').textContent = document.getElementById('kills').textContent;
+  document.getElementById('ec-exp-hr').textContent = document.getElementById('exp-hr').textContent;
+  document.getElementById('ec-farm-time').textContent = document.getElementById('farm-time').textContent;
 
-  const now = new Date();
-  document.getElementById('ec-ts').textContent =
-    now.toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' }) +
-    '  ' + now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+  const now = new Date();
+  document.getElementById('ec-ts').textContent = now.toLocaleString('th-TH');
 
-  const restoreBtn = () => {
-    btn.disabled = false;
-    btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> บันทึกผลลัพธ์เป็นรูปภาพ';
-  };
+  // สร้าง QR Code 
+  const qrContainer = document.getElementById('ec-qr');
+  qrContainer.innerHTML = '';
+  new QRCode(qrContainer, {
+    text: "https://peerapa13.github.io/iruna_class_skill/exp_calculator",
+    width: 48,
+    height: 48,
+    colorDark : "#0a0c10",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.L
+  });
 
-  buildQR().then(() => {
-    return html2canvas(document.getElementById('export-card'), {
-      backgroundColor: '#0a0c10',
-      scale: 2,
-      useCORS: true,
-      allowTaint: true
-    });
-  }).then(canvas => {
-    const link = document.createElement('a');
-    link.download = `Iruna_EXP_LV${cur}_TO_${goal}.png`;
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-  }).catch(err => {
-    console.error('Save error:', err);
-    alert('ไม่สามารถบันทึกรูปภาพได้: ' + err.message);
-  }).finally(restoreBtn);
+  const exportCard = document.getElementById('export-card');
+  exportCard.style.top = '0px';
+  exportCard.style.left = '0px';
+  exportCard.style.zIndex = '-1000';
+
+  // ฟังก์ชันสำหรับเรียก html2canvas หลังจากจัดเตรียม DOM เสร็จสมบูรณ์
+  const doCapture = () => {
+    html2canvas(exportCard, { backgroundColor: '#0a0c10', scale: 2 }).then(canvas => {
+      const link = document.createElement('a');
+      link.download = `Iruna_EXP_Calc_${now.getTime()}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+
+      // คืนค่าปุ่มและซ่อน Card กลับไป
+      exportCard.style.top = '-9999px';
+      exportCard.style.left = '-9999px';
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+    });
+  };
+
+  // ฟังก์ชันเช็คการโหลดของ QR Code (Polling)
+  const checkQRAndCapture = () => {
+    const qrImg = qrContainer.querySelector('img');
+    
+    // ตรวจสอบว่ามีแท็ก img และ qrcodejs ได้แปลง canvas เป็น src (base64) 
+    if (qrImg && qrImg.getAttribute('src')) {
+      if (qrImg.complete) {
+        doCapture(); // หากรูปโหลดเสร็จแล้ว แคปได้เลย
+      } else {
+        qrImg.onload = doCapture; // กำลังโหลด ให้รอ onload
+        qrImg.onerror = doCapture; // Fallback เกันปุ่มค้าง
+      }
+    } else {
+      // ถ้ายังไม่มี src ไลบรารียังเจนไม่เสร็จ ให้วนกลับมาเช็คใหม่ในอีก 50ms
+      setTimeout(checkQRAndCapture, 50);
+    }
+  };
+
+  // เริ่มการตรวจสอบ
+  setTimeout(checkQRAndCapture, 50); 
 }
 
 loadDataAndInit();
