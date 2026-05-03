@@ -667,6 +667,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <div class="input-grid" style="margin-bottom:14px">
       <div class="field">
         <label>EXP ต่อ kill</label>
+        <!-- ใช้ text input เพื่อแสดง comma -->
         <input type="text" id="mob-exp" class="comma-input" inputmode="numeric"
                value="0" oninput="onMobExpInput(this)">
       </div>
@@ -734,6 +735,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
 
 <!-- Export card  -->
 <div id="export-card">
+  <!-- Header -->
   <div style="text-align:center;border-bottom:1px solid #c9a84c;padding-bottom:14px;margin-bottom:20px;">
     <div style="font-family:'Cinzel',serif;color:#c9a84c;font-size:20px;letter-spacing:2px;font-weight:700;">✦ IRUNA ONLINE TH ✦</div>
     <div style="font-size:12px;color:#8a8fa8;letter-spacing:1px;margin-top:4px;">EXP CALCULATOR RESULT</div>
@@ -831,7 +833,6 @@ function onMobExpInput(el) {
   if (!digits) { el.value = ''; calc(); return; }
   const formatted = parseInt(digits).toLocaleString();
   el.value = formatted;
-  // adjust cursor for added/removed commas
   const commasOld = (oldVal.slice(0, pos).match(/,/g) || []).length;
   const commasNew = (formatted.match(/,/g) || []).length;
   try { el.setSelectionRange(pos + commasNew - commasOld, pos + commasNew - commasOld); } catch(e) {}
@@ -968,8 +969,6 @@ function buildQR() {
       colorDark: '#000000', colorLight: '#ffffff',
       correctLevel: QRCode.CorrectLevel.H
     });
-    // QRCode renders a <canvas> — html2canvas can't capture cross-origin canvas,
-    // so convert it to <img> via dataURL first
     setTimeout(() => {
       const qrCanvas = wrap.querySelector('canvas');
       if (qrCanvas) {
