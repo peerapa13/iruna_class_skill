@@ -570,7 +570,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <div class="input-grid">
       <div class="field">
         <label>เลเวลปัจจุบัน</label>
-        <input type="number" id="cur-lv" min="1" max="404" value="1" oninput="calc()">
+        <input type="number" id="cur-lv" min="1" max="404" value="15" oninput="calc()">
       </div>
       <div class="field">
         <label>เลเวลเป้าหมาย</label>
@@ -648,11 +648,11 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <div class="input-grid" style="margin-bottom:14px">
       <div class="field">
         <label>EXP ต่อ kill</label>
-        <input type="number" id="mob-exp" min="1" value="50000" oninput="calc()">
+        <input type="number" id="mob-exp" min="1" value="1" oninput="calc()">
       </div>
       <div class="field">
         <label>วินาที / kill</label>
-        <input type="number" id="kill-time" min="1" value="10" oninput="calc()">
+        <input type="number" id="kill-time" min="1" value="1" oninput="calc()">
       </div>
     </div>
     <div class="farm-grid">
@@ -1014,7 +1014,7 @@ if (qrDiv) {
       backgroundColor: '#0a0c10'
     });
     const link = document.createElement('a');
-    link.download = `iruna-exp-lv${cur}.png`;
+    link.download = `iruna-exp-lv${cur}tolv${goal}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
   } catch (e) { 
