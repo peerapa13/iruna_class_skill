@@ -816,9 +816,9 @@ function fmt(n) { return Math.round(n).toLocaleString(); }
 function fmtTime(sec) {
   if (!isFinite(sec) || sec <= 0) return '—';
   const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60);
-  if (h > 8760) return `~${Math.round(h/8760)} ปี`;
-  if (h > 720)  return `~${Math.round(h/720)} เดือน`;
-  if (h > 24)   return `~${Math.round(h/24)} วัน ${m} ชม.`;
+  if (h >= 8760) return `~${Math.round(h/8760)} ปี`;
+  if (h >= 720)  return `~${Math.round(h/720)} เดือน`;
+  if (h >= 24)   { const d = Math.floor(h/24), hr = h % 24; return `${d} วัน ${hr} ชม. ${m} นาที`; }
   return `${h} ชม. ${m} นาที`;
 }
 
