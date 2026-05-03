@@ -795,9 +795,9 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
   <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #2a3045;padding-top:14px;">
     <div>
       <div style="font-size:10px;color:#555b72;margin-bottom:3px;" id="ec-ts">—</div>
+      <div style="font-size:10px;color:#555b72;">peerapa13.github.io/iruna_class_skill/exp_calculator</div>
     </div>
     <div style="text-align:center;">
-      <!-- QR จะถูกใส่เป็น <img> จาก dataURL ที่เก็บไว้ -->
       <div id="ec-qr" style="background:#fff;padding:4px;border-radius:4px;display:inline-block;width:88px;height:88px;"></div>
       <div style="font-size:9px;color:#555b72;margin-top:3px;">สแกนเพื่อเข้าเว็บ</div>
     </div>
@@ -807,7 +807,6 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
 <script>
 let RAW = {};
 
-/* ── QR DataURL — generate ครั้งเดียวตอนโหลดหน้า แล้วเก็บไว้ ── */
 let _qrDataUrl = null;
 
 function initQR() {
@@ -832,7 +831,7 @@ function initQR() {
       }
       document.body.removeChild(tempDiv);
       resolve();
-    }, 1000);
+    }, 300);
   });
 }
 
@@ -1019,7 +1018,6 @@ function saveImage() {
     btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> บันทึกผลลัพธ์เป็นรูปภาพ';
   };
 
-  // รอให้ img โหลดเสร็จก่อน capture (100ms พอเพราะเป็น dataURL ไม่ต้องโหลดจาก network)
   setTimeout(() => {
     html2canvas(document.getElementById('export-card'), {
       backgroundColor: '#0a0c10',
@@ -1042,7 +1040,7 @@ function saveImage() {
       console.error('Save error:', err);
       alert('ไม่สามารถบันทึกรูปภาพได้: ' + err.message);
     }).finally(restoreBtn);
-  }, 100);
+  }, 300);
 }
 
 /* ── Load EXP data + init QR ── */
