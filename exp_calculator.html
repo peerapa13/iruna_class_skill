@@ -194,7 +194,6 @@ body::before {
 .field input[type=number]::-webkit-inner-spin-button,
 .field input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 
-/* comma-formatted text input — same look as number input */
 .field input.comma-input {
   width: 100%;
   background: var(--bg-card);
@@ -477,7 +476,6 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
 .hint-icon { color: var(--gold); font-size: 15px; flex-shrink: 0; margin-top: 1px; }
 .hint strong { color: var(--gold-light); font-weight: 600; }
 
-/* ── Save Button ── */
 .save-btn-wrap {
   display: flex;
   justify-content: center;
@@ -504,7 +502,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
 .save-btn:active { transform: scale(0.97); }
 .save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* ── Export card (off-screen, for html2canvas) ── */
+/* Export card (off-screen) */
 #export-card {
   position: fixed;
   top: -9999px; left: -9999px;
@@ -667,7 +665,6 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <div class="input-grid" style="margin-bottom:14px">
       <div class="field">
         <label>EXP ต่อ kill</label>
-        <!-- ใช้ text input เพื่อแสดง comma -->
         <input type="text" id="mob-exp" class="comma-input" inputmode="numeric"
                value="0" oninput="onMobExpInput(this)">
       </div>
@@ -692,7 +689,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     </div>
   </div>
 
-  <!-- ── Save Result Button ── -->
+  <!-- Save Result Button -->
   <div class="save-btn-wrap">
     <button class="save-btn" id="btn-save-image" onclick="saveImage()">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -733,7 +730,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
   </footer>
 </div>
 
-<!-- Export card  -->
+<!-- Export card (off-screen, for html2canvas) -->
 <div id="export-card">
   <!-- Header -->
   <div style="text-align:center;border-bottom:1px solid #c9a84c;padding-bottom:14px;margin-bottom:20px;">
@@ -746,7 +743,6 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <div style="text-align:center;flex:1;">
       <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลปัจจุบัน</div>
       <div style="font-family:'Cinzel',serif;font-size:30px;color:#2dd4a0;font-weight:700;line-height:1;">Lv <span id="ec-cur-lv">—</span></div>
-      <!-- progress bar -->
       <div style="margin-top:8px;">
         <div style="font-size:10px;color:#555b72;margin-bottom:4px;">% EXP in level</div>
         <div style="height:6px;background:#161a22;border:1px solid #2a3045;border-radius:3px;overflow:hidden;">
@@ -801,7 +797,8 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
       <div style="font-size:10px;color:#555b72;margin-bottom:3px;" id="ec-ts">—</div>
     </div>
     <div style="text-align:center;">
-      <div id="ec-qr" style="background:#fff;padding:4px;border-radius:4px;display:inline-block;"></div>
+      <!-- QR จะถูกใส่เป็น <img> จาก dataURL ที่เก็บไว้ -->
+      <div id="ec-qr" style="background:#fff;padding:4px;border-radius:4px;display:inline-block;width:88px;height:88px;"></div>
       <div style="font-size:9px;color:#555b72;margin-top:3px;">สแกนเพื่อเข้าเว็บ</div>
     </div>
   </div>
@@ -809,6 +806,48 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
 
 <script>
 let RAW = {};
+
+/* ── QR DataURL — generate ครั้งเดียวตอนโหลดหน้า แล้วเก็บไว้ ── */
+let _qrDataUrl = null;
+
+function initQR() {
+  return new Promise(resolve => {
+    const tempDiv = document.createElement('div');
+    tempDiv.style.cssText = 'position:fixed;top:-9999px;left:-9999px;visibility:hidden;';
+    document.body.appendChild(tempDiv);
+
+    new QRCode(tempDiv, {
+      text: 'https://peerapa13.github.io/iruna_class_skill/exp_calculator',
+      width: 80,
+      height: 80,
+      colorDark: '#000000',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    setTimeout(() => {
+      const qrCanvas = tempDiv.querySelector('canvas');
+      if (qrCanvas) {
+        _qrDataUrl = qrCanvas.toDataURL('image/png');
+      }
+      document.body.removeChild(tempDiv);
+      resolve();
+    }, 500);
+  });
+}
+
+function injectQRToExportCard() {
+  const wrap = document.getElementById('ec-qr');
+  wrap.innerHTML = '';
+  if (_qrDataUrl) {
+    const img = new Image();
+    img.src = _qrDataUrl;
+    img.width = 80;
+    img.height = 80;
+    img.style.display = 'block';
+    wrap.appendChild(img);
+  }
+}
 
 /* ── Helpers ── */
 function fmt(n) { return Math.round(n).toLocaleString(); }
@@ -879,9 +918,9 @@ function calc() {
 
   const kills = Math.ceil(expNeeded / mobExp);
   const sec   = kills * killTime;
-  document.getElementById('kills').textContent    = fmt(kills);
+  document.getElementById('kills').textContent     = fmt(kills);
   document.getElementById('farm-time').textContent = fmtTime(sec);
-  document.getElementById('exp-hr').textContent   = fmt(Math.round(mobExp * (3600 / killTime)));
+  document.getElementById('exp-hr').textContent    = fmt(Math.round(mobExp * (3600 / killTime)));
 
   renderTable(cur, goal);
 }
@@ -946,83 +985,7 @@ function applyLookup() {
   document.getElementById('cur-lv').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-/* ── Pre-build QR on page load ── */
-function initQR() {
-  const wrap = document.getElementById('ec-qr');
-  wrap.innerHTML = '';
-  const tempDiv = document.createElement('div');
-  tempDiv.style.cssText = 'position:absolute;visibility:hidden;top:0;left:0;';
-  document.body.appendChild(tempDiv);
-
-  new QRCode(tempDiv, {
-    text: 'https://peerapa13.github.io/iruna_class_skill/exp_calculator',
-    width: 80, height: 80,
-    colorDark: '#000000', colorLight: '#ffffff',
-    correctLevel: QRCode.CorrectLevel.H
-  });
-
-  setTimeout(() => {
-    const qrCanvas = tempDiv.querySelector('canvas');
-    if (qrCanvas) {
-      const img = document.createElement('img');
-      img.src = qrCanvas.toDataURL('image/png');
-      img.width = 80;
-      img.height = 80;
-      img.style.display = 'block';
-      wrap.innerHTML = '';
-      wrap.appendChild(img);
-    }
-    document.body.removeChild(tempDiv);
-  }, 300);
-}
-
-/* ── Load data ── */
-async function loadDataAndInit() {
-  try {
-    const response = await fetch('data/EXP/EXP_per_Level.json');
-    if (!response.ok) throw new Error('Network response was not ok');
-    RAW = await response.json();
-    calc();
-  } catch (error) {
-    console.error('Failed to load EXP data:', error);
-  }
-  initQR();
-}
-
 /* ── Save Image ── */
-function buildQR() {
-  return new Promise(resolve => {
-    const wrap = document.getElementById('ec-qr');
-    wrap.innerHTML = '';
-    const tempDiv = document.createElement('div');
-    tempDiv.style.cssText = 'position:absolute;visibility:hidden;top:0;left:0;';
-    document.body.appendChild(tempDiv);
-
-    new QRCode(tempDiv, {
-      text: 'https://peerapa13.github.io/iruna_class_skill/exp_calculator',
-      width: 80, height: 80,
-      colorDark: '#000000', colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.H
-    });
-
-    setTimeout(() => {
-      const qrCanvas = tempDiv.querySelector('canvas');
-      if (qrCanvas) {
-        const dataUrl = qrCanvas.toDataURL('image/png');
-        wrap.innerHTML = '';
-        const img = document.createElement('img');
-        img.src = dataUrl;
-        img.width = 80;
-        img.height = 80;
-        img.style.display = 'block';
-        wrap.appendChild(img);
-      }
-      document.body.removeChild(tempDiv);
-      resolve();
-    }, 300);
-  });
-}
-
 function saveImage() {
   const btn = document.getElementById('btn-save-image');
   btn.disabled = true;
@@ -1048,31 +1011,52 @@ function saveImage() {
     now.toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' }) +
     '  ' + now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
 
+
+  injectQRToExportCard();
+
   const restoreBtn = () => {
     btn.disabled = false;
     btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> บันทึกผลลัพธ์เป็นรูปภาพ';
   };
-  html2canvas(document.getElementById('export-card'), {
-    backgroundColor: '#0a0c10',
-    scale: 2,
-    useCORS: true,
-    allowTaint: true,
-    logging: false,
-    onclone: (doc) => {
-      const card = doc.getElementById('export-card');
-      card.style.position = 'relative';
-      card.style.top = '0';
-      card.style.left = '0';
-    }
-  }).then(canvas => {
-    const link = document.createElement('a');
-    link.download = `Iruna_EXP_LV${cur}_TO_${goal}.png`;
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-  }).catch(err => {
-    console.error('Save error:', err);
-    alert('ไม่สามารถบันทึกรูปภาพได้: ' + err.message);
-  }).finally(restoreBtn);
+
+  // รอให้ img โหลดเสร็จก่อน capture (100ms พอเพราะเป็น dataURL ไม่ต้องโหลดจาก network)
+  setTimeout(() => {
+    html2canvas(document.getElementById('export-card'), {
+      backgroundColor: '#0a0c10',
+      scale: 2,
+      useCORS: true,
+      allowTaint: true,
+      logging: false,
+      onclone: (doc) => {
+        const card = doc.getElementById('export-card');
+        card.style.position = 'relative';
+        card.style.top = '0';
+        card.style.left = '0';
+      }
+    }).then(canvas => {
+      const link = document.createElement('a');
+      link.download = `Iruna_EXP_LV${cur}_TO_${goal}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }).catch(err => {
+      console.error('Save error:', err);
+      alert('ไม่สามารถบันทึกรูปภาพได้: ' + err.message);
+    }).finally(restoreBtn);
+  }, 100);
+}
+
+/* ── Load EXP data + init QR ── */
+async function loadDataAndInit() {
+  await initQR();
+
+  try {
+    const response = await fetch('data/EXP/EXP_per_Level.json');
+    if (!response.ok) throw new Error('Network response was not ok');
+    RAW = await response.json();
+    calc();
+  } catch (error) {
+    console.error('Failed to load EXP data:', error);
+  }
 }
 
 loadDataAndInit();
