@@ -194,25 +194,6 @@ body::before {
 .field input[type=number]::-webkit-inner-spin-button,
 .field input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 
-/* comma-formatted text input — same look as number input */
-.field input.comma-input {
-  width: 100%;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 9px 12px;
-  font-family: 'Sarabun', sans-serif;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text-pri);
-  outline: none;
-  transition: border-color .2s, box-shadow .2s;
-}
-.field input.comma-input:focus {
-  border-color: var(--gold-dim);
-  box-shadow: 0 0 0 2px rgba(201,168,76,0.1);
-}
-
 .quick-row {
   display: flex;
   flex-wrap: wrap;
@@ -667,9 +648,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <div class="input-grid" style="margin-bottom:14px">
       <div class="field">
         <label>EXP ต่อ kill</label>
-        <!-- ใช้ text input เพื่อแสดง comma -->
-        <input type="text" id="mob-exp" class="comma-input" inputmode="numeric"
-               value="0" oninput="onMobExpInput(this)">
+        <input type="number" id="mob-exp" min="1" value="50000" oninput="calc()">
       </div>
       <div class="field">
         <label>วินาที / kill</label>
@@ -813,6 +792,7 @@ let RAW = {};
 
 /* ── Helpers ── */
 function fmt(n) { return Math.round(n).toLocaleString(); }
+
 function fmtTime(sec) {
   if (!isFinite(sec) || sec <= 0) return '—';
   const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60);
@@ -822,26 +802,40 @@ function fmtTime(sec) {
   return `${h} ชม. ${m} นาที`;
 }
 
-/* ── Comma input for mob-exp ── */
-function getMobExp() {
-  const raw = document.getElementById('mob-exp').value.replace(/,/g, '');
-  return Math.max(1, parseInt(raw) || 1);
+/* ── Helper สำหรับดึงค่าตัวเลขจาก Input ที่มีลูกน้ำ ── */
+function getRawValue(id) {
+  const val = document.getElementById(id).value.replace(/,/g, '');
+  return parseInt(val) || 0;
 }
+
+/* ── ระบบจัดการ Comma (Input) ── */
 function onMobExpInput(el) {
   const pos = el.selectionStart;
   const oldVal = el.value;
   const digits = oldVal.replace(/[^0-9]/g, '');
-  if (!digits) { el.value = ''; calc(); return; }
+  
+  if (!digits) { 
+    el.value = ''; 
+    if (el.id === 'lookup-exp') doLookup();
+    else calc(); 
+    return; 
+  }
+  
   const formatted = parseInt(digits).toLocaleString();
   el.value = formatted;
-  // adjust cursor for added/removed commas
+
+  // คำนวณตำแหน่ง Cursor ใหม่หลังจากเติมลูกน้ำ
   const commasOld = (oldVal.slice(0, pos).match(/,/g) || []).length;
-  const commasNew = (formatted.match(/,/g) || []).length;
-  try { el.setSelectionRange(pos + commasNew - commasOld, pos + commasNew - commasOld); } catch(e) {}
-  calc();
+  const commasNew = (formatted.slice(0, pos).match(/,/g) || []).length;
+  const delta = commasNew - commasOld;
+  
+  try { el.setSelectionRange(pos + delta, pos + delta); } catch(e) {}
+  
+  if (el.id === 'lookup-exp') doLookup();
+  else calc();
 }
 
-/* ── Core calc ── */
+/* ── Core Calculation ── */
 let tableMode = 'range';
 function setTableMode(m) {
   tableMode = m;
@@ -849,8 +843,10 @@ function setTableMode(m) {
   document.getElementById('tbtn-all').classList.toggle('active', m === 'all');
   renderTable();
 }
+
 function setPct(v) { document.getElementById('exp-pct').value = v; onSlider(); }
 function setGoal(v) { document.getElementById('goal-lv').value = v; calc(); }
+
 function onSlider() {
   const p = parseInt(document.getElementById('exp-pct').value) || 0;
   document.getElementById('pct-label').textContent = p + '%';
@@ -863,10 +859,8 @@ function calc() {
   const cur      = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1));
   const goal     = Math.min(405, Math.max(cur + 1, parseInt(document.getElementById('goal-lv').value) || cur + 1));
   const pct      = Math.min(99, Math.max(0, parseInt(document.getElementById('exp-pct').value) || 0));
-  const mobExp   = getMobExp();
+  const mobExp   = Math.max(1, getRawValue('mob-exp'));
   const killTime = Math.max(1, parseInt(document.getElementById('kill-time').value) || 1);
-
-  document.getElementById('pct-label').textContent = pct + '%';
 
   const curD  = RAW[String(cur)]  || { exp: 0, cum: 0 };
   const goalD = RAW[String(goal)] || { exp: 0, cum: 0 };
@@ -881,21 +875,24 @@ function calc() {
 
   const kills = Math.ceil(expNeeded / mobExp);
   const sec   = kills * killTime;
-  document.getElementById('kills').textContent    = fmt(kills);
+  document.getElementById('kills').textContent     = fmt(kills);
   document.getElementById('farm-time').textContent = fmtTime(sec);
-  document.getElementById('exp-hr').textContent   = fmt(Math.round(mobExp * (3600 / killTime)));
+  document.getElementById('exp-hr').textContent    = fmt(Math.round(mobExp * (3600 / killTime)));
 
-  renderTable(cur, goal);
+  renderTable();
 }
 
 function renderTable() {
   const curLv  = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1));
   const goalLv = Math.min(405, Math.max(curLv + 1, parseInt(document.getElementById('goal-lv').value) || curLv + 1));
   const tbody  = document.getElementById('table-body');
+  if(!tbody) return;
+
   let html = '';
   const keys = tableMode === 'range'
     ? Array.from({ length: goalLv - curLv + 1 }, (_, i) => curLv + i)
     : Array.from({ length: 405 }, (_, i) => i + 1);
+
   for (const lv of keys) {
     const d = RAW[String(lv)]; if (!d) continue;
     const isCur = lv === curLv, isGoal = lv === goalLv;
@@ -907,6 +904,7 @@ function renderTable() {
   tbody.innerHTML = html;
 }
 
+/* ── Lookup System ── */
 function toggleLookup() {
   const p   = document.getElementById('lookup-panel');
   const btn = document.getElementById('lookup-toggle-btn');
@@ -915,40 +913,54 @@ function toggleLookup() {
   btn.classList.toggle('active', open);
   if (open) document.getElementById('lookup-exp').focus();
 }
+
 function doLookup() {
   if (Object.keys(RAW).length === 0) return;
-  const expInput = parseInt(document.getElementById('lookup-exp').value) || 0;
-  if (expInput <= 0) { document.getElementById('lookup-result').style.display = 'none'; return; }
+  const expInput = getRawValue('lookup-exp');
+  
+  if (expInput <= 0) { 
+    document.getElementById('lookup-result').style.display = 'none'; 
+    return; 
+  }
+
   let foundLv = 1;
   for (let lv = 1; lv <= 404; lv++) {
     const next = RAW[String(lv + 1)];
     if (!next) { foundLv = lv; break; }
     if (expInput >= RAW[String(lv)].cum && expInput < next.cum) { foundLv = lv; break; }
   }
-  if (expInput >= RAW['405'].cum) foundLv = 405;
+  if (expInput >= RAW['405']?.cum) foundLv = 405;
+
   const d = RAW[String(foundLv)];
   const expIntoLv = expInput - d.cum;
   const pct = d.exp > 0 ? Math.min(99, Math.floor(expIntoLv / d.exp * 100)) : 0;
+
   document.getElementById('lk-level').textContent  = foundLv;
   document.getElementById('lk-pct').textContent    = pct + '%';
   document.getElementById('lk-exp-lv').textContent = fmt(expIntoLv) + ' / ' + fmt(d.exp);
   document.getElementById('lookup-result').style.display = 'block';
-  document.getElementById('lookup-panel').dataset.lv  = foundLv;
-  document.getElementById('lookup-panel').dataset.pct = pct;
+  
+  const panel = document.getElementById('lookup-panel');
+  panel.dataset.lv  = foundLv;
+  panel.dataset.pct = pct;
 }
+
 function applyLookup() {
-  const lv  = parseInt(document.getElementById('lookup-panel').dataset.lv)  || 1;
-  const pct = parseInt(document.getElementById('lookup-panel').dataset.pct) || 0;
+  const panel = document.getElementById('lookup-panel');
+  const lv  = parseInt(panel.dataset.lv)  || 1;
+  const pct = parseInt(panel.dataset.pct) || 0;
+  
   document.getElementById('cur-lv').value = lv;
   document.getElementById('exp-pct').value = pct;
   document.getElementById('pct-label').textContent = pct + '%';
+  
   calc();
-  document.getElementById('lookup-panel').style.display = 'none';
+  panel.style.display = 'none';
   document.getElementById('lookup-toggle-btn').classList.remove('active');
   document.getElementById('cur-lv').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-/* ── Load data ── */
+/* ── Load Data ── */
 async function loadDataAndInit() {
   try {
     const response = await fetch('data/EXP/EXP_per_Level.json');
@@ -960,29 +972,18 @@ async function loadDataAndInit() {
   }
 }
 
-/* ── Save Image ── */
-let qrBuilt = false;
-function buildQR() {
-  if (qrBuilt) return;
-  document.getElementById('ec-qr').innerHTML = '';
-  new QRCode(document.getElementById('ec-qr'), {
-    text: 'https://peerapa13.github.io/iruna_class_skill/exp_calculator',
-    width: 72, height: 72,
-    colorDark: '#000000', colorLight: '#ffffff',
-    correctLevel: QRCode.CorrectLevel.H
-  });
-  qrBuilt = true;
-}
-
-function saveImage() {
+/* ── Save Image  ── */
+async function saveImage() {
   const btn = document.getElementById('btn-save-image');
+  if (!btn) return;
+  
   btn.disabled = true;
   btn.textContent = '⏳ กำลังสร้างภาพ…';
 
-  // populate export card
-  const cur      = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1));
-  const goal     = Math.min(405, Math.max(cur + 1, parseInt(document.getElementById('goal-lv').value) || cur + 1));
-  const pct      = Math.min(99, Math.max(0, parseInt(document.getElementById('exp-pct').value) || 0));
+  // เตรียมข้อมูลใน Export Card
+  const cur  = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1));
+  const goal = Math.min(405, Math.max(cur + 1, parseInt(document.getElementById('goal-lv').value) || cur + 1));
+  const pct  = Math.min(99, Math.max(0, parseInt(document.getElementById('exp-pct').value) || 0));
 
   document.getElementById('ec-cur-lv').textContent    = cur;
   document.getElementById('ec-goal-lv').textContent   = goal;
@@ -996,31 +997,35 @@ function saveImage() {
   document.getElementById('ec-exp-hr').textContent    = document.getElementById('exp-hr').textContent;
 
   const now = new Date();
-  document.getElementById('ec-ts').textContent =
-    now.toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' }) +
+  document.getElementById('ec-ts').textContent = 
+    now.toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' }) + 
     '  ' + now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
 
-  buildQR();
+  const qrDiv = document.getElementById('ec-qr');
+  if (qrDiv) {
+    qrDiv.innerHTML = "";
+    new QRCode(qrDiv, { text: window.location.href, width: 40, height: 40 });
+  }
 
-  setTimeout(() => {
-    html2canvas(document.getElementById('export-card'), {
-      backgroundColor: '#0a0c10',
+  try {
+    const canvas = await html2canvas(document.getElementById('export-card'), { 
       scale: 2,
-      useCORS: true
-    }).then(canvas => {
-      const link = document.createElement('a');
-      link.download = `Iruna_EXP_LV${cur}_TO_${goal}.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    }).catch(err => {
-      console.error('Save error:', err);
-      alert('ไม่สามารถบันทึกรูปภาพได้: ' + err.message);
-    }).finally(() => {
-      btn.disabled = false;
-      btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> บันทึกผลลัพธ์เป็นรูปภาพ';
+      useCORS: true,
+      backgroundColor: '#0a0c10'
     });
-  }, 300);
+    const link = document.createElement('a');
+    link.download = `iruna-exp-lv${cur}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  } catch (e) { 
+    console.error(e);
+    alert('เกิดข้อผิดพลาดในการบันทึกรูป'); 
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '📸 บันทึกเป็นรูปภาพ';
+  }
 }
+
 
 loadDataAndInit();
 </script>
