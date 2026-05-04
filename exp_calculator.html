@@ -825,24 +825,28 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <div style="font-family:'Cinzel',serif;color:#c9a84c;font-size:20px;letter-spacing:2px;font-weight:700;">✦ IRUNA ONLINE TH ✦</div>
     <div style="font-size:12px;color:#8a8fa8;letter-spacing:1px;margin-top:4px;">MODE 3 · เลเวลจากเควส</div>
   </div>
+
   <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(61,80,128,0.12);border:1px solid #2a3045;border-radius:8px;padding:16px 20px;margin-bottom:16px;">
     <div style="text-align:center;flex:1;">
       <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลปัจจุบัน</div>
       <div style="font-family:'Cinzel',serif;font-size:30px;color:#2dd4a0;font-weight:700;line-height:1;">Lv <span id="ec3-cur-lv">—</span></div>
+    </div>
+
+    <div style="font-size:22px;color:#c9a84c;padding:0 16px;">➜</div>
+
+    <div style="text-align:center;flex:1;">
+      <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลที่จะได้</div>
+      <div style="font-family:'Cinzel',serif;font-size:30px;color:#5b9cf6;font-weight:700;line-height:1;">Lv <span id="ec3-reach-lv">—</span></div>
+      
       <div style="margin-top:8px;">
-        <div style="font-size:10px;color:#555b72;margin-bottom:4px;">% EXP ในเลเวลนี้</div>
-        <div style="height:6px;background:#161a22;border:1px solid #2a3045;border-radius:3px;overflow:hidden;">
-          <div id="ec3-pbar" style="height:100%;background:linear-gradient(90deg,#1a7a5e,#2dd4a0);border-radius:3px;width:0%;"></div>
+        <div style="height:5px;background:#161a22;border:1px solid #2a3045;border-radius:3px;overflow:hidden;width:80px;margin:0 auto;">
+          <div id="ec3-pbar" style="height:100%; background:#5b9cf6; width:0%;"></div>
         </div>
-        <div id="ec3-pct-txt" style="font-family:'Cinzel',serif;font-size:13px;color:#2dd4a0;margin-top:3px;">0%</div>
+        <div id="ec3-pct-txt" style="font-family:'Cinzel',serif;font-size:13px;color:#5b9cf6;margin-top:3px;font-weight:600;">0%</div>
       </div>
     </div>
-    <div style="font-size:22px;color:#c9a84c;padding:0 16px;">➜</div>
-    <div style="text-align:center;flex:1;">
-      <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลเป้าหมาย</div>
-      <div style="font-family:'Cinzel',serif;font-size:30px;color:#5b9cf6;font-weight:700;line-height:1;">Lv <span id="ec3-reach-lv">—</span></div>
-    </div>
   </div>
+
   <div style="background:#161a22;border:1px solid #2a3045;border-radius:6px;padding:14px 16px;margin-bottom:12px;">
     <div style="font-size:10px;color:#555b72;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">ข้อมูลเควส</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;">
@@ -852,7 +856,8 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
       <div style="display:flex;justify-content:space-between;grid-column:1/-1;"><span style="font-size:12px;color:#8a8fa8;">EXP สะสมหลังจบ</span><span id="ec3-new-cum" style="font-size:12px;color:#5b9cf6;font-weight:700;">—</span></div>
     </div>
   </div>
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #2a3045;padding-top:14px;">
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #2a3045;padding-top:14px;">
     <div>
       <div style="font-size:10px;color:#555b72;margin-bottom:3px;" id="ec3-ts">—</div>
       <div style="font-size:10px;color:#555b72;">peerapa13.github.io/iruna_class_skill/exp_calculator</div>
