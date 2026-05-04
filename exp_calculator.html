@@ -1097,20 +1097,22 @@ function buildEpSelects() {
 }
 function buildChSelects(side) {
   const epNum = parseInt(document.getElementById('sel-ep-' + side).value);
-  const ep    = EPISODES.find(e => e.ep === epNum);
-  const sel   = document.getElementById('sel-ch-' + side);
+  const ep = EPISODES.find(e => e.ep === epNum);
+  const sel = document.getElementById('sel-ch-' + side);
   sel.innerHTML = '';
   if (!ep) return;
-  ep.chapters.forEach(ch => sel.add(new Option(ch.name, ch.chapter)));
-  if (side === 'to') sel.value = ep.chapters[ep.chapters.length - 1].chapter;
+  ep.chapters.forEach((ch, i) => {
+    sel.add(new Option(ch.name, i)); 
+  });
+  if (side === 'to') sel.value = ep.chapters.length - 1;
   buildMsSelects(side);
 }
 function buildMsSelects(side) {
   const epNum = parseInt(document.getElementById('sel-ep-' + side).value);
-  const chNum = parseInt(document.getElementById('sel-ch-' + side).value);
-  const ep    = EPISODES.find(e => e.ep === epNum);
-  const ch    = ep ? ep.chapters.find(c => c.chapter === chNum) : null;
-  const sel   = document.getElementById('sel-ms-' + side);
+  const chIdx = parseInt(document.getElementById('sel-ch-' + side).value); // รับเป็น Index
+  const ep = EPISODES.find(e => e.ep === epNum);
+  const ch = (ep && ep.chapters) ? ep.chapters[chIdx] : null; 
+  const sel = document.getElementById('sel-ms-' + side);
   sel.innerHTML = '';
   if (!ch) return;
   ch.missions.forEach((ms, i) => sel.add(new Option(ms.name, i)));
@@ -1118,10 +1120,10 @@ function buildMsSelects(side) {
 }
 function onEpChange(side) { buildChSelects(side); calcMode3(); }
 function onChChange(side) { buildMsSelects(side); calcMode3(); }
-function getMsNum(epNum, chNum, msIdx) {
+function getMsNum(epNum, chIdx, msIdx) { 
   const ep = EPISODES.find(e => e.ep === epNum);
-  if (!ep) return null;
-  const ch = ep.chapters.find(c => c.chapter === chNum);
+  if (!ep || !ep.chapters[chIdx]) return null;
+  const ch = ep.chapters[chIdx];
   if (!ch || !ch.missions[msIdx]) return null;
   return ch.missions[msIdx].num;
 }
