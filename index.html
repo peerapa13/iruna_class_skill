@@ -65,6 +65,24 @@
     margin: 0 auto;
     padding: 0 24px 80px;
   }
+    .btn-secondary {
+    padding: 12px 28px;
+    background: rgba(63,200,249,0.1);
+    border: 1px solid rgba(63,200,249,0.4);
+    color: var(--accent);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s;
+    font-family: 'Noto Sans Thai', sans-serif;
+  }
+ 
+  .btn-secondary:hover {
+    background: rgba(63,200,249,0.2);
+    box-shadow: 0 0 20px rgba(63,200,249,0.2);
+    transform: translateY(-2px);
+  }
 
   .sidebar {
     display: flex;
@@ -403,8 +421,8 @@
  
 <div class="main-wrapper">
   <nav class="sidebar">
-  <div class="group-header" onclick="location.href='exp_calculator'; showSpinner();">📊 คำนวนค่าประสบการณ์ </div>
-  <div class="group-header" onclick="location.href='spinner'; showSpinner();">🎡 สุ่มอาชีพ </div>
+  <div class="btn-secondary" onclick="location.href='exp_calculator'; showSpinner();">📊 คำนวนEXP </div>
+  <div class="btn-secondary" onclick="location.href='spinner'; showSpinner();">🎡 สุ่มอาชีพ </div>
   <h2>เส้นทางอาชีพ</h2>
   <div class="job-group">
     <div class="group-header" onclick="toggleGroup(this)">⚔️ นักรบ <span class="arrow">▼</span></div>
