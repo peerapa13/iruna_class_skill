@@ -791,8 +791,15 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     </div>
     <div style="font-size:22px;color:#c9a84c;padding:0 16px;">➜</div>
     <div style="text-align:center;flex:1;">
-      <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลเป้าหมาย</div>
+      <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลที่จะถึง</div>
       <div style="font-family:'Cinzel',serif;font-size:30px;color:#5b9cf6;font-weight:700;line-height:1;">Lv <span id="ec2-reach-lv">—</span></div>
+      <div style="margin-top:8px;">
+        <div style="font-size:10px;color:#555b72;margin-bottom:4px;">% EXP ในเลเวลนี้</div>
+        <div style="height:6px;background:#161a22;border:1px solid #2a3045;border-radius:3px;overflow:hidden;">
+          <div id="ec2-pbar-reach" style="height:100%;background:linear-gradient(90deg,#1a7a5e,#2dd4a0);border-radius:3px;width:0%;"></div>
+        </div>
+        <div id="ec2-pct-txt-reach" style="font-family:'Cinzel',serif;font-size:13px;color:#2dd4a0;margin-top:3px;">0%</div>
+      </div>
     </div>
   </div>
   <div style="background:#161a22;border:1px solid #2a3045;border-radius:6px;padding:14px 16px;margin-bottom:12px;">
@@ -1298,12 +1305,15 @@ async function saveImage() {
       const mobExp2  = Math.max(1, parseInt(document.getElementById('mob-exp-2').value) || 1);
       const boosted2 = Math.round(mobExp2 * (1 + bonus / 100));
       const reachLv  = document.getElementById('m2-reach-lv').textContent;
-      const reachPct = document.getElementById('m2-reach-pct').textContent.replace(/[^0-9]/g,'');
+      const reachPctText = document.getElementById('m2-reach-pct').textContent; 
+      const reachPct = reachPctText.split('%')[0].trim();
       const hours    = document.getElementById('farm-hours').value;
       document.getElementById('ec2-cur-lv').textContent          = cur;
       document.getElementById('ec2-reach-lv').textContent        = reachLv;
-      document.getElementById('ec2-pct-txt').textContent         = (reachPct || '0') + '%';
-      document.getElementById('ec2-pbar').style.width            = (reachPct || '0') + '%';
+      document.getElementById('ec2-pct-txt').textContent         = pct + '%';
+      document.getElementById('ec2-pbar').style.width            = pct + '%';  
+      document.getElementById('ec2-pct-txt-reach').textContent   = `${reachPct}% ในLv${reachLv}`;
+      document.getElementById('ec2-pbar-reach').style.width      = reachPct + '%'; 
       document.getElementById('ec2-farm-hours').textContent      = fmtTime(parseFloat(hours) * 3600);
       document.getElementById('ec2-bonus-total').textContent     = '+' + bonus + '%';
       document.getElementById('ec2-mob-exp').textContent         = fmt(mobExp2);
