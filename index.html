@@ -613,19 +613,19 @@ function toggleGroup(element) {
 //////////ฟั่งชั่นหน้าแรก///////////////
 const HOME_CONTENT = {
   upcoming: [
-    { title: "ระบบคำนวณ EXP ภารกิจ", desc: "รองรับการเลือกช่วง Episode2-6 และคำนวณเลเวลที่จะได้รับหลังจบเควส" },
-    { title: "ข้อมูลสกิลสายพาลาดิน", desc: "เพิ่มรายละเอียดและเลเวลของสกิลพาลาให้ครบถ้วน" }
+    { title: "ระบบคำนวณ EXP ภารกิจ", desc: "รองรับการเลือกช่วง Episode และคำนวณเลเวลที่จะได้รับหลังจบเควส" },
+    { title: "ข้อมูลสกิลสาย Bishop", desc: "เพิ่มรายละเอียดและเลเวลของสกิลสายซัพพอร์ตทั้งหมด" }
   ],
   recent: [
-    { date: "4 พ.ค. 2569", title: "เพิ่มข้อมูลEXPจากเควสEpisode1", desc: "อัปเดตข้อมูล EXPจากเควสสำหรับ Episode1 ทั้งหมด" },
-    { date: "4 พ.ค. 2569", title: "ปรับปรุงหน้าคำนวน EXP", desc: "เปลี่ยนธีมสีและรองรับการใช้งานบนมือถือดีขึ้น เพิ่มฟีเจอร์ใหม่ให้เลือกคำนวน3รููปแบบ" }
+    { date: "15 พ.ค. 2567", title: "เพิ่มข้อมูล Summoner", desc: "อัปเดตสกิลพื้นฐานและสกิลสายอาชีพขั้นสูงทั้งหมด" },
+    { date: "10 พ.ค. 2567", title: "ปรับปรุงหน้า UI", desc: "เปลี่ยนธีมสีและรองรับการใช้งานบนมือถือดีขึ้น" }
   ]
 };
 
 function renderHome() {
   const container = document.getElementById('job-content');
   
-  // HTML สำหรับหน้าแรก
+  // สร้าง HTML สำหรับหน้าหลัก
   let html = `
     <div class="home-container" style="padding: 20px; animation: fadeIn 0.5s ease-out;">
       <h1 style="color: var(--gold); margin-bottom: 24px; font-family: 'Cinzel', serif;">📜 สถานะการอัปเดต</h1>
@@ -675,6 +675,9 @@ function renderHome() {
         renderJob(jobId);
       });
     });
+ 
+    // แสดงตามค่าเริ่มต้น
+    renderJob('Summoner');
   });
 </script>
 
