@@ -110,7 +110,7 @@
           ]
         },
         {
-          "chapter": 1,
+          "chapter": 12,
           "name": "บทที่ 1 ประเทศของดีล",
           "missions": [
             { "num": 39, "name": "The Mystery Deepens", "exp": 320000 },
@@ -119,7 +119,7 @@
           ]
         },
         {
-          "chapter": 2,
+          "chapter": 13,
           "name": "บทที่ 2 เทพีผู้อยู่ฝั่งตรงข้าม",
           "missions": [
             { "num": 42, "name": "Slebinian Shadow", "exp": 1200000 },
@@ -128,7 +128,7 @@
           ]
         },
         {
-          "chapter": 3,
+          "chapter": 14,
           "name": "บทที่ 3 ชนวนของแผนการลับ",
           "missions": [
             { "num": 45, "name": "Chain Crisis", "exp": 2860000 },
@@ -140,7 +140,7 @@
           ]
         },
         {
-          "chapter": 1,
+          "chapter": 15,
           "name": "บทที่ 1 ประเทศของเอลฟ์",
           "missions": [
             { "num": 51, "name": "Peculiar Place", "exp": 4900000 },
@@ -149,7 +149,7 @@
           ]
         },
         {
-          "chapter": 2,
+          "chapter": 16,
           "name": "บทที่ 2 เมืองหลวงแห่งความวุ่นวาย",
           "missions": [
             { "num": 54, "name": "Treetop Metropolis", "exp": 4500000 },
@@ -158,7 +158,7 @@
           ]
         },
         {
-          "chapter": 3,
+          "chapter": 17,
           "name": "บทที่ 3 ความผิดปกติของต้นไม้ใหญ่",
           "missions": [
             { "num": 57, "name": "Background to a Blunder", "exp": 5600000 },
@@ -168,28 +168,28 @@
           ]
         },
         {
-          "chapter": 1,
+          "chapter": 18,
           "name": "บทที่ 1 ต่างแดน",
           "missions": [
             { "num": 61, "name": "Water People Samurai", "exp": 7200000 }
           ]
         },
         {
-          "chapter": 2,
+          "chapter": 19,
           "name": "บทที่ 2 ลัทธินอกรีตอิซุรุกิ",
           "missions": [
             { "num": 62, "name": "The Minase and the Sanki", "exp": 7600000 }
           ]
         },
         {
-          "chapter": 3,
+          "chapter": 20,
           "name": "บทที่ 3 อวตารของช่างหัวดื้อ",
           "missions": [
             { "num": 63, "name": "The Avatar of Stubbornness", "exp": 8000000 }
           ]
         },
         {
-          "chapter": 4,
+          "chapter": 21,
           "name": "บทที่ 4 เสียงที่สนั่นจากเทพอันชั่วร้าย",
           "missions": [
             { "num": 64, "name": "Deserted Village", "exp": 10270000 },
@@ -197,56 +197,56 @@
           ]
         },
         {
-          "chapter": 1,
+          "chapter": 22,
           "name": "บทที่ 1 ขึ้นฝั่งซูร์วีเนีย",
           "missions": [
             { "num": 66, "name": "Defiant Harbor", "exp": 10750000 }
           ]
         },
         {
-          "chapter": 2,
+          "chapter": 233,
           "name": "บทที่ 2 ดินแดนที่ถูกยึดครอง",
           "missions": [
             { "num": 67, "name": "The Occupied Land", "exp": 11500000 }
           ]
         },
         {
-          "chapter": 3,
+          "chapter": 24,
           "name": "บทที่ 3 เผ่าดีลผู้ต่อต้าน",
           "missions": [
             { "num": 68, "name": "The Defiant Deil", "exp": 12000000 }
           ]
         },
         {
-          "chapter": 4,
+          "chapter": 25,
           "name": "บทที่ 4 เครื่องเปลี่ยนมนุษย์",
           "missions": [
             { "num": 69, "name": "The Human Transforming Machine", "exp": 12600000 }
           ]
         },
         {
-          "chapter": 5,
+          "chapter": 26,
           "name": "บทที่ 5 ดินแดนรกร้าง ถิ่นกำเนิดที่ไร้ชีวิต",
           "missions": [
             { "num": 70, "name": "The Barren Land, Birthplace of the Lifeless", "exp": 13450000 }
           ]
         },
         {
-          "chapter": 6,
+          "chapter": 27,
           "name": "บทที่ 6 แยกออกจากจุดเริ่มต้น",
           "missions": [
               { "num": 71, "name": "Parting from the Starting Point", "exp": 14370000 }
           ]
         },
         {
-          "chapter": 7,
+          "chapter": 28,
           "name": "บทที่ 7 กลับสู่ปาลูลูอีกครั้ง",
           "missions": [
             { "num": 72, "name": "Return to Palulu Again", "exp": 15300000 }
           ]
         },
         {
-          "chapter": 8,
+          "chapter": 29,
           "name": "บทที่ 8 การต่อสู้ครตัดสินที่จักวรรดิ",
           "missions": [
             { "num": 73, "name": "The Mournful Empress", "exp": 16200000 },
@@ -254,7 +254,7 @@
           ]
         },
         {
-          "chapter": 9,
+          "chapter": 30,
           "name": "บทสุดท้ายEP1",
           "missions": [
             { "num": 75, "name": "Beyond the Adventure", "exp": 10000000 }
