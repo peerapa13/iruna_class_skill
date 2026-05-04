@@ -26,12 +26,8 @@
   --text-pri:   #e8e4d8;
   --text-sec:   #8a8fa8;
   --text-dim:   #555b72;
-  --exp-bar:    #1a7a5e;
-  --exp-fill:   #2dd4a0;
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
 body {
   font-family: 'Sarabun', sans-serif;
   background: var(--bg-deep);
@@ -39,7 +35,6 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
 }
-
 body::before {
   content: '';
   position: fixed;
@@ -51,7 +46,6 @@ body::before {
   pointer-events: none;
   z-index: 0;
 }
-
 .site-wrap {
   position: relative;
   z-index: 1;
@@ -59,7 +53,6 @@ body::before {
   margin: 0 auto;
   padding: 0 16px 60px;
 }
-
 .site-header {
   padding: 32px 0 24px;
   text-align: center;
@@ -75,151 +68,68 @@ body::before {
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
 .header-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(201,168,76,0.1);
-  border: 1px solid var(--gold-dim);
-  border-radius: 4px;
-  padding: 4px 14px;
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  color: var(--gold);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 14px;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(201,168,76,0.1); border: 1px solid var(--gold-dim);
+  border-radius: 4px; padding: 4px 14px;
+  font-family: 'Cinzel', serif; font-size: 11px; color: var(--gold);
+  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px;
 }
 .header-badge::before { content: '✦'; font-size: 9px; }
 .header-badge::after  { content: '✦'; font-size: 9px; }
 .site-header h1 {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(22px, 4vw, 32px);
-  font-weight: 700;
-  color: var(--gold-light);
-  letter-spacing: 1px;
-  text-shadow: 0 0 40px rgba(201,168,76,0.3);
-  margin-bottom: 6px;
+  font-family: 'Cinzel', serif; font-size: clamp(22px, 4vw, 32px);
+  font-weight: 700; color: var(--gold-light); letter-spacing: 1px;
+  text-shadow: 0 0 40px rgba(201,168,76,0.3); margin-bottom: 6px;
 }
-.site-header p {
-  font-size: 13px;
-  color: var(--text-sec);
-  letter-spacing: 0.5px;
-}
+.site-header p { font-size: 13px; color: var(--text-sec); letter-spacing: 0.5px; }
 
 .back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--text-sec);
-  text-decoration: none;
-  margin-bottom: 20px;
-  padding: 5px 10px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--text-sec); text-decoration: none;
+  margin-bottom: 20px; padding: 5px 10px;
+  border: 1px solid var(--border); border-radius: 4px;
   transition: color .2s, border-color .2s;
 }
 .back-link:hover { color: var(--gold); border-color: var(--gold-dim); }
 .back-link::before { content: '←'; }
 
 .panel {
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 20px;
-  margin-bottom: 16px;
-  position: relative;
+  background: var(--bg-panel); border: 1px solid var(--border);
+  border-radius: 6px; padding: 20px; margin-bottom: 16px; position: relative;
 }
 .panel::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 20px; right: 20px;
-  height: 1px;
+  content: ''; position: absolute; top: 0; left: 20px; right: 20px; height: 1px;
   background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
-  border-radius: 1px;
 }
 .panel-title {
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--gold);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-family: 'Cinzel', serif; font-size: 11px; font-weight: 600;
+  color: var(--gold); letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
 }
-.panel-title::before {
-  content: '';
-  display: block;
-  width: 3px; height: 14px;
-  background: var(--gold);
-  border-radius: 2px;
-}
+.panel-title::before { content: ''; display: block; width: 3px; height: 14px; background: var(--gold); border-radius: 2px; }
 
-.input-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 16px;
-}
+.input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
 .field label {
-  display: block;
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--text-sec);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 6px;
+  display: block; font-size: 11px; font-weight: 500; color: var(--text-sec);
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px;
 }
 .field input[type=number] {
-  width: 100%;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 9px 12px;
-  font-family: 'Sarabun', sans-serif;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text-pri);
-  outline: none;
-  transition: border-color .2s, box-shadow .2s;
-  -moz-appearance: textfield;
+  width: 100%; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 4px; padding: 9px 12px;
+  font-family: 'Sarabun', sans-serif; font-size: 15px; font-weight: 500;
+  color: var(--text-pri); outline: none;
+  transition: border-color .2s, box-shadow .2s; -moz-appearance: textfield;
 }
-.field input[type=number]:focus {
-  border-color: var(--gold-dim);
-  box-shadow: 0 0 0 2px rgba(201,168,76,0.1);
-}
+.field input[type=number]:focus { border-color: var(--gold-dim); box-shadow: 0 0 0 2px rgba(201,168,76,0.1); }
 .field input[type=number]::-webkit-inner-spin-button,
 .field input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 
-.quick-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-  margin-bottom: 14px;
-}
-.quick-label {
-  font-size: 11px;
-  color: var(--text-dim);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
+.quick-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 14px; }
+.quick-label { font-size: 11px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
 .qbtn {
-  cursor: pointer;
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 5px 12px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  color: var(--text-sec);
-  transition: all .15s;
-  letter-spacing: 0.5px;
+  cursor: pointer; font-family: 'Cinzel', serif; font-size: 11px; font-weight: 600;
+  padding: 5px 12px; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 3px; color: var(--text-sec); transition: all .15s; letter-spacing: 0.5px;
 }
 .qbtn:hover { border-color: var(--gold-dim); color: var(--gold); background: rgba(201,168,76,0.06); }
 .qbtn.active { background: rgba(201,168,76,0.12); border-color: var(--gold); color: var(--gold-light); }
@@ -227,294 +137,189 @@ body::before {
 .qbtn.max:hover { background: rgba(45,212,160,0.08); border-color: var(--teal); }
 
 .slider-section { margin-bottom: 4px; }
-.slider-label-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-.slider-label-row span:first-child {
-  font-size: 11px;
-  color: var(--text-sec);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-.pct-display {
-  font-family: 'Cinzel', serif;
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--gold-light);
-  min-width: 52px;
-  text-align: right;
-}
+.slider-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.slider-label-row span:first-child { font-size: 11px; color: var(--text-sec); letter-spacing: 1px; text-transform: uppercase; }
+.pct-display { font-family: 'Cinzel', serif; font-size: 18px; font-weight: 600; color: var(--gold-light); min-width: 52px; text-align: right; }
 input[type=range] {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 6px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  outline: none;
-  cursor: pointer;
-  margin-bottom: 6px;
-  position: relative;
+  -webkit-appearance: none; width: 100%; height: 6px;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 3px;
+  outline: none; cursor: pointer; margin-bottom: 6px;
 }
 input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  background: var(--gold);
-  border: 2px solid var(--bg-deep);
-  box-shadow: 0 0 8px rgba(201,168,76,0.5);
-  cursor: pointer;
-  transition: box-shadow .15s;
+  -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--gold); border: 2px solid var(--bg-deep);
+  box-shadow: 0 0 8px rgba(201,168,76,0.5); cursor: pointer;
 }
 input[type=range]:hover::-webkit-slider-thumb { box-shadow: 0 0 14px rgba(201,168,76,0.8); }
 input[type=range]::-moz-range-thumb {
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  background: var(--gold);
-  border: 2px solid var(--bg-deep);
-  cursor: pointer;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--gold); border: 2px solid var(--bg-deep); cursor: pointer;
 }
-.slider-ticks {
-  display: flex;
-  justify-content: space-between;
-  font-size: 10px;
-  color: var(--text-dim);
-  margin-bottom: 10px;
-  letter-spacing: 0.5px;
-}
+.slider-ticks { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-dim); margin-bottom: 10px; }
 
 .exp-derived {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 10px 14px;
-  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 4px; padding: 10px 14px; margin-bottom: 14px;
 }
 .exp-derived-label { font-size: 12px; color: var(--text-sec); flex-shrink: 0; }
 .exp-derived-val { font-family: 'Cinzel', serif; font-size: 17px; font-weight: 600; color: var(--teal); }
 .exp-derived-unit { font-size: 12px; color: var(--text-dim); }
 
-.stat-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 16px;
-}
+.stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
 .stat-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  padding: 13px 14px;
-  position: relative;
-  overflow: hidden;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 5px; padding: 13px 14px; position: relative; overflow: hidden;
 }
-.stat-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
-  border-radius: 0 0 5px 5px;
-}
-.stat-card.green::after  { background: var(--teal); }
-.stat-card.blue::after   { background: var(--blue); }
-.stat-card.amber::after  { background: var(--gold); }
-.stat-card.white::after  { background: var(--text-sec); }
-.stat-label {
-  font-size: 10px;
-  font-weight: 500;
-  color: var(--text-dim);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-}
-.stat-value {
-  font-family: 'Cinzel', serif;
-  font-size: 15px;
-  font-weight: 600;
-  word-break: break-all;
-  line-height: 1.2;
-}
+.stat-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; border-radius: 0 0 5px 5px; }
+.stat-card.green::after { background: var(--teal); }
+.stat-card.blue::after  { background: var(--blue); }
+.stat-card.amber::after { background: var(--gold); }
+.stat-card.white::after { background: var(--text-sec); }
+.stat-card.purple::after{ background: #a78bfa; }
+.stat-label { font-size: 10px; font-weight: 500; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+.stat-value { font-family: 'Cinzel', serif; font-size: 15px; font-weight: 600; word-break: break-all; line-height: 1.2; }
 .stat-card.green .stat-value  { color: var(--teal); }
 .stat-card.blue .stat-value   { color: var(--blue); }
 .stat-card.amber .stat-value  { color: var(--gold-light); }
 .stat-card.white .stat-value  { color: var(--text-pri); }
+.stat-card.purple .stat-value { color: #a78bfa; }
 
-.farm-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
+.farm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 
-.table-controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* ── EXP Bonus section ── */
+.bonus-section {
+  background: rgba(167,139,250,0.05);
+  border: 1px solid rgba(167,139,250,0.25);
+  border-radius: 5px;
+  padding: 14px 16px;
   margin-bottom: 14px;
-  flex-wrap: wrap;
-  gap: 8px;
 }
+.bonus-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px; flex-wrap: wrap; gap: 8px;
+}
+.bonus-title {
+  font-size: 11px; font-weight: 600; color: #a78bfa;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  display: flex; align-items: center; gap: 6px;
+}
+.bonus-title::before { content: ''; display: block; width: 3px; height: 11px; background: #a78bfa; border-radius: 2px; }
+.bonus-total-badge {
+  font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700;
+  color: #a78bfa; background: rgba(167,139,250,0.12);
+  border: 1px solid rgba(167,139,250,0.3); border-radius: 4px;
+  padding: 3px 10px;
+}
+.bonus-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
+.bonus-item { display: flex; flex-direction: column; gap: 4px; }
+.bonus-item label { font-size: 10px; color: var(--text-dim); letter-spacing: 0.8px; text-transform: uppercase; }
+.bonus-item input {
+  background: var(--bg-card); border: 1px solid rgba(167,139,250,0.2);
+  border-radius: 4px; padding: 7px 10px;
+  font-family: 'Sarabun', sans-serif; font-size: 14px; font-weight: 500;
+  color: #a78bfa; outline: none; -moz-appearance: textfield;
+  transition: border-color .2s;
+}
+.bonus-item input:focus { border-color: #a78bfa; box-shadow: 0 0 0 2px rgba(167,139,250,0.1); }
+.bonus-item input::-webkit-inner-spin-button,
+.bonus-item input::-webkit-outer-spin-button { -webkit-appearance: none; }
+.bonus-quick { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+.bonus-quick-label { font-size: 10px; color: var(--text-dim); letter-spacing: 0.8px; text-transform: uppercase; }
+.bbtn {
+  cursor: pointer; font-size: 11px; font-weight: 600; padding: 3px 10px;
+  background: var(--bg-card); border: 1px solid rgba(167,139,250,0.2);
+  border-radius: 3px; color: #8b74d4; transition: all .15s;
+}
+.bbtn:hover { border-color: #a78bfa; color: #a78bfa; background: rgba(167,139,250,0.08); }
+
+/* EXP after bonus display */
+.exp-bonus-result {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px;
+}
+.exp-bonus-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 5px; padding: 11px 13px;
+  position: relative; overflow: hidden;
+}
+.exp-bonus-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; }
+.exp-bonus-card.base::after   { background: var(--text-sec); }
+.exp-bonus-card.boosted::after { background: #a78bfa; }
+.exp-bonus-clabel { font-size: 10px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+.exp-bonus-cval { font-family: 'Cinzel', serif; font-size: 14px; font-weight: 600; color: var(--text-pri); line-height: 1.2; }
+.exp-bonus-card.boosted .exp-bonus-cval { color: #a78bfa; }
+.exp-bonus-arrow { display: flex; align-items: center; justify-content: center; color: #a78bfa; font-size: 18px; }
+
+.table-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
 .toggle-group { display: flex; gap: 4px; }
 .tbtn {
-  cursor: pointer;
-  font-size: 11px;
-  font-weight: 500;
-  padding: 5px 14px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  color: var(--text-sec);
-  transition: all .15s;
-  letter-spacing: 0.5px;
-  font-family: 'Sarabun', sans-serif;
+  cursor: pointer; font-size: 11px; font-weight: 500; padding: 5px 14px;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 3px;
+  color: var(--text-sec); transition: all .15s; font-family: 'Sarabun', sans-serif;
 }
 .tbtn:hover { border-color: var(--border-glow); color: var(--text-pri); }
 .tbtn.active { background: rgba(201,168,76,0.1); border-color: var(--gold-dim); color: var(--gold); }
 
 .table-wrap {
-  max-height: 360px;
-  overflow-y: auto;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border-glow) var(--bg-card);
+  max-height: 360px; overflow-y: auto; border: 1px solid var(--border); border-radius: 5px;
+  scrollbar-width: thin; scrollbar-color: var(--border-glow) var(--bg-card);
 }
 .table-wrap::-webkit-scrollbar { width: 6px; }
 .table-wrap::-webkit-scrollbar-track { background: var(--bg-card); }
 .table-wrap::-webkit-scrollbar-thumb { background: var(--border-glow); border-radius: 3px; }
-
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
 thead th {
-  position: sticky; top: 0;
-  background: var(--bg-panel);
-  padding: 9px 12px;
-  text-align: left;
-  font-size: 10px;
-  font-weight: 600;
-  font-family: 'Cinzel', serif;
-  color: var(--gold);
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  border-bottom: 1px solid var(--border);
-  white-space: nowrap;
+  position: sticky; top: 0; background: var(--bg-panel); padding: 9px 12px;
+  text-align: left; font-size: 10px; font-weight: 600; font-family: 'Cinzel', serif;
+  color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase;
+  border-bottom: 1px solid var(--border); white-space: nowrap;
 }
-tbody td {
-  padding: 8px 12px;
-  border-bottom: 1px solid rgba(42,48,69,0.5);
-  color: var(--text-sec);
-  font-size: 13px;
-  white-space: nowrap;
-}
+tbody td { padding: 8px 12px; border-bottom: 1px solid rgba(42,48,69,0.5); color: var(--text-sec); font-size: 13px; white-space: nowrap; }
 tbody tr:hover td { background: var(--bg-hover); color: var(--text-pri); }
 tbody tr.row-cur td  { background: rgba(45,212,160,0.07); color: var(--teal); font-weight: 600; }
 tbody tr.row-goal td { background: rgba(91,156,246,0.07); color: var(--blue); font-weight: 600; }
 tbody tr.row-cur:hover td  { background: rgba(45,212,160,0.12); }
 tbody tr.row-goal:hover td { background: rgba(91,156,246,0.12); }
 td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px; }
-
-.tag-est {
-  display: inline-block;
-  font-size: 9px;
-  padding: 1px 5px;
-  background: rgba(45,212,160,0.12);
-  border: 1px solid var(--teal-dim);
-  border-radius: 2px;
-  color: var(--teal-dim);
-  font-family: 'Sarabun', sans-serif;
-  font-weight: 500;
-  vertical-align: middle;
-  margin-left: 4px;
-  letter-spacing: 0.5px;
-}
-.row-badge {
-  font-size: 10px;
-  padding: 1px 6px;
-  border-radius: 2px;
-  margin-left: 6px;
-  font-family: 'Sarabun', sans-serif;
-  font-weight: 400;
-  vertical-align: middle;
-}
+.tag-est { display: inline-block; font-size: 9px; padding: 1px 5px; background: rgba(45,212,160,0.12); border: 1px solid var(--teal-dim); border-radius: 2px; color: var(--teal-dim); font-family: 'Sarabun', sans-serif; font-weight: 500; vertical-align: middle; margin-left: 4px; }
+.row-badge { font-size: 10px; padding: 1px 6px; border-radius: 2px; margin-left: 6px; font-family: 'Sarabun', sans-serif; font-weight: 400; vertical-align: middle; }
 .row-cur .row-badge  { background: rgba(45,212,160,0.2); color: var(--teal); border: 1px solid var(--teal-dim); }
 .row-goal .row-badge { background: rgba(91,156,246,0.2); color: var(--blue); border: 1px solid var(--blue-dim); }
 
-.hint {
-  display: flex;
-  gap: 10px;
-  background: rgba(201,168,76,0.05);
-  border: 1px solid var(--gold-dim);
-  border-radius: 5px;
-  padding: 12px 14px;
-  margin-bottom: 16px;
-  font-size: 13px;
-  color: var(--text-sec);
-  line-height: 1.6;
-}
+.hint { display: flex; gap: 10px; background: rgba(201,168,76,0.05); border: 1px solid var(--gold-dim); border-radius: 5px; padding: 12px 14px; margin-bottom: 16px; font-size: 13px; color: var(--text-sec); line-height: 1.6; }
 .hint-icon { color: var(--gold); font-size: 15px; flex-shrink: 0; margin-top: 1px; }
 .hint strong { color: var(--gold-light); font-weight: 600; }
 
-/* ── Save Button ── */
-.save-btn-wrap {
-  display: flex;
-  justify-content: center;
-  margin: 4px 0 16px;
-}
+.save-btn-wrap { display: flex; justify-content: center; margin: 4px 0 16px; }
 .save-btn {
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: 'Cinzel', serif;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  padding: 11px 28px;
-  background: rgba(201,168,76,0.08);
-  border: 1px solid var(--gold-dim);
-  border-radius: 5px;
-  color: var(--gold);
-  transition: all .2s;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Cinzel', serif; font-size: 12px; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase; padding: 11px 28px;
+  background: rgba(201,168,76,0.08); border: 1px solid var(--gold-dim);
+  border-radius: 5px; color: var(--gold); transition: all .2s;
 }
 .save-btn:hover { border-color: var(--gold); color: var(--gold-light); background: rgba(201,168,76,0.15); }
 .save-btn:active { transform: scale(0.97); }
 .save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* ── Export card (off-screen, for html2canvas) ── */
 #export-card {
-  position: fixed;
-  top: -9999px; left: -9999px;
-  width: 480px;
-  background: #0a0c10;
-  color: #e8e4d8;
-  padding: 28px 24px 24px;
-  border: 2px solid #3d5080;
-  border-radius: 12px;
+  position: fixed; top: -9999px; left: -9999px;
+  width: 480px; background: #0a0c10; color: #e8e4d8;
+  padding: 28px 24px 24px; border: 2px solid #3d5080; border-radius: 12px;
   font-family: 'Sarabun', sans-serif;
 }
 
-.site-footer {
-  text-align: center;
-  padding-top: 32px;
-  border-top: 1px solid var(--border);
-  margin-top: 32px;
-  font-size: 12px;
-  color: var(--text-dim);
-  letter-spacing: 0.5px;
-}
+.site-footer { text-align: center; padding-top: 32px; border-top: 1px solid var(--border); margin-top: 32px; font-size: 12px; color: var(--text-dim); }
 
 @media (max-width: 560px) {
   .input-grid, .stat-grid, .farm-grid { grid-template-columns: 1fr 1fr; }
   .stat-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .bonus-grid { grid-template-columns: 1fr 1fr; }
+  .exp-bonus-result { grid-template-columns: 1fr; }
 }
 @media (max-width: 420px) {
   .stat-grid { grid-template-columns: 1fr 1fr; }
   .farm-grid { grid-template-columns: 1fr 1fr; }
+  .bonus-grid { grid-template-columns: 1fr 1fr; }
 }
 </style>
 </head>
@@ -535,25 +340,16 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
   <!-- Lookup Panel -->
   <div id="lookup-panel" class="panel" style="display:none;border-color:var(--gold-dim);background:rgba(201,168,76,0.04)">
     <div class="panel-title">หาเลเวลจาก EXP สะสม</div>
-    <p style="font-size:13px;color:var(--text-sec);margin-bottom:14px;line-height:1.6">กรอก EXP สะสมรวมที่มีอยู่ (เช่น จากการดูในเมนูสถิติ หรือคำนวณจากที่อื่น) แล้วระบบจะบอกว่าอยู่ Lv ไหน และ progress bar อยู่ที่เท่าไหร่</p>
+    <p style="font-size:13px;color:var(--text-sec);margin-bottom:14px;line-height:1.6">กรอก EXP สะสมรวมที่มีอยู่ แล้วระบบจะบอกว่าอยู่ Lv ไหน และ progress bar อยู่ที่เท่าไหร่</p>
     <div class="field" style="margin-bottom:14px">
       <label>EXP สะสมปัจจุบัน</label>
       <input type="number" id="lookup-exp" min="0" value="" placeholder="เช่น 78830442" oninput="doLookup()" style="font-size:15px">
     </div>
     <div id="lookup-result" style="display:none">
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
-        <div class="stat-card green">
-          <div class="stat-label">เลเวลปัจจุบัน</div>
-          <div class="stat-value" id="lk-level">—</div>
-        </div>
-        <div class="stat-card amber">
-          <div class="stat-label">% progress bar</div>
-          <div class="stat-value" id="lk-pct">—</div>
-        </div>
-        <div class="stat-card blue">
-          <div class="stat-label">EXP ที่ใช้ขึ้น Lv นี้</div>
-          <div class="stat-value" id="lk-exp-lv">—</div>
-        </div>
+        <div class="stat-card green"><div class="stat-label">เลเวลปัจจุบัน</div><div class="stat-value" id="lk-level">—</div></div>
+        <div class="stat-card amber"><div class="stat-label">% progress bar</div><div class="stat-value" id="lk-pct">—</div></div>
+        <div class="stat-card blue"><div class="stat-label">EXP ที่ใช้ขึ้น Lv นี้</div><div class="stat-value" id="lk-exp-lv">—</div></div>
       </div>
       <button class="qbtn" onclick="applyLookup()" style="margin-top:12px;font-family:'Sarabun',sans-serif;font-size:13px;color:var(--teal);border-color:var(--teal-dim)">↓ ใช้ค่านี้ในเครื่องคำนวณด้านล่าง</button>
     </div>
@@ -561,7 +357,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
 
   <div class="hint">
     <span class="hint-icon">💡</span>
-    <span>เกมไม่แสดงตัวเลข EXP ตรงๆ แต่มี <strong>progress bar แบ่ง 10 ส่วน</strong> ใต้แถบ HP/MP — ประมาณ % แล้วลาก slider ด้านล่าง เครื่องคำนวณจะแปลงเป็นตัวเลขให้เอง</span>
+    <span>เกมไม่แสดงตัวเลข EXP ตรงๆ แต่มี <strong>progress bar แบ่ง 10 ส่วน</strong> ใต้แถบ HP/MP — ประมาณ % แล้วลาก slider ด้านล่าง</span>
   </div>
 
   <!-- Input Panel -->
@@ -577,7 +373,6 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
         <input type="number" id="goal-lv" min="2" max="405" value="405" oninput="calc()">
       </div>
     </div>
-
     <div class="quick-row">
       <span class="quick-label">เป้าหมายด่วน</span>
       <button class="qbtn" onclick="setGoal(140)">140</button>
@@ -593,7 +388,6 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
       <button class="qbtn" onclick="setGoal(340)">340</button>
       <button class="qbtn max" onclick="setGoal(405)">405 MAX</button>
     </div>
-
     <div class="slider-section">
       <div class="slider-label-row">
         <span>% EXP ใน Lv นี้ (ดูจาก progress bar)</span>
@@ -605,13 +399,11 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
         <span>50%</span><span>60%</span><span>70%</span><span>80%</span><span>90%</span><span>99%</span>
       </div>
     </div>
-
     <div class="exp-derived">
       <span class="exp-derived-label">EXP สะสมใน Lv นี้ประมาณ</span>
       <span class="exp-derived-val" id="exp-from-pct">0</span>
       <span class="exp-derived-unit">EXP</span>
     </div>
-
     <div class="quick-row">
       <span class="quick-label">ปุ่มด่วน</span>
       <button class="qbtn" onclick="setPct(0)">0%</button>
@@ -629,18 +421,9 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
 
   <!-- Stats -->
   <div class="stat-grid">
-    <div class="stat-card green">
-      <div class="stat-label">EXP ที่ต้องการอีก</div>
-      <div class="stat-value" id="exp-needed">—</div>
-    </div>
-    <div class="stat-card blue">
-      <div class="stat-label">EXP สะสมรวมถึงเป้า</div>
-      <div class="stat-value" id="cum-goal">—</div>
-    </div>
-    <div class="stat-card amber">
-      <div class="stat-label">EXP สะสมปัจจุบัน (รวม % bar)</div>
-      <div class="stat-value" id="cum-current">—</div>
-    </div>
+    <div class="stat-card green"><div class="stat-label">EXP ที่ต้องการอีก</div><div class="stat-value" id="exp-needed">—</div></div>
+    <div class="stat-card blue"><div class="stat-label">EXP สะสมรวมถึงเป้า</div><div class="stat-value" id="cum-goal">—</div></div>
+    <div class="stat-card amber"><div class="stat-label">EXP สะสมปัจจุบัน (รวม % bar)</div><div class="stat-value" id="cum-current">—</div></div>
   </div>
 
   <!-- Farm Estimator -->
@@ -648,7 +431,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <div class="panel-title">ประมาณเวลาฟาร์ม</div>
     <div class="input-grid" style="margin-bottom:14px">
       <div class="field">
-        <label>EXP ต่อ kill</label>
+        <label>EXP ต่อ kill (ก่อน bonus)</label>
         <input type="number" id="mob-exp" min="1" value="1" oninput="calc()">
       </div>
       <div class="field">
@@ -656,23 +439,67 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
         <input type="number" id="kill-time" min="1" value="1" oninput="calc()">
       </div>
     </div>
+
+    <!-- EXP Bonus Section -->
+    <div class="bonus-section">
+      <div class="bonus-header">
+        <div class="bonus-title">✦ EXPโบนัส %</div>
+        <div class="bonus-total-badge">รวม +<span id="bonus-total">0</span>%</div>
+      </div>
+      <div class="bonus-grid">
+        <div class="bonus-item">
+          <label>คอร์ส</label>
+          <input type="number" id="bonus-premium" min="0" max="999" value="0" placeholder="0" oninput="calc()">
+        </div>
+        <div class="bonus-item">
+          <label>กิลด์บัฟexp Lv (<span id="guild-pct-badge">0%</span>)</label>
+          <select id="bonus-guild" onchange="onGuildChange()" style="width:100%;background:#161a22;border:1px solid rgba(167,139,250,0.2);border-radius:4px;padding:7px 10px;font-family:'Sarabun',sans-serif;font-size:14px;font-weight:500;color:#a78bfa;outline:none;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22 viewBox=%220 0 12 8%22%3E%3Cpath fill=%22%23a78bfa%22 d=%22M6 8L0 0h12z%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;">
+            <option value="0">ไม่มีกิลด์บัฟexp</option>
+            <option value="1">Lv 1 (+1%)</option>
+            <option value="2">Lv 2 (+2%)</option>
+            <option value="3">Lv 3 (+3%)</option>
+            <option value="4">Lv 4 (+4%)</option>
+            <option value="5">Lv 5 (+5%)</option>
+            <option value="6">Lv 6 (+6%)</option>
+            <option value="7">Lv 7 (+7%)</option>
+            <option value="8">Lv 8 (+8%)</option>
+            <option value="9">Lv 9 (+9%)</option>
+            <option value="10">Lv 10 (+10%)</option>
+          </select>
+        </div>
+        <div class="bonus-item">
+          <label>อีเว้นท์ / ไอเท็ม</label>
+          <input type="number" id="bonus-event" min="0" max="999" value="0" placeholder="0" oninput="calc()">
+        </div>
+      </div>
+      <div class="bonus-quick" style="margin-bottom:12px">
+        <span class="bonus-quick-label">ปุ่มด่วน</span>
+        <button class="bbtn" onclick="setBonus(0,0,0)">ไม่มี</button>
+        <button class="bbtn" onclick="setBonus(150,0,0)">คอร์สครบ</button>
+        <button class="bbtn" onclick="setBonus(0,10,0)">โบนัสกิลด์LV10</button>
+        <button class="bbtn" onclick="setBonus(150,10,0)">คอร์สครบ+โบนัสกิลด์LV10</button>
+      </div>
+      <!-- EXP before/after bonus -->
+      <div class="exp-bonus-result" id="exp-bonus-result-wrap" style="display:none">
+        <div class="exp-bonus-card base">
+          <div class="exp-bonus-clabel">EXP / Kill (ก่อนโบนัส)</div>
+          <div class="exp-bonus-cval" id="exp-base-display">—</div>
+        </div>
+        <div class="exp-bonus-card boosted">
+          <div class="exp-bonus-clabel">EXP / Kill (หลัง +<span id="bonus-pct-label">0</span>%)</div>
+          <div class="exp-bonus-cval" id="exp-boosted-display">—</div>
+        </div>
+      </div>
+    </div>
+
     <div class="farm-grid">
-      <div class="stat-card white">
-        <div class="stat-label">จำนวน Kill</div>
-        <div class="stat-value" id="kills">—</div>
-      </div>
-      <div class="stat-card white">
-        <div class="stat-label">เวลาโดยประมาณ</div>
-        <div class="stat-value" style="font-size:13px" id="farm-time">—</div>
-      </div>
-      <div class="stat-card white">
-        <div class="stat-label">EXP / ชั่วโมง</div>
-        <div class="stat-value" id="exp-hr">—</div>
-      </div>
+      <div class="stat-card white"><div class="stat-label">จำนวน Kill</div><div class="stat-value" id="kills">—</div></div>
+      <div class="stat-card white"><div class="stat-label">เวลาโดยประมาณ</div><div class="stat-value" style="font-size:13px" id="farm-time">—</div></div>
+      <div class="stat-card white"><div class="stat-label">EXP / ชั่วโมง (หลัง bonus)</div><div class="stat-value" id="exp-hr">—</div></div>
     </div>
   </div>
 
-  <!-- ── Save Result Button ── -->
+  <!-- Save Button -->
   <div class="save-btn-wrap">
     <button class="save-btn" id="btn-save-image" onclick="saveImage()">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -695,13 +522,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     </div>
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>Lv</th>
-            <th>EXP ต้องการ (ขึ้น Lv)</th>
-            <th>EXP สะสมรวม</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Lv</th><th>EXP ต้องการ (ขึ้น Lv)</th><th>EXP สะสมรวม</th></tr></thead>
         <tbody id="table-body"></tbody>
       </table>
     </div>
@@ -713,20 +534,16 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
   </footer>
 </div>
 
-<!-- Export card (hidden, rendered by html2canvas) -->
+<!-- Export card -->
 <div id="export-card">
-  <!-- Header -->
   <div style="text-align:center;border-bottom:1px solid #c9a84c;padding-bottom:14px;margin-bottom:20px;">
     <div style="font-family:'Cinzel',serif;color:#c9a84c;font-size:20px;letter-spacing:2px;font-weight:700;">✦ IRUNA ONLINE TH ✦</div>
     <div style="font-size:12px;color:#8a8fa8;letter-spacing:1px;margin-top:4px;">EXP CALCULATOR RESULT</div>
   </div>
-
-  <!-- Lv current → goal -->
   <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(61,80,128,0.12);border:1px solid #2a3045;border-radius:8px;padding:16px 20px;margin-bottom:16px;">
     <div style="text-align:center;flex:1;">
       <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลปัจจุบัน</div>
       <div style="font-family:'Cinzel',serif;font-size:30px;color:#2dd4a0;font-weight:700;line-height:1;">Lv <span id="ec-cur-lv">—</span></div>
-      <!-- progress bar -->
       <div style="margin-top:8px;">
         <div style="font-size:10px;color:#555b72;margin-bottom:4px;">% EXP in level</div>
         <div style="height:6px;background:#161a22;border:1px solid #2a3045;border-radius:3px;overflow:hidden;">
@@ -741,20 +558,24 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
       <div style="font-family:'Cinzel',serif;font-size:30px;color:#5b9cf6;font-weight:700;line-height:1;">Lv <span id="ec-goal-lv">—</span></div>
     </div>
   </div>
-
-  <!-- EXP needed -->
   <div style="background:#161a22;border:1px solid #2a3045;border-radius:6px;padding:12px 16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
     <span style="font-size:13px;color:#8a8fa8;">EXP ที่ต้องการอีก</span>
     <span id="ec-exp-needed" style="font-family:'Cinzel',serif;font-size:18px;color:#c9a84c;font-weight:700;">—</span>
   </div>
-
-  <!-- Farm stats -->
-  <div style="background:#161a22;border:1px solid #2a3045;border-radius:6px;padding:14px 16px;margin-bottom:16px;">
+  <div style="background:#161a22;border:1px solid #2a3045;border-radius:6px;padding:14px 16px;margin-bottom:12px;">
     <div style="font-size:10px;color:#555b72;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">ประมาณเวลาฟาร์ม</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;">
       <div style="display:flex;justify-content:space-between;">
-        <span style="font-size:12px;color:#8a8fa8;">EXP / Kill</span>
+        <span style="font-size:12px;color:#8a8fa8;">EXP / Kill (ก่อน)</span>
         <span id="ec-mob-exp" style="font-size:12px;color:#e8e4d8;font-weight:600;">—</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;">
+        <span style="font-size:12px;color:#8a8fa8;">EXP / Kill (หลัง)</span>
+        <span id="ec-mob-exp-boosted" style="font-size:12px;color:#a78bfa;font-weight:600;">—</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;">
+        <span style="font-size:12px;color:#8a8fa8;">EXP Bonus รวม</span>
+        <span id="ec-bonus-total" style="font-size:12px;color:#a78bfa;font-weight:600;">—</span>
       </div>
       <div style="display:flex;justify-content:space-between;">
         <span style="font-size:12px;color:#8a8fa8;">วินาที / Kill</span>
@@ -774,8 +595,6 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
       </div>
     </div>
   </div>
-
-  <!-- Footer: timestamp + QR -->
   <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #2a3045;padding-top:14px;">
     <div>
       <div style="font-size:10px;color:#555b72;margin-bottom:3px;" id="ec-ts">—</div>
@@ -791,9 +610,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
 <script>
 let RAW = {};
 
-/* ── Helpers ── */
 function fmt(n) { return Math.round(n).toLocaleString(); }
-
 function fmtTime(sec) {
   if (!isFinite(sec) || sec <= 0) return '—';
   const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60);
@@ -803,40 +620,31 @@ function fmtTime(sec) {
   return `${h} ชม. ${m} นาที`;
 }
 
-/* ── Helper สำหรับดึงค่าตัวเลขจาก Input ที่มีลูกน้ำ ── */
-function getRawValue(id) {
-  const val = document.getElementById(id).value.replace(/,/g, '');
-  return parseInt(val) || 0;
+function getGuildPct() {
+  // Guild Buff Lv 1-10 = +1% to +10%
+  return parseInt(document.getElementById('bonus-guild').value) || 0;
+}
+function onGuildChange() {
+  const lv = getGuildPct();
+  document.getElementById('guild-pct-badge').textContent = lv + '%';
+  calc();
+}
+function getBonusTotal() {
+  const p = parseInt(document.getElementById('bonus-premium').value) || 0;
+  const g = getGuildPct();
+  const e = parseInt(document.getElementById('bonus-event').value)   || 0;
+  return p + g + e;
+}
+function setBonus(p, g, e) {
+  document.getElementById('bonus-premium').value = p;
+  // For guild, find closest valid level (0-10)
+  const gLv = Math.min(10, Math.max(0, g));
+  document.getElementById('bonus-guild').value = gLv;
+  document.getElementById('guild-pct-badge').textContent = gLv + '%';
+  document.getElementById('bonus-event').value   = e;
+  calc();
 }
 
-/* ── ระบบจัดการ Comma (Input) ── */
-function onMobExpInput(el) {
-  const pos = el.selectionStart;
-  const oldVal = el.value;
-  const digits = oldVal.replace(/[^0-9]/g, '');
-  
-  if (!digits) { 
-    el.value = ''; 
-    if (el.id === 'lookup-exp') doLookup();
-    else calc(); 
-    return; 
-  }
-  
-  const formatted = parseInt(digits).toLocaleString();
-  el.value = formatted;
-
-  // คำนวณตำแหน่ง Cursor ใหม่หลังจากเติมลูกน้ำ
-  const commasOld = (oldVal.slice(0, pos).match(/,/g) || []).length;
-  const commasNew = (formatted.slice(0, pos).match(/,/g) || []).length;
-  const delta = commasNew - commasOld;
-  
-  try { el.setSelectionRange(pos + delta, pos + delta); } catch(e) {}
-  
-  if (el.id === 'lookup-exp') doLookup();
-  else calc();
-}
-
-/* ── Core Calculation ── */
 let tableMode = 'range';
 function setTableMode(m) {
   tableMode = m;
@@ -844,10 +652,8 @@ function setTableMode(m) {
   document.getElementById('tbtn-all').classList.toggle('active', m === 'all');
   renderTable();
 }
-
 function setPct(v) { document.getElementById('exp-pct').value = v; onSlider(); }
 function setGoal(v) { document.getElementById('goal-lv').value = v; calc(); }
-
 function onSlider() {
   const p = parseInt(document.getElementById('exp-pct').value) || 0;
   document.getElementById('pct-label').textContent = p + '%';
@@ -860,8 +666,18 @@ function calc() {
   const cur      = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1));
   const goal     = Math.min(405, Math.max(cur + 1, parseInt(document.getElementById('goal-lv').value) || cur + 1));
   const pct      = Math.min(99, Math.max(0, parseInt(document.getElementById('exp-pct').value) || 0));
-  const mobExp   = Math.max(1, getRawValue('mob-exp'));
+  const mobExp   = Math.max(1, parseInt(document.getElementById('mob-exp').value) || 1);
   const killTime = Math.max(1, parseInt(document.getElementById('kill-time').value) || 1);
+  const bonusPct = getBonusTotal();
+  const mobExpBoosted = Math.round(mobExp * (1 + bonusPct / 100));
+
+  // Update bonus displays
+  document.getElementById('bonus-total').textContent     = bonusPct;
+  document.getElementById('bonus-pct-label').textContent = bonusPct;
+  document.getElementById('exp-base-display').textContent    = fmt(mobExp);
+  document.getElementById('exp-boosted-display').textContent = fmt(mobExpBoosted);
+  // Show before/after cards only when there is actual bonus
+  document.getElementById('exp-bonus-result-wrap').style.display = bonusPct > 0 ? 'grid' : 'none';
 
   const curD  = RAW[String(cur)]  || { exp: 0, cum: 0 };
   const goalD = RAW[String(goal)] || { exp: 0, cum: 0 };
@@ -874,11 +690,12 @@ function calc() {
   document.getElementById('cum-goal').textContent    = fmt(goalD.cum);
   document.getElementById('cum-current').textContent = fmt(curD.cum + curExpInLv);
 
-  const kills = Math.ceil(expNeeded / mobExp);
+  // Use boosted EXP for kill/time calculations
+  const kills = Math.ceil(expNeeded / mobExpBoosted);
   const sec   = kills * killTime;
   document.getElementById('kills').textContent     = fmt(kills);
   document.getElementById('farm-time').textContent = fmtTime(sec);
-  document.getElementById('exp-hr').textContent    = fmt(Math.round(mobExp * (3600 / killTime)));
+  document.getElementById('exp-hr').textContent    = fmt(Math.round(mobExpBoosted * (3600 / killTime)));
 
   renderTable();
 }
@@ -887,13 +704,11 @@ function renderTable() {
   const curLv  = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1));
   const goalLv = Math.min(405, Math.max(curLv + 1, parseInt(document.getElementById('goal-lv').value) || curLv + 1));
   const tbody  = document.getElementById('table-body');
-  if(!tbody) return;
-
+  if (!tbody) return;
   let html = '';
   const keys = tableMode === 'range'
     ? Array.from({ length: goalLv - curLv + 1 }, (_, i) => curLv + i)
     : Array.from({ length: 405 }, (_, i) => i + 1);
-
   for (const lv of keys) {
     const d = RAW[String(lv)]; if (!d) continue;
     const isCur = lv === curLv, isGoal = lv === goalLv;
@@ -905,7 +720,6 @@ function renderTable() {
   tbody.innerHTML = html;
 }
 
-/* ── Lookup System ── */
 function toggleLookup() {
   const p   = document.getElementById('lookup-panel');
   const btn = document.getElementById('lookup-toggle-btn');
@@ -914,16 +728,10 @@ function toggleLookup() {
   btn.classList.toggle('active', open);
   if (open) document.getElementById('lookup-exp').focus();
 }
-
 function doLookup() {
   if (Object.keys(RAW).length === 0) return;
-  const expInput = getRawValue('lookup-exp');
-  
-  if (expInput <= 0) { 
-    document.getElementById('lookup-result').style.display = 'none'; 
-    return; 
-  }
-
+  const expInput = parseInt(document.getElementById('lookup-exp').value) || 0;
+  if (expInput <= 0) { document.getElementById('lookup-result').style.display = 'none'; return; }
   let foundLv = 1;
   for (let lv = 1; lv <= 404; lv++) {
     const next = RAW[String(lv + 1)];
@@ -931,37 +739,29 @@ function doLookup() {
     if (expInput >= RAW[String(lv)].cum && expInput < next.cum) { foundLv = lv; break; }
   }
   if (expInput >= RAW['405']?.cum) foundLv = 405;
-
   const d = RAW[String(foundLv)];
   const expIntoLv = expInput - d.cum;
   const pct = d.exp > 0 ? Math.min(99, Math.floor(expIntoLv / d.exp * 100)) : 0;
-
   document.getElementById('lk-level').textContent  = foundLv;
   document.getElementById('lk-pct').textContent    = pct + '%';
   document.getElementById('lk-exp-lv').textContent = fmt(expIntoLv) + ' / ' + fmt(d.exp);
   document.getElementById('lookup-result').style.display = 'block';
-  
   const panel = document.getElementById('lookup-panel');
-  panel.dataset.lv  = foundLv;
-  panel.dataset.pct = pct;
+  panel.dataset.lv = foundLv; panel.dataset.pct = pct;
 }
-
 function applyLookup() {
   const panel = document.getElementById('lookup-panel');
   const lv  = parseInt(panel.dataset.lv)  || 1;
   const pct = parseInt(panel.dataset.pct) || 0;
-  
   document.getElementById('cur-lv').value = lv;
   document.getElementById('exp-pct').value = pct;
   document.getElementById('pct-label').textContent = pct + '%';
-  
   calc();
   panel.style.display = 'none';
   document.getElementById('lookup-toggle-btn').classList.remove('active');
   document.getElementById('cur-lv').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-/* ── Load Data ── */
 async function loadDataAndInit() {
   try {
     const response = await fetch('data/EXP/EXP_per_Level.json');
@@ -973,60 +773,74 @@ async function loadDataAndInit() {
   }
 }
 
-/* ── Save Image  ── */
+/* ── Save Image ── */
 async function saveImage() {
   const btn = document.getElementById('btn-save-image');
-  if (!btn) return;
   btn.disabled = true;
   btn.textContent = '⏳ กำลังบันทึกภาพ…';
+
   const cur  = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1));
   const goal = Math.min(405, Math.max(cur + 1, parseInt(document.getElementById('goal-lv').value) || cur + 1));
   const pct  = Math.min(99, Math.max(0, parseInt(document.getElementById('exp-pct').value) || 0));
-  document.getElementById('ec-cur-lv').textContent    = cur;
-  document.getElementById('ec-goal-lv').textContent   = goal;
-  document.getElementById('ec-pct-txt').textContent   = pct + '%';
-  document.getElementById('ec-pbar').style.width      = pct + '%';
-  document.getElementById('ec-exp-needed').textContent = document.getElementById('exp-needed').textContent;
-  document.getElementById('ec-mob-exp').textContent   = document.getElementById('mob-exp').value || '0';
-  document.getElementById('ec-kill-time').textContent = document.getElementById('kill-time').value + ' วิ';
-  document.getElementById('ec-kills').textContent     = document.getElementById('kills').textContent;
-  document.getElementById('ec-farm-time').textContent = document.getElementById('farm-time').textContent;
-  document.getElementById('ec-exp-hr').textContent    = document.getElementById('exp-hr').textContent;
+  const bonusPct = getBonusTotal();
+
+  document.getElementById('ec-cur-lv').textContent      = cur;
+  document.getElementById('ec-goal-lv').textContent     = goal;
+  document.getElementById('ec-pct-txt').textContent     = pct + '%';
+  document.getElementById('ec-pbar').style.width        = pct + '%';
+  document.getElementById('ec-exp-needed').textContent  = document.getElementById('exp-needed').textContent;
+  document.getElementById('ec-mob-exp').textContent     = document.getElementById('exp-base-display').textContent;
+  document.getElementById('ec-mob-exp-boosted').textContent = document.getElementById('exp-boosted-display').textContent;
+  document.getElementById('ec-bonus-total').textContent = '+' + bonusPct + '%';
+  document.getElementById('ec-kill-time').textContent   = document.getElementById('kill-time').value + ' วิ';
+  document.getElementById('ec-kills').textContent       = document.getElementById('kills').textContent;
+  document.getElementById('ec-farm-time').textContent   = document.getElementById('farm-time').textContent;
+  document.getElementById('ec-exp-hr').textContent      = document.getElementById('exp-hr').textContent;
+
   const now = new Date();
-  document.getElementById('ec-ts').textContent = 
-    now.toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' }) + 
+  document.getElementById('ec-ts').textContent =
+    now.toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' }) +
     '  ' + now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
-  const qrDiv = document.getElementById('ec-qr');
-if (qrDiv) {
-    qrDiv.innerHTML = ""; 
+
+  // Build QR → convert canvas→img → wait onload → capture
+  await new Promise(resolve => {
+    const qrDiv = document.getElementById('ec-qr');
+    qrDiv.innerHTML = '';
     new QRCode(qrDiv, {
-        text: "https://peerapa13.github.io/iruna_class_skill/exp_calculator",
-        width: 70,
-        height: 70,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
+      text: 'https://peerapa13.github.io/iruna_class_skill/exp_calculator',
+      width: 72, height: 72,
+      colorDark: '#000000', colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
     });
-}
+    setTimeout(() => {
+      const qrCanvas = qrDiv.querySelector('canvas');
+      if (qrCanvas) {
+        const dataUrl = qrCanvas.toDataURL('image/png');
+        const img = new Image();
+        img.onload = () => { qrDiv.innerHTML = ''; qrDiv.appendChild(img); resolve(); };
+        img.onerror = resolve;
+        img.width = 72; img.height = 72;
+        img.src = dataUrl;
+      } else { resolve(); }
+    }, 150);
+  });
+
   try {
-    const canvas = await html2canvas(document.getElementById('export-card'), { 
-      scale: 2,
-      useCORS: true,
-      backgroundColor: '#0a0c10'
+    const canvas = await html2canvas(document.getElementById('export-card'), {
+      scale: 2, useCORS: true, allowTaint: true, backgroundColor: '#0a0c10'
     });
     const link = document.createElement('a');
     link.download = `iruna-exp-lv${cur}tolv${goal}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
-  } catch (e) { 
+  } catch(e) {
     console.error(e);
-    alert('เกิดข้อผิดพลาดในการบันทึกรูป'); 
+    alert('เกิดข้อผิดพลาดในการบันทึกรูป: ' + e.message);
   } finally {
     btn.disabled = false;
-    btn.textContent = 'บันทึกผลลัพธ์เป็นรูปภาพ';
+    btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> บันทึกผลลัพธ์เป็นรูปภาพ';
   }
 }
-
 
 loadDataAndInit();
 </script>
