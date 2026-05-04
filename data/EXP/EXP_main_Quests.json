@@ -204,7 +204,7 @@
           ]
         },
         {
-          "chapter": 233,
+          "chapter": 23,
           "name": "บทที่ 2 ดินแดนที่ถูกยึดครอง",
           "missions": [
             { "num": 67, "name": "The Occupied Land", "exp": 11500000 }
@@ -269,8 +269,18 @@
       "chapters": [
         {
           "chapter": 1,
-          "name": "บทที่ 1 ",
+          "name": "บทที่ 1 สู่โลกต่างแดน",
           "missions": [
+            { "num": 76, "name": "A Sudden Start", "exp": 17800000 },
+            { "num": 77, "name": "The Dragonewt Realm: Bleudraf", "exp": 18300000 }
+          ]
+        },
+        {
+          "chapter": 2,
+          "name": "บทที่ 2 เทพและโรคระบาด",
+          "missions": [
+                { "num": 78, "name": "The God of Justice's Lament", "exp": 19200000 },
+            { "num": 79, "name": "Blighted Village", "exp": 20400000 }
           ]
         }
       ]
