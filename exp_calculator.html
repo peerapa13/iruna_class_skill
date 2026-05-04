@@ -23,6 +23,7 @@
   --blue:       #5b9cf6;
   --blue-dim:   #2a4a80;
   --red:        #e05252;
+  --purple:     #a78bfa;
   --text-pri:   #e8e4d8;
   --text-sec:   #8a8fa8;
   --text-dim:   #555b72;
@@ -109,6 +110,7 @@ body::before {
 .panel-title::before { content: ''; display: block; width: 3px; height: 14px; background: var(--gold); border-radius: 2px; }
 
 .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.input-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px; }
 .field label {
   display: block; font-size: 11px; font-weight: 500; color: var(--text-sec);
   letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px;
@@ -123,6 +125,15 @@ body::before {
 .field input[type=number]:focus { border-color: var(--gold-dim); box-shadow: 0 0 0 2px rgba(201,168,76,0.1); }
 .field input[type=number]::-webkit-inner-spin-button,
 .field input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+.field select {
+  width: 100%; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 4px; padding: 9px 12px;
+  font-family: 'Sarabun', sans-serif; font-size: 13px; font-weight: 500;
+  color: var(--text-pri); outline: none; cursor: pointer;
+  transition: border-color .2s;
+}
+.field select:focus { border-color: var(--gold-dim); }
+.field select option { background: var(--bg-card); }
 
 .quick-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 14px; }
 .quick-label { font-size: 11px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
@@ -172,44 +183,61 @@ input[type=range]::-moz-range-thumb {
   border-radius: 5px; padding: 13px 14px; position: relative; overflow: hidden;
 }
 .stat-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; border-radius: 0 0 5px 5px; }
-.stat-card.green::after { background: var(--teal); }
-.stat-card.blue::after  { background: var(--blue); }
-.stat-card.amber::after { background: var(--gold); }
-.stat-card.white::after { background: var(--text-sec); }
-.stat-card.purple::after{ background: #a78bfa; }
+.stat-card.green::after  { background: var(--teal); }
+.stat-card.blue::after   { background: var(--blue); }
+.stat-card.amber::after  { background: var(--gold); }
+.stat-card.white::after  { background: var(--text-sec); }
+.stat-card.purple::after { background: var(--purple); }
 .stat-label { font-size: 10px; font-weight: 500; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
 .stat-value { font-family: 'Cinzel', serif; font-size: 15px; font-weight: 600; word-break: break-all; line-height: 1.2; }
 .stat-card.green .stat-value  { color: var(--teal); }
 .stat-card.blue .stat-value   { color: var(--blue); }
 .stat-card.amber .stat-value  { color: var(--gold-light); }
 .stat-card.white .stat-value  { color: var(--text-pri); }
-.stat-card.purple .stat-value { color: #a78bfa; }
+.stat-card.purple .stat-value { color: var(--purple); }
 
-.farm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+/* ── Mode Tabs ── */
+.mode-tabs {
+  display: flex; gap: 0; margin-bottom: 16px;
+  border: 1px solid var(--border); border-radius: 5px; overflow: hidden;
+}
+.mode-tab {
+  flex: 1; padding: 10px 8px; text-align: center; cursor: pointer;
+  background: var(--bg-card); color: var(--text-dim);
+  border-right: 1px solid var(--border);
+  transition: all .15s; line-height: 1.3; user-select: none;
+}
+.mode-tab:last-child { border-right: none; }
+.mode-tab .mt-icon { font-size: 16px; display: block; margin-bottom: 3px; }
+.mode-tab .mt-title { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 1px; display: block; }
+.mode-tab .mt-sub { font-size: 10px; color: var(--text-dim); display: block; margin-top: 2px; }
+.mode-tab:hover { background: var(--bg-hover); color: var(--text-sec); }
+.mode-tab.active { background: rgba(201,168,76,0.1); border-bottom: 2px solid var(--gold); color: var(--gold-light); }
+.mode-tab.active .mt-sub { color: var(--gold-dim); }
+
+/* ── Mode Body ── */
+.mode-body { margin-bottom: 14px; }
 
 /* ── EXP Bonus section ── */
 .bonus-section {
   background: rgba(167,139,250,0.05);
   border: 1px solid rgba(167,139,250,0.25);
-  border-radius: 5px;
-  padding: 14px 16px;
-  margin-bottom: 14px;
+  border-radius: 5px; padding: 14px 16px; margin-bottom: 14px;
 }
 .bonus-header {
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 10px; flex-wrap: wrap; gap: 8px;
 }
 .bonus-title {
-  font-size: 11px; font-weight: 600; color: #a78bfa;
+  font-size: 11px; font-weight: 600; color: var(--purple);
   letter-spacing: 1.5px; text-transform: uppercase;
   display: flex; align-items: center; gap: 6px;
 }
-.bonus-title::before { content: ''; display: block; width: 3px; height: 11px; background: #a78bfa; border-radius: 2px; }
+.bonus-title::before { content: ''; display: block; width: 3px; height: 11px; background: var(--purple); border-radius: 2px; }
 .bonus-total-badge {
   font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700;
-  color: #a78bfa; background: rgba(167,139,250,0.12);
-  border: 1px solid rgba(167,139,250,0.3); border-radius: 4px;
-  padding: 3px 10px;
+  color: var(--purple); background: rgba(167,139,250,0.12);
+  border: 1px solid rgba(167,139,250,0.3); border-radius: 4px; padding: 3px 10px;
 }
 .bonus-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
 .bonus-item { display: flex; flex-direction: column; gap: 4px; }
@@ -218,12 +246,20 @@ input[type=range]::-moz-range-thumb {
   background: var(--bg-card); border: 1px solid rgba(167,139,250,0.2);
   border-radius: 4px; padding: 7px 10px;
   font-family: 'Sarabun', sans-serif; font-size: 14px; font-weight: 500;
-  color: #a78bfa; outline: none; -moz-appearance: textfield;
-  transition: border-color .2s;
+  color: var(--purple); outline: none; -moz-appearance: textfield; transition: border-color .2s;
 }
-.bonus-item input:focus { border-color: #a78bfa; box-shadow: 0 0 0 2px rgba(167,139,250,0.1); }
+.bonus-item input:focus { border-color: var(--purple); box-shadow: 0 0 0 2px rgba(167,139,250,0.1); }
 .bonus-item input::-webkit-inner-spin-button,
 .bonus-item input::-webkit-outer-spin-button { -webkit-appearance: none; }
+.bonus-item select {
+  background: var(--bg-card); border: 1px solid rgba(167,139,250,0.2);
+  border-radius: 4px; padding: 7px 10px;
+  font-family: 'Sarabun', sans-serif; font-size: 14px; font-weight: 500;
+  color: var(--purple); outline: none; cursor: pointer;
+  -webkit-appearance: none; appearance: none;
+  background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22 viewBox=%220 0 12 8%22%3E%3Cpath fill=%22%23a78bfa%22 d=%22M6 8L0 0h12z%22/%3E%3C/svg%3E');
+  background-repeat: no-repeat; background-position: right 10px center; padding-right: 28px;
+}
 .bonus-quick { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
 .bonus-quick-label { font-size: 10px; color: var(--text-dim); letter-spacing: 0.8px; text-transform: uppercase; }
 .bbtn {
@@ -231,24 +267,42 @@ input[type=range]::-moz-range-thumb {
   background: var(--bg-card); border: 1px solid rgba(167,139,250,0.2);
   border-radius: 3px; color: #8b74d4; transition: all .15s;
 }
-.bbtn:hover { border-color: #a78bfa; color: #a78bfa; background: rgba(167,139,250,0.08); }
+.bbtn:hover { border-color: var(--purple); color: var(--purple); background: rgba(167,139,250,0.08); }
 
-/* EXP after bonus display */
-.exp-bonus-result {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px;
-}
+/* EXP before/after bonus */
+.exp-bonus-result { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
 .exp-bonus-card {
   background: var(--bg-card); border: 1px solid var(--border); border-radius: 5px; padding: 11px 13px;
   position: relative; overflow: hidden;
 }
 .exp-bonus-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; }
-.exp-bonus-card.base::after   { background: var(--text-sec); }
-.exp-bonus-card.boosted::after { background: #a78bfa; }
+.exp-bonus-card.base::after    { background: var(--text-sec); }
+.exp-bonus-card.boosted::after { background: var(--purple); }
 .exp-bonus-clabel { font-size: 10px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
 .exp-bonus-cval { font-family: 'Cinzel', serif; font-size: 14px; font-weight: 600; color: var(--text-pri); line-height: 1.2; }
-.exp-bonus-card.boosted .exp-bonus-cval { color: #a78bfa; }
-.exp-bonus-arrow { display: flex; align-items: center; justify-content: center; color: #a78bfa; font-size: 18px; }
+.exp-bonus-card.boosted .exp-bonus-cval { color: var(--purple); }
 
+/* Result box for modes 2 & 3 */
+.result-lv-box {
+  background: rgba(45,212,160,0.05); border: 1px solid var(--teal-dim);
+  border-radius: 6px; padding: 16px; text-align: center; margin-bottom: 12px;
+}
+.result-lv-box .rlb-label { font-size: 11px; color: var(--text-sec); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+.result-lv-box .rlb-val { font-family: 'Cinzel', serif; font-size: 38px; font-weight: 700; color: var(--teal); line-height: 1; }
+.result-lv-box .rlb-gain { font-size: 13px; color: var(--gold); margin-top: 6px; }
+.result-lv-box .rlb-pct  { font-size: 12px; color: var(--text-sec); margin-top: 3px; }
+.prog-track { height: 8px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+.prog-fill  { height: 100%; background: var(--teal); border-radius: 4px; transition: width .3s; }
+
+/* Quest range selector */
+.div-label {
+  font-size: 11px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase;
+  margin: 14px 0 10px; display: flex; align-items: center; gap: 10px;
+}
+.div-label::before, .div-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.range-info { font-size: 12px; color: var(--teal); min-height: 18px; margin-bottom: 8px; line-height: 1.6; }
+
+/* Quest table */
 .table-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
 .toggle-group { display: flex; gap: 4px; }
 .tbtn {
@@ -275,15 +329,20 @@ thead th {
 }
 tbody td { padding: 8px 12px; border-bottom: 1px solid rgba(42,48,69,0.5); color: var(--text-sec); font-size: 13px; white-space: nowrap; }
 tbody tr:hover td { background: var(--bg-hover); color: var(--text-pri); }
-tbody tr.row-cur td  { background: rgba(45,212,160,0.07); color: var(--teal); font-weight: 600; }
-tbody tr.row-goal td { background: rgba(91,156,246,0.07); color: var(--blue); font-weight: 600; }
+tbody tr.row-cur td   { background: rgba(45,212,160,0.07); color: var(--teal); font-weight: 600; }
+tbody tr.row-goal td  { background: rgba(91,156,246,0.07); color: var(--blue); font-weight: 600; }
 tbody tr.row-cur:hover td  { background: rgba(45,212,160,0.12); }
 tbody tr.row-goal:hover td { background: rgba(91,156,246,0.12); }
+tbody tr.first-q td { background: rgba(45,212,160,0.06); }
+tbody tr.last-q td  { background: rgba(91,156,246,0.06); }
 td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px; }
 .tag-est { display: inline-block; font-size: 9px; padding: 1px 5px; background: rgba(45,212,160,0.12); border: 1px solid var(--teal-dim); border-radius: 2px; color: var(--teal-dim); font-family: 'Sarabun', sans-serif; font-weight: 500; vertical-align: middle; margin-left: 4px; }
 .row-badge { font-size: 10px; padding: 1px 6px; border-radius: 2px; margin-left: 6px; font-family: 'Sarabun', sans-serif; font-weight: 400; vertical-align: middle; }
 .row-cur .row-badge  { background: rgba(45,212,160,0.2); color: var(--teal); border: 1px solid var(--teal-dim); }
 .row-goal .row-badge { background: rgba(91,156,246,0.2); color: var(--blue); border: 1px solid var(--blue-dim); }
+.badge { font-size: 9px; padding: 1px 5px; border-radius: 2px; margin-left: 4px; vertical-align: middle; }
+.badge-start { background: rgba(45,212,160,0.15); border: 1px solid var(--teal-dim); color: var(--teal); }
+.badge-end   { background: rgba(91,156,246,0.15); border: 1px solid var(--blue-dim); color: var(--blue); }
 
 .hint { display: flex; gap: 10px; background: rgba(201,168,76,0.05); border: 1px solid var(--gold-dim); border-radius: 5px; padding: 12px 14px; margin-bottom: 16px; font-size: 13px; color: var(--text-sec); line-height: 1.6; }
 .hint-icon { color: var(--gold); font-size: 15px; flex-shrink: 0; margin-top: 1px; }
@@ -311,14 +370,15 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
 .site-footer { text-align: center; padding-top: 32px; border-top: 1px solid var(--border); margin-top: 32px; font-size: 12px; color: var(--text-dim); }
 
 @media (max-width: 560px) {
-  .input-grid, .stat-grid, .farm-grid { grid-template-columns: 1fr 1fr; }
+  .input-grid, .stat-grid { grid-template-columns: 1fr 1fr; }
   .stat-grid { grid-template-columns: 1fr 1fr 1fr; }
   .bonus-grid { grid-template-columns: 1fr 1fr; }
   .exp-bonus-result { grid-template-columns: 1fr; }
+  .input-grid-3 { grid-template-columns: 1fr 1fr; }
+  .mode-tab .mt-sub { display: none; }
 }
 @media (max-width: 420px) {
   .stat-grid { grid-template-columns: 1fr 1fr; }
-  .farm-grid { grid-template-columns: 1fr 1fr; }
   .bonus-grid { grid-template-columns: 1fr 1fr; }
 }
 </style>
@@ -366,27 +426,8 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <div class="input-grid">
       <div class="field">
         <label>เลเวลปัจจุบัน</label>
-        <input type="number" id="cur-lv" min="1" max="404" value="15" oninput="calc()">
+        <input type="number" id="cur-lv" min="1" max="404" value="15" oninput="onCharChange()">
       </div>
-      <div class="field">
-        <label>เลเวลเป้าหมาย</label>
-        <input type="number" id="goal-lv" min="2" max="405" value="405" oninput="calc()">
-      </div>
-    </div>
-    <div class="quick-row">
-      <span class="quick-label">เป้าหมายด่วน</span>
-      <button class="qbtn" onclick="setGoal(140)">140</button>
-      <button class="qbtn" onclick="setGoal(160)">160</button>
-      <button class="qbtn" onclick="setGoal(180)">180</button>
-      <button class="qbtn" onclick="setGoal(200)">200</button>
-      <button class="qbtn" onclick="setGoal(220)">220</button>
-      <button class="qbtn" onclick="setGoal(240)">240</button>
-      <button class="qbtn" onclick="setGoal(260)">260</button>
-      <button class="qbtn" onclick="setGoal(280)">280</button>
-      <button class="qbtn" onclick="setGoal(300)">300</button>
-      <button class="qbtn" onclick="setGoal(320)">320</button>
-      <button class="qbtn" onclick="setGoal(340)">340</button>
-      <button class="qbtn max" onclick="setGoal(405)">405 MAX</button>
     </div>
     <div class="slider-section">
       <div class="slider-label-row">
@@ -419,42 +460,146 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     </div>
   </div>
 
-  <!-- Stats -->
-  <div class="stat-grid">
-    <div class="stat-card green"><div class="stat-label">EXP ที่ต้องการอีก</div><div class="stat-value" id="exp-needed">—</div></div>
-    <div class="stat-card blue"><div class="stat-label">EXP สะสมรวมถึงเป้า</div><div class="stat-value" id="cum-goal">—</div></div>
-    <div class="stat-card amber"><div class="stat-label">EXP สะสมปัจจุบัน (รวม % bar)</div><div class="stat-value" id="cum-current">—</div></div>
-  </div>
-
-  <!-- Farm Estimator -->
+  <!-- ══ UNIFIED FARM / ESTIMATOR PANEL ══ -->
   <div class="panel">
-    <div class="panel-title">ประมาณเวลาฟาร์ม</div>
-    <div class="input-grid" style="margin-bottom:14px">
-      <div class="field">
-        <label>EXP ต่อ kill (ก่อน bonus)</label>
-        <input type="number" id="mob-exp" min="1" value="1" oninput="calc()">
+    <div class="panel-title">ประมาณการฟาร์ม</div>
+
+    <!-- Mode Tabs -->
+    <div class="mode-tabs">
+      <div class="mode-tab active" id="mtab-1" onclick="setFarmMode(1)">
+        <span class="mt-icon">⏱</span>
+        <span class="mt-title">โหมด 1</span>
+        <span class="mt-sub">เวลาถึง Lv เป้า</span>
       </div>
-      <div class="field">
-        <label>วินาที / kill</label>
-        <input type="number" id="kill-time" min="1" value="1" oninput="calc()">
+      <div class="mode-tab" id="mtab-2" onclick="setFarmMode(2)">
+        <span class="mt-icon">⚔</span>
+        <span class="mt-title">โหมด 2</span>
+        <span class="mt-sub">Lv จากเวลาฟาร์ม</span>
+      </div>
+      <div class="mode-tab" id="mtab-3" onclick="setFarmMode(3)">
+        <span class="mt-icon">📜</span>
+        <span class="mt-title">โหมด 3</span>
+        <span class="mt-sub">Lv จาก Quest</span>
       </div>
     </div>
 
-    <!-- EXP Bonus Section -->
+    <!-- ── Mode 1: shared kill inputs + goal already in char panel ── -->
+    <div class="mode-body" id="mbody-1">
+      <div class="input-grid" style="margin-bottom:0">
+        <div class="field">
+          <label>EXP ต่อ kill (ก่อน bonus)</label>
+          <input type="number" id="mob-exp" min="1" value="1" oninput="calcMode1()">
+        </div>
+        <div class="field">
+          <label>วินาที / kill</label>
+          <input type="number" id="kill-time" min="1" value="1" oninput="calcMode1()">
+        </div>
+        <div class="field">
+          <label>เลเวลเป้าหมาย <span style="font-size:10px;color:var(--text-dim)">(max405)</span></label>
+          <input type="number" id="goal-lv" min="2" max="405" value="405" oninput="onCharChange()">
+        </div>
+      </div>
+      <div class="quick-row">
+          <span class="quick-label">เป้าหมายด่วน</span>
+          <button class="qbtn" onclick="setGoal(140)">140</button>
+          <button class="qbtn" onclick="setGoal(160)">160</button>
+          <button class="qbtn" onclick="setGoal(180)">180</button>
+          <button class="qbtn" onclick="setGoal(200)">200</button>
+          <button class="qbtn" onclick="setGoal(220)">220</button>
+          <button class="qbtn" onclick="setGoal(240)">240</button>
+          <button class="qbtn" onclick="setGoal(260)">260</button>
+          <button class="qbtn" onclick="setGoal(280)">280</button>
+          <button class="qbtn" onclick="setGoal(300)">300</button>
+          <button class="qbtn" onclick="setGoal(320)">320</button>
+          <button class="qbtn" onclick="setGoal(340)">340</button>
+          <button class="qbtn max" onclick="setGoal(405)">405 MAX</button>
+        </div>
+    </div>
+
+    <!-- ── Mode 2: hours input ── -->
+    <div class="mode-body" id="mbody-2" style="display:none">
+      <div class="input-grid" style="margin-bottom:8px">
+        <div class="field">
+          <label>เวลาที่จะฟาร์ม (ชั่วโมง)</label>
+          <input type="number" id="farm-hours" min="0" value="10" oninput="calcMode2()">
+        </div>
+        <div class="field">
+          <label>วินาที / kill</label>
+          <input type="number" id="kill-time-2" min="1" value="1" oninput="calcMode2()">
+        </div>
+      </div>
+      <div class="input-grid" style="margin-bottom:8px">
+        <div class="field">
+          <label>EXP ต่อ kill (ก่อน bonus)</label>
+          <input type="number" id="mob-exp-2" min="1" value="1" oninput="calcMode2()">
+        </div>
+      </div>
+      <div class="quick-row" style="margin-bottom:0">
+        <span class="quick-label">เวลาด่วน</span>
+        <button class="qbtn" onclick="setHours(1)">1 ชม.</button>
+        <button class="qbtn" onclick="setHours(3)">3 ชม.</button>
+        <button class="qbtn" onclick="setHours(5)">5 ชม.</button>
+        <button class="qbtn" onclick="setHours(10)">10 ชม.</button>
+        <button class="qbtn" onclick="setHours(24)">1 วัน</button>
+        <button class="qbtn" onclick="setHours(72)">3 วัน</button>
+        <button class="qbtn" onclick="setHours(168)">7 วัน</button>
+      </div>
+    </div>
+
+    <!-- ── Mode 3: Quest selector ── -->
+    <div class="mode-body" id="mbody-3" style="display:none">
+      <div id="quest-loading" style="text-align:center;padding:16px;font-size:13px;color:var(--text-dim)">
+        ⏳ กำลังโหลดข้อมูล Quest…
+      </div>
+      <div id="quest-selector" style="display:none">
+        <div class="div-label">เริ่มที่</div>
+        <div class="input-grid-3">
+          <div class="field"><label>Episode</label><select id="sel-ep-from" onchange="onEpChange('from')"></select></div>
+          <div class="field"><label>บท (Chapter)</label><select id="sel-ch-from" onchange="onChChange('from')"></select></div>
+          <div class="field"><label>มิชชั่น</label><select id="sel-ms-from" onchange="calcMode3()"></select></div>
+        </div>
+        <div class="div-label">จบที่</div>
+        <div class="input-grid-3">
+          <div class="field"><label>Episode</label><select id="sel-ep-to" onchange="onEpChange('to')"></select></div>
+          <div class="field"><label>บท (Chapter)</label><select id="sel-ch-to" onchange="onChChange('to')"></select></div>
+          <div class="field"><label>มิชชั่น</label><select id="sel-ms-to" onchange="calcMode3()"></select></div>
+        </div>
+        <div class="range-info" id="ep-range-info"></div>
+        <div style="margin-top:4px">
+          <button class="tbtn" id="qlist-btn" onclick="toggleQList()" style="font-size:11px">▼ ดูรายชื่อ Mission ในช่วงที่เลือก</button>
+        </div>
+        <div id="qlist-wrap" style="display:none;margin-top:10px">
+          <div class="table-wrap" style="max-height:220px">
+            <table>
+              <thead><tr>
+                <th>#</th><th>EP</th><th>บท</th>
+                <th style="min-width:160px">Mission</th>
+                <th style="text-align:right">EXP</th>
+                <th style="text-align:right">EXP สะสม</th>
+              </tr></thead>
+              <tbody id="qlist-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Shared EXP Bonus (modes 1 & 2 only) ── -->
+    <div id="bonus-section-wrap">
     <div class="bonus-section">
       <div class="bonus-header">
-        <div class="bonus-title">✦ EXPโบนัส %</div>
+        <div class="bonus-title">✦ EXP โบนัส %</div>
         <div class="bonus-total-badge">รวม +<span id="bonus-total">0</span>%</div>
       </div>
       <div class="bonus-grid">
         <div class="bonus-item">
           <label>คอร์ส</label>
-          <input type="number" id="bonus-premium" min="0" max="999" value="0" placeholder="0" oninput="calc()">
+          <input type="number" id="bonus-premium" min="0" max="999" value="0" placeholder="0" oninput="onBonusChange()">
         </div>
         <div class="bonus-item">
-          <label>กิลด์บัฟexp Lv (<span id="guild-pct-badge">0%</span>)</label>
-          <select id="bonus-guild" onchange="onGuildChange()" style="width:100%;background:#161a22;border:1px solid rgba(167,139,250,0.2);border-radius:4px;padding:7px 10px;font-family:'Sarabun',sans-serif;font-size:14px;font-weight:500;color:#a78bfa;outline:none;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22 viewBox=%220 0 12 8%22%3E%3Cpath fill=%22%23a78bfa%22 d=%22M6 8L0 0h12z%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;">
-            <option value="0">ไม่มีกิลด์บัฟexp</option>
+          <label>กิลด์บัฟ EXP Lv (<span id="guild-pct-badge">0%</span>)</label>
+          <select id="bonus-guild" onchange="onGuildChange()">
+            <option value="0">ไม่มีกิลด์บัฟ</option>
             <option value="1">Lv 1 (+1%)</option>
             <option value="2">Lv 2 (+2%)</option>
             <option value="3">Lv 3 (+3%)</option>
@@ -469,17 +614,16 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
         </div>
         <div class="bonus-item">
           <label>อีเว้นท์ / ไอเท็ม / สมุด</label>
-          <input type="number" id="bonus-event" min="0" max="999" value="0" placeholder="0" oninput="calc()">
+          <input type="number" id="bonus-event" min="0" max="999" value="0" placeholder="0" oninput="onBonusChange()">
         </div>
       </div>
       <div class="bonus-quick" style="margin-bottom:12px">
         <span class="bonus-quick-label">ปุ่มด่วน</span>
         <button class="bbtn" onclick="setBonus(0,0,0)">ไม่มี</button>
         <button class="bbtn" onclick="setBonus(150,0,0)">คอร์สครบ</button>
-        <button class="bbtn" onclick="setBonus(0,10,0)">โบนัสกิลด์LV10</button>
-        <button class="bbtn" onclick="setBonus(150,10,0)">คอร์สครบ+โบนัสกิลด์LV10</button>
+        <button class="bbtn" onclick="setBonus(0,10,0)">กิลด์ LV10</button>
+        <button class="bbtn" onclick="setBonus(150,10,0)">คอร์สครบ+กิลด์ LV10</button>
       </div>
-      <!-- EXP before/after bonus -->
       <div class="exp-bonus-result" id="exp-bonus-result-wrap" style="display:none">
         <div class="exp-bonus-card base">
           <div class="exp-bonus-clabel">EXP / Kill (ก่อนโบนัส)</div>
@@ -491,14 +635,55 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
         </div>
       </div>
     </div>
-
-    <div class="farm-grid">
-      <div class="stat-card white"><div class="stat-label">จำนวน Kill</div><div class="stat-value" id="kills">—</div></div>
-      <div class="stat-card white"><div class="stat-label">เวลาโดยประมาณ</div><div class="stat-value" style="font-size:13px" id="farm-time">—</div></div>
-      <div class="stat-card white"><div class="stat-label">EXP / ชั่วโมง (หลัง bonus)</div><div class="stat-value" id="exp-hr">—</div></div>
+    </div><!-- end bonus-section-wrap -->
+    <!-- ── Results: Mode 1 ── -->
+    <div id="result-1">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+        <div class="stat-card white"><div class="stat-label">จำนวนมอนเตอร์</div><div class="stat-value" id="kills">—</div></div>
+        <div class="stat-card white"><div class="stat-label">เวลาโดยประมาณ</div><div class="stat-value" style="font-size:13px" id="farm-time">—</div></div>
+        <div class="stat-card white"><div class="stat-label">EXP / ชั่วโมง (หลังโบนัส)</div><div class="stat-value" id="exp-hr">—</div></div>
+        <!-- Stats (Mode 1 summary) -->
+        <div class="stat-card green"><div class="stat-label">EXP ที่ต้องการอีก</div><div class="stat-value" id="exp-needed">—</div></div>
+        <div class="stat-card blue"><div class="stat-label">EXP สะสมรวมถึงเป้า</div><div class="stat-value" id="cum-goal">—</div></div>
+        <div class="stat-card amber"><div class="stat-label">EXP สะสมปัจจุบัน (รวม % bar)</div><div class="stat-value" id="cum-current">—</div></div>
+      </div>
     </div>
-  </div>
 
+    <!-- ── Results: Mode 2 ── -->
+    <div id="result-2" style="display:none">
+      <div class="result-lv-box">
+        <div class="rlb-label">เลเวลที่จะถึงหลังจากฟาร์ม</div>
+        <div class="rlb-val" id="m2-reach-lv">—</div>
+        <div class="rlb-gain" id="m2-reach-diff">—</div>
+        <div class="rlb-pct" id="m2-reach-pct">—</div>
+        <div class="prog-track"><div class="prog-fill" id="m2-pbar" style="width:0%"></div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+        <div class="stat-card purple"><div class="stat-label">EXP/Kill (หลังโบนัส)</div><div class="stat-value" id="m2-exp-boosted">—</div></div>
+        <div class="stat-card amber"><div class="stat-label">จำนวนมอนเตอร์</div><div class="stat-value" id="m2-kills">—</div></div>
+        <div class="stat-card blue"><div class="stat-label">คาดการณ์EXP รวมที่ได้</div><div class="stat-value" id="m2-total-exp">—</div></div>
+      </div>
+    </div>
+
+    <!-- ── Results: Mode 3 ── -->
+    <div id="result-3" style="display:none">
+      <div class="result-lv-box">
+        <div class="rlb-label">เลเวลที่จะได้หลังทำเควสครบ</div>
+        <div class="rlb-val" id="m3-reach-lv">—</div>
+        <div class="rlb-gain" id="m3-reach-diff">—</div>
+        <div class="rlb-pct" id="m3-reach-pct">—</div>
+        <div class="prog-track"><div class="prog-fill" id="m3-pbar" style="width:0%"></div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+        <div class="stat-card green"><div class="stat-label">EXP จากเควส</div><div class="stat-value" id="m3-quest-exp">—</div></div>
+        <div class="stat-card amber"><div class="stat-label">จำนวนมิชชั่น</div><div class="stat-value" id="m3-count">—</div></div>
+        <div class="stat-card blue"><div class="stat-label">EXP สะสมหลังจบ</div><div class="stat-value" id="m3-new-cum">—</div></div>
+      </div>
+    </div>
+
+  </div><!-- end farm panel -->
+
+  
   <!-- Save Button -->
   <div class="save-btn-wrap">
     <button class="save-btn" id="btn-save-image" onclick="saveImage()">
@@ -534,83 +719,163 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
   </footer>
 </div>
 
-<!-- Export card -->
-<div id="export-card">
+<!-- Export card Mode 1: EXP needed + farm time -->
+<div id="export-card-1" style="position:fixed;top:-9999px;left:-9999px;width:480px;background:#0a0c10;color:#e8e4d8;padding:28px 24px 24px;border:2px solid #3d5080;border-radius:12px;font-family:'Sarabun',sans-serif;">
   <div style="text-align:center;border-bottom:1px solid #c9a84c;padding-bottom:14px;margin-bottom:20px;">
     <div style="font-family:'Cinzel',serif;color:#c9a84c;font-size:20px;letter-spacing:2px;font-weight:700;">✦ IRUNA ONLINE TH ✦</div>
-    <div style="font-size:12px;color:#8a8fa8;letter-spacing:1px;margin-top:4px;">EXP CALCULATOR RESULT</div>
+    <div style="font-size:12px;color:#8a8fa8;letter-spacing:1px;margin-top:4px;">MODE 1 · EXP &amp; FARM TIME</div>
   </div>
   <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(61,80,128,0.12);border:1px solid #2a3045;border-radius:8px;padding:16px 20px;margin-bottom:16px;">
     <div style="text-align:center;flex:1;">
       <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลปัจจุบัน</div>
-      <div style="font-family:'Cinzel',serif;font-size:30px;color:#2dd4a0;font-weight:700;line-height:1;">Lv <span id="ec-cur-lv">—</span></div>
+      <div style="font-family:'Cinzel',serif;font-size:30px;color:#2dd4a0;font-weight:700;line-height:1;">Lv <span id="ec1-cur-lv">—</span></div>
       <div style="margin-top:8px;">
         <div style="font-size:10px;color:#555b72;margin-bottom:4px;">% EXP in level</div>
         <div style="height:6px;background:#161a22;border:1px solid #2a3045;border-radius:3px;overflow:hidden;">
-          <div id="ec-pbar" style="height:100%;background:linear-gradient(90deg,#1a7a5e,#2dd4a0);border-radius:3px;width:0%;"></div>
+          <div id="ec1-pbar" style="height:100%;background:linear-gradient(90deg,#1a7a5e,#2dd4a0);border-radius:3px;width:0%;"></div>
         </div>
-        <div id="ec-pct-txt" style="font-family:'Cinzel',serif;font-size:13px;color:#2dd4a0;margin-top:3px;">0%</div>
+        <div id="ec1-pct-txt" style="font-family:'Cinzel',serif;font-size:13px;color:#2dd4a0;margin-top:3px;">0%</div>
       </div>
     </div>
     <div style="font-size:22px;color:#c9a84c;padding:0 16px;">➜</div>
     <div style="text-align:center;flex:1;">
       <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลเป้าหมาย</div>
-      <div style="font-family:'Cinzel',serif;font-size:30px;color:#5b9cf6;font-weight:700;line-height:1;">Lv <span id="ec-goal-lv">—</span></div>
+      <div style="font-family:'Cinzel',serif;font-size:30px;color:#5b9cf6;font-weight:700;line-height:1;">Lv <span id="ec1-goal-lv">—</span></div>
     </div>
   </div>
   <div style="background:#161a22;border:1px solid #2a3045;border-radius:6px;padding:12px 16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
     <span style="font-size:13px;color:#8a8fa8;">EXP ที่ต้องการอีก</span>
-    <span id="ec-exp-needed" style="font-family:'Cinzel',serif;font-size:18px;color:#c9a84c;font-weight:700;">—</span>
+    <span id="ec1-exp-needed" style="font-family:'Cinzel',serif;font-size:18px;color:#c9a84c;font-weight:700;">—</span>
   </div>
   <div style="background:#161a22;border:1px solid #2a3045;border-radius:6px;padding:14px 16px;margin-bottom:12px;">
     <div style="font-size:10px;color:#555b72;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">ประมาณเวลาฟาร์ม</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;">
-      <div style="display:flex;justify-content:space-between;">
-        <span style="font-size:12px;color:#8a8fa8;">EXP / Kill (ก่อน)</span>
-        <span id="ec-mob-exp" style="font-size:12px;color:#e8e4d8;font-weight:600;">—</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;">
-        <span style="font-size:12px;color:#8a8fa8;">EXP / Kill (หลัง)</span>
-        <span id="ec-mob-exp-boosted" style="font-size:12px;color:#a78bfa;font-weight:600;">—</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;">
-        <span style="font-size:12px;color:#8a8fa8;">EXP Bonus รวม</span>
-        <span id="ec-bonus-total" style="font-size:12px;color:#a78bfa;font-weight:600;">—</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;">
-        <span style="font-size:12px;color:#8a8fa8;">วินาที / Kill</span>
-        <span id="ec-kill-time" style="font-size:12px;color:#e8e4d8;font-weight:600;">—</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;">
-        <span style="font-size:12px;color:#8a8fa8;">จำนวน Kill</span>
-        <span id="ec-kills" style="font-size:12px;color:#e8e4d8;font-weight:600;">—</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;">
-        <span style="font-size:12px;color:#8a8fa8;">EXP / ชั่วโมง</span>
-        <span id="ec-exp-hr" style="font-size:12px;color:#e8e4d8;font-weight:600;">—</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;grid-column:1/-1;">
-        <span style="font-size:12px;color:#8a8fa8;">เวลาโดยประมาณ</span>
-        <span id="ec-farm-time" style="font-size:12px;color:#e8c96a;font-weight:700;">—</span>
-      </div>
+      <div style="display:flex;justify-content:space-between;"><span style="font-size:12px;color:#8a8fa8;">EXP / Kill (ก่อน)</span><span id="ec1-mob-exp" style="font-size:12px;color:#e8e4d8;font-weight:600;">—</span></div>
+      <div style="display:flex;justify-content:space-between;"><span style="font-size:12px;color:#8a8fa8;">EXP / Kill (หลัง)</span><span id="ec1-mob-exp-boosted" style="font-size:12px;color:#a78bfa;font-weight:600;">—</span></div>
+      <div style="display:flex;justify-content:space-between;"><span style="font-size:12px;color:#8a8fa8;">EXP Bonus รวม</span><span id="ec1-bonus-total" style="font-size:12px;color:#a78bfa;font-weight:600;">—</span></div>
+      <div style="display:flex;justify-content:space-between;"><span style="font-size:12px;color:#8a8fa8;">วินาที / Kill</span><span id="ec1-kill-time" style="font-size:12px;color:#e8e4d8;font-weight:600;">—</span></div>
+      <div style="display:flex;justify-content:space-between;"><span style="font-size:12px;color:#8a8fa8;">จำนวน Kill</span><span id="ec1-kills" style="font-size:12px;color:#e8e4d8;font-weight:600;">—</span></div>
+      <div style="display:flex;justify-content:space-between;"><span style="font-size:12px;color:#8a8fa8;">EXP / ชั่วโมง</span><span id="ec1-exp-hr" style="font-size:12px;color:#e8e4d8;font-weight:600;">—</span></div>
+      <div style="display:flex;justify-content:space-between;grid-column:1/-1;"><span style="font-size:12px;color:#8a8fa8;">เวลาโดยประมาณ</span><span id="ec1-farm-time" style="font-size:12px;color:#e8c96a;font-weight:700;">—</span></div>
     </div>
   </div>
-  <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #2a3045;padding-top:14px;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #2a3045;padding-top:14px;">
     <div>
-      <div style="font-size:10px;color:#555b72;margin-bottom:3px;" id="ec-ts">—</div>
+      <div style="font-size:10px;color:#555b72;margin-bottom:3px;" id="ec1-ts">—</div>
       <div style="font-size:10px;color:#555b72;">peerapa13.github.io/iruna_class_skill/exp_calculator</div>
     </div>
     <div style="text-align:center;">
-      <div id="ec-qr" style="background:#fff;padding:4px;border-radius:4px;display:inline-block;"></div>
+      <div id="ec1-qr" style="background:#fff;padding:4px;border-radius:4px;display:inline-block;"></div>
+      <div style="font-size:9px;color:#555b72;margin-top:3px;">สแกนเพื่อเข้าเว็บ</div>
+    </div>
+  </div>
+</div>
+
+<!-- Export card Mode 2: Level from farm time -->
+<div id="export-card-2" style="position:fixed;top:-9999px;left:-9999px;width:480px;background:#0a0c10;color:#e8e4d8;padding:28px 24px 24px;border:2px solid #3d5080;border-radius:12px;font-family:'Sarabun',sans-serif;">
+  <div style="text-align:center;border-bottom:1px solid #c9a84c;padding-bottom:14px;margin-bottom:20px;">
+    <div style="font-family:'Cinzel',serif;color:#c9a84c;font-size:20px;letter-spacing:2px;font-weight:700;">✦ IRUNA ONLINE TH ✦</div>
+    <div style="font-size:12px;color:#8a8fa8;letter-spacing:1px;margin-top:4px;">MODE 2 · ปณะมาณเลเวลจากเวลาในการฟาร์ม</div>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(61,80,128,0.12);border:1px solid #2a3045;border-radius:8px;padding:16px 20px;margin-bottom:16px;">
+    <div style="text-align:center;flex:1;">
+      <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลปัจจุบัน</div>
+      <div style="font-family:'Cinzel',serif;font-size:30px;color:#2dd4a0;font-weight:700;line-height:1;">Lv <span id="ec2-cur-lv">—</span></div>
+      <div style="margin-top:8px;">
+        <div style="font-size:10px;color:#555b72;margin-bottom:4px;">% EXP ในเลเวลนี้</div>
+        <div style="height:6px;background:#161a22;border:1px solid #2a3045;border-radius:3px;overflow:hidden;">
+          <div id="ec2-pbar" style="height:100%;background:linear-gradient(90deg,#1a7a5e,#2dd4a0);border-radius:3px;width:0%;"></div>
+        </div>
+        <div id="ec2-pct-txt" style="font-family:'Cinzel',serif;font-size:13px;color:#2dd4a0;margin-top:3px;">0%</div>
+      </div>
+    </div>
+    <div style="font-size:22px;color:#c9a84c;padding:0 16px;">➜</div>
+    <div style="text-align:center;flex:1;">
+      <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลเป้าหมาย</div>
+      <div style="font-family:'Cinzel',serif;font-size:30px;color:#5b9cf6;font-weight:700;line-height:1;">Lv <span id="ec2-reach-lv">—</span></div>
+    </div>
+  </div>
+  <div style="background:#161a22;border:1px solid #2a3045;border-radius:6px;padding:14px 16px;margin-bottom:12px;">
+    <div style="font-size:10px;color:#555b72;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">ข้อมูลการฟาร์ม</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;">
+      <div style="display:flex;justify-content:space-between;"><span style="font-size:12px;color:#8a8fa8;">เวลาฟาร์ม</span><span id="ec2-farm-hours" style="font-size:12px;color:#e8c96a;font-weight:700;">—</span></div>
+      <div style="display:flex;justify-content:space-between;"><span style="font-size:12px;color:#8a8fa8;">EXP Bonus รวม</span><span id="ec2-bonus-total" style="font-size:12px;color:#a78bfa;font-weight:600;">—</span></div>
+      <div style="display:flex;justify-content:space-between;"><span style="font-size:12px;color:#8a8fa8;">EXP / Kill (ก่อน)</span><span id="ec2-mob-exp" style="font-size:12px;color:#e8e4d8;font-weight:600;">—</span></div>
+      <div style="display:flex;justify-content:space-between;"><span style="font-size:12px;color:#8a8fa8;">EXP / Kill (หลัง)</span><span id="ec2-mob-exp-boosted" style="font-size:12px;color:#a78bfa;font-weight:600;">—</span></div>
+      <div style="display:flex;justify-content:space-between;"><span style="font-size:12px;color:#8a8fa8;">วินาที / Kill</span><span id="ec2-kill-time" style="font-size:12px;color:#e8e4d8;font-weight:600;">—</span></div>
+      <div style="display:flex;justify-content:space-between;"><span style="font-size:12px;color:#8a8fa8;">จำนวน Kill</span><span id="ec2-kills" style="font-size:12px;color:#e8e4d8;font-weight:600;">—</span></div>
+      <div style="display:flex;justify-content:space-between;grid-column:1/-1;"><span style="font-size:12px;color:#8a8fa8;">EXP รวมที่ได้</span><span id="ec2-total-exp" style="font-size:12px;color:#2dd4a0;font-weight:700;">—</span></div>
+    </div>
+  </div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #2a3045;padding-top:14px;">
+    <div>
+      <div style="font-size:10px;color:#555b72;margin-bottom:3px;" id="ec2-ts">—</div>
+      <div style="font-size:10px;color:#555b72;">peerapa13.github.io/iruna_class_skill/exp_calculator</div>
+    </div>
+    <div style="text-align:center;">
+      <div id="ec2-qr" style="background:#fff;padding:4px;border-radius:4px;display:inline-block;"></div>
+      <div style="font-size:9px;color:#555b72;margin-top:3px;">สแกนเพื่อเข้าเว็บ</div>
+    </div>
+  </div>
+</div>
+
+<!-- Export card Mode 3: Level from Quest -->
+<div id="export-card-3" style="position:fixed;top:-9999px;left:-9999px;width:480px;background:#0a0c10;color:#e8e4d8;padding:28px 24px 24px;border:2px solid #3d5080;border-radius:12px;font-family:'Sarabun',sans-serif;">
+  <div style="text-align:center;border-bottom:1px solid #c9a84c;padding-bottom:14px;margin-bottom:20px;">
+    <div style="font-family:'Cinzel',serif;color:#c9a84c;font-size:20px;letter-spacing:2px;font-weight:700;">✦ IRUNA ONLINE TH ✦</div>
+    <div style="font-size:12px;color:#8a8fa8;letter-spacing:1px;margin-top:4px;">MODE 3 · เลเวลจากเควส</div>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(61,80,128,0.12);border:1px solid #2a3045;border-radius:8px;padding:16px 20px;margin-bottom:16px;">
+    <div style="text-align:center;flex:1;">
+      <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลปัจจุบัน</div>
+      <div style="font-family:'Cinzel',serif;font-size:30px;color:#2dd4a0;font-weight:700;line-height:1;">Lv <span id="ec3-cur-lv">—</span></div>
+      <div style="margin-top:8px;">
+        <div style="font-size:10px;color:#555b72;margin-bottom:4px;">% EXP ในเลเวลนี้</div>
+        <div style="height:6px;background:#161a22;border:1px solid #2a3045;border-radius:3px;overflow:hidden;">
+          <div id="ec3-pbar" style="height:100%;background:linear-gradient(90deg,#1a7a5e,#2dd4a0);border-radius:3px;width:0%;"></div>
+        </div>
+        <div id="ec3-pct-txt" style="font-family:'Cinzel',serif;font-size:13px;color:#2dd4a0;margin-top:3px;">0%</div>
+      </div>
+    </div>
+    <div style="font-size:22px;color:#c9a84c;padding:0 16px;">➜</div>
+    <div style="text-align:center;flex:1;">
+      <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลเป้าหมาย</div>
+      <div style="font-family:'Cinzel',serif;font-size:30px;color:#5b9cf6;font-weight:700;line-height:1;">Lv <span id="ec3-reach-lv">—</span></div>
+    </div>
+  </div>
+  <div style="background:#161a22;border:1px solid #2a3045;border-radius:6px;padding:14px 16px;margin-bottom:12px;">
+    <div style="font-size:10px;color:#555b72;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">ข้อมูลเควส</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;">
+      <div style="display:flex;justify-content:space-between;grid-column:1/-1;"><span style="font-size:12px;color:#8a8fa8;">ช่วง Quest</span><span id="ec3-quest-range" style="font-size:12px;color:#e8c96a;font-weight:600;text-align:right;max-width:260px;">—</span></div>
+      <div style="display:flex;justify-content:space-between;"><span style="font-size:12px;color:#8a8fa8;">EXP จาก Quest</span><span id="ec3-quest-exp" style="font-size:12px;color:#2dd4a0;font-weight:700;">—</span></div>
+      <div style="display:flex;justify-content:space-between;"><span style="font-size:12px;color:#8a8fa8;">จำนวน Mission</span><span id="ec3-count" style="font-size:12px;color:#e8e4d8;font-weight:600;">—</span></div>
+      <div style="display:flex;justify-content:space-between;grid-column:1/-1;"><span style="font-size:12px;color:#8a8fa8;">EXP สะสมหลังจบ</span><span id="ec3-new-cum" style="font-size:12px;color:#5b9cf6;font-weight:700;">—</span></div>
+    </div>
+  </div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #2a3045;padding-top:14px;">
+    <div>
+      <div style="font-size:10px;color:#555b72;margin-bottom:3px;" id="ec3-ts">—</div>
+      <div style="font-size:10px;color:#555b72;">peerapa13.github.io/iruna_class_skill/exp_calculator</div>
+    </div>
+    <div style="text-align:center;">
+      <div id="ec3-qr" style="background:#fff;padding:4px;border-radius:4px;display:inline-block;"></div>
       <div style="font-size:9px;color:#555b72;margin-top:3px;">สแกนเพื่อเข้าเว็บ</div>
     </div>
   </div>
 </div>
 
 <script>
-let RAW = {};
+// ─── Data ─────────────────────────────────────────────────────────────
+let RAW      = {};   // EXP_per_Level.json
+let EPISODES = [];   // EXP_main_Quests.json
+let ALL_MS   = [];   // flat mission list
+let questLoaded = false;
+let farmMode = 1;    // active mode: 1 | 2 | 3
+let tableMode = 'range';
+let qlistOpen = false;
 
-function fmt(n) { return Math.round(n).toLocaleString(); }
+// ─── Helpers ──────────────────────────────────────────────────────────
+const fmt = n => Math.round(n).toLocaleString();
 function fmtTime(sec) {
   if (!isFinite(sec) || sec <= 0) return '—';
   const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60);
@@ -620,89 +885,303 @@ function fmtTime(sec) {
   return `${h} ชม. ${m} นาที`;
 }
 
-function getGuildPct() {
-  // Guild Buff Lv 1-10 = +1% to +10%
-  return parseInt(document.getElementById('bonus-guild').value) || 0;
-}
-function onGuildChange() {
-  const lv = getGuildPct();
-  document.getElementById('guild-pct-badge').textContent = lv + '%';
-  calc();
-}
-function getBonusTotal() {
+function getCurLv()  { return Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1)); }
+function getGoalLv() { return Math.min(405, Math.max(getCurLv()+1, parseInt(document.getElementById('goal-lv').value) || getCurLv()+1)); }
+function getPct()    { return Math.min(99, Math.max(0, parseInt(document.getElementById('exp-pct').value) || 0)); }
+function getBonusPct() {
   const p = parseInt(document.getElementById('bonus-premium').value) || 0;
-  const g = getGuildPct();
+  const g = parseInt(document.getElementById('bonus-guild').value)   || 0;
   const e = parseInt(document.getElementById('bonus-event').value)   || 0;
   return p + g + e;
 }
-function setBonus(p, g, e) {
-  document.getElementById('bonus-premium').value = p;
-  // For guild, find closest valid level (0-10)
-  const gLv = Math.min(10, Math.max(0, g));
-  document.getElementById('bonus-guild').value = gLv;
-  document.getElementById('guild-pct-badge').textContent = gLv + '%';
-  document.getElementById('bonus-event').value   = e;
-  calc();
+function getCurTotal() {
+  const d = RAW[String(getCurLv())] || { exp: 0, cum: 0 };
+  return d.cum + Math.round(d.exp * (getPct() / 100));
+}
+function expToLevel(totalExp) {
+  for (let lv = 1; lv <= 404; lv++) {
+    const cur = RAW[String(lv)], next = RAW[String(lv+1)];
+    if (!next) return { lv, expInLv: totalExp - cur.cum };
+    if (totalExp >= cur.cum && totalExp < next.cum) return { lv, expInLv: totalExp - cur.cum };
+  }
+  return { lv: 405, expInLv: 0 };
 }
 
-let tableMode = 'range';
+// ─── Shared bonus UI ──────────────────────────────────────────────────
+function updateBonusDisplay() {
+  const bonus = getBonusPct();
+  const mobExpEl1 = document.getElementById('mob-exp');
+  const mobExpEl2 = document.getElementById('mob-exp-2');
+  const activeMobExpEl = farmMode === 2 ? mobExpEl2 : mobExpEl1;
+  const mobExp = Math.max(1, parseInt(activeMobExpEl?.value) || 1);
+  const boosted = Math.round(mobExp * (1 + bonus / 100));
+
+  document.getElementById('bonus-total').textContent      = bonus;
+  document.getElementById('bonus-pct-label').textContent  = bonus;
+  document.getElementById('exp-base-display').textContent    = fmt(mobExp);
+  document.getElementById('exp-boosted-display').textContent = fmt(boosted);
+  document.getElementById('exp-bonus-result-wrap').style.display = (bonus > 0 && farmMode !== 3) ? 'grid' : 'none';
+}
+function onBonusChange() { updateBonusDisplay(); runCurrentMode(); }
+function onGuildChange() {
+  const lv = parseInt(document.getElementById('bonus-guild').value) || 0;
+  document.getElementById('guild-pct-badge').textContent = lv + '%';
+  onBonusChange();
+}
+function setBonus(p, g, e) {
+  document.getElementById('bonus-premium').value = p;
+  document.getElementById('bonus-guild').value   = Math.min(10, g);
+  document.getElementById('guild-pct-badge').textContent = Math.min(10,g) + '%';
+  document.getElementById('bonus-event').value   = e;
+  onBonusChange();
+}
+
+// ─── Mode switching ───────────────────────────────────────────────────
+function setFarmMode(m) {
+  farmMode = m;
+  [1, 2, 3].forEach(i => {
+    document.getElementById('mtab-' + i).classList.toggle('active', i === m);
+    document.getElementById('mbody-' + i).style.display  = i === m ? 'block' : 'none';
+    document.getElementById('result-' + i).style.display = i === m ? 'block' : 'none';
+  });
+  // hide EXP bonus section in mode 3 (quest gives fixed EXP, bonus N/A)
+  document.getElementById('bonus-section-wrap').style.display = m === 3 ? 'none' : 'block';
+  // load quest data lazily when switching to mode 3
+  if (m === 3 && !questLoaded) loadQuestData();
+  updateBonusDisplay();
+  runCurrentMode();
+}
+function runCurrentMode() {
+  if (!Object.keys(RAW).length) return;
+  if (farmMode === 1) calcMode1();
+  else if (farmMode === 2) calcMode2();
+  else if (farmMode === 3) calcMode3();
+}
+
+// ─── Char panel changes ───────────────────────────────────────────────
+function onCharChange() { calcCharStats(); runCurrentMode(); renderTable(); }
+function calcCharStats() {
+  if (!Object.keys(RAW).length) return;
+  const cur = getCurLv(), pct = getPct();
+  const curD = RAW[String(cur)] || { exp: 0, cum: 0 };
+  const goal = getGoalLv();
+  const goalD = RAW[String(goal)] || { exp: 0, cum: 0 };
+  const curExpInLv = Math.round(curD.exp * (pct / 100));
+  document.getElementById('exp-from-pct').textContent = fmt(curExpInLv);
+  const expNeeded = Math.max(0, (goalD.cum - curD.cum) - curExpInLv);
+  document.getElementById('exp-needed').textContent  = fmt(expNeeded);
+  document.getElementById('cum-goal').textContent    = fmt(goalD.cum);
+  document.getElementById('cum-current').textContent = fmt(curD.cum + curExpInLv);
+}
+function setPct(v) {
+  document.getElementById('exp-pct').value = v;
+  document.getElementById('pct-label').textContent = v + '%';
+  onCharChange();
+}
+function setGoal(v) { document.getElementById('goal-lv').value = v; onCharChange(); }
+function onSlider() {
+  const p = parseInt(document.getElementById('exp-pct').value) || 0;
+  document.getElementById('pct-label').textContent = p + '%';
+  onCharChange();
+}
+
+// ─── Mode 1: Time to reach goal level ────────────────────────────────
+function calcMode1() {
+  if (!Object.keys(RAW).length) return;
+  calcCharStats();
+  updateBonusDisplay();
+  const bonus     = getBonusPct();
+  const mobExp    = Math.max(1, parseInt(document.getElementById('mob-exp').value) || 1);
+  const killTime  = Math.max(1, parseInt(document.getElementById('kill-time').value) || 1);
+  const boosted   = Math.round(mobExp * (1 + bonus / 100));
+  const cur = getCurLv(), goal = getGoalLv(), pct = getPct();
+  const curD  = RAW[String(cur)]  || { exp: 0, cum: 0 };
+  const goalD = RAW[String(goal)] || { exp: 0, cum: 0 };
+  const curExpInLv = Math.round(curD.exp * (pct / 100));
+  const expNeeded  = Math.max(0, (goalD.cum - curD.cum) - curExpInLv);
+  const kills = Math.ceil(expNeeded / boosted);
+  const sec   = kills * killTime;
+  document.getElementById('kills').textContent     = fmt(kills);
+  document.getElementById('farm-time').textContent = fmtTime(sec);
+  document.getElementById('exp-hr').textContent    = fmt(Math.round(boosted * (3600 / killTime)));
+  renderTable();
+}
+
+// ─── Mode 2: Level from farming time ─────────────────────────────────
+function setHours(h) { document.getElementById('farm-hours').value = h; calcMode2(); }
+function calcMode2() {
+  if (!Object.keys(RAW).length) return;
+  updateBonusDisplay();
+  const startLv   = getCurLv();
+  const hours     = Math.max(0, parseFloat(document.getElementById('farm-hours').value) || 0);
+  const killSec   = Math.max(1, parseInt(document.getElementById('kill-time-2').value) || 1);
+  const mobExp    = Math.max(1, parseInt(document.getElementById('mob-exp-2').value) || 1);
+  const bonus     = getBonusPct();
+  const boosted   = Math.round(mobExp * (1 + bonus / 100));
+  const kills     = Math.floor(hours * 3600 / killSec);
+  const totalExp  = kills * boosted;
+  const startCum  = (RAW[String(startLv)] || { cum: 0 }).cum + Math.round((RAW[String(startLv)]?.exp || 0) * (getPct() / 100));
+  const reachCum  = startCum + totalExp;
+
+  let reachLv = startLv;
+  for (let lv = startLv; lv <= 405; lv++) {
+    const d = RAW[String(lv)]; if (!d) break;
+    if (reachCum >= d.cum) reachLv = lv; else break;
+  }
+  if (reachLv > 405) reachLv = 405;
+
+  const lvGain = reachLv - startLv;
+  const d      = RAW[String(reachLv)] || {};
+  const expInNext   = reachCum - (d.cum || 0);
+  const nextLvExp   = (RAW[String(Math.min(405, reachLv+1))] || { exp: 1 }).exp;
+  const pctInNext   = reachLv < 405 ? Math.min(99, Math.floor(expInNext / nextLvExp * 100)) : 100;
+
+  document.getElementById('m2-reach-lv').textContent  = 'Lv ' + reachLv;
+  document.getElementById('m2-reach-diff').textContent = lvGain > 0 ? `+${lvGain} เลเวล จาก Lv ${startLv}` : 'ไม่เพียงพอขึ้นเลเวล';
+  document.getElementById('m2-reach-pct').textContent  = reachLv < 405 ? `${pctInNext}% ใน Lv ${reachLv+1}` : 'MAX LEVEL';
+  document.getElementById('m2-pbar').style.width       = pctInNext + '%';
+  document.getElementById('m2-exp-boosted').textContent = fmt(boosted);
+  document.getElementById('m2-kills').textContent       = fmt(kills);
+  document.getElementById('m2-total-exp').textContent   = fmt(totalExp);
+}
+
+// ─── Mode 3: Level from Quest ────────────────────────────────────────
+async function loadQuestData() {
+  try {
+    const res = await fetch('data/EXP/EXP_main_Quests.json');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const qd  = await res.json();
+    EPISODES  = qd.episodes;
+    ALL_MS    = [];
+    for (const ep of EPISODES) {
+      for (const ch of (ep.chapters ?? [])) {
+        for (const ms of (ch.missions ?? [])) {
+          ALL_MS.push({ ep: ep.ep, epName: ep.name, chapter: ch.chapter, chName: ch.name, num: ms.num, name: ms.name, exp: ms.exp });
+        }
+      }
+    }
+    ALL_MS.sort((a, b) => a.num - b.num);
+    questLoaded = true;
+    document.getElementById('quest-loading').style.display  = 'none';
+    document.getElementById('quest-selector').style.display = 'block';
+    buildEpSelects();
+    calcMode3();
+  } catch (err) {
+    document.getElementById('quest-loading').textContent = '⚠️ โหลดข้อมูล Quest ไม่สำเร็จ: ' + err.message;
+  }
+}
+function buildEpSelects() {
+  ['from', 'to'].forEach(side => {
+    const sel = document.getElementById('sel-ep-' + side);
+    sel.innerHTML = '';
+    EPISODES.forEach(ep => sel.add(new Option(ep.name, ep.ep)));
+    if (side === 'to') sel.value = EPISODES[EPISODES.length - 1].ep;
+    buildChSelects(side);
+  });
+}
+function buildChSelects(side) {
+  const epNum = parseInt(document.getElementById('sel-ep-' + side).value);
+  const ep    = EPISODES.find(e => e.ep === epNum);
+  const sel   = document.getElementById('sel-ch-' + side);
+  sel.innerHTML = '';
+  if (!ep) return;
+  ep.chapters.forEach(ch => sel.add(new Option(ch.name, ch.chapter)));
+  if (side === 'to') sel.value = ep.chapters[ep.chapters.length - 1].chapter;
+  buildMsSelects(side);
+}
+function buildMsSelects(side) {
+  const epNum = parseInt(document.getElementById('sel-ep-' + side).value);
+  const chNum = parseInt(document.getElementById('sel-ch-' + side).value);
+  const ep    = EPISODES.find(e => e.ep === epNum);
+  const ch    = ep ? ep.chapters.find(c => c.chapter === chNum) : null;
+  const sel   = document.getElementById('sel-ms-' + side);
+  sel.innerHTML = '';
+  if (!ch) return;
+  ch.missions.forEach((ms, i) => sel.add(new Option(ms.name, i)));
+  if (side === 'to') sel.value = ch.missions.length - 1;
+}
+function onEpChange(side) { buildChSelects(side); calcMode3(); }
+function onChChange(side) { buildMsSelects(side); calcMode3(); }
+function getMsNum(epNum, chNum, msIdx) {
+  const ep = EPISODES.find(e => e.ep === epNum);
+  if (!ep) return null;
+  const ch = ep.chapters.find(c => c.chapter === chNum);
+  if (!ch || !ch.missions[msIdx]) return null;
+  return ch.missions[msIdx].num;
+}
+function calcMode3() {
+  if (!questLoaded || !Object.keys(RAW).length) return;
+  const epFrom   = parseInt(document.getElementById('sel-ep-from').value);
+  const chFrom   = parseInt(document.getElementById('sel-ch-from').value);
+  const msIdxFrom = parseInt(document.getElementById('sel-ms-from').value);
+  const epTo     = parseInt(document.getElementById('sel-ep-to').value);
+  const chTo     = parseInt(document.getElementById('sel-ch-to').value);
+  const msIdxTo  = parseInt(document.getElementById('sel-ms-to').value);
+  let msFrom = getMsNum(epFrom, chFrom, msIdxFrom);
+  let msTo   = getMsNum(epTo,   chTo,   msIdxTo);
+  if (msFrom === null || msTo === null) return;
+  if (msFrom > msTo) { const t = msFrom; msFrom = msTo; msTo = t; }
+
+  const mF = ALL_MS.find(m => m.num === msFrom);
+  const mT = ALL_MS.find(m => m.num === msTo);
+  if (mF && mT)
+    document.getElementById('ep-range-info').textContent =
+      `EP${mF.ep} ${mF.chName} M${mF.num} "${mF.name}" → EP${mT.ep} ${mT.chName} M${mT.num} "${mT.name}"`;
+
+  const msList       = ALL_MS.filter(m => m.num >= msFrom && m.num <= msTo);
+  const totalQuestExp = msList.reduce((s, m) => s + m.exp, 0);
+  const curTotal     = getCurTotal();
+  const newTotal     = curTotal + totalQuestExp;
+  const { lv: newLv, expInLv } = expToLevel(newTotal);
+  const newD   = RAW[String(newLv)] || { exp: 1, cum: 0 };
+  const newPct = newD.exp > 0 ? Math.min(99, Math.floor(expInLv / newD.exp * 100)) : 0;
+  const lvGain = newLv - getCurLv();
+
+  document.getElementById('m3-reach-lv').textContent   = 'Lv ' + newLv;
+  document.getElementById('m3-reach-diff').textContent = lvGain > 0 ? `+${lvGain} เลเวล จาก Lv ${getCurLv()}` : 'เลเวลไม่เปลี่ยนแปลง';
+  document.getElementById('m3-reach-pct').textContent  = `${newPct}% ใน Lv ${newLv}`;
+  document.getElementById('m3-pbar').style.width       = newPct + '%';
+  document.getElementById('m3-quest-exp').textContent  = fmt(totalQuestExp);
+  document.getElementById('m3-count').textContent      = msList.length;
+  document.getElementById('m3-new-cum').textContent    = fmt(newTotal);
+
+  renderQList(msList, msFrom, msTo);
+}
+function renderQList(list, msFrom, msTo) {
+  let html = '', running = 0;
+  list.forEach(m => {
+    running += m.exp;
+    const isFirst = m.num === msFrom, isLast = m.num === msTo;
+    const cls   = isFirst ? 'first-q' : isLast ? 'last-q' : '';
+    const badge = isFirst ? '<span class="badge badge-start">START</span>'
+                : isLast  ? '<span class="badge badge-end">END</span>' : '';
+    html += `<tr class="${cls}">
+      <td style="font-family:'Cinzel',serif;font-size:11px;color:var(--text-dim);width:36px">${m.num}</td>
+      <td style="color:var(--gold-dim);font-size:11px;white-space:nowrap">EP${m.ep}</td>
+      <td style="color:var(--text-dim);font-size:11px;white-space:nowrap">${m.chName}</td>
+      <td style="color:var(--text-sec);max-width:180px;overflow:hidden;text-overflow:ellipsis">${m.name}${badge}</td>
+      <td style="text-align:right;color:var(--gold);font-family:'Cinzel',serif;font-size:12px">${fmt(m.exp)}</td>
+      <td style="text-align:right;color:var(--teal);font-size:11px">${fmt(running)}</td>
+    </tr>`;
+  });
+  document.getElementById('qlist-body').innerHTML = html;
+}
+let _qlistOpen = false;
+function toggleQList() {
+  _qlistOpen = !_qlistOpen;
+  document.getElementById('qlist-wrap').style.display = _qlistOpen ? 'block' : 'none';
+  document.getElementById('qlist-btn').textContent = (_qlistOpen ? '▲' : '▼') + ' ดูรายชื่อ Mission ในช่วงที่เลือก';
+}
+
+// ─── EXP Table ────────────────────────────────────────────────────────
 function setTableMode(m) {
   tableMode = m;
   document.getElementById('tbtn-range').classList.toggle('active', m === 'range');
   document.getElementById('tbtn-all').classList.toggle('active', m === 'all');
   renderTable();
 }
-function setPct(v) { document.getElementById('exp-pct').value = v; onSlider(); }
-function setGoal(v) { document.getElementById('goal-lv').value = v; calc(); }
-function onSlider() {
-  const p = parseInt(document.getElementById('exp-pct').value) || 0;
-  document.getElementById('pct-label').textContent = p + '%';
-  calc();
-}
-
-function calc() {
-  if (Object.keys(RAW).length === 0) return;
-
-  const cur      = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1));
-  const goal     = Math.min(405, Math.max(cur + 1, parseInt(document.getElementById('goal-lv').value) || cur + 1));
-  const pct      = Math.min(99, Math.max(0, parseInt(document.getElementById('exp-pct').value) || 0));
-  const mobExp   = Math.max(1, parseInt(document.getElementById('mob-exp').value) || 1);
-  const killTime = Math.max(1, parseInt(document.getElementById('kill-time').value) || 1);
-  const bonusPct = getBonusTotal();
-  const mobExpBoosted = Math.round(mobExp * (1 + bonusPct / 100));
-
-  // Update bonus displays
-  document.getElementById('bonus-total').textContent     = bonusPct;
-  document.getElementById('bonus-pct-label').textContent = bonusPct;
-  document.getElementById('exp-base-display').textContent    = fmt(mobExp);
-  document.getElementById('exp-boosted-display').textContent = fmt(mobExpBoosted);
-  // Show before/after cards only when there is actual bonus
-  document.getElementById('exp-bonus-result-wrap').style.display = bonusPct > 0 ? 'grid' : 'none';
-
-  const curD  = RAW[String(cur)]  || { exp: 0, cum: 0 };
-  const goalD = RAW[String(goal)] || { exp: 0, cum: 0 };
-
-  const curExpInLv = Math.round(curD.exp * (pct / 100));
-  document.getElementById('exp-from-pct').textContent = fmt(curExpInLv);
-
-  const expNeeded = Math.max(0, (goalD.cum - curD.cum) - curExpInLv);
-  document.getElementById('exp-needed').textContent  = fmt(expNeeded);
-  document.getElementById('cum-goal').textContent    = fmt(goalD.cum);
-  document.getElementById('cum-current').textContent = fmt(curD.cum + curExpInLv);
-
-  // Use boosted EXP for kill/time calculations
-  const kills = Math.ceil(expNeeded / mobExpBoosted);
-  const sec   = kills * killTime;
-  document.getElementById('kills').textContent     = fmt(kills);
-  document.getElementById('farm-time').textContent = fmtTime(sec);
-  document.getElementById('exp-hr').textContent    = fmt(Math.round(mobExpBoosted * (3600 / killTime)));
-
-  renderTable();
-}
-
 function renderTable() {
-  const curLv  = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1));
-  const goalLv = Math.min(405, Math.max(curLv + 1, parseInt(document.getElementById('goal-lv').value) || curLv + 1));
+  const curLv  = getCurLv(), goalLv = getGoalLv();
   const tbody  = document.getElementById('table-body');
   if (!tbody) return;
   let html = '';
@@ -720,6 +1199,7 @@ function renderTable() {
   tbody.innerHTML = html;
 }
 
+// ─── Lookup ───────────────────────────────────────────────────────────
 function toggleLookup() {
   const p   = document.getElementById('lookup-panel');
   const btn = document.getElementById('lookup-toggle-btn');
@@ -729,16 +1209,16 @@ function toggleLookup() {
   if (open) document.getElementById('lookup-exp').focus();
 }
 function doLookup() {
-  if (Object.keys(RAW).length === 0) return;
+  if (!Object.keys(RAW).length) return;
   const expInput = parseInt(document.getElementById('lookup-exp').value) || 0;
   if (expInput <= 0) { document.getElementById('lookup-result').style.display = 'none'; return; }
   let foundLv = 1;
   for (let lv = 1; lv <= 404; lv++) {
-    const next = RAW[String(lv + 1)];
+    const next = RAW[String(lv+1)];
     if (!next) { foundLv = lv; break; }
     if (expInput >= RAW[String(lv)].cum && expInput < next.cum) { foundLv = lv; break; }
   }
-  if (expInput >= RAW['405']?.cum) foundLv = 405;
+  if (expInput >= (RAW['405']?.cum || Infinity)) foundLv = 405;
   const d = RAW[String(foundLv)];
   const expIntoLv = expInput - d.cum;
   const pct = d.exp > 0 ? Math.min(99, Math.floor(expIntoLv / d.exp * 100)) : 0;
@@ -746,103 +1226,137 @@ function doLookup() {
   document.getElementById('lk-pct').textContent    = pct + '%';
   document.getElementById('lk-exp-lv').textContent = fmt(expIntoLv) + ' / ' + fmt(d.exp);
   document.getElementById('lookup-result').style.display = 'block';
-  const panel = document.getElementById('lookup-panel');
-  panel.dataset.lv = foundLv; panel.dataset.pct = pct;
+  document.getElementById('lookup-panel').dataset.lv  = foundLv;
+  document.getElementById('lookup-panel').dataset.pct = pct;
 }
 function applyLookup() {
   const panel = document.getElementById('lookup-panel');
   const lv  = parseInt(panel.dataset.lv)  || 1;
   const pct = parseInt(panel.dataset.pct) || 0;
-  document.getElementById('cur-lv').value = lv;
+  document.getElementById('cur-lv').value  = lv;
   document.getElementById('exp-pct').value = pct;
   document.getElementById('pct-label').textContent = pct + '%';
-  calc();
+  onCharChange();
   panel.style.display = 'none';
   document.getElementById('lookup-toggle-btn').classList.remove('active');
   document.getElementById('cur-lv').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-async function loadDataAndInit() {
-  try {
-    const response = await fetch('data/EXP/EXP_per_Level.json');
-    if (!response.ok) throw new Error('Network response was not ok');
-    RAW = await response.json();
-    calc();
-  } catch (error) {
-    console.error('Failed to load EXP data:', error);
-  }
-}
-
-/* ── Save Image ── */
-async function saveImage() {
-  const btn = document.getElementById('btn-save-image');
-  btn.disabled = true;
-  btn.textContent = '⏳ กำลังบันทึกภาพ…';
-
-  const cur  = Math.min(404, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1));
-  const goal = Math.min(405, Math.max(cur + 1, parseInt(document.getElementById('goal-lv').value) || cur + 1));
-  const pct  = Math.min(99, Math.max(0, parseInt(document.getElementById('exp-pct').value) || 0));
-  const bonusPct = getBonusTotal();
-
-  document.getElementById('ec-cur-lv').textContent      = cur;
-  document.getElementById('ec-goal-lv').textContent     = goal;
-  document.getElementById('ec-pct-txt').textContent     = pct + '%';
-  document.getElementById('ec-pbar').style.width        = pct + '%';
-  document.getElementById('ec-exp-needed').textContent  = document.getElementById('exp-needed').textContent;
-  document.getElementById('ec-mob-exp').textContent     = document.getElementById('exp-base-display').textContent;
-  document.getElementById('ec-mob-exp-boosted').textContent = document.getElementById('exp-boosted-display').textContent;
-  document.getElementById('ec-bonus-total').textContent = '+' + bonusPct + '%';
-  document.getElementById('ec-kill-time').textContent   = document.getElementById('kill-time').value + ' วิ';
-  document.getElementById('ec-kills').textContent       = document.getElementById('kills').textContent;
-  document.getElementById('ec-farm-time').textContent   = document.getElementById('farm-time').textContent;
-  document.getElementById('ec-exp-hr').textContent      = document.getElementById('exp-hr').textContent;
-
-  const now = new Date();
-  document.getElementById('ec-ts').textContent =
-    now.toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' }) +
-    '  ' + now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
-
-  // Build QR → convert canvas→img → wait onload → capture
-  await new Promise(resolve => {
-    const qrDiv = document.getElementById('ec-qr');
+// ─── Save Image (mode-aware) ──────────────────────────────────────────
+async function buildQR(qrId) {
+  return new Promise(resolve => {
+    const qrDiv = document.getElementById(qrId);
     qrDiv.innerHTML = '';
-    new QRCode(qrDiv, {
-      text: 'https://peerapa13.github.io/iruna_class_skill/exp_calculator',
-      width: 72, height: 72,
-      colorDark: '#000000', colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.H
-    });
+    new QRCode(qrDiv, { text:'https://peerapa13.github.io/iruna_class_skill/exp_calculator', width:72, height:72, colorDark:'#000000', colorLight:'#ffffff', correctLevel:QRCode.CorrectLevel.H });
     setTimeout(() => {
       const qrCanvas = qrDiv.querySelector('canvas');
       if (qrCanvas) {
         const dataUrl = qrCanvas.toDataURL('image/png');
         const img = new Image();
         img.onload = () => { qrDiv.innerHTML = ''; qrDiv.appendChild(img); resolve(); };
-        img.onerror = resolve;
-        img.width = 72; img.height = 72;
-        img.src = dataUrl;
-      } else { resolve(); }
+        img.onerror = resolve; img.width = 72; img.height = 72; img.src = dataUrl;
+      } else resolve();
     }, 150);
   });
+}
+function setTimestamp(tsId) {
+  const now = new Date();
+  document.getElementById(tsId).textContent =
+    now.toLocaleDateString('th-TH', { year:'numeric', month:'short', day:'numeric' }) +
+    '  ' + now.toLocaleTimeString('th-TH', { hour:'2-digit', minute:'2-digit' });
+}
+
+async function saveImage() {
+  const btn = document.getElementById('btn-save-image');
+  btn.disabled = true; btn.textContent = '⏳ กำลังบันทึกภาพ…';
+  const cur = getCurLv(), pct = getPct(), bonus = getBonusPct();
+  const now = new Date();
+  let cardId, filename;
 
   try {
-    const canvas = await html2canvas(document.getElementById('export-card'), {
-      scale: 2, useCORS: true, allowTaint: true, backgroundColor: '#0a0c10'
-    });
+    if (farmMode === 1) {
+      // ── Mode 1 ──
+      const goal   = getGoalLv();
+      const mobExp = Math.max(1, parseInt(document.getElementById('mob-exp').value) || 1);
+      const boosted = Math.round(mobExp * (1 + bonus / 100));
+      document.getElementById('ec1-cur-lv').textContent        = cur;
+      document.getElementById('ec1-goal-lv').textContent       = goal;
+      document.getElementById('ec1-pct-txt').textContent       = pct + '%';
+      document.getElementById('ec1-pbar').style.width          = pct + '%';
+      document.getElementById('ec1-exp-needed').textContent    = document.getElementById('exp-needed').textContent;
+      document.getElementById('ec1-mob-exp').textContent       = fmt(mobExp);
+      document.getElementById('ec1-mob-exp-boosted').textContent = fmt(boosted);
+      document.getElementById('ec1-bonus-total').textContent   = '+' + bonus + '%';
+      document.getElementById('ec1-kill-time').textContent     = document.getElementById('kill-time').value + ' วิ';
+      document.getElementById('ec1-kills').textContent         = document.getElementById('kills').textContent;
+      document.getElementById('ec1-farm-time').textContent     = document.getElementById('farm-time').textContent;
+      document.getElementById('ec1-exp-hr').textContent        = document.getElementById('exp-hr').textContent;
+      setTimestamp('ec1-ts'); await buildQR('ec1-qr');
+      cardId = 'export-card-1'; filename = `iruna-mode1-lv${cur}to${goal}.png`;
+
+    } else if (farmMode === 2) {
+      // ── Mode 2 ──
+      const mobExp2  = Math.max(1, parseInt(document.getElementById('mob-exp-2').value) || 1);
+      const boosted2 = Math.round(mobExp2 * (1 + bonus / 100));
+      const reachLv  = document.getElementById('m2-reach-lv').textContent;
+      const reachPct = document.getElementById('m2-reach-pct').textContent.replace(/[^0-9]/g,'');
+      const hours    = document.getElementById('farm-hours').value;
+      document.getElementById('ec2-cur-lv').textContent          = cur;
+      document.getElementById('ec2-reach-lv').textContent        = reachLv;
+      document.getElementById('ec2-pct-txt').textContent         = (reachPct || '0') + '%';
+      document.getElementById('ec2-pbar').style.width            = (reachPct || '0') + '%';
+      document.getElementById('ec2-farm-hours').textContent      = fmtTime(parseFloat(hours) * 3600);
+      document.getElementById('ec2-bonus-total').textContent     = '+' + bonus + '%';
+      document.getElementById('ec2-mob-exp').textContent         = fmt(mobExp2);
+      document.getElementById('ec2-mob-exp-boosted').textContent = fmt(boosted2);
+      document.getElementById('ec2-kill-time').textContent       = document.getElementById('kill-time-2').value + ' วิ';
+      document.getElementById('ec2-kills').textContent           = document.getElementById('m2-kills').textContent;
+      document.getElementById('ec2-total-exp').textContent       = document.getElementById('m2-total-exp').textContent;
+      setTimestamp('ec2-ts'); await buildQR('ec2-qr');
+      cardId = 'export-card-2'; filename = `iruna-mode2-lv${cur}-${hours}hr.png`;
+
+    } else {
+      // ── Mode 3 ──
+      const reachLv  = document.getElementById('m3-reach-lv').textContent;
+      const reachPct = document.getElementById('m3-reach-pct').textContent.replace(/[^0-9]/g,'');
+      const rangeInfo = document.getElementById('ep-range-info').textContent.trim();
+      document.getElementById('ec3-cur-lv').textContent      = cur;
+      document.getElementById('ec3-reach-lv').textContent    = reachLv;
+      document.getElementById('ec3-pct-txt').textContent     = (reachPct || '0') + '%';
+      document.getElementById('ec3-pbar').style.width        = (reachPct || '0') + '%';
+      document.getElementById('ec3-quest-range').textContent = rangeInfo || '—';
+      document.getElementById('ec3-quest-exp').textContent   = document.getElementById('m3-quest-exp').textContent;
+      document.getElementById('ec3-count').textContent       = document.getElementById('m3-count').textContent;
+      document.getElementById('ec3-new-cum').textContent     = document.getElementById('m3-new-cum').textContent;
+      setTimestamp('ec3-ts'); await buildQR('ec3-qr');
+      cardId = 'export-card-3'; filename = `iruna-mode3-quest-lv${cur}.png`;
+    }
+
+    const canvas = await html2canvas(document.getElementById(cardId), { scale:2, useCORS:true, allowTaint:true, backgroundColor:'#0a0c10' });
     const link = document.createElement('a');
-    link.download = `iruna-exp-lv${cur}tolv${goal}.png`;
-    link.href = canvas.toDataURL('image/png');
-    link.click();
+    link.download = filename;
+    link.href = canvas.toDataURL('image/png'); link.click();
   } catch(e) {
-    console.error(e);
-    alert('เกิดข้อผิดพลาดในการบันทึกรูป: ' + e.message);
+    alert('เกิดข้อผิดพลาด: ' + e.message);
   } finally {
     btn.disabled = false;
     btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> บันทึกผลลัพธ์เป็นรูปภาพ';
   }
 }
 
-loadDataAndInit();
+// ─── Bootstrap ────────────────────────────────────────────────────────
+(async function init() {
+  try {
+    const res = await fetch('data/EXP/EXP_per_Level.json');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    RAW = await res.json();
+    calcCharStats();
+    calcMode1();
+    renderTable();
+  } catch (err) {
+    console.error('Failed to load EXP data:', err);
+  }
+})();
 </script>
 </body>
 </html>
