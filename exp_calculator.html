@@ -1096,27 +1096,31 @@ function buildEpSelects() {
   });
 }
 function buildChSelects(side) {
-  const epNum = parseInt(document.getElementById('sel-ep-' + side).value);
-  const ep = EPISODES.find(e => e.ep === epNum);
-  const sel = document.getElementById('sel-ch-' + side);
-  sel.innerHTML = '';
-  if (!ep) return;
+  const selEp = document.getElementById('sel-ep-' + side);
+  const epIdx = selEp.selectedIndex; 
+  const ep = EPISODES[epIdx]; 
+  const selCh = document.getElementById('sel-ch-' + side);
+  selCh.innerHTML = '';
+  if (!ep || !ep.chapters) return;
   ep.chapters.forEach((ch, i) => {
-    sel.add(new Option(ch.name, i)); 
+    selCh.add(new Option(ch.name, i));
   });
-  if (side === 'to') sel.value = ep.chapters.length - 1;
+  if (side === 'to') selCh.value = ep.chapters.length - 1;
   buildMsSelects(side);
 }
+
 function buildMsSelects(side) {
-  const epNum = parseInt(document.getElementById('sel-ep-' + side).value);
-  const chIdx = parseInt(document.getElementById('sel-ch-' + side).value); // รับเป็น Index
-  const ep = EPISODES.find(e => e.ep === epNum);
-  const ch = (ep && ep.chapters) ? ep.chapters[chIdx] : null; 
-  const sel = document.getElementById('sel-ms-' + side);
-  sel.innerHTML = '';
-  if (!ch) return;
-  ch.missions.forEach((ms, i) => sel.add(new Option(ms.name, i)));
-  if (side === 'to') sel.value = ch.missions.length - 1;
+  const epIdx = document.getElementById('sel-ep-' + side).selectedIndex;
+  const chIdx = parseInt(document.getElementById('sel-ch-' + side).value);
+  const ep = EPISODES[epIdx];
+  const ch = (ep && ep.chapters) ? ep.chapters[chIdx] : null;
+  const selMs = document.getElementById('sel-ms-' + side);
+  selMs.innerHTML = '';
+  if (!ch || !ch.missions) return;
+  ch.missions.forEach((ms, i) => {
+    selMs.add(new Option(ms.name, i));
+  });
+  if (side === 'to') selMs.value = ch.missions.length - 1;
 }
 function onEpChange(side) { buildChSelects(side); calcMode3(); }
 function onChChange(side) { buildMsSelects(side); calcMode3(); }
