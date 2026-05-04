@@ -499,7 +499,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
           <input type="number" id="goal-lv" min="2" max="405" value="405" oninput="onCharChange()">
         </div>
       </div>
-      <div class="quick-row">
+      <div class="quick-row" >
           <span class="quick-label">เป้าหมายด่วน</span>
           <button class="qbtn" onclick="setGoal(140)">140</button>
           <button class="qbtn" onclick="setGoal(160)">160</button>
@@ -520,8 +520,8 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <div class="mode-body" id="mbody-2" style="display:none">
       <div class="input-grid" style="margin-bottom:8px">
         <div class="field">
-          <label>เวลาที่จะฟาร์ม (ชั่วโมง)</label>
-          <input type="number" id="farm-hours" min="0" value="10" oninput="calcMode2()">
+          <label>EXP ต่อ kill (ก่อน bonus)</label>
+          <input type="number" id="mob-exp-2" min="1" value="1" oninput="calcMode2()">
         </div>
         <div class="field">
           <label>วินาที / kill</label>
@@ -530,19 +530,23 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
       </div>
       <div class="input-grid" style="margin-bottom:8px">
         <div class="field">
-          <label>EXP ต่อ kill (ก่อน bonus)</label>
-          <input type="number" id="mob-exp-2" min="1" value="1" oninput="calcMode2()">
+          <label>เวลาที่จะฟาร์ม (ชั่วโมง)</label>
+          <input type="number" id="farm-hours" min="0" value="10" oninput="calcMode2()">
+        </div>
+        <div class="field">
+          <label>เวลาฟาร์ม (นาที)</label>
+          <input type="number" id="farm-mins" min="0" max="59" value="0" oninput="calcMode2()">
         </div>
       </div>
       <div class="quick-row" style="margin-bottom:0">
         <span class="quick-label">เวลาด่วน</span>
-        <button class="qbtn" onclick="setHours(1)">1 ชม.</button>
-        <button class="qbtn" onclick="setHours(3)">3 ชม.</button>
-        <button class="qbtn" onclick="setHours(5)">5 ชม.</button>
-        <button class="qbtn" onclick="setHours(10)">10 ชม.</button>
-        <button class="qbtn" onclick="setHours(24)">1 วัน</button>
-        <button class="qbtn" onclick="setHours(72)">3 วัน</button>
-        <button class="qbtn" onclick="setHours(168)">7 วัน</button>
+        <button class="qbtn" onclick="setTimeQuick(0,30)">30 นาที</button>
+        <button class="qbtn" onclick="setTimeQuick(1,0)">1 ชม.</button>
+        <button class="qbtn" onclick="setTimeQuick(3,0)">3 ชม.</button>
+        <button class="qbtn" onclick="setTimeQuick(5,0)">5 ชม.</button>
+        <button class="qbtn" onclick="setTimeQuick(10,0)">10 ชม.</button>
+        <button class="qbtn" onclick="setTimeQuick(24,0)">1 วัน</button>
+        <button class="qbtn" onclick="setTimeQuick(168,0)">7 วัน</button>
       </div>
     </div>
 
@@ -1014,12 +1018,18 @@ function calcMode1() {
 }
 
 // ─── Mode 2: Level from farming time ─────────────────────────────────
-function setHours(h) { document.getElementById('farm-hours').value = h; calcMode2(); }
+function setTimeQuick(h, m) {
+    document.getElementById('farm-hours').value = h;
+    document.getElementById('farm-mins').value = m;
+    calcMode2();
+}
 function calcMode2() {
   if (!Object.keys(RAW).length) return;
   updateBonusDisplay();
   const startLv   = getCurLv();
-  const hours     = Math.max(0, parseFloat(document.getElementById('farm-hours').value) || 0);
+  let hours     = Math.max(0, parseFloat(document.getElementById('farm-hours').value) || 0);
+  const mins = parseFloat(document.getElementById('farm-mins').value) || 0;
+  hours += (mins / 60);
   const killSec   = Math.max(1, parseInt(document.getElementById('kill-time-2').value) || 1);
   const mobExp    = Math.max(1, parseInt(document.getElementById('mob-exp-2').value) || 1);
   const bonus     = getBonusPct();
@@ -1307,14 +1317,16 @@ async function saveImage() {
       const reachLv  = document.getElementById('m2-reach-lv').textContent;
       const reachPctText = document.getElementById('m2-reach-pct').textContent; 
       const reachPct = reachPctText.split('%')[0].trim();
-      const hours    = document.getElementById('farm-hours').value;
+      const hoursVal = parseFloat(document.getElementById('farm-hours').value) || 0;
+      const minsVal  = parseFloat(document.getElementById('farm-mins').value) || 0;
+      const totalSec = (hoursVal + minsVal / 60) * 3600;
       document.getElementById('ec2-cur-lv').textContent          = cur;
       document.getElementById('ec2-reach-lv').textContent        = reachLv;
       document.getElementById('ec2-pct-txt').textContent         = pct + '%';
       document.getElementById('ec2-pbar').style.width            = pct + '%';  
-      document.getElementById('ec2-pct-txt-reach').textContent   = `${reachPct}% ในLv${reachLv}`;
+      document.getElementById('ec2-pct-txt-reach').textContent   = reachPct + '%'; 
       document.getElementById('ec2-pbar-reach').style.width      = reachPct + '%'; 
-      document.getElementById('ec2-farm-hours').textContent      = fmtTime(parseFloat(hours) * 3600);
+      document.getElementById('ec2-farm-hours').textContent      = fmtTime(totalSec);
       document.getElementById('ec2-bonus-total').textContent     = '+' + bonus + '%';
       document.getElementById('ec2-mob-exp').textContent         = fmt(mobExp2);
       document.getElementById('ec2-mob-exp-boosted').textContent = fmt(boosted2);
@@ -1322,7 +1334,7 @@ async function saveImage() {
       document.getElementById('ec2-kills').textContent           = document.getElementById('m2-kills').textContent;
       document.getElementById('ec2-total-exp').textContent       = document.getElementById('m2-total-exp').textContent;
       setTimestamp('ec2-ts'); await buildQR('ec2-qr');
-      cardId = 'export-card-2'; filename = `iruna-mode2-lv${cur}-${hours}hr.png`;
+      cardId = 'export-card-2'; filename = `iruna-mode2-lv${cur}-${hoursVal}h${minsVal}m.png`;
 
     } else {
       // ── Mode 3 ──
