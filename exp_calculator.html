@@ -467,19 +467,19 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <!-- Mode Tabs -->
     <div class="mode-tabs">
       <div class="mode-tab active" id="mtab-1" onclick="setFarmMode(1)">
-        <span class="mt-icon">⚔</span>
-        <span class="mt-title">เป้าหมาย</span>
+        <span class="mt-icon">⏱</span>
+        <span class="mt-title">โหมด 1</span>
         <span class="mt-sub">เวลาถึง Lv เป้า</span>
       </div>
       <div class="mode-tab" id="mtab-2" onclick="setFarmMode(2)">
-        <span class="mt-icon">⏱</span>
-        <span class="mt-title">ระยะเวลา</span>
+        <span class="mt-icon">⚔</span>
+        <span class="mt-title">โหมด 2</span>
         <span class="mt-sub">Lv จากเวลาฟาร์ม</span>
       </div>
       <div class="mode-tab" id="mtab-3" onclick="setFarmMode(3)">
         <span class="mt-icon">📜</span>
-        <span class="mt-title">เควส</span>
-        <span class="mt-sub">Lv จากเควส</span>
+        <span class="mt-title">โหมด 3</span>
+        <span class="mt-sub">Lv จาก Quest</span>
       </div>
     </div>
 
@@ -836,7 +836,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
 
     <div style="text-align:center;flex:1;">
       <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลที่จะได้</div>
-      <div style="font-family:'Cinzel',serif;font-size:30px;color:#5b9cf6;font-weight:700;line-height:1;">Lv <span id="ec3-reach-lv">—</span></div>
+      <div style="font-family:'Cinzel',serif;font-size:30px;color:#5b9cf6;font-weight:700;line-height:1;"><span id="ec3-reach-lv">—</span></div>
       
       <div style="margin-top:8px;">
         <div style="height:5px;background:#161a22;border:1px solid #2a3045;border-radius:3px;overflow:hidden;width:80px;margin:0 auto;">
@@ -858,14 +858,8 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
   </div>
 
   <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #2a3045;padding-top:14px;">
-    <div>
-      <div style="font-size:10px;color:#555b72;margin-bottom:3px;" id="ec3-ts">—</div>
-      <div style="font-size:10px;color:#555b72;">peerapa13.github.io/iruna_class_skill/exp_calculator</div>
-    </div>
-    <div style="text-align:center;">
-      <div id="ec3-qr" style="background:#fff;padding:4px;border-radius:4px;display:inline-block;"></div>
-      <div style="font-size:9px;color:#555b72;margin-top:3px;">สแกนเพื่อเข้าเว็บ</div>
-    </div>
+    <div><div style="font-size:10px;color:#555b72;margin-bottom:3px;" id="ec3-ts">—</div><div style="font-size:10px;color:#555b72;">peerapa13.github.io/iruna_class_skill/exp_calculator</div></div>
+    <div style="text-align:center;"><div id="ec3-qr" style="background:#fff;padding:4px;border-radius:4px;display:inline-block;"></div><div style="font-size:9px;color:#555b72;margin-top:3px;">สแกนเพื่อเข้าเว็บ</div></div>
   </div>
 </div>
 
@@ -1323,12 +1317,13 @@ async function saveImage() {
     } else {
       // ── Mode 3 ──
       const reachLv  = document.getElementById('m3-reach-lv').textContent;
-      const reachPct = document.getElementById('m3-reach-pct').textContent.replace(/[^0-9]/g,'');
+      const reachPctText = document.getElementById('m3-reach-pct').textContent; 
+      const reachPct = reachPctText.split('%')[0].trim();
       const rangeInfo = document.getElementById('ep-range-info').textContent.trim();
       document.getElementById('ec3-cur-lv').textContent      = cur;
       document.getElementById('ec3-reach-lv').textContent    = reachLv;
-      document.getElementById('ec3-pct-txt').textContent     = (reachPct || '0') + '%';
-      document.getElementById('ec3-pbar').style.width        = (reachPct || '0') + '%';
+      document.getElementById('ec3-pct-txt').textContent     = `${reachPct}% ในLvนี้`;
+      document.getElementById('ec3-pbar').style.width        = reachPct + '%'; 
       document.getElementById('ec3-quest-range').textContent = rangeInfo || '—';
       document.getElementById('ec3-quest-exp').textContent   = document.getElementById('m3-quest-exp').textContent;
       document.getElementById('ec3-count').textContent       = document.getElementById('m3-count').textContent;
