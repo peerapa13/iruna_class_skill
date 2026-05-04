@@ -609,66 +609,9 @@ function toggleGroup(element) {
 
   modal.showModal();
 }
-
-//////////ฟั่งชั่นหน้าแรก///////////////
-const HOME_CONTENT = {
-  upcoming: [
-    { title: "ระบบคำนวณ EXP ภารกิจ", desc: "รองรับการเลือกช่วง Episode และคำนวณเลเวลที่จะได้รับหลังจบเควส" },
-    { title: "ข้อมูลสกิลสาย Bishop", desc: "เพิ่มรายละเอียดและเลเวลของสกิลสายซัพพอร์ตทั้งหมด" }
-  ],
-  recent: [
-    { date: "15 พ.ค. 2567", title: "เพิ่มข้อมูล Summoner", desc: "อัปเดตสกิลพื้นฐานและสกิลสายอาชีพขั้นสูงทั้งหมด" },
-    { date: "10 พ.ค. 2567", title: "ปรับปรุงหน้า UI", desc: "เปลี่ยนธีมสีและรองรับการใช้งานบนมือถือดีขึ้น" }
-  ]
-};
-
-function renderHome() {
-  const container = document.getElementById('job-content');
-  
-  // สร้าง HTML สำหรับหน้าหลัก
-  let html = `
-    <div class="home-container" style="padding: 20px; animation: fadeIn 0.5s ease-out;">
-      <h1 style="color: var(--gold); margin-bottom: 24px; font-family: 'Cinzel', serif;">📜 สถานะการอัปเดต</h1>
-      
-      <div class="update-section" style="margin-bottom: 40px;">
-        <h2 style="color: var(--accent); font-size: 1.2rem; margin-bottom: 15px; display: flex; align-items: center;">
-          <span style="margin-right: 10px;">⏳</span> กำลังดำเนินการ (Upcoming)
-        </h2>
-        <div class="update-list">
-          ${HOME_CONTENT.upcoming.map(item => `
-            <div style="background: rgba(255,255,255,0.05); border-left: 3px solid var(--accent); padding: 15px; margin-bottom: 10px; border-radius: 0 8px 8px 0;">
-              <strong style="display: block; color: var(--text);">${item.title}</strong>
-              <small style="color: var(--text-dim);">${item.desc}</small>
-            </div>
-          `).join('')}
-        </div>
-      </div>
-
-      <div class="update-section">
-        <h2 style="color: var(--gold-light); font-size: 1.2rem; margin-bottom: 15px; display: flex; align-items: center;">
-          <span style="margin-right: 10px;">✅ อัปเดตล่าสุด (Recent Updates)</span>
-        </h2>
-        <div class="update-list">
-          ${HOME_CONTENT.recent.map(item => `
-            <div style="background: rgba(255,255,255,0.03); border-left: 3px solid var(--gold-dim); padding: 15px; margin-bottom: 10px; border-radius: 0 8px 8px 0;">
-              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <strong style="color: var(--gold-light);">${item.title}</strong>
-                <span style="font-size: 0.75rem; color: var(--text-dim);">${item.date}</span>
-              </div>
-              <small style="color: var(--text-dim);">${item.desc}</small>
-            </div>
-          `).join('')}
-        </div>
-      </div>
-    </div>
-  `;
-  
-  container.innerHTML = html;
-}
  
   // เพิ่ม Event Listeners เมื่อ DOM โหลดเสร็จ
   document.addEventListener('DOMContentLoaded', function() {
-    renderHome();
     document.querySelectorAll('.job-btn').forEach(btn => {
       btn.addEventListener('click', function() {
         const jobId = this.getAttribute('data-job');
