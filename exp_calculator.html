@@ -467,19 +467,19 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <!-- Mode Tabs -->
     <div class="mode-tabs">
       <div class="mode-tab active" id="mtab-1" onclick="setFarmMode(1)">
-        <span class="mt-icon">⚔</span>
-        <span class="mt-title">เป้าหมาย</span>
+        <span class="mt-icon">⏱</span>
+        <span class="mt-title">โหมด 1</span>
         <span class="mt-sub">เวลาถึง Lv เป้า</span>
       </div>
       <div class="mode-tab" id="mtab-2" onclick="setFarmMode(2)">
-        <span class="mt-icon">⏱</span>
-        <span class="mt-title">ระยะเวลา</span>
+        <span class="mt-icon">⚔</span>
+        <span class="mt-title">โหมด 2</span>
         <span class="mt-sub">Lv จากเวลาฟาร์ม</span>
       </div>
       <div class="mode-tab" id="mtab-3" onclick="setFarmMode(3)">
         <span class="mt-icon">📜</span>
-        <span class="mt-title">เควส</span>
-        <span class="mt-sub">Lv จากเควส</span>
+        <span class="mt-title">โหมด 3</span>
+        <span class="mt-sub">Lv จาก Quest</span>
       </div>
     </div>
 
@@ -829,10 +829,17 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <div style="text-align:center;flex:1;">
       <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลปัจจุบัน</div>
       <div style="font-family:'Cinzel',serif;font-size:30px;color:#2dd4a0;font-weight:700;line-height:1;">Lv <span id="ec3-cur-lv">—</span></div>
+      <div style="margin-top:8px;">
+        <div style="font-size:10px;color:#555b72;margin-bottom:4px;">% EXP ในเลเวลนี้</div>
+        <div style="height:6px;background:#161a22;border:1px solid #2a3045;border-radius:3px;overflow:hidden;">
+          <div id="ec3-pbar" style="height:100%;background:linear-gradient(90deg,#1a7a5e,#2dd4a0);border-radius:3px;width:0%;"></div>
+        </div>
+        <div id="ec3-pct-txt" style="font-family:'Cinzel',serif;font-size:13px;color:#2dd4a0;margin-top:3px;">0%</div>
+      </div>
     </div>
     <div style="font-size:22px;color:#c9a84c;padding:0 16px;">➜</div>
     <div style="text-align:center;flex:1;">
-      <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลที่จะได้</div>
+      <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลเป้าหมาย</div>
       <div style="font-family:'Cinzel',serif;font-size:30px;color:#5b9cf6;font-weight:700;line-height:1;">Lv <span id="ec3-reach-lv">—</span></div>
     </div>
   </div>
