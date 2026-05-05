@@ -388,6 +388,228 @@
   }
 
 
+
+  /* pathch note*/
+    .home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .version-pill {
+    background: rgba(212, 168, 67, 0.1);
+    border: 1px solid rgba(212, 168, 67, 0.35);
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+.version-date {
+    color: var(--text-dim);
+    font-family: 'Noto Sans Thai', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    margin-left: 6px;
+  }
+
+  .home-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  @media (max-width: 700px) {
+    .home-two-col { grid-template-columns: 1fr; }
+  }
+
+  .home-section {
+    background: rgba(15, 23, 42, 0.5);
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid rgba(51, 65, 85, 0.6);
+  }
+
+  .home-section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .home-section-icon {
+    font-size: 16px;
+  }
+
+  .upcoming-header { color: var(--accent); }
+  .recent-header   { color: #77D77B; }
+
+  .upcoming-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .upcoming-item {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.55;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .status-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+    display: inline-block;
+    width: fit-content;
+    letter-spacing: 0.3px;
+  }
+
+  .status-soon    { background: rgba(63,200,249,0.12); color: var(--accent); border: 1px solid rgba(63,200,249,0.3); }
+  .status-wip     { background: rgba(168,85,247,0.12); color: #c084fc; border: 1px solid rgba(168,85,247,0.3); }
+  .status-planned { background: rgba(100,116,139,0.2); color: #94a3b8; border: 1px solid rgba(100,116,139,0.3); }
+
+  /* ===== Changelog / Patch Notes ===== */
+  .changelog-card {
+    background: rgba(30, 41, 59, 0.8);
+    padding: 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(51, 65, 85, 0.8);
+  }
+
+  .changelog-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 22px;
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+  }
+
+  .changelog-subtitle {
+    color: var(--text-dim);
+    font-size: 13px;
+    margin-bottom: 28px;
+  }
+
+  .patch-entry {
+    margin-bottom: 28px;
+    border-left: 3px solid rgba(212, 168, 67, 0.4);
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .patch-entry::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 6px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 8px rgba(212, 168, 67, 0.6);
+  }
+
+  .patch-entry.latest {
+    border-left-color: var(--accent);
+  }
+
+  .patch-entry.latest::before {
+    background: var(--accent);
+    box-shadow: 0 0 8px rgba(63, 200, 249, 0.6);
+  }
+
+  .patch-version {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .patch-ver-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--gold-light);
+  }
+
+  .patch-entry.latest .patch-ver-tag {
+    color: var(--accent);
+  }
+
+  .patch-date {
+    font-size: 11px;
+    color: var(--text-dim);
+    background: rgba(255,255,255,0.05);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  .new-badge {
+    font-size: 10px;
+    background: rgba(63, 200, 249, 0.2);
+    color: var(--accent);
+    border: 1px solid rgba(63, 200, 249, 0.4);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .patch-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .patch-item {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .patch-item-tag {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    letter-spacing: 0.4px;
+  }
+
+  .tag-new { background: rgba(119, 215, 123, 0.15); color: #77D77B; border: 1px solid rgba(119,215,123,0.3); }
+  .tag-fix { background: rgba(255, 188, 66, 0.15); color: #ffbc42; border: 1px solid rgba(255,188,66,0.3); }
+  .tag-update { background: rgba(63, 200, 249, 0.15); color: var(--accent); border: 1px solid rgba(63,200,249,0.3); }
+  .tag-wip { background: rgba(168, 85, 247, 0.15); color: #a855f7; border: 1px solid rgba(168,85,247,0.3); }
+
+  .changelog-divider {
+    border: none;
+    border-top: 1px solid rgba(51, 65, 85, 0.6);
+    margin: 28px 0;
+  }
+
   
 
   @media (max-width: 1024px) {
@@ -526,6 +748,102 @@ function toggleGroup(element) {
   group.classList.toggle('active');
 }
 
+
+ // ============================================================
+  //  ข้อมูลเวอร์ชันและอัปเดตล่าสุดที
+  // ============================================================
+  const SITE_VERSION_DATE = '5 พ.ค. 2025';
+
+  // อัปเดตล่าสุด 
+  // tag: 'new' | 'fix' | 'update' | 'wip'
+  const RECENT_UPDATES = [
+    { tag: 'new',    text: 'เพิ่มหน้าฟังก์คำนวนexpจากเควส EP1' },
+    { tag: 'new',    text: 'เพิ่มหน้าสุ่มอาชีพ' },
+    { tag: 'update', text: 'ปรับปรุงข้อมูลสกิลอาชีพที่มีอยู่ให้ถูกต้องและครบถ้วนมากขึ้น' },
+    { tag: 'fix',    text: 'แก้ไขข้อมูลสกิลบางส่วนที่ผิดพลาด' },
+  ];
+
+  // กำลังจะมา
+  // status: 'soon' | 'wip' | 'planned'
+  const UPCOMING = [
+    { status: 'wip',     text: 'ข้อมูลEXP จากเควส EP2 - EP6 ' },
+    { status: 'soon',    text: 'ข้อมูลสกิลอาชีพพาลาดิน' },
+    { status: 'planned', text: 'ข้อมูลสกิลอาชีพที่เหลือ (จอมขมังเวทย์, นักดนตรี, สังฆราช ฯลฯ)' },
+    { status: 'planned', text: 'หน้าแยกแสดงวิธีทำสกิลอย่างละเอียด' },
+    { status: 'planned', text: 'ไกด์ทุกอาชีพอาชีพ' },
+    { status: 'planned', text: 'ระบบคำนวนสเตตัส' },
+  ];
+  // ============================================================
+
+  const tagLabel = { new: 'NEW', fix: 'FIX', update: 'UPDATE', wip: 'WIP' };
+  const tagClass = { new: 'tag-new', fix: 'tag-fix', update: 'tag-update', wip: 'tag-wip' };
+  const statusLabel = { soon: '🔜 เร็ว ๆ นี้', wip: '🔨 กำลังทำ', planned: '📌 วางแผนไว้' };
+  const statusClass = { soon: 'status-soon', wip: 'status-wip', planned: 'status-planned' };
+
+  function renderChangelog() {
+    const viewport = document.getElementById('view-port');
+
+    // ลบ class active จากปุ่มอาชีพทั้งหมด
+    document.querySelectorAll('.job-btn').forEach(b => b.classList.remove('active'));
+
+    const recentHTML = RECENT_UPDATES.map(item => `
+      <li class="patch-item">
+        <span class="patch-item-tag ${tagClass[item.tag]}">${tagLabel[item.tag]}</span>
+        <span>${item.text}</span>
+      </li>
+    `).join('');
+
+    const upcomingHTML = UPCOMING.map(item => `
+      <li class="upcoming-item">
+        <span class="status-badge ${statusClass[item.status]}">${statusLabel[item.status]}</span>
+        <span>${item.text}</span>
+      </li>
+    `).join('');
+
+    viewport.innerHTML = `
+      <div class="changelog-card">
+        <div class="home-header">
+          <div>
+            <h2 class="changelog-title">ข้อมูลอัพเดตเว็บไซต์</h2>
+            <p class="changelog-subtitle">ห้องสมุด Iruna Online ภาษาไทย</p>
+          </div>
+          <div class="version-pill">${SITE_VERSION_DATE}</div>
+        </div>
+
+        <hr class="changelog-divider">
+
+        <div class="home-two-col">
+          <!-- ซ้าย: กำลังจะมา -->
+          <div class="home-section">
+            <div class="home-section-header upcoming-header">
+              <span>กำลังจะมา</span>
+              <span class="version-date">soon</span>
+            </div>
+            <ul class="upcoming-list">
+              ${upcomingHTML}
+            </ul>
+          </div>
+
+          <!-- ขวา: อัปเดตล่าสุด -->
+          <div class="home-section">
+            <div class="home-section-header recent-header">
+              <span class="home-section-icon">✅</span>
+              <span>อัปเดตล่าสุด</span>
+            </div>
+            <ul class="patch-items">
+              ${recentHTML}
+            </ul>
+          </div>
+        </div>
+
+        <hr class="changelog-divider">
+        <p style="font-size: 12px; color: var(--text-dim); text-align: center;">
+          หากพบปัญหาหรือมีข้อเสนอแนะ สามารถติดต่อได้ที่ 
+          <a href="https://discord.gg/SKDeYngNp" target="_blank" style="color: var(--accent); text-decoration: underline;">Discord Server</a> ของเรา
+        </p>
+      </div>
+    `;
+}
   async function renderJob(jobId) {
     const viewport = document.getElementById('view-port');
     viewport.innerHTML = '<div class="card"><div class="loading">⏳ กำลังโหลดข้อมูล...</div></div>';
@@ -628,7 +946,7 @@ function toggleGroup(element) {
   modal.showModal();
 }
  
-  // เพิ่ม Event Listeners เมื่อ DOM โหลดเสร็จ
+   // เพิ่ม Event Listeners เมื่อ DOM โหลดเสร็จ
   document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.job-btn').forEach(btn => {
       btn.addEventListener('click', function() {
@@ -637,8 +955,8 @@ function toggleGroup(element) {
       });
     });
  
-    // แสดงตามค่าเริ่มต้น
-    renderJob('Summoner');
+    // แสดง Changelog 
+    renderChangelog();
   });
 </script>
 
