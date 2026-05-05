@@ -259,8 +259,7 @@
           "missions": [
             { "num": 75, "name": "Beyond the Adventure", "exp": 10000000 }
           ]
-        }
-        
+        } 
       ]
     },
     {
@@ -279,10 +278,80 @@
           "chapter": 2,
           "name": "บทที่ 2 เทพและโรคระบาด",
           "missions": [
-                { "num": 78, "name": "The God of Justice's Lament", "exp": 19200000 },
+            { "num": 78, "name": "The God of Justice's Lament", "exp": 19200000 },
             { "num": 79, "name": "Blighted Village", "exp": 20400000 }
           ]
-        }
+        },
+        {
+          "chapter": 3,
+          "name": "บทที่ 3 ความวุยวายเขตปกครองตนเอง",
+          "missions": [
+            { "num": 80, "name": "Mutant Dragonewts", "exp": 24700000 },
+            { "num": 81, "name": "Dragonewt Feedlot", "exp": 26000000 },
+            { "num": 82, "name": "The Lograth Rebellion", "exp": 27200000 }
+          ]
+        },
+        {
+            "chapter": 4,
+            "name": "บทที่ 4 โลกที่แตกต่างโลกที่เปลี่ยนไป",
+            "missions": [
+            { "num": 83, "name": "City of Survivors", "exp": 27800000 },
+            { "num": 84, "name": "The End of Ambition", "exp": 28800000 }
+            ]
+          },
+          {
+            "chapter": 5,
+            "name": "บทที่ 5 เหตุการณ์ผิดปกติอย่างต่อเนื่อง",
+            "missions": [
+            { "num": 85, "name": "The Disappearing Gods", "exp": 29900000 },
+            { "num": 86, "name": "The Overworld", "exp": 31600000 },
+            { "num": 87, "name": "Other World Dragon", "exp": 33400000 }
+            ]
+          },
+          {
+            "chapter": 6,
+            "name": "บทที่ 6 พระเจ้า มังกร โลก",
+            "missions": [
+            { "num": 88, "name": "The Dragonewt Priests", "exp": 34000000 },
+            { "num": 89, "name": "The Dragonewts' Secret", "exp": 35200000 },
+            { "num": 90, "name": "An Unexpected Encounter", "exp": 36500000 }
+            ]
+          },
+          {
+            "chapter": 7,
+            "name": "บทที่ 7 เชื้อสายจักพรรดิมังกร",
+            "missions": [
+            { "num": 91, "name": "The Brothers Kidnapped", "exp": 43000000 }
+             ]
+          },
+          {
+            "chapter": 8,
+            "name": "บทที่ 8 ศัตรูใหม่: ศัตรูที่แท้จริง",
+            "missions": [
+            { "num": 92, "name": "Demons, Gods and Emperors", "exp": 44800000 },
+            { "num": 93, "name": "Noyevere, The New World", "exp": 47000000 }
+             ]
+          },
+          {
+            "chapter": 9,
+            "name": "บทที่ 9 ผู้ที่จับเทพเจ้า",
+            "missions": [
+            { "num": 94, "name": "The Road to Xeltzam", "exp": 48800000 },
+            { "num": 95, "name": "Mutated Predators", "exp": 50500000 },
+            { "num": 96, "name": "The Shrine of Geyanetiel", "exp": 53100000 },
+            { "num": 97, "name": "Mindless Wisdom", "exp": 55800000 },
+            { "num": 98, "name": "The Price of Greed", "exp": 56700000 },
+            { "num": 99, "name": "Souls of the Soulless", "exp": 58600000 },
+            { "num": 100, "name": "Futile Emotions", "exp": 70000000 }
+             ]
+          },
+          {
+            "chapter": 10,
+            "name": "บทสุดท้ายEP2",
+            "missions": [
+            { "num": 101, "name": "Departure from the Dragonewt Realm", "exp": 37500000 }
+             ]
+          }
       ]
     },
     {
@@ -291,11 +360,94 @@
       "chapters": [
         {
           "chapter": 1,
-          "name": "Episode 3",
+          "name": "บทที่ 1 อิลูน่าที่ไม่ใช่อิลูน่า" ,
           "missions": [
+            { "num": 102, "name": "The Bandaged Girl and the Mysterious Warriors", "exp": 65000000 },
+            { "num": 103, "name": "Familiar Faces and New Enemies", "exp": 67000000 },
+            { "num": 104, "name": "Apostolia and the God's Fragments", "exp": 69000000 }
           ]
-        }
-      ]
+        },
+        {
+          "chapter": 2,
+          "name": "บทที่ 2 เศษเสี้ยวแห่งเทพกับมิโกะมังกร" ,
+          "missions": [
+            { "num": 105, "name": "God's Fragments and the Ancient Dragon", "exp": 71500000 },
+            { "num": 106, "name": "The God's Fragments and Gido's Small Box", "exp": 74000000 },
+            { "num": 107, "name": "The God's Fragments and Dragon Priestess", "exp": 76000000 }
+          ]
+        },
+        {
+          "chapter": 3,
+          "name": "บทที่ 3 ประเทศบนต้นไม้" ,
+          "missions": [
+            { "num": 108, "name": "President and Al Crysta", "exp": 77000000 },
+            { "num": 109, "name": "The Mountain Dragon and God's Fragments", "exp": 79700000 },
+            { "num": 110, "name": "Unchosen and Ineligible", "exp": 83200000 }
+          ]
+        },
+        {
+          "chapter": 4,
+          "name": "บทที่ 4 แผนการร้ายทำลายมิสลูน่า" ,
+          "missions": [
+            { "num": 111, "name": "The Lake Dragon and Bandit Girl", "exp": 86100000 },
+            { "num": 112, "name": "Evil Prophet and Temple", "exp": 88800000 },
+            { "num": 113, "name": "The Crisis Under Sateria", "exp": 92800000 }
+          ]
+         },
+         {
+          "chapter": 5,
+          "name": "บทที่ 5 ประเทศแห่งเวทมนตร์ที่เต็มไปด้วยละอองทราย" ,
+          "missions": [
+            { "num": 114, "name": "The Three Trials and Wild Dragon", "exp": 94000000 },
+            { "num": 115, "name": "ยังไม่ทราบรอข้อมูล", "exp": 95500000 },
+            { "num": 116, "name": "The Heavy Armor Knights and Deep Mystery", "exp": 98500000 }
+          ]
+         },
+         {
+          "chapter": 6,
+          "name": "บทที่ 6 ความจริงของวงเวทย์" ,
+          "missions": [
+            { "num": 117, "name": "The God's Fragments and Magic Circle", "exp": 100000000 },
+            { "num": 118, "name": "Innocence and Chain Reaction", "exp": 103000000 },
+            { "num": 119, "name": "The Sacred Plains and National Ruin", "exp": 106000000 }
+          ]
+         },
+         {
+          "chapter": 7,
+          "name": "บทที่ 7 จักรวรรดิที่หยิ่งยโส" ,
+          "missions": [
+            { "num": 120, "name": "The Desolated City and Ouvel's Shadow", "exp": 114000000 },
+            { "num": 121, "name": "The Underground Town and Monsters' Den", "exp": 117000000 },
+            { "num": 122, "name": "The Sea Dragon and Devil's Island", "exp": 121000000 }
+          ]
+         },
+         {
+          "chapter": 8,
+          "name": "บทที่ 8 ปริศนาทีู่กเปิดเผย" ,
+          "missions": [
+            { "num": 123, "name": "The Betrayer and Dragon Priestess", "exp": 124000000 },
+            { "num": 124, "name": "The True Identity of Zolte and End of the Knights", "exp": 128000000 },
+            { "num": 125, "name": "The Emperor and Evil Dragon", "exp": 131000000 }
+          ]
+         },
+         {
+          "chapter": 9,
+          "name": "บทที่ 9 บุกจู่โจมอุเบรัม" ,
+          "missions": [
+          { "num": 126, "name": "The Palace of Greed and Monster Field", "exp": 135000000 },
+          { "num": 127, "name": "The God's Fragments and Evil Desire", "exp": 139000000 },
+          { "num": 128, "name": "The Angels' Garden and New Dragon King", "exp": 142000000 },
+          { "num": 129, "name": "Inconsistency and Identity", "exp": 146000000 }
+          ]
+         },
+         {
+          "chapter": 10,
+          "name": "บทสุดท้ายEP3" ,
+          "missions": [
+          { "num": 130, "name": "The End and a New Beginning", "exp": 86000000 }
+          ]
+         }
+      ] 
     },
     {
       "ep": 4,
@@ -303,20 +455,83 @@
       "chapters": [
         {
           "chapter": 1,
-          "name": "Episode 4",
+          "name": "บทนำ โลกที่เคลื่อนไหว",
           "missions": [
+          { "num": 131, "name": "The Missing People", "exp": 87000000 }
           ]
-        }
+        },
+        {
+          "chapter": 2,
+          "name": "บทที่ 1 วิญญาณแห่งทะเลฟอร์ตินา",
+          "missions": [
+          { "num": 132, "name": "The Unknown Girl", "exp": 166000000 },
+          { "num": 133, "name": "The Mark and Singing Voice", "exp": 171000000 },
+          { "num": 134, "name": "The Blind Dragon", "exp": 175000000 }
+          ]
+        },
+        {
+          "chapter": 3,
+          "name": "บทที่ 2 เปลวไฟแห่งความชิงชัง",
+          "missions": [
+          { "num": 135, "name": "The Promise", "exp": 179000000 },
+          { "num": 136, "name": "Eternal Friendship", "exp": 183000000 },
+          { "num": 137, "name": "The Invisible Injury", "exp": 187000000 }
+          ]
+        },
+        {
+          "chapter": 4,
+          "name": "บทที่ 3 ปราสาทน้ำแข็งที่พังทลาย",
+          "missions": [
+            { "num": 138, "name": "The Tender Lie and Witch's Lamps", "exp": 191000000 },
+            { "num": 139, "name": "Ahead of the Light", "exp": 195000000 }
+          ]
+         },
+         {
+          "chapter": 5,
+          "name": "บทที่ 4 ป้อมปราการแห่งการแสแสร้ง",
+          "missions": [
+            { "num": 140, "name": "Wish for Happy Moment", "exp": 205000000 },
+            { "num": 141, "name": "The Broken Clay Doll", "exp": 210000000 },
+            { "num": 142, "name": "In the Sunken Town", "exp": 215000000 }
+          ]
+         },
+         {
+          "chapter": 6,
+          "name": "บทที่ 5 ปลายทางของคำวิงวอนที่ว่างเปล่า",
+          "missions": [
+            { "num": 143, "name": "The Collapsing Dream", "exp": 220000000 },
+            { "num": 144, "name": "The Collapsing Area", "exp": 226000000 },
+            { "num": 145, "name": "The Result of the Desire", "exp": 232000000 },
+            { "num": 146, "name": "To the Future", "exp": 261000000 }
+          ]
+         }
       ]
     },
     {
       "ep": 5,
-      "name": "Episode 5",
+      "name": "Episode 5 ",
       "chapters": [
         {
           "chapter": 1,
-          "name": "Episode 5",
+          "name": "ปฐมบท(รอชื่อที่ใช้จริงๆ)",
           "missions": [
+          { "num": 147, "name": "A Guide from Another World", "exp": 145000000 }
+          ]
+        },
+        {
+          "chapter": 2,
+          "name": "บทที่ 1 แสงจันทร์แห่งดวสทิเรีย",
+          "missions": [
+          { "num": 148, "name": "The King of Night", "exp": 145000000 },
+          { "num": 149, "name": "The Fallen Beast", "exp": 273000000 }
+          ]
+        },
+        {
+          "trick": "รออัพเดตจร้าาาาาาา",
+          "chapter": 3,
+          "name": "บทที่ 2 ",
+          "missions": [
+
           ]
         }
       ]
