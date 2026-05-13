@@ -426,7 +426,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <div class="input-grid">
       <div class="field">
         <label>เลเวลปัจจุบัน</label>
-        <input type="number" id="cur-lv" min="1" max="404" value="15" oninput="onCharChange()">
+        <input type="number" id="cur-lv" min="1" max="405" value="15" oninput="onCharChange()">
       </div>
     </div>
     <div class="slider-section">
@@ -1019,6 +1019,11 @@ function calcMode1() {
   if (goal > GAME_MAX_LV) {
     alert('เลเวลเป้าหมายต้องไม่เกิน ' + GAME_MAX_LV);
     document.getElementById('goal-lv').value = GAME_MAX_LV;
+    return;
+  }
+  if (goal < 1) {
+    alert('เออเริ่ดลดเลเวลได้ไง? จนติดลบเลยนะ! ตั้งกลับไปเป็น 1 ละกัน 🙂');
+    document.getElementById('goal-lv').value = 1;
     return;
   }
   if (goal <= cur) {
