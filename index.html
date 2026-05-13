@@ -750,13 +750,14 @@ function toggleGroup(element) {
 
 
  // ============================================================
-  //  ข้อมูลเวอร์ชันและอัปเดตล่าสุดที
+  //  ข้อมูลเวอร์ชันและอัปเดตล่าสุด
   // ============================================================
-  const SITE_VERSION_DATE = '5 พ.ค. 2025';
+  const SITE_VERSION_DATE = '13 พ.ค. 2025';
 
   // อัปเดตล่าสุด 
   // tag: 'new' | 'fix' | 'update' | 'wip'
   const RECENT_UPDATES = [
+    { tag: 'update', text: 'เพิ่มข้อมูลEXP จากเควส EP5' },
     { tag: 'update', text: 'เพิ่มข้อมูลEXP จากเควส EP2 - EP4' },
     { tag: 'new',    text: 'เพิ่มหน้าฟังก์คำนวนexpจากเควส' },
     { tag: 'new',    text: 'เพิ่มหน้าสุ่มอาชีพ' },
@@ -767,7 +768,7 @@ function toggleGroup(element) {
   // กำลังจะมา
   // status: 'soon' | 'wip' | 'planned'
   const UPCOMING = [
-    { status: 'wip',     text: 'ข้อมูลEXP จากเควส EP5 - EP6 ' },
+    { status: 'wip',     text: 'ข้อมูลEXP จากเควส EP6 ' },
     { status: 'soon',    text: 'ข้อมูลสกิลอาชีพพาลาดิน' },
     { status: 'planned', text: 'ข้อมูลสกิลอาชีพที่เหลือ (จอมขมังเวทย์, นักดนตรี, สังฆราช ฯลฯ)' },
     { status: 'planned', text: 'หน้าแยกแสดงวิธีทำสกิลอย่างละเอียด' },
