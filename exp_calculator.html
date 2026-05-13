@@ -897,7 +897,7 @@ function fmtTime(sec) {
 }
 
 function getCurLv()  { return Math.min(GAME_MAX_LV , Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1)); }
-function getGoalLv() { return Math.min(GAME_MAX_LV, Math.max(getCurLv()+1, parseInt(document.getElementById('goal-lv').value) || getCurLv()+1)); }
+function getGoalLv() { return parseInt(document.getElementById('goal-lv').value); }
 function getPct()    { return Math.min(99, Math.max(0, parseInt(document.getElementById('exp-pct').value) || 0)); }
 function getBonusPct() {
   const p = parseInt(document.getElementById('bonus-premium').value) || 0;
