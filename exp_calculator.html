@@ -1016,6 +1016,11 @@ function onSlider() {
 function calcMode1() {
   if (!Object.keys(RAW).length) return;
   const cur = getCurLv(), goal = getGoalLv(), pct = getPct();
+  if (goal > GAME_MAX_LV) {
+    alert('เลเวลเป้าหมายต้องไม่เกิน ' + GAME_MAX_LV);
+    document.getElementById('goal-lv').value = GAME_MAX_LV;
+    return;
+  }
   if (goal <= cur) {
     document.getElementById('kills').textContent     = '—';
     document.getElementById('farm-time').textContent = '—';
@@ -1190,7 +1195,7 @@ function calcMode3() {
   lvEl.textContent = 'Lv ' + newLv;
   if (newLv >= GAME_MAX_LV) {
       lvEl.style.color ='var(--gold)';
-      diffEl.innerHTML = `<span style="color:#00d2d3; font-size: 0.9em;">(เกินขีดจำกัดเกมปัจจุบัน)</span><br>+${lvGain} เลเวล จาก Lv ${getCurLv()}`;
+      diffEl.innerHTML = `<span style="color: #FF0033 ; font-size: 0.9em;">(เกินขีดจำกัดเกมปัจจุบัน)</span><br>+${lvGain} เลเวล จาก Lv ${getCurLv()}`;
   } else {
       lvEl.style.color = '#00d2d3'; 
       diffEl.textContent = lvGain > 0 ? `+${lvGain} เลเวล จาก Lv ${getCurLv()}` : 'เลเวลไม่เปลี่ยนแปลง';
