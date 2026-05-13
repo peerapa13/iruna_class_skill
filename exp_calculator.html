@@ -896,7 +896,7 @@ function fmtTime(sec) {
   return `${h} ชม. ${m} นาที`;
 }
 
-function getCurLv()  { return Math.min(GAME_MAX_LV - 1, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1)); }
+function getCurLv()  { return Math.min(GAME_MAX_LV , Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1)); }
 function getGoalLv() { return Math.min(GAME_MAX_LV, Math.max(getCurLv()+1, parseInt(document.getElementById('goal-lv').value) || getCurLv()+1)); }
 function getPct()    { return Math.min(99, Math.max(0, parseInt(document.getElementById('exp-pct').value) || 0)); }
 function getBonusPct() {
@@ -1015,13 +1015,21 @@ function onSlider() {
 // ─── Mode 1: Time to reach goal level ────────────────────────────────
 function calcMode1() {
   if (!Object.keys(RAW).length) return;
+  const cur = getCurLv(), goal = getGoalLv(), pct = getPct();
+  if (goal <= cur) {
+    document.getElementById('kills').textContent     = '—';
+    document.getElementById('farm-time').textContent = '—';
+    document.getElementById('exp-hr').textContent    = '—';
+    calcCharStats();
+    updateBonusDisplay();
+    return;
+  }
   calcCharStats();
   updateBonusDisplay();
   const bonus     = getBonusPct();
   const mobExp    = Math.max(1, parseInt(document.getElementById('mob-exp').value) || 1);
   const killTime  = Math.max(1, parseInt(document.getElementById('kill-time').value) || 1);
   const boosted   = Math.round(mobExp * (1 + bonus / 100));
-  const cur = getCurLv(), goal = getGoalLv(), pct = getPct();
   const curD  = RAW[String(cur)]  || { exp: 0, cum: 0 };
   const goalD = RAW[String(goal)] || { exp: 0, cum: 0 };
   const curExpInLv = Math.round(curD.exp * (pct / 100));
@@ -1181,10 +1189,10 @@ function calcMode3() {
   const diffEl = document.getElementById('m3-reach-diff');
   lvEl.textContent = 'Lv ' + newLv;
   if (newLv >= GAME_MAX_LV) {
-      lvEl.style.color = '#00d2d3'; // สีพิเศษสำหรับเวลเกิน
+      lvEl.style.color ='var(--gold)';
       diffEl.innerHTML = `<span style="color:#00d2d3; font-size: 0.9em;">(เกินขีดจำกัดเกมปัจจุบัน)</span><br>+${lvGain} เลเวล จาก Lv ${getCurLv()}`;
   } else {
-      lvEl.style.color = 'var(--gold)'; 
+      lvEl.style.color = '#00d2d3'; 
       diffEl.textContent = lvGain > 0 ? `+${lvGain} เลเวล จาก Lv ${getCurLv()}` : 'เลเวลไม่เปลี่ยนแปลง';
   }
   // ---------------------------------
