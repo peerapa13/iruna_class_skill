@@ -912,9 +912,10 @@ function getCurTotal() {
 function expToLevel(totalExp, mode = 1) {
   let found = { lv: 1, expInLv: 0 };
   const allLevels = Object.keys(RAW).map(Number).sort((a, b) => a - b);
-  const maxDataLv = allLevels[allLevels.length - 1]; 
-  for (let lv of allLevels) {
-    const cur = RAW[String(lv)], next = RAW[String(lv + 1)];
+  for (let i = 0; i < allLevels.length; i++) {
+    const lv = allLevels[i];
+    const cur = RAW[String(lv)];
+    const next = RAW[String(lv + 1)];
     if (!next) {
       if (totalExp >= cur.cum) found = { lv: lv, expInLv: totalExp - cur.cum };
       break;
@@ -924,7 +925,6 @@ function expToLevel(totalExp, mode = 1) {
       break;
     }
   }
-  // เช็คเงื่อนไขแยกโหมด
   if (mode !== 3 && found.lv >= GAME_MAX_LV) {
     return { lv: GAME_MAX_LV, expInLv: 0, isOverGameLimit: true };
   }
@@ -1171,7 +1171,7 @@ function calcMode3() {
   const totalQuestExp = msList.reduce((s, m) => s + m.exp, 0);
   const curTotal     = getCurTotal();
   const newTotal     = curTotal + totalQuestExp;
-  const { lv: newLv, expInLv } = expToLevel(newTotal);
+  const { lv: newLv, expInLv } = expToLevel(newTotal, 3);
   const newD   = RAW[String(newLv)] || { exp: 1, cum: 0 };
   const newPct = newD.exp > 0 ? Math.min(99, Math.floor(expInLv / newD.exp * 100)) : 0;
   const lvGain = newLv - getCurLv();
@@ -1181,16 +1181,13 @@ function calcMode3() {
   const diffEl = document.getElementById('m3-reach-diff');
   lvEl.textContent = 'Lv ' + newLv;
   if (newLv >= GAME_MAX_LV) {
-      lvEl.style.color = '#00d2d3'; 
+      lvEl.style.color = '#00d2d3'; // สีพิเศษสำหรับเวลเกิน
       diffEl.innerHTML = `<span style="color:#00d2d3; font-size: 0.9em;">(เกินขีดจำกัดเกมปัจจุบัน)</span><br>+${lvGain} เลเวล จาก Lv ${getCurLv()}`;
   } else {
       lvEl.style.color = 'var(--gold)'; 
       diffEl.textContent = lvGain > 0 ? `+${lvGain} เลเวล จาก Lv ${getCurLv()}` : 'เลเวลไม่เปลี่ยนแปลง';
   }
   // ---------------------------------
-
-  document.getElementById('m3-reach-lv').textContent   = 'Lv ' + newLv;
-  document.getElementById('m3-reach-diff').textContent = lvGain > 0 ? `+${lvGain} เลเวล จาก Lv ${getCurLv()}` : 'เลเวลไม่เปลี่ยนแปลง';
   document.getElementById('m3-reach-pct').textContent  = `${newPct}% ใน Lv ${newLv}`;
   document.getElementById('m3-pbar').style.width       = newPct + '%';
   document.getElementById('m3-quest-exp').textContent  = fmt(totalQuestExp);
