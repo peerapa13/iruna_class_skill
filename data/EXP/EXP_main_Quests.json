@@ -78,74 +78,74 @@
           "chapter": 8,
           "name": "บทที่ 8 มรดกของเทพเจ้า",
           "missions": [
-            { "num": 28, "name": "Sea of Intrigue", "exp": 250000 },
-            { "num": 29, "name": "Fort of Intrigue", "exp": 300000 }
+            { "num": 28, "name": "ทะเลแห่งกลอุบาย", "exp": 250000 },
+            { "num": 29, "name": "หอรบที่ชั่วรา้ย", "exp": 300000 }
           ]
         },
         {
           "chapter": 9,
           "name": "บทที่ 9 ภัยคุกคามสีขาว",
           "missions": [
-            { "num": 30, "name": "Highway of the Devil Plants", "exp": 360000 },
-            { "num": 31, "name": "The Burning Flatlands", "exp": 400000 },
-            { "num": 32, "name": "The Great Tree and The Dragon", "exp": 520000 }
+            { "num": 30, "name": "ปีศาจพืชแห่งทางหลวง", "exp": 360000 },
+            { "num": 31, "name": "ทุ่งราบที่เผาไหม้", "exp": 400000 },
+            { "num": 32, "name": "มังกรกับต้นไม้ยักษ์", "exp": 520000 }
           ]
         },
         {
           "chapter": 10,
           "name": "บทที่ 10 มังกรน้ำแข็งและเทพธิดาแห่งน้ำ",
           "missions": [
-            { "num": 33, "name": "The Disappearing Lake", "exp": 550000 },
-            { "num": 34, "name": "Dust Cloud Dreams", "exp": 570000 },
-            { "num": 35, "name": "From Ice to Water", "exp": 640000 }
+            { "num": 33, "name": "ทะเลสาบที่หายไปอย่างช้าๆ", "exp": 550000 },
+            { "num": 34, "name": "ความทรงจำของฝุ่นทราย", "exp": 570000 },
+            { "num": 35, "name": "น้ำแข็งกลายเป็นน้ำ", "exp": 640000 }
           ]
         },
         {
           "chapter": 11,
           "name": "บทที่ 11 ไปยังดินแดนที่ยังไม่มีการสำรวจ",
           "missions": [
-            { "num": 36, "name": "Highland Camp", "exp": 680000 },
-            { "num": 37, "name": "Awaiting Orders", "exp": 740000 },
-            { "num": 38, "name": "To a New Future", "exp": 300000 }
+            { "num": 36, "name": "ค่ายบนที่ราบสูง", "exp": 680000 },
+            { "num": 37, "name": "ขุ่นพลนักรบ", "exp": 740000 },
+            { "num": 38, "name": "ไปสู่ดินแดนใหม่", "exp": 300000 }
           ]
         },
         {
           "chapter": 12,
           "name": "บทที่ 1 ประเทศของดีล",
           "missions": [
-            { "num": 39, "name": "The Mystery Deepens", "exp": 320000 },
-            { "num": 40, "name": "The Toils of War", "exp": 790000 },
-            { "num": 41, "name": "The Inje Idol", "exp": 970000 }
+            { "num": 39, "name": "ปริศนาที่ซ้อนทับกัน", "exp": 320000 },
+            { "num": 40, "name": "ส่วนหนึ่งของความวุ่ยวายของสงคราม", "exp": 790000 },
+            { "num": 41, "name": "รูปปั้นอิเจ", "exp": 970000 }
           ]
         },
         {
           "chapter": 13,
           "name": "บทที่ 2 เทพีผู้อยู่ฝั่งตรงข้าม",
           "missions": [
-            { "num": 42, "name": "Slebinian Shadow", "exp": 1200000 },
-            { "num": 43, "name": "Holy Child", "exp": 1500000 },
-            { "num": 44, "name": "God-Killing Trap", "exp": 1850000 } 
+            { "num": 42, "name": "เงาของซูวิเนีย", "exp": 1200000 },
+            { "num": 43, "name": "ลูกของเทพเจ้า", "exp": 1500000 },
+            { "num": 44, "name": "กับดักสังหารเทพ", "exp": 1850000 } 
           ]
         },
         {
           "chapter": 14,
           "name": "บทที่ 3 ชนวนของแผนการลับ",
           "missions": [
-            { "num": 45, "name": "Chain Crisis", "exp": 2860000 },
-            { "num": 46, "name": "Hot Sand, Fierce Fight", "exp": 3150000 },
-            { "num": 47, "name": "Sinister Scheme Setback", "exp": 3850000 },
-            { "num": 48, "name": "Teaus Reconciliation", "exp": 4100000 },
-            { "num": 49, "name": "Victory at Zalsim", "exp": 4300000 },
-            { "num": 50, "name": "Beyond the Mountains of Darkness", "exp": 4650000 }
+            { "num": 45, "name": "วิกฤตการณ์ที่เกิดขึ้นอย่างต่อเนื่อง", "exp": 2860000 },
+            { "num": 46, "name": "การต่อสู้ในทรายอันร้อนแรง", "exp": 3150000 },
+            { "num": 47, "name": "แผนร้ายบังเกิด", "exp": 3850000 },
+            { "num": 48, "name": "เจรจาสงบศึก ณ ทีเอาส์", "exp": 4100000 },
+            { "num": 49, "name": "ชัยชนะ ณ ซาร์ซิม", "exp": 4300000 },
+            { "num": 50, "name": "ข้ามภูเขาแห่งความมืด", "exp": 4650000 }
           ]
         },
         {
           "chapter": 15,
           "name": "บทที่ 1 ประเทศของเอลฟ์",
           "missions": [
-            { "num": 51, "name": "Peculiar Place", "exp": 4900000 },
-            { "num": 52, "name": "The Labyrinth of Leaves", "exp": 5200000 },
-            { "num": 53, "name": "Frenzied Fight in the Former City", "exp": 2700000 }
+            { "num": 51, "name": "แผ่นดินอันประหลาด", "exp": 4900000 },
+            { "num": 52, "name": "เขาวงกตแสงรอดต้นไม้", "exp": 5200000 },
+            { "num": 53, "name": "การสู้รบที่เมืองเก่า", "exp": 2700000 }
           ]
         },
         {
@@ -247,7 +247,7 @@
         },
         {
           "chapter": 29,
-          "name": "บทที่ 8 การต่อสู้ครตัดสินที่จักวรรดิ",
+          "name": "บทที่ 8 การต่อสู้ตัดสินที่จักวรรดิ",
           "missions": [
             { "num": 73, "name": "The Mournful Empress", "exp": 16200000 },
             { "num": 74, "name": "The Final Battle, and…", "exp": 17000000 }
@@ -423,7 +423,7 @@
          },
          {
           "chapter": 8,
-          "name": "บทที่ 8 ปริศนาทีู่กเปิดเผย" ,
+          "name": "บทที่ 8 ปริศนาที่ถูกเปิดเผย" ,
           "missions": [
             { "num": 123, "name": "The Betrayer and Dragon Priestess", "exp": 124000000 },
             { "num": 124, "name": "The True Identity of Zolte and End of the Knights", "exp": 128000000 },
