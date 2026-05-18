@@ -152,62 +152,62 @@
           "chapter": 16,
           "name": "บทที่ 2 เมืองหลวงแห่งความวุ่นวาย",
           "missions": [
-            { "num": 54, "name": "Treetop Metropolis", "exp": 4500000 },
-            { "num": 55, "name": "Palatial Trail", "exp": 1500000 },
-            { "num": 56, "name": "Reconciliation of the Gods", "exp": 5300000 }
+            { "num": 54, "name": "เมืองหลวงบนต้นไม้", "exp": 4500000 },
+            { "num": 55, "name": "บททดสอบสู่การเข้าราชวัง", "exp": 1500000 },
+            { "num": 56, "name": "เข้าเฝ้าเทพเจ้า", "exp": 5300000 }
           ]
         },
         {
           "chapter": 17,
           "name": "บทที่ 3 ความผิดปกติของต้นไม้ใหญ่",
           "missions": [
-            { "num": 57, "name": "Background to a Blunder", "exp": 5600000 },
-            { "num": 58, "name": "The Old Man and His Research", "exp": 6200000 },
-            { "num": 59, "name": "Father and Daughter At Odds", "exp": 6200000 },
-            { "num": 60, "name": "To the Source of Strife", "exp": 6850000 }
+            { "num": 57, "name": "ความผิดพลาดในอดีต", "exp": 5600000 },
+            { "num": 58, "name": "คนแก่และการค้นคว้า", "exp": 6200000 },
+            { "num": 59, "name": "การแข่งขันของพ่อลูก", "exp": 6200000 },
+            { "num": 60, "name": "มุ่งสู่ต้นต่อของความวุ่ยวาย", "exp": 6850000 }
           ]
         },
         {
           "chapter": 18,
           "name": "บทที่ 1 ต่างแดน",
           "missions": [
-            { "num": 61, "name": "Water People Samurai", "exp": 7200000 }
+            { "num": 61, "name": "ซามไรของราษฎรแห่งน้ำ", "exp": 7200000 }
           ]
         },
         {
           "chapter": 19,
           "name": "บทที่ 2 ลัทธินอกรีตอิซุรุกิ",
           "missions": [
-            { "num": 62, "name": "The Minase and the Sanki", "exp": 7600000 }
+            { "num": 62, "name": "วัดแห่งหน้ากาก", "exp": 7600000 }
           ]
         },
         {
           "chapter": 20,
           "name": "บทที่ 3 อวตารของช่างหัวดื้อ",
           "missions": [
-            { "num": 63, "name": "The Avatar of Stubbornness", "exp": 8000000 }
+            { "num": 63, "name": "ดาบแห่งเทพเจ้า", "exp": 8000000 }
           ]
         },
         {
           "chapter": 21,
           "name": "บทที่ 4 เสียงที่สนั่นจากเทพอันชั่วร้าย",
           "missions": [
-            { "num": 64, "name": "Deserted Village", "exp": 10270000 },
-            { "num": 65, "name": "Departure from the Other World", "exp": 10000000 }
+            { "num": 64, "name": "หมู่บ้านที่ไร้ผู้คน", "exp": 10270000 },
+            { "num": 65, "name": "ไปสู่ดินแดนใหม่", "exp": 10000000 }
           ]
         },
         {
           "chapter": 22,
           "name": "บทที่ 1 ขึ้นฝั่งซูร์วีเนีย",
           "missions": [
-            { "num": 66, "name": "Defiant Harbor", "exp": 10750000 }
+            { "num": 66, "name": "เมืองท่าของกลุ่มปฏิวัติ", "exp": 10750000 }
           ]
         },
         {
           "chapter": 23,
           "name": "บทที่ 2 ดินแดนที่ถูกยึดครอง",
           "missions": [
-            { "num": 67, "name": "The Occupied Land", "exp": 11500000 }
+            { "num": 67, "name": "หมู่บ้านที่ถูกจับ", "exp": 11500000 }
           ]
         },
         {

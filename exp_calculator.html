@@ -302,6 +302,29 @@ input[type=range]::-moz-range-thumb {
 .div-label::before, .div-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 .range-info { font-size: 12px; color: var(--teal); min-height: 18px; margin-bottom: 8px; line-height: 1.6; }
 
+/* Quest detail table */
+.quest-detail-wrap {
+  margin-top: 16px;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+.quest-detail-title {
+  font-family: 'Cinzel', serif; font-size: 11px; font-weight: 600;
+  color: var(--gold); letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+}
+.quest-detail-title::before { content: ''; display: block; width: 3px; height: 14px; background: var(--gold); border-radius: 2px; }
+.quest-summary-row {
+  display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+  margin-bottom: 10px; font-size: 12px; color: var(--text-sec);
+}
+.quest-summary-badge {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 3px; padding: 3px 9px; font-size: 12px; font-family: 'Cinzel', serif;
+}
+.quest-summary-badge.green { color: var(--teal); border-color: var(--teal-dim); }
+.quest-summary-badge.gold  { color: var(--gold); border-color: var(--gold-dim); }
+
 /* Quest table */
 .table-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
 .toggle-group { display: flex; gap: 4px; }
@@ -343,6 +366,12 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
 .badge { font-size: 9px; padding: 1px 5px; border-radius: 2px; margin-left: 4px; vertical-align: middle; }
 .badge-start { background: rgba(45,212,160,0.15); border: 1px solid var(--teal-dim); color: var(--teal); }
 .badge-end   { background: rgba(91,156,246,0.15); border: 1px solid var(--blue-dim); color: var(--blue); }
+
+/* pct bar mini in quest table */
+.pct-bar-wrap { display: flex; align-items: center; gap: 5px; min-width: 80px; }
+.pct-bar-track { flex: 1; height: 4px; background: var(--bg-deep); border-radius: 2px; overflow: hidden; }
+.pct-bar-fill  { height: 100%; background: var(--gold); border-radius: 2px; }
+.pct-val { font-size: 10px; color: var(--text-dim); min-width: 34px; text-align: right; }
 
 .hint { display: flex; gap: 10px; background: rgba(201,168,76,0.05); border: 1px solid var(--gold-dim); border-radius: 5px; padding: 12px 14px; margin-bottom: 16px; font-size: 13px; color: var(--text-sec); line-height: 1.6; }
 .hint-icon { color: var(--gold); font-size: 15px; flex-shrink: 0; margin-top: 1px; }
@@ -569,22 +598,6 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
           <div class="field"><label>มิชชั่น</label><select id="sel-ms-to" onchange="calcMode3()"></select></div>
         </div>
         <div class="range-info" id="ep-range-info"></div>
-        <div style="margin-top:4px">
-          <button class="tbtn" id="qlist-btn" onclick="toggleQList()" style="font-size:11px">▼ ดูรายชื่อ Mission ในช่วงที่เลือก</button>
-        </div>
-        <div id="qlist-wrap" style="display:none;margin-top:10px">
-          <div class="table-wrap" style="max-height:220px">
-            <table>
-              <thead><tr>
-                <th>#</th><th>EP</th><th>บท</th>
-                <th style="min-width:160px">Mission</th>
-                <th style="text-align:right">EXP</th>
-                <th style="text-align:right">EXP สะสม</th>
-              </tr></thead>
-              <tbody id="qlist-body"></tbody>
-            </table>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -640,13 +653,13 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
       </div>
     </div>
     </div><!-- end bonus-section-wrap -->
+
     <!-- ── Results: Mode 1 ── -->
     <div id="result-1">
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
         <div class="stat-card white"><div class="stat-label">จำนวนมอนเตอร์</div><div class="stat-value" id="kills">—</div></div>
         <div class="stat-card white"><div class="stat-label">เวลาโดยประมาณ</div><div class="stat-value" style="font-size:13px" id="farm-time">—</div></div>
         <div class="stat-card white"><div class="stat-label">EXP / ชั่วโมง (หลังโบนัส)</div><div class="stat-value" id="exp-hr">—</div></div>
-        <!-- Stats (Mode 1 summary) -->
         <div class="stat-card green"><div class="stat-label">EXP ที่ต้องการอีก</div><div class="stat-value" id="exp-needed">—</div></div>
         <div class="stat-card blue"><div class="stat-label">EXP สะสมรวมถึงเป้า</div><div class="stat-value" id="cum-goal">—</div></div>
         <div class="stat-card amber"><div class="stat-label">EXP สะสมปัจจุบัน (รวม % bar)</div><div class="stat-value" id="cum-current">—</div></div>
@@ -678,16 +691,37 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
         <div class="rlb-pct" id="m3-reach-pct">—</div>
         <div class="prog-track"><div class="prog-fill" id="m3-pbar" style="width:0%"></div></div>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:0">
         <div class="stat-card green"><div class="stat-label">EXP จากเควส</div><div class="stat-value" id="m3-quest-exp">—</div></div>
         <div class="stat-card amber"><div class="stat-label">จำนวนมิชชั่น</div><div class="stat-value" id="m3-count">—</div></div>
         <div class="stat-card blue"><div class="stat-label">EXP สะสมหลังจบ</div><div class="stat-value" id="m3-new-cum">—</div></div>
+      </div>
+
+      <!-- ✦ ตาราง EXP รายมิชชั่น (ใหม่) ✦ -->
+      <div class="quest-detail-wrap" id="quest-detail-section" style="display:none">
+        <div class="quest-detail-title">EXP รายมิชชั่น</div>
+        <div class="quest-summary-row" id="quest-summary-row"></div>
+        <div class="table-wrap" style="max-height:340px">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:44px">#</th>
+                <th style="width:44px">EP</th>
+                <th style="min-width:80px">บท</th>
+                <th style="min-width:160px">Mission</th>
+                <th style="text-align:right;min-width:90px">EXP</th>
+                <th style="min-width:100px">% ของรวม</th>
+                <th style="text-align:right;min-width:100px">EXP สะสม</th>
+              </tr>
+            </thead>
+            <tbody id="qlist-body"></tbody>
+          </table>
+        </div>
       </div>
     </div>
 
   </div><!-- end farm panel -->
 
-  
   <!-- Save Button -->
   <div class="save-btn-wrap">
     <button class="save-btn" id="btn-save-image" onclick="saveImage()">
@@ -723,7 +757,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
   </footer>
 </div>
 
-<!-- Export card Mode 1: EXP needed + farm time -->
+<!-- Export card Mode 1 -->
 <div id="export-card-1" style="position:fixed;top:-9999px;left:-9999px;width:480px;background:#0a0c10;color:#e8e4d8;padding:28px 24px 24px;border:2px solid #3d5080;border-radius:12px;font-family:'Sarabun',sans-serif;">
   <div style="text-align:center;border-bottom:1px solid #c9a84c;padding-bottom:14px;margin-bottom:20px;">
     <div style="font-family:'Cinzel',serif;color:#c9a84c;font-size:20px;letter-spacing:2px;font-weight:700;">✦ IRUNA ONLINE TH ✦</div>
@@ -763,7 +797,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
       <div style="display:flex;justify-content:space-between;grid-column:1/-1;"><span style="font-size:12px;color:#8a8fa8;">เวลาโดยประมาณ</span><span id="ec1-farm-time" style="font-size:12px;color:#e8c96a;font-weight:700;">—</span></div>
     </div>
   </div>
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #2a3045;padding-top:14px;">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #2a3045;padding-top:14px;">
     <div>
       <div style="font-size:10px;color:#555b72;margin-bottom:3px;" id="ec1-ts">—</div>
       <div style="font-size:10px;color:#555b72;">peerapa13.github.io/iruna_class_skill/exp_calculator</div>
@@ -775,7 +809,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
   </div>
 </div>
 
-<!-- Export card Mode 2: Level from farm time -->
+<!-- Export card Mode 2 -->
 <div id="export-card-2" style="position:fixed;top:-9999px;left:-9999px;width:480px;background:#0a0c10;color:#e8e4d8;padding:28px 24px 24px;border:2px solid #3d5080;border-radius:12px;font-family:'Sarabun',sans-serif;">
   <div style="text-align:center;border-bottom:1px solid #c9a84c;padding-bottom:14px;margin-bottom:20px;">
     <div style="font-family:'Cinzel',serif;color:#c9a84c;font-size:20px;letter-spacing:2px;font-weight:700;">✦ IRUNA ONLINE TH ✦</div>
@@ -818,7 +852,7 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
       <div style="display:flex;justify-content:space-between;grid-column:1/-1;"><span style="font-size:12px;color:#8a8fa8;">EXP รวมที่ได้</span><span id="ec2-total-exp" style="font-size:12px;color:#2dd4a0;font-weight:700;">—</span></div>
     </div>
   </div>
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #2a3045;padding-top:14px;">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #2a3045;padding-top:14px;">
     <div>
       <div style="font-size:10px;color:#555b72;margin-bottom:3px;" id="ec2-ts">—</div>
       <div style="font-size:10px;color:#555b72;">peerapa13.github.io/iruna_class_skill/exp_calculator</div>
@@ -830,25 +864,21 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
   </div>
 </div>
 
-<!-- Export card Mode 3: Level from Quest -->
+<!-- Export card Mode 3 -->
 <div id="export-card-3" style="position:fixed;top:-9999px;left:-9999px;width:480px;background:#0a0c10;color:#e8e4d8;padding:28px 24px 24px;border:2px solid #3d5080;border-radius:12px;font-family:'Sarabun',sans-serif;">
   <div style="text-align:center;border-bottom:1px solid #c9a84c;padding-bottom:14px;margin-bottom:20px;">
     <div style="font-family:'Cinzel',serif;color:#c9a84c;font-size:20px;letter-spacing:2px;font-weight:700;">✦ IRUNA ONLINE TH ✦</div>
     <div style="font-size:12px;color:#8a8fa8;letter-spacing:1px;margin-top:4px;">MODE 3 · เลเวลจากเควส</div>
   </div>
-
   <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(61,80,128,0.12);border:1px solid #2a3045;border-radius:8px;padding:16px 20px;margin-bottom:16px;">
     <div style="text-align:center;flex:1;">
       <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลปัจจุบัน</div>
       <div style="font-family:'Cinzel',serif;font-size:30px;color:#2dd4a0;font-weight:700;line-height:1;">Lv <span id="ec3-cur-lv">—</span></div>
     </div>
-
     <div style="font-size:22px;color:#c9a84c;padding:0 16px;">➜</div>
-
     <div style="text-align:center;flex:1;">
       <div style="font-size:11px;color:#8a8fa8;letter-spacing:1px;margin-bottom:6px;">เลเวลที่จะได้</div>
       <div style="font-family:'Cinzel',serif;font-size:30px;color:#5b9cf6;font-weight:700;line-height:1;"><span id="ec3-reach-lv">—</span></div>
-      
       <div style="margin-top:8px;">
         <div style="height:5px;background:#161a22;border:1px solid #2a3045;border-radius:3px;overflow:hidden;width:80px;margin:0 auto;">
           <div id="ec3-pbar" style="height:100%; background:#5b9cf6; width:0%;"></div>
@@ -857,7 +887,6 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
       </div>
     </div>
   </div>
-
   <div style="background:#161a22;border:1px solid #2a3045;border-radius:6px;padding:14px 16px;margin-bottom:12px;">
     <div style="font-size:10px;color:#555b72;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">ข้อมูลเควส</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;">
@@ -867,7 +896,6 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
       <div style="display:flex;justify-content:space-between;grid-column:1/-1;"><span style="font-size:12px;color:#8a8fa8;">EXP สะสมหลังจบ</span><span id="ec3-new-cum" style="font-size:12px;color:#5b9cf6;font-weight:700;">—</span></div>
     </div>
   </div>
-
   <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #2a3045;padding-top:14px;">
     <div><div style="font-size:10px;color:#555b72;margin-bottom:3px;" id="ec3-ts">—</div><div style="font-size:10px;color:#555b72;">peerapa13.github.io/iruna_class_skill/exp_calculator</div></div>
     <div style="text-align:center;"><div id="ec3-qr" style="background:#fff;padding:4px;border-radius:4px;display:inline-block;"></div><div style="font-size:9px;color:#555b72;margin-top:3px;">สแกนเพื่อเข้าเว็บ</div></div>
@@ -876,14 +904,13 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
 
 <script>
 // ─── Data ─────────────────────────────────────────────────────────────
-let RAW      = {};   // EXP_per_Level.json
-let EPISODES = [];   // EXP_main_Quests.json
-let ALL_MS   = [];   // flat mission list
+let RAW      = {};
+let EPISODES = [];
+let ALL_MS   = [];
 let questLoaded = false;
-let farmMode = 1;    // active mode: 1 | 2 | 3
+let farmMode = 1;
 let tableMode = 'range';
-let qlistOpen = false;
-const GAME_MAX_LV = 405; // เพดานเลเวลในเกมปัจจุบัน
+const GAME_MAX_LV = 405;
 
 // ─── Helpers ──────────────────────────────────────────────────────────
 const fmt = n => Math.round(n).toLocaleString();
@@ -896,7 +923,7 @@ function fmtTime(sec) {
   return `${h} ชม. ${m} นาที`;
 }
 
-function getCurLv()  { return Math.min(GAME_MAX_LV , Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1)); }
+function getCurLv()  { return Math.min(GAME_MAX_LV, Math.max(1, parseInt(document.getElementById('cur-lv').value) || 1)); }
 function getGoalLv() { return parseInt(document.getElementById('goal-lv').value); }
 function getPct()    { return Math.min(99, Math.max(0, parseInt(document.getElementById('exp-pct').value) || 0)); }
 function getBonusPct() {
@@ -928,10 +955,7 @@ function expToLevel(totalExp, mode = 1) {
   if (mode !== 3 && found.lv >= GAME_MAX_LV) {
     return { lv: GAME_MAX_LV, expInLv: 0, isOverGameLimit: true };
   }
-  return { 
-    ...found, 
-    isOverGameLimit: found.lv >= GAME_MAX_LV 
-  };
+  return { ...found, isOverGameLimit: found.lv >= GAME_MAX_LV };
 }
 
 // ─── Shared bonus UI ──────────────────────────────────────────────────
@@ -942,7 +966,6 @@ function updateBonusDisplay() {
   const activeMobExpEl = farmMode === 2 ? mobExpEl2 : mobExpEl1;
   const mobExp = Math.max(1, parseInt(activeMobExpEl?.value) || 1);
   const boosted = Math.round(mobExp * (1 + bonus / 100));
-
   document.getElementById('bonus-total').textContent      = bonus;
   document.getElementById('bonus-pct-label').textContent  = bonus;
   document.getElementById('exp-base-display').textContent    = fmt(mobExp);
@@ -971,9 +994,7 @@ function setFarmMode(m) {
     document.getElementById('mbody-' + i).style.display  = i === m ? 'block' : 'none';
     document.getElementById('result-' + i).style.display = i === m ? 'block' : 'none';
   });
-  // hide EXP bonus section in mode 3 (quest gives fixed EXP, bonus N/A)
   document.getElementById('bonus-section-wrap').style.display = m === 3 ? 'none' : 'block';
-  // load quest data lazily when switching to mode 3
   if (m === 3 && !questLoaded) loadQuestData();
   updateBonusDisplay();
   runCurrentMode();
@@ -1012,7 +1033,7 @@ function onSlider() {
   onCharChange();
 }
 
-// ─── Mode 1: Time to reach goal level ────────────────────────────────
+// ─── Mode 1 ──────────────────────────────────────────────────────────
 function calcMode1() {
   if (!Object.keys(RAW).length) return;
   const cur = getCurLv(), goal = getGoalLv(), pct = getPct();
@@ -1036,10 +1057,10 @@ function calcMode1() {
   }
   calcCharStats();
   updateBonusDisplay();
-  const bonus     = getBonusPct();
-  const mobExp    = Math.max(1, parseInt(document.getElementById('mob-exp').value) || 1);
-  const killTime  = Math.max(1, parseInt(document.getElementById('kill-time').value) || 1);
-  const boosted   = Math.round(mobExp * (1 + bonus / 100));
+  const bonus    = getBonusPct();
+  const mobExp   = Math.max(1, parseInt(document.getElementById('mob-exp').value) || 1);
+  const killTime = Math.max(1, parseInt(document.getElementById('kill-time').value) || 1);
+  const boosted  = Math.round(mobExp * (1 + bonus / 100));
   const curD  = RAW[String(cur)]  || { exp: 0, cum: 0 };
   const goalD = RAW[String(goal)] || { exp: 0, cum: 0 };
   const curExpInLv = Math.round(curD.exp * (pct / 100));
@@ -1052,41 +1073,38 @@ function calcMode1() {
   renderTable();
 }
 
-// ─── Mode 2: Level from farming time ─────────────────────────────────
+// ─── Mode 2 ──────────────────────────────────────────────────────────
 function setTimeQuick(h, m) {
-    document.getElementById('farm-hours').value = h;
-    document.getElementById('farm-mins').value = m;
-    calcMode2();
+  document.getElementById('farm-hours').value = h;
+  document.getElementById('farm-mins').value = m;
+  calcMode2();
 }
 function calcMode2() {
   if (!Object.keys(RAW).length) return;
   updateBonusDisplay();
-  const startLv   = getCurLv();
-  let hours     = Math.max(0, parseFloat(document.getElementById('farm-hours').value) || 0);
-  const mins = parseFloat(document.getElementById('farm-mins').value) || 0;
+  const startLv  = getCurLv();
+  let hours      = Math.max(0, parseFloat(document.getElementById('farm-hours').value) || 0);
+  const mins     = parseFloat(document.getElementById('farm-mins').value) || 0;
   hours += (mins / 60);
-  const killSec   = Math.max(1, parseInt(document.getElementById('kill-time-2').value) || 1);
-  const mobExp    = Math.max(1, parseInt(document.getElementById('mob-exp-2').value) || 1);
-  const bonus     = getBonusPct();
-  const boosted   = Math.round(mobExp * (1 + bonus / 100));
-  const kills     = Math.floor(hours * 3600 / killSec);
-  const totalExp  = kills * boosted;
-  const startCum  = (RAW[String(startLv)] || { cum: 0 }).cum + Math.round((RAW[String(startLv)]?.exp || 0) * (getPct() / 100));
-  const reachCum  = startCum + totalExp;
-
+  const killSec  = Math.max(1, parseInt(document.getElementById('kill-time-2').value) || 1);
+  const mobExp   = Math.max(1, parseInt(document.getElementById('mob-exp-2').value) || 1);
+  const bonus    = getBonusPct();
+  const boosted  = Math.round(mobExp * (1 + bonus / 100));
+  const kills    = Math.floor(hours * 3600 / killSec);
+  const totalExp = kills * boosted;
+  const startCum = (RAW[String(startLv)] || { cum: 0 }).cum + Math.round((RAW[String(startLv)]?.exp || 0) * (getPct() / 100));
+  const reachCum = startCum + totalExp;
   let reachLv = startLv;
   for (let lv = startLv; lv <= 405; lv++) {
     const d = RAW[String(lv)]; if (!d) break;
     if (reachCum >= d.cum) reachLv = lv; else break;
   }
   if (reachLv > 405) reachLv = 405;
-
   const lvGain = reachLv - startLv;
-  const d      = RAW[String(reachLv)] || {};
+  const d = RAW[String(reachLv)] || {};
   const expInNext   = reachCum - (d.cum || 0);
   const nextLvExp   = (RAW[String(Math.min(405, reachLv+1))] || { exp: 1 }).exp;
   const pctInNext   = reachLv < 405 ? Math.min(99, Math.floor(expInNext / nextLvExp * 100)) : 100;
-
   document.getElementById('m2-reach-lv').textContent  = 'Lv ' + reachLv;
   document.getElementById('m2-reach-diff').textContent = lvGain > 0 ? `+${lvGain} เลเวล จาก Lv ${startLv}` : 'ไม่เพียงพอขึ้นเลเวล';
   document.getElementById('m2-reach-pct').textContent  = reachLv < 405 ? `${pctInNext}% ใน Lv ${reachLv+1}` : 'MAX LEVEL';
@@ -1096,7 +1114,7 @@ function calcMode2() {
   document.getElementById('m2-total-exp').textContent   = fmt(totalExp);
 }
 
-// ─── Mode 3: Level from Quest ────────────────────────────────────────
+// ─── Mode 3: Quest ────────────────────────────────────────────────────
 async function loadQuestData() {
   try {
     const res = await fetch('data/EXP/EXP_main_Quests.json');
@@ -1132,8 +1150,8 @@ function buildEpSelects() {
 }
 function buildChSelects(side) {
   const selEp = document.getElementById('sel-ep-' + side);
-  const epIdx = selEp.selectedIndex; 
-  const ep = EPISODES[epIdx]; 
+  const epIdx = selEp.selectedIndex;
+  const ep = EPISODES[epIdx];
   const selCh = document.getElementById('sel-ch-' + side);
   selCh.innerHTML = '';
   if (!ep || !ep.chapters) return;
@@ -1143,7 +1161,6 @@ function buildChSelects(side) {
   if (side === 'to') selCh.value = ep.chapters.length - 1;
   buildMsSelects(side);
 }
-
 function buildMsSelects(side) {
   const epIdx = document.getElementById('sel-ep-' + side).selectedIndex;
   const chIdx = parseInt(document.getElementById('sel-ch-' + side).value);
@@ -1159,21 +1176,22 @@ function buildMsSelects(side) {
 }
 function onEpChange(side) { buildChSelects(side); calcMode3(); }
 function onChChange(side) { buildMsSelects(side); calcMode3(); }
-function getMsNum(epNum, chIdx, msIdx) { 
+function getMsNum(epNum, chIdx, msIdx) {
   const ep = EPISODES.find(e => e.ep === epNum);
   if (!ep || !ep.chapters[chIdx]) return null;
   const ch = ep.chapters[chIdx];
   if (!ch || !ch.missions[msIdx]) return null;
   return ch.missions[msIdx].num;
 }
+
 function calcMode3() {
   if (!questLoaded || !Object.keys(RAW).length) return;
-  const epFrom   = parseInt(document.getElementById('sel-ep-from').value);
-  const chFrom   = parseInt(document.getElementById('sel-ch-from').value);
+  const epFrom    = parseInt(document.getElementById('sel-ep-from').value);
+  const chFrom    = parseInt(document.getElementById('sel-ch-from').value);
   const msIdxFrom = parseInt(document.getElementById('sel-ms-from').value);
-  const epTo     = parseInt(document.getElementById('sel-ep-to').value);
-  const chTo     = parseInt(document.getElementById('sel-ch-to').value);
-  const msIdxTo  = parseInt(document.getElementById('sel-ms-to').value);
+  const epTo      = parseInt(document.getElementById('sel-ep-to').value);
+  const chTo      = parseInt(document.getElementById('sel-ch-to').value);
+  const msIdxTo   = parseInt(document.getElementById('sel-ms-to').value);
   let msFrom = getMsNum(epFrom, chFrom, msIdxFrom);
   let msTo   = getMsNum(epTo,   chTo,   msIdxTo);
   if (msFrom === null || msTo === null) return;
@@ -1185,59 +1203,83 @@ function calcMode3() {
     document.getElementById('ep-range-info').textContent =
       `EP${mF.ep} ${mF.chName} M${mF.num} "${mF.name}" → EP${mT.ep} ${mT.chName} M${mT.num} "${mT.name}"`;
 
-  const msList       = ALL_MS.filter(m => m.num >= msFrom && m.num <= msTo);
-  const totalQuestExp = msList.reduce((s, m) => s + m.exp, 0);
-  const curTotal     = getCurTotal();
-  const newTotal     = curTotal + totalQuestExp;
+  const msList          = ALL_MS.filter(m => m.num >= msFrom && m.num <= msTo);
+  const totalQuestExp   = msList.reduce((s, m) => s + m.exp, 0);
+  const curTotal        = getCurTotal();
+  const newTotal        = curTotal + totalQuestExp;
   const { lv: newLv, expInLv } = expToLevel(newTotal, 3);
   const newD   = RAW[String(newLv)] || { exp: 1, cum: 0 };
   const newPct = newD.exp > 0 ? Math.min(99, Math.floor(expInLv / newD.exp * 100)) : 0;
   const lvGain = newLv - getCurLv();
 
-  // --- ส่วนแสดงเวลเกิน ---
-  const lvEl = document.getElementById('m3-reach-lv');
+  const lvEl   = document.getElementById('m3-reach-lv');
   const diffEl = document.getElementById('m3-reach-diff');
   lvEl.textContent = 'Lv ' + newLv;
   if (newLv >= GAME_MAX_LV) {
-      lvEl.style.color ='var(--gold)';
-      diffEl.innerHTML = `<span style="color: #FF0033 ; font-size: 0.9em;">(เกินขีดจำกัดเกมปัจจุบัน)</span><br>+${lvGain} เลเวล จาก Lv ${getCurLv()}`;
+    lvEl.style.color = 'var(--gold)';
+    diffEl.innerHTML = `<span style="color:#FF0033;font-size:0.9em;">(เกินขีดจำกัดเกมปัจจุบัน)</span><br>+${lvGain} เลเวล จาก Lv ${getCurLv()}`;
   } else {
-      lvEl.style.color = '#00d2d3'; 
-      diffEl.textContent = lvGain > 0 ? `+${lvGain} เลเวล จาก Lv ${getCurLv()}` : 'เลเวลไม่เปลี่ยนแปลง';
+    lvEl.style.color = '#00d2d3';
+    diffEl.textContent = lvGain > 0 ? `+${lvGain} เลเวล จาก Lv ${getCurLv()}` : 'เลเวลไม่เปลี่ยนแปลง';
   }
-  // ---------------------------------
   document.getElementById('m3-reach-pct').textContent  = `${newPct}% ใน Lv ${newLv}`;
   document.getElementById('m3-pbar').style.width       = newPct + '%';
   document.getElementById('m3-quest-exp').textContent  = fmt(totalQuestExp);
   document.getElementById('m3-count').textContent      = msList.length;
   document.getElementById('m3-new-cum').textContent    = fmt(newTotal);
 
-  renderQList(msList, msFrom, msTo);
+  // ── ตาราง EXP รายมิชชั่น ──
+  renderQuestDetailTable(msList, msFrom, msTo, totalQuestExp);
 }
-function renderQList(list, msFrom, msTo) {
-  let html = '', running = 0;
-  list.forEach(m => {
+
+// ─── render ตาราง EXP รายมิชชั่น (ใหม่) ─────────────────────────────
+function renderQuestDetailTable(list, msFrom, msTo, totalExp) {
+  const section = document.getElementById('quest-detail-section');
+  const tbody   = document.getElementById('qlist-body');
+  const summaryRow = document.getElementById('quest-summary-row');
+
+  if (!list || list.length === 0) {
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = 'block';
+
+  // summary badges
+  const epSet = [...new Set(list.map(m => m.ep))];
+  summaryRow.innerHTML =
+    `<span class="quest-summary-badge gold">${list.length} มิชชั่น</span>` +
+    `<span class="quest-summary-badge green">${fmt(totalExp)} EXP รวม</span>` +
+    `<span style="color:var(--text-dim);font-size:11px">EP: ${epSet.join(', ')}</span>`;
+
+  let html = '';
+  let running = 0;
+  list.forEach((m, idx) => {
     running += m.exp;
-    const isFirst = m.num === msFrom, isLast = m.num === msTo;
-    const cls   = isFirst ? 'first-q' : isLast ? 'last-q' : '';
-    const badge = isFirst ? '<span class="badge badge-start">START</span>'
-                : isLast  ? '<span class="badge badge-end">END</span>' : '';
-    html += `<tr class="${cls}">
+    const pct    = totalExp > 0 ? (m.exp / totalExp * 100) : 0;
+    const pctStr = pct.toFixed(1);
+    const barW   = Math.max(2, Math.round(pct));
+    const isFirst = m.num === msFrom;
+    const isLast  = m.num === msTo;
+    const rowCls  = isFirst ? 'first-q' : isLast ? 'last-q' : '';
+    const badge   = isFirst ? '<span class="badge badge-start">START</span>'
+                  : isLast  ? '<span class="badge badge-end">END</span>' : '';
+
+    html += `<tr class="${rowCls}">
       <td style="font-family:'Cinzel',serif;font-size:11px;color:var(--text-dim);width:36px">${m.num}</td>
       <td style="color:var(--gold-dim);font-size:11px;white-space:nowrap">EP${m.ep}</td>
-      <td style="color:var(--text-dim);font-size:11px;white-space:nowrap">${m.chName}</td>
-      <td style="color:var(--text-sec);max-width:180px;overflow:hidden;text-overflow:ellipsis">${m.name}${badge}</td>
-      <td style="text-align:right;color:var(--gold);font-family:'Cinzel',serif;font-size:12px">${fmt(m.exp)}</td>
-      <td style="text-align:right;color:var(--teal);font-size:11px">${fmt(running)}</td>
+      <td style="color:var(--text-dim);font-size:11px;white-space:nowrap;max-width:100px;overflow:hidden;text-overflow:ellipsis">${m.chName}</td>
+      <td style="color:var(--text-sec);max-width:200px;overflow:hidden;text-overflow:ellipsis">${m.name}${badge}</td>
+      <td style="text-align:right;color:var(--gold);font-family:'Cinzel',serif;font-size:12px;white-space:nowrap">${fmt(m.exp)}</td>
+      <td style="min-width:100px;padding-right:14px">
+        <div class="pct-bar-wrap">
+          <div class="pct-bar-track"><div class="pct-bar-fill" style="width:${barW}%"></div></div>
+          <span class="pct-val">${pctStr}%</span>
+        </div>
+      </td>
+      <td style="text-align:right;color:var(--teal);font-size:12px;font-family:'Cinzel',serif;white-space:nowrap">${fmt(running)}</td>
     </tr>`;
   });
-  document.getElementById('qlist-body').innerHTML = html;
-}
-let _qlistOpen = false;
-function toggleQList() {
-  _qlistOpen = !_qlistOpen;
-  document.getElementById('qlist-wrap').style.display = _qlistOpen ? 'block' : 'none';
-  document.getElementById('qlist-btn').textContent = (_qlistOpen ? '▲' : '▼') + ' ดูรายชื่อ Mission ในช่วงที่เลือก';
+  tbody.innerHTML = html;
 }
 
 // ─── EXP Table ────────────────────────────────────────────────────────
@@ -1309,7 +1351,7 @@ function applyLookup() {
   document.getElementById('cur-lv').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-// ─── Save Image (mode-aware) ──────────────────────────────────────────
+// ─── Save Image ───────────────────────────────────────────────────────
 async function buildQR(qrId) {
   return new Promise(resolve => {
     const qrDiv = document.getElementById(qrId);
@@ -1337,12 +1379,9 @@ async function saveImage() {
   const btn = document.getElementById('btn-save-image');
   btn.disabled = true; btn.textContent = '⏳ กำลังบันทึกภาพ…';
   const cur = getCurLv(), pct = getPct(), bonus = getBonusPct();
-  const now = new Date();
   let cardId, filename;
-
   try {
     if (farmMode === 1) {
-      // ── Mode 1 ──
       const goal   = getGoalLv();
       const mobExp = Math.max(1, parseInt(document.getElementById('mob-exp').value) || 1);
       const boosted = Math.round(mobExp * (1 + bonus / 100));
@@ -1360,13 +1399,11 @@ async function saveImage() {
       document.getElementById('ec1-exp-hr').textContent        = document.getElementById('exp-hr').textContent;
       setTimestamp('ec1-ts'); await buildQR('ec1-qr');
       cardId = 'export-card-1'; filename = `iruna-mode1-lv${cur}to${goal}.png`;
-
     } else if (farmMode === 2) {
-      // ── Mode 2 ──
       const mobExp2  = Math.max(1, parseInt(document.getElementById('mob-exp-2').value) || 1);
       const boosted2 = Math.round(mobExp2 * (1 + bonus / 100));
       const reachLv  = document.getElementById('m2-reach-lv').textContent;
-      const reachPctText = document.getElementById('m2-reach-pct').textContent; 
+      const reachPctText = document.getElementById('m2-reach-pct').textContent;
       const reachPct = reachPctText.split('%')[0].trim();
       const hoursVal = parseFloat(document.getElementById('farm-hours').value) || 0;
       const minsVal  = parseFloat(document.getElementById('farm-mins').value) || 0;
@@ -1374,9 +1411,9 @@ async function saveImage() {
       document.getElementById('ec2-cur-lv').textContent          = cur;
       document.getElementById('ec2-reach-lv').textContent        = reachLv;
       document.getElementById('ec2-pct-txt').textContent         = pct + '%';
-      document.getElementById('ec2-pbar').style.width            = pct + '%';  
-      document.getElementById('ec2-pct-txt-reach').textContent   = reachPct + '%'; 
-      document.getElementById('ec2-pbar-reach').style.width      = reachPct + '%'; 
+      document.getElementById('ec2-pbar').style.width            = pct + '%';
+      document.getElementById('ec2-pct-txt-reach').textContent   = reachPct + '%';
+      document.getElementById('ec2-pbar-reach').style.width      = reachPct + '%';
       document.getElementById('ec2-farm-hours').textContent      = fmtTime(totalSec);
       document.getElementById('ec2-bonus-total').textContent     = '+' + bonus + '%';
       document.getElementById('ec2-mob-exp').textContent         = fmt(mobExp2);
@@ -1386,17 +1423,15 @@ async function saveImage() {
       document.getElementById('ec2-total-exp').textContent       = document.getElementById('m2-total-exp').textContent;
       setTimestamp('ec2-ts'); await buildQR('ec2-qr');
       cardId = 'export-card-2'; filename = `iruna-mode2-lv${cur}-${hoursVal}h${minsVal}m.png`;
-
     } else {
-      // ── Mode 3 ──
       const reachLv  = document.getElementById('m3-reach-lv').textContent;
-      const reachPctText = document.getElementById('m3-reach-pct').textContent; 
+      const reachPctText = document.getElementById('m3-reach-pct').textContent;
       const reachPct = reachPctText.split('%')[0].trim();
       const rangeInfo = document.getElementById('ep-range-info').textContent.trim();
       document.getElementById('ec3-cur-lv').textContent      = cur;
       document.getElementById('ec3-reach-lv').textContent    = reachLv;
       document.getElementById('ec3-pct-txt').textContent     = `${reachPct}% ในLvนี้`;
-      document.getElementById('ec3-pbar').style.width        = reachPct + '%'; 
+      document.getElementById('ec3-pbar').style.width        = reachPct + '%';
       document.getElementById('ec3-quest-range').textContent = rangeInfo || '—';
       document.getElementById('ec3-quest-exp').textContent   = document.getElementById('m3-quest-exp').textContent;
       document.getElementById('ec3-count').textContent       = document.getElementById('m3-count').textContent;
@@ -1404,7 +1439,6 @@ async function saveImage() {
       setTimestamp('ec3-ts'); await buildQR('ec3-qr');
       cardId = 'export-card-3'; filename = `iruna-mode3-quest-lv${cur}.png`;
     }
-
     const canvas = await html2canvas(document.getElementById(cardId), { scale:2, useCORS:true, allowTaint:true, backgroundColor:'#0a0c10' });
     const link = document.createElement('a');
     link.download = filename;
