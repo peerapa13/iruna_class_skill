@@ -26,7 +26,7 @@
   --purple:     #a78bfa;
   --text-pri:   #e8e4d8;
   --text-sec:   #8a8fa8;
-  --text-dim:   #555b72;
+  --text-dim:   #dbdbdb;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -210,10 +210,8 @@ input[type=range]::-moz-range-thumb {
 .mode-tab:last-child { border-right: none; }
 .mode-tab .mt-icon { font-size: 16px; display: block; margin-bottom: 3px; }
 .mode-tab .mt-title { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 1px; display: block; }
-.mode-tab .mt-sub { font-size: 10px; color: var(--text-dim); display: block; margin-top: 2px; }
 .mode-tab:hover { background: var(--bg-hover); color: var(--text-sec); }
 .mode-tab.active { background: rgba(201,168,76,0.1); border-bottom: 2px solid var(--gold); color: var(--gold-light); }
-.mode-tab.active .mt-sub { color: var(--gold-dim); }
 
 /* ── Mode Body ── */
 .mode-body { margin-bottom: 14px; }
@@ -404,7 +402,6 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
   .bonus-grid { grid-template-columns: 1fr 1fr; }
   .exp-bonus-result { grid-template-columns: 1fr; }
   .input-grid-3 { grid-template-columns: 1fr 1fr; }
-  .mode-tab .mt-sub { display: none; }
 }
 @media (max-width: 420px) {
   .stat-grid { grid-template-columns: 1fr 1fr; }
@@ -497,18 +494,15 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
     <div class="mode-tabs">
       <div class="mode-tab active" id="mtab-1" onclick="setFarmMode(1)">
         <span class="mt-icon">⏱</span>
-        <span class="mt-title">โหมด 1</span>
-        <span class="mt-sub">เวลาถึง Lv เป้า</span>
+        <span class="mt-title">เวลาถึง Lv เป้าหมาย</span>
       </div>
       <div class="mode-tab" id="mtab-2" onclick="setFarmMode(2)">
         <span class="mt-icon">⚔</span>
-        <span class="mt-title">โหมด 2</span>
-        <span class="mt-sub">Lv จากเวลาฟาร์ม</span>
+        <span class="mt-title">Lv จากเวลาฟาร์ม</span>
       </div>
       <div class="mode-tab" id="mtab-3" onclick="setFarmMode(3)">
-        <span class="mt-icon">📜</span>
-        <span class="mt-title">โหมด 3</span>
-        <span class="mt-sub">Lv จาก Quest</span>
+        <span class="mt-icon">📖</span>
+        <span class="mt-title">Lv จากเควสหลัก</span>
       </div>
     </div>
 
