@@ -1269,12 +1269,6 @@ function renderQuestDetailTable(list, msFrom, msTo, totalExp) {
       <td style="color:var(--text-dim);font-size:11px;white-space:nowrap;max-width:100px;overflow:hidden;text-overflow:ellipsis">${m.chName}</td>
       <td style="color:var(--text-sec);max-width:200px;overflow:hidden;text-overflow:ellipsis">${m.name}${badge}</td>
       <td style="text-align:right;color:var(--gold);font-family:'Cinzel',serif;font-size:12px;white-space:nowrap">${fmt(m.exp)}</td>
-      <td style="min-width:100px;padding-right:14px">
-        <div class="pct-bar-wrap">
-          <div class="pct-bar-track"><div class="pct-bar-fill" style="width:${barW}%"></div></div>
-          <span class="pct-val">${pctStr}%</span>
-        </div>
-      </td>
       <td style="text-align:right;color:var(--teal);font-size:12px;font-family:'Cinzel',serif;white-space:nowrap">${fmt(running)}</td>
     </tr>`;
   });
