@@ -25,7 +25,7 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding: 30px 15px; /* ปรับลดเพื่อไม่ให้ดันจอในมือถือ */
+            padding: 40px 20px;
             overflow-x: hidden;
         }
 
@@ -51,7 +51,7 @@
 
         .container {
             background: var(--card-bg);
-            padding: 40px 20px; /* ลด padding ซ้าย-ขวา ในมือถือ เพื่อเพิ่มพื้นที่วงล้อ */
+            padding: 40px;
             border-radius: 20px;
             border: 1px solid rgba(212, 168, 67, 0.3);
             box-shadow: 0 0 30px rgba(0,0,0,0.5);
@@ -63,20 +63,13 @@
         #wheel-container {
             position: relative;
             margin: 20px auto;
-            width: 100%;
-            max-width: 320px; /* ให้กางสูงสุดแค่ 320px */
-            aspect-ratio: 1 / 1; /* บังคับเป็นสี่เหลี่ยมจัตุรัสเพื่อให้วงล้อกลมเสมอ */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 320px;
+            height: 320px;
         }
 
         canvas {
-            width: 100% !important;
-            height: 100% !important;
-            max-width: 320px;
-            max-height: 320px;
-            display: block;
+            max-width: 100%;
+            height: auto;
         }
 
         /* เข็มชี้กงล้อ */
@@ -106,8 +99,6 @@
             cursor: pointer;
             transition: 0.3s;
             box-shadow: 0 5px 15px rgba(212, 168, 67, 0.4);
-            width: 100%;
-            max-width: 280px; /* ปรับขนาดปุ่มไม่ให้ล้นกล่อง */
         }
 
         .spin-btn:hover {
@@ -118,7 +109,6 @@
         .spin-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
-            transform: none; /* ปิดเอฟเฟกต์ขยายตอนโหลด */
         }
 
         #result {
@@ -132,7 +122,6 @@
 
         .back-link {
             margin-top: 40px;
-            display: inline-block;
             color: var(--gold);
             text-decoration: none;
             font-size: 14px;
@@ -143,19 +132,120 @@
         .back-link:hover {
             border-bottom: 1px solid var(--gold);
         }
-
-        /* ดึง CSS ดั้งเดิมกลับมาแผลงฤทธิ์ในหน้าจอที่กว้างขึ้น (เช่น แท็บเล็ต/คอม) */
-        @media (min-width: 480px) {
-            body { padding: 40px 20px; }
-            .container { padding: 40px; }
-        }
     </style>
+<style>
+:root {
+  --gold:       #d4a843;
+  --gold-light: #f0c96a;
+  --accent:     #3fc8f9;
+  --deep:       #0a0812;
+  --text:       #e8e0f0;
+  --text-dim:   #9d8fb8;
+  --sidebar-w:  230px;
+}
+.hamburger-btn {
+  position: fixed; top: 14px; left: 14px; z-index: 1001;
+  width: 42px; height: 42px;
+  background: rgba(10,8,18,0.9); border: 1px solid rgba(212,168,67,0.35);
+  border-radius: 8px; cursor: pointer;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+  transition: border-color .2s, background .2s;
+  backdrop-filter: blur(8px);
+}
+.hamburger-btn:hover { border-color: var(--gold); background: rgba(212,168,67,0.08); }
+.hamburger-btn span {
+  display: block; width: 18px; height: 2px;
+  background: var(--gold); border-radius: 2px;
+  transition: transform .3s, opacity .3s;
+}
+.sidebar-open .hamburger-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.sidebar-open .hamburger-btn span:nth-child(2) { opacity: 0; }
+.sidebar-open .hamburger-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.sb-overlay {
+  position: fixed; inset: 0; z-index: 999;
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(2px);
+  opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.sidebar-open .sb-overlay { opacity: 1; pointer-events: all; }
+.sidebar {
+  position: fixed; top: 0; left: 0; z-index: 1000;
+  width: var(--sidebar-w); height: 100vh;
+  background: #0d0f14; border-right: 1px solid rgba(212,168,67,0.2);
+  display: flex; flex-direction: column; gap: 5px;
+  padding: 70px 12px 40px; overflow-y: auto;
+  transform: translateX(-100%); transition: transform .3s cubic-bezier(.4,0,.2,1);
+}
+.sidebar-open .sidebar { transform: translateX(0); }
+.sidebar-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 10px; color: var(--gold);
+  letter-spacing: 2px; text-transform: uppercase;
+  padding-bottom: 10px; margin-bottom: 6px;
+  border-bottom: 1px solid rgba(212,168,67,0.25);
+}
+.sb-btn {
+  display: block; width: 100%; text-align: left;
+  padding: 9px 12px;
+  background: rgba(30,41,59,0.5); border: 1px solid rgba(51,65,85,0.6);
+  border-radius: 6px; color: var(--text-dim);
+  font-family: 'Noto Sans Thai', sans-serif; font-size: 13px;
+  cursor: pointer; text-decoration: none;
+  transition: all .2s;
+}
+.sb-btn:hover  { background: rgba(63,200,249,0.08); border-color: var(--accent); color: var(--accent); }
+.sb-btn.active { background: rgba(212,168,67,0.1);  border-color: var(--gold);   color: var(--gold-light); }
+.sb-group-header {
+  width: 100%; text-align: left;
+  padding: 9px 12px;
+  background: rgba(212,168,67,0.08); border: 1px solid rgba(212,168,67,0.22);
+  border-radius: 6px; color: var(--gold);
+  font-family: 'Noto Sans Thai', sans-serif; font-size: 13px; font-weight: 700;
+  cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  transition: background .2s;
+}
+.sb-group-header:hover { background: rgba(212,168,67,0.15); }
+.sb-arrow { font-size: 9px; transition: transform .25s; }
+.sb-group.open .sb-arrow { transform: rotate(180deg); }
+.sb-group-content {
+  display: none; flex-direction: column; gap: 4px;
+  padding-left: 10px; margin-top: 4px;
+  border-left: 1px solid rgba(63,200,249,0.25);
+}
+.sb-group.open .sb-group-content { display: flex; }
+.sb-sub-label {
+  font-size: 10px; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 6px 6px 2px;
+}
+.sb-section-label {
+  margin-top: 10px; font-size: 11px; color: var(--gold);
+  letter-spacing: 1px; padding: 6px 0 4px;
+  border-bottom: 1px solid rgba(212,168,67,0.2);
+}
+</style>
 </head>
 <body>
+<!-- Sidebar จะถูกโหลดมาใส่ที่นี่ -->
+<div id="sb-root"></div>
+<script>
+  fetch('sidebar.html')
+    .then(r => r.text())
+    .then(html => {
+      const root = document.getElementById('sb-root');
+      root.innerHTML = html;
+      // รัน <script> ที่อยู่ใน sidebar.html ด้วย
+      root.querySelectorAll('script').forEach(oldScript => {
+        const newScript = document.createElement('script');
+        newScript.textContent = oldScript.textContent;
+        document.body.appendChild(newScript);
+      });
+    })
+    .catch(() => console.warn('ไม่สามารถโหลด sidebar.html ได้'));
+</script>
     <div id="stars"></div>
 
     <div class="header">
-        <h1 class="title">IRUNA ONLINE</h1>
+        <h1 class="title">iruna online</h1>
         <p style="color: #9d8fb8;">สุ่มเลือกอาชีพของคุณ</p>
     </div>
 
@@ -169,7 +259,6 @@
         <div id="result"></div>
     </div>
 
-    <a href="index" class="back-link">← กลับไปหน้าฐานข้อมูลสกิล</a>
 
     <script>
         const jobs = [
@@ -199,7 +288,7 @@
             for (let i = 0; i < numSegments; i++) {
                 const angle = currentAngle + (i * arcSize);
                 
-                // สลับสีช่องตามธีมเดิม
+                // สลับสีช่อง
                 ctx.fillStyle = (i % 2 === 0) ? "#1e293b" : "#0f172a";
                 ctx.strokeStyle = "#d4a843";
                 ctx.lineWidth = 1;
@@ -211,7 +300,7 @@
                 ctx.fill();
                 ctx.stroke();
 
-                // วาดข้อความภาษาไทย
+                // วาดข้อความ
                 ctx.save();
                 ctx.translate(centerX, centerY);
                 ctx.rotate(angle + arcSize / 2);
@@ -227,11 +316,11 @@
             spinBtn.disabled = true;
             resultDiv.innerText = "กำลังสุ่ม...";
             
-            const extraSpins = Math.floor(Math.random() * 5) + 5; 
+            const extraSpins = Math.floor(Math.random() * 5) + 5; // หมุนอย่างน้อย 5-10 รอบ
             const randomAngle = Math.random() * (2 * Math.PI);
             const totalRotation = (extraSpins * 2 * Math.PI) + randomAngle;
             
-            const duration = 4000; 
+            const duration = 4000; // 4 วินาที
             const start = performance.now();
             const initialAngle = currentAngle;
 
@@ -239,7 +328,7 @@
                 const elapsed = time - start;
                 const progress = Math.min(elapsed / duration, 1);
                 
-                // Ease Out effect หน่วงตอนท้าย
+                // Ease Out effect
                 const easeOut = 1 - Math.pow(1 - progress, 3);
                 
                 currentAngle = initialAngle + (totalRotation * easeOut);
@@ -259,6 +348,7 @@
         function finishSpin() {
             spinBtn.disabled = false;
             
+            // เข็มอยู่ที่ตำแหน่ง -PI/2 (90 องศาด้านบน)
             const normalizedAngle = (currentAngle % (2 * Math.PI));
             const pointerAngle = (1.5 * Math.PI - normalizedAngle) % (2 * Math.PI);
             const finalPointerAngle = pointerAngle < 0 ? pointerAngle + 2 * Math.PI : pointerAngle;
@@ -269,7 +359,7 @@
 
         spinBtn.addEventListener("click", spin);
 
-        // วาดครั้งแรกตอนโหลดหน้าเว็บ
+        // วาดครั้งแรก
         drawWheel();
     </script>
 </body>

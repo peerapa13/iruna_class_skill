@@ -407,10 +407,98 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
   .stat-grid { grid-template-columns: 1fr 1fr; }
   .bonus-grid { grid-template-columns: 1fr 1fr; }
 }
+
+/* ── Sidebar shared CSS ── */
+:root { --sidebar-w: 230px; }
+.hamburger-btn {
+  position: fixed; top: 14px; left: 14px; z-index: 1001;
+  width: 42px; height: 42px;
+  background: rgba(10,8,18,0.9); border: 1px solid rgba(201,168,76,0.35);
+  border-radius: 8px; cursor: pointer;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+  transition: border-color .2s, background .2s; backdrop-filter: blur(8px);
+}
+.hamburger-btn:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); }
+.hamburger-btn span {
+  display: block; width: 18px; height: 2px;
+  background: var(--gold); border-radius: 2px; transition: transform .3s, opacity .3s;
+}
+.sidebar-open .hamburger-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.sidebar-open .hamburger-btn span:nth-child(2) { opacity: 0; }
+.sidebar-open .hamburger-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.sb-overlay {
+  position: fixed; inset: 0; z-index: 999;
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(2px);
+  opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.sidebar-open .sb-overlay { opacity: 1; pointer-events: all; }
+.sidebar {
+  position: fixed; top: 0; left: 0; z-index: 1000;
+  width: var(--sidebar-w); height: 100vh;
+  background: #0d0f14; border-right: 1px solid rgba(201,168,76,0.2);
+  display: flex; flex-direction: column; gap: 5px;
+  padding: 70px 12px 40px; overflow-y: auto;
+  transform: translateX(-100%); transition: transform .3s cubic-bezier(.4,0,.2,1);
+}
+.sidebar-open .sidebar { transform: translateX(0); }
+.sidebar-title {
+  font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase;
+  padding-bottom: 10px; margin-bottom: 6px; border-bottom: 1px solid rgba(201,168,76,0.25);
+}
+.sb-btn {
+  display: block; width: 100%; text-align: left; padding: 9px 12px;
+  background: rgba(30,41,59,0.5); border: 1px solid rgba(51,65,85,0.6);
+  border-radius: 6px; color: var(--text-sec);
+  font-family: 'Sarabun', sans-serif; font-size: 13px;
+  cursor: pointer; text-decoration: none; transition: all .2s;
+}
+.sb-btn:hover  { background: rgba(93,123,185,0.1); border-color: var(--blue); color: var(--blue); }
+.sb-btn.active { background: rgba(201,168,76,0.1); border-color: var(--gold); color: var(--gold-light); }
+.sb-group-header {
+  width: 100%; text-align: left; padding: 9px 12px;
+  background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.22);
+  border-radius: 6px; color: var(--gold);
+  font-family: 'Sarabun', sans-serif; font-size: 13px; font-weight: 700;
+  cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  transition: background .2s;
+}
+.sb-group-header:hover { background: rgba(201,168,76,0.15); }
+.sb-arrow { font-size: 9px; transition: transform .25s; }
+.sb-group.open .sb-arrow { transform: rotate(180deg); }
+.sb-group-content {
+  display: none; flex-direction: column; gap: 4px;
+  padding-left: 10px; margin-top: 4px;
+  border-left: 1px solid rgba(93,123,185,0.25);
+}
+.sb-group.open .sb-group-content { display: flex; }
+.sb-sub-label {
+  font-size: 10px; color: var(--blue);
+  letter-spacing: 1px; text-transform: uppercase; padding: 6px 6px 2px;
+}
+.sb-section-label {
+  margin-top: 10px; font-size: 11px; color: var(--gold);
+  letter-spacing: 1px; padding: 6px 0 4px;
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+}
 </style>
 </head>
 <body>
-<div class="site-wrap">
+<div id="sb-root"></div>
+<script>
+  fetch('sidebar.html')
+    .then(r => r.text())
+    .then(html => {
+      const root = document.getElementById('sb-root');
+      root.innerHTML = html;
+      root.querySelectorAll('script').forEach(oldScript => {
+        const newScript = document.createElement('script');
+        newScript.textContent = oldScript.textContent;
+        document.body.appendChild(newScript);
+      });
+    })
+    .catch(() => console.warn('ไม่สามารถโหลด sidebar.html ได้'));
+</script>
+<div class="site-wrap" style="padding-top: 24px;">
 
   <header class="site-header">
     <div class="header-badge">Iruna Online TH</div>

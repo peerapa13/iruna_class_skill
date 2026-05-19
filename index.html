@@ -34,202 +34,80 @@
     background: radial-gradient(ellipse at 20% 50%, rgba(124,58,237,0.12) 0%, transparent 60%);
   }
 
-  /* ===== Hamburger Button ===== */
+  /* ===== Sidebar (โหลดจาก sidebar.html — CSS ต้อง match) ===== */
   .hamburger-btn {
-    position: fixed;
-    top: 18px;
-    left: 18px;
-    z-index: 1000;
-    background: rgba(10, 8, 18, 0.85);
-    border: 1px solid rgba(212, 168, 67, 0.4);
-    border-radius: 8px;
-    color: var(--gold);
-    cursor: pointer;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    transition: all 0.2s;
-    backdrop-filter: blur(8px);
+    position: fixed; top: 14px; left: 14px; z-index: 1001;
+    width: 42px; height: 42px;
+    background: rgba(10,8,18,0.9); border: 1px solid rgba(212,168,67,0.35);
+    border-radius: 8px; cursor: pointer;
+    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+    transition: border-color .2s, background .2s; backdrop-filter: blur(8px);
   }
+  .hamburger-btn:hover { border-color: var(--gold); background: rgba(212,168,67,0.08); }
+  .hamburger-btn span {
+    display: block; width: 18px; height: 2px;
+    background: var(--gold); border-radius: 2px; transition: transform .3s, opacity .3s;
+  }
+  .sidebar-open .hamburger-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .sidebar-open .hamburger-btn span:nth-child(2) { opacity: 0; }
+  .sidebar-open .hamburger-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  .hamburger-btn:hover {
-    background: rgba(212, 168, 67, 0.12);
-    border-color: var(--gold);
-    box-shadow: 0 0 16px rgba(212, 168, 67, 0.2);
+  .sb-overlay {
+    position: fixed; inset: 0; z-index: 999;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(2px);
+    opacity: 0; pointer-events: none; transition: opacity .3s;
   }
+  .sidebar-open .sb-overlay { opacity: 1; pointer-events: all; }
 
-  .hamburger-btn .bar {
-    width: 20px;
-    height: 2px;
-    background: var(--gold);
-    border-radius: 2px;
-    transition: all 0.3s cubic-bezier(.4,0,.2,1);
-    transform-origin: center;
-  }
-
-  /* เมื่อ sidebar เปิด → แถบกลายเป็น X */
-  body.sidebar-open .hamburger-btn .bar:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-  body.sidebar-open .hamburger-btn .bar:nth-child(2) {
-    opacity: 0;
-    transform: scaleX(0);
-  }
-  body.sidebar-open .hamburger-btn .bar:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-  }
-
-  /* ===== Overlay ===== */
-  .sidebar-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0);
-    z-index: 90;
-    pointer-events: none;
-    transition: background 0.3s ease;
-  }
-
-  body.sidebar-open .sidebar-overlay {
-    background: rgba(0, 0, 0, 0.65);
-    pointer-events: all;
-  }
-
-  /* ===== Sidebar Drawer ===== */
   .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: var(--sidebar-width);
-    background: rgba(12, 10, 22, 0.97);
-    border-right: 1px solid rgba(212, 168, 67, 0.25);
-    z-index: 100;
+    position: fixed; top: 0; left: 0; z-index: 1000;
+    width: var(--sidebar-width); height: 100vh;
+    background: rgba(12,10,22,0.97); border-right: 1px solid rgba(212,168,67,0.2);
+    display: flex; flex-direction: column; gap: 5px;
+    padding: 70px 12px 40px; overflow-y: auto;
     transform: translateX(calc(-1 * var(--sidebar-width)));
-    transition: transform 0.32s cubic-bezier(.4,0,.2,1);
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    padding: 80px 16px 32px;
-    gap: 8px;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(212,168,67,0.2) transparent;
+    transition: transform .3s cubic-bezier(.4,0,.2,1);
+    box-shadow: none;
   }
+  .sidebar-open .sidebar { transform: translateX(0); box-shadow: 4px 0 32px rgba(0,0,0,0.6); }
 
-  body.sidebar-open .sidebar {
-    transform: translateX(0);
-    box-shadow: 4px 0 32px rgba(0, 0, 0, 0.6);
-  }
-
-  .sidebar h2 {
+  .sidebar-title {
     font-family: 'Cinzel Decorative', serif;
-    font-size: 14px;
-    color: var(--gold);
-    margin-bottom: 12px;
-    border-bottom: 1px solid rgba(212, 168, 67, 0.3);
-    padding-bottom: 12px;
+    font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase;
+    padding-bottom: 10px; margin-bottom: 6px; border-bottom: 1px solid rgba(212,168,67,0.25);
   }
-
-  .btn-secondary {
-    padding: 10px 14px;
-    background: rgba(63,200,249,0.08);
-    border: 1px solid rgba(63,200,249,0.3);
-    color: var(--accent);
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: 'Noto Sans Thai', sans-serif;
-    text-align: left;
-    width: 100%;
+  .sb-btn {
+    display: block; width: 100%; text-align: left; padding: 9px 12px;
+    background: rgba(30,41,59,0.5); border: 1px solid rgba(51,65,85,0.6);
+    border-radius: 6px; color: var(--text-dim);
+    font-family: 'Noto Sans Thai', sans-serif; font-size: 13px;
+    cursor: pointer; text-decoration: none; transition: all .2s;
   }
-
-  .btn-secondary:hover {
-    background: rgba(63,200,249,0.18);
-    border-color: var(--accent);
+  .sb-btn:hover  { background: rgba(63,200,249,0.08); border-color: var(--accent); color: var(--accent); }
+  .sb-btn.active { background: rgba(212,168,67,0.1);  border-color: var(--gold);   color: var(--gold-light); }
+  .sb-group-header {
+    width: 100%; text-align: left; padding: 9px 12px;
+    background: rgba(212,168,67,0.08); border: 1px solid rgba(212,168,67,0.22);
+    border-radius: 6px; color: var(--gold);
+    font-family: 'Noto Sans Thai', sans-serif; font-size: 13px; font-weight: 700;
+    cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    transition: background .2s;
   }
-
-  /* ===== Job Groups ===== */
-  .job-group {
-    margin-bottom: 6px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  .sb-group-header:hover { background: rgba(212,168,67,0.15); }
+  .sb-arrow { font-size: 9px; transition: transform .25s; }
+  .sb-group.open .sb-arrow { transform: rotate(180deg); }
+  .sb-group-content {
+    display: none; flex-direction: column; gap: 4px;
+    padding-left: 10px; margin-top: 4px; border-left: 1px solid rgba(63,200,249,0.25);
   }
-
-  .group-header {
-    background: rgba(212, 168, 67, 0.08);
-    color: var(--gold);
-    padding: 9px 13px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 13px;
-    border: 1px solid rgba(212, 168, 67, 0.25);
-    border-radius: 6px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: 0.2s;
-    font-family: 'Noto Sans Thai', sans-serif;
+  .sb-group.open .sb-group-content { display: flex; }
+  .sb-sub-label {
+    font-size: 10px; color: var(--accent);
+    letter-spacing: 1px; text-transform: uppercase; padding: 6px 6px 2px;
   }
-
-  .group-header:hover {
-    background: rgba(212, 168, 67, 0.18);
-  }
-
-  .group-content {
-    display: none;
-    padding-left: 10px;
-    margin-top: 4px;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .job-group.active .group-content {
-    display: flex;
-  }
-
-  .job-group.active .arrow {
-    transform: rotate(180deg);
-  }
-
-  .arrow {
-    font-size: 10px;
-    transition: 0.3s;
-  }
-
-  .sub-label {
-    color: var(--accent);
-    font-size: 11px;
-    margin-top: 6px;
-    margin-bottom: 2px;
-    padding-left: 6px;
-    border-left: 2px solid var(--accent);
-  }
-
-  .job-btn {
-    text-align: left;
-    padding: 9px 12px;
-    background: rgba(30, 41, 59, 0.5);
-    border: 1px solid rgba(51, 65, 85, 0.5);
-    color: var(--text);
-    cursor: pointer;
-    border-radius: 6px;
-    transition: all 0.2s;
-    font-size: 13px;
-    font-family: 'Noto Sans Thai', sans-serif;
-    width: 100%;
-  }
-
-  .job-btn:hover, .job-btn.active {
-    background: rgba(63, 200, 249, 0.12);
-    border-color: var(--accent);
-    color: var(--accent);
+  .sb-section-label {
+    margin-top: 10px; font-size: 11px; color: var(--gold);
+    letter-spacing: 1px; padding: 6px 0 4px; border-bottom: 1px solid rgba(212,168,67,0.2);
   }
 
   /* ===== Main Layout ===== */
@@ -583,61 +461,33 @@
 <body>
 <div id="stars"></div>
 
-<!-- Hamburger Button -->
-<button class="hamburger-btn" id="hamburgerBtn" onclick="toggleSidebar()" aria-label="เปิดเมนู">
-  <span class="bar"></span>
-  <span class="bar"></span>
-  <span class="bar"></span>
-</button>
-
-<!-- Overlay -->
-<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
-
-<!-- Sidebar Drawer -->
-<nav class="sidebar" id="sidebar">
-  <button class="btn-secondary" onclick="location.href='exp_calculator'; closeSidebar();">📊 คำนวนEXP</button>
-  <button class="btn-secondary" onclick="location.href='spinner'; closeSidebar();">🎡 สุ่มอาชีพ</button>
-
-  <h2 style="margin-top: 12px;">เส้นทางอาชีพ</h2>
-
-  <div class="job-group">
-    <div class="group-header" onclick="toggleGroup(this)">⚔️ นักรบ <span class="arrow">▼</span></div>
-    <div class="group-content">
-      <div class="sub-label">อัศวิน</div>
-      <button class="job-btn" data-job="Paladin">พาลาดิน</button>
-      <button class="job-btn" data-job="Gladiator">จอมดาบ</button>
-      <button class="job-btn" data-job="Beast Knight">บีทไนท์</button>
-      <div class="sub-label">นายพราน</div>
-      <button class="job-btn" data-job="Sniper">นักแม่นธนู</button>
-      <button class="job-btn" data-job="Assassin">นักฆ่า</button>
-      <button class="job-btn" data-job="Summoner">ซัมมอนเนอร์</button>
-    </div>
-  </div>
-
-  <div class="job-group">
-    <div class="group-header" onclick="toggleGroup(this)">🔮 นักเวทย์ <span class="arrow">▼</span></div>
-    <div class="group-content">
-      <div class="sub-label">จอมเวทย์</div>
-      <button class="job-btn" data-job="High Wizard">จอมขมังเวทย์</button>
-      <button class="job-btn" data-job="Necromancer">เนโครแมนเซอร์</button>
-      <button class="job-btn" data-job="Enchanter">ผู้วิเศษ</button>
-      <div class="sub-label">บาทหลวง</div>
-      <button class="job-btn" data-job="Bishop">สังฆราช</button>
-      <button class="job-btn" data-job="Monk">นักพรต</button>
-      <button class="job-btn" data-job="Servant">เซอร์แวน</button>
-    </div>
-  </div>
-
-  <div class="job-group">
-    <div class="group-header" onclick="toggleGroup(this)">✨ พิเศษ <span class="arrow">▼</span></div>
-    <div class="group-content">
-      <button class="job-btn" data-job="Ninja">นินจา</button>
-      <button class="job-btn" data-job="Samurai">ซามุไร</button>
-      <button class="job-btn" data-job="Minstrel">นักดนตรี</button>
-      <button class="job-btn" data-job="Alchemist">นักเล่นแร่แปรธาตุ</button>
-    </div>
-  </div>
-</nav>
+<div id="sb-root"></div>
+<script>
+  fetch('sidebar.html')
+    .then(r => r.text())
+    .then(html => {
+      const root = document.getElementById('sb-root');
+      root.innerHTML = html;
+      root.querySelectorAll('script').forEach(oldScript => {
+        const newScript = document.createElement('script');
+        newScript.textContent = oldScript.textContent;
+        document.body.appendChild(newScript);
+      });
+      // ผูก event ให้ปุ่มอาชีพใน sidebar โหลด job data แทนการ navigate
+      root.querySelectorAll('.sb-job-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const url = new URL(this.href, location.href);
+          const jobId = url.searchParams.get('job');
+          if (jobId && location.pathname.includes('index')) {
+            e.preventDefault();
+            renderJob(jobId);
+            document.body.classList.remove('sidebar-open');
+          }
+        });
+      });
+    })
+    .catch(() => console.warn('ไม่สามารถโหลด sidebar.html ได้'));
+</script>
 
 <!-- Main Content -->
 <div class="hero">
@@ -675,11 +525,7 @@
     'Alchemist': 'alchemist.json'
   };
 
-  // ===== Sidebar Toggle =====
-  function toggleSidebar() {
-    document.body.classList.toggle('sidebar-open');
-  }
-
+  // ===== Sidebar Toggle (ใช้ร่วมกับ sidebar.html) =====
   function closeSidebar() {
     document.body.classList.remove('sidebar-open');
   }
@@ -688,16 +534,6 @@
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeSidebar();
   });
-
-  // ===== Accordion =====
-  function toggleGroup(element) {
-    const group = element.parentElement;
-    const allGroups = document.querySelectorAll('.job-group');
-    allGroups.forEach(g => {
-      if (g !== group) g.classList.remove('active');
-    });
-    group.classList.toggle('active');
-  }
 
   // ===== Load Job Data =====
   async function loadJobData(jobId) {
@@ -897,14 +733,12 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.job-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const jobId = this.getAttribute('data-job');
-        renderJob(jobId);
-        closeSidebar();
-      });
-    });
     renderChangelog();
+
+    // รับ ?job= param จาก URL (เมื่อมาจากหน้าอื่นผ่าน sidebar link)
+    const params = new URLSearchParams(location.search);
+    const jobParam = params.get('job');
+    if (jobParam) renderJob(jobParam);
   });
 </script>
 </body>

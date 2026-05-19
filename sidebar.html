@@ -1,0 +1,77 @@
+<!-- sidebar.html — โหลดด้วย JS fetch ในทุกหน้า -->
+<!-- Hamburger Button -->
+<button class="hamburger-btn" onclick="toggleSidebar()" aria-label="เมนู">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- Overlay -->
+<div class="sb-overlay" onclick="toggleSidebar()"></div>
+
+<!-- Sidebar -->
+<nav class="sidebar">
+  <div class="sidebar-title">เครื่องมือ</div>
+
+  <a class="sb-btn" href="exp_calculator.html" data-page="exp_calculator">คำนวณ EXP</a>
+  <a class="sb-btn" href="spinner.html"         data-page="spinner">🎡 สุ่มอาชีพ</a>
+
+  <div class="sb-section-label">เส้นทางอาชีพ</div>
+
+  <div class="sb-group">
+    <button class="sb-group-header" onclick="this.parentElement.classList.toggle('open')">
+      ⚔️ นักรบ <span class="sb-arrow">▼</span>
+    </button>
+    <div class="sb-group-content">
+      <div class="sb-sub-label">อัศวิน</div>
+      <a class="sb-btn sb-job-btn" href="index.html?job=Paladin">พาลาดิน</a>
+      <a class="sb-btn sb-job-btn" href="index.html?job=Gladiator">จอมดาบ</a>
+      <a class="sb-btn sb-job-btn" href="index.html?job=Beast%20Knight">บีทไนท์</a>
+      <div class="sb-sub-label">นายพราน</div>
+      <a class="sb-btn sb-job-btn" href="index.html?job=Sniper">นักแม่นธนู</a>
+      <a class="sb-btn sb-job-btn" href="index.html?job=Assassin">นักฆ่า</a>
+      <a class="sb-btn sb-job-btn" href="index.html?job=Summoner">ซัมมอนเนอร์</a>
+    </div>
+  </div>
+
+  <div class="sb-group">
+    <button class="sb-group-header" onclick="this.parentElement.classList.toggle('open')">
+      🔮 นักเวทย์ <span class="sb-arrow">▼</span>
+    </button>
+    <div class="sb-group-content">
+      <div class="sb-sub-label">จอมเวทย์</div>
+      <a class="sb-btn sb-job-btn" href="index.html?job=High%20Wizard">จอมขมังเวทย์</a>
+      <a class="sb-btn sb-job-btn" href="index.html?job=Necromancer">เนโครแมนเซอร์</a>
+      <a class="sb-btn sb-job-btn" href="index.html?job=Enchanter">ผู้วิเศษ</a>
+      <div class="sb-sub-label">บาทหลวง</div>
+      <a class="sb-btn sb-job-btn" href="index.html?job=Bishop">สังฆราช</a>
+      <a class="sb-btn sb-job-btn" href="index.html?job=Monk">นักพรต</a>
+      <a class="sb-btn sb-job-btn" href="index.html?job=Servant">เซอร์แวน</a>
+    </div>
+  </div>
+
+  <div class="sb-group">
+    <button class="sb-group-header" onclick="this.parentElement.classList.toggle('open')">
+      ✨ พิเศษ <span class="sb-arrow">▼</span>
+    </button>
+    <div class="sb-group-content">
+      <a class="sb-btn sb-job-btn" href="index.html?job=Ninja">นินจา</a>
+      <a class="sb-btn sb-job-btn" href="index.html?job=Samurai">ซามุไร</a>
+      <a class="sb-btn sb-job-btn" href="index.html?job=Minstrel">นักดนตรี</a>
+      <a class="sb-btn sb-job-btn" href="index.html?job=Alchemist">นักเล่นแร่แปรธาตุ</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+function toggleSidebar() {
+  document.body.classList.toggle('sidebar-open');
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.body.classList.remove('sidebar-open');
+});
+(function highlightActive() {
+  const page = location.pathname.split('/').pop().replace('.html','') || 'index';
+  document.querySelectorAll('.sb-btn[data-page]').forEach(btn => {
+    if (btn.dataset.page === page) btn.classList.add('active');
+  });
+})();
+</script>
