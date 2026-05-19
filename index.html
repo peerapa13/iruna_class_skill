@@ -2,12 +2,21 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/png" href="https://iruna-online.com/img/fankit/Colon_orange.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>อิลูน่าข้อมูลสกิล</title>
+<title>อิลูน่าข้อมูลสกิล | ข้อมูลสกิลและเครื่องมือ</title>
 <meta name="description" content="ห้องสมุดข้อมูลสกิลอาชีพ Iruna Online ภาษาไทย">
 <meta property="og:title" content="อิลูน่าข้อมูลสกิล">
 <meta property="og:description" content="ห้องสมุดข้อมูลสกิลอาชีพ Iruna Online ภาษาไทย">
 <meta name="robots" content="index, follow">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "อิลูน่าข้อมูลสกิล",
+  "url": "https://irunath-skill.onrender.com/"
+}
+</script>
   
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Noto+Sans+Thai:wght@300;400;600;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -679,8 +688,6 @@
       <div class="card">
         <h1 class="job-title">${job.name}</h1>
         <p class="job-desc">${job.desc}</p>
-        <div class="section-title">หนทางสู่อาชีพนี้...</div>
-        <div class="info-box">${job.obtain}</div>
         ${skillsHTML ? `<div class="section-title">⚔️ ข้อมูลสกิล</div><div>${skillsHTML}</div>` :
           '<div class="section-title">⚔️ สกิล</div><div class="info-box">ยังไม่มีข้อมูลสกิลในฐานข้อมูล</div>'}
         <div class="section-title">✓ คำแนะนำสำหรับอาชีพ</div>
