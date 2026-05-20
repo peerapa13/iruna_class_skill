@@ -214,7 +214,7 @@
           "chapter": 24,
           "name": "บทที่ 3 เผ่าดีลผู้ต่อต้าน",
           "missions": [
-            { "num": 68, "name": "The Defiant Deil", "exp": 12000000 }
+            { "num": 68, "name": "กลุ่มปฏิวัติในเหมืองแร่", "exp": 12000000 }
           ]
         },
         {
@@ -235,29 +235,29 @@
           "chapter": 27,
           "name": "บทที่ 6 แยกออกจากจุดเริ่มต้น",
           "missions": [
-              { "num": 71, "name": "Parting from the Starting Point", "exp": 14370000 }
+              { "num": 71, "name": "ทุ่งราบที่พังทลาย", "exp": 14370000 }
           ]
         },
         {
           "chapter": 28,
           "name": "บทที่ 7 กลับสู่ปาลูลูอีกครั้ง",
           "missions": [
-            { "num": 72, "name": "Return to Palulu Again", "exp": 15300000 }
+            { "num": 72, "name": "เหตุวุ่นวายที่ป้อมปราการ", "exp": 15300000 }
           ]
         },
         {
           "chapter": 29,
           "name": "บทที่ 8 การต่อสู้ตัดสินที่จักวรรดิ",
           "missions": [
-            { "num": 73, "name": "The Mournful Empress", "exp": 16200000 },
-            { "num": 74, "name": "The Final Battle, and…", "exp": 17000000 }
+            { "num": 73, "name": "จักพรรดินีที่น่าเศร้า", "exp": 16200000 },
+            { "num": 74, "name": "การตู้สู้ครั้งสุดท้าย และ…", "exp": 17000000 }
           ]
         },
         {
           "chapter": 30,
           "name": "บทสุดท้ายEP1",
           "missions": [
-            { "num": 75, "name": "Beyond the Adventure", "exp": 10000000 }
+            { "num": 75, "name": "นอกเหนือจากการผจญภัย", "exp": 10000000 }
           ]
         } 
       ]
