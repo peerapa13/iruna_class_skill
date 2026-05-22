@@ -597,7 +597,7 @@
         <span>${item.text}</span>
       </li>
     `).join('');
-    
+
     const recentHTML = RECENT_UPDATES.map(item => `
       <li class="patch-item">
         <span class="patch-item-tag ${tagClass[item.tag]}">${tagLabel[item.tag]}</span>
@@ -617,6 +617,14 @@
 
         <hr class="changelog-divider">
 
+        <div class ="home-section">
+            <div class="home-section-header recent-header">
+              <span>✅ อัปเดตล่าสุด</span>
+            </div>
+            <ul class="patch-items">${recentHTML}</ul>
+          </div>
+        </div>
+
         <div class="home-two-col">
           <div class="home-section">
             <div class="home-section-header upcoming-header">
@@ -625,14 +633,6 @@
             </div>
             <ul class="upcoming-list">${upcomingHTML}</ul>
           </div>
-
-          <div class="home-section">
-            <div class="home-section-header recent-header">
-              <span>✅ อัปเดตล่าสุด</span>
-            </div>
-            <ul class="patch-items">${recentHTML}</ul>
-          </div>
-        </div>
 
         <hr class="changelog-divider">
         <p style="font-size: 12px; color: var(--text-dim); text-align: center;">
