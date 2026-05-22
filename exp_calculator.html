@@ -679,6 +679,19 @@ td:first-child { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px
           <div class="field"><label>Episode</label><select id="sel-ep-to" onchange="onEpChange('to')"></select></div>
           <div class="field"><label>บท (Chapter)</label><select id="sel-ch-to" onchange="onChChange('to')"></select></div>
           <div class="field"><label>มิชชั่น</label><select id="sel-ms-to" onchange="calcMode3()"></select></div>
+        <!-- ปุ่มด่วน -->
+        <div class="quick-row" style="margin-bottom:4px">
+          <span class="quick-label">จบด่วน</span>
+          <button class="qbtn" onclick="setQuestEnd(3,1,3)" style="color:var(--teal);border-color:var(--teal-dim)">
+            หินสี
+          </button>
+          <button class="qbtn" onclick="setQuestEnd(6,1,2)" style="color:var(--gold);border-color:var(--gold-dim)">
+            ริลิก 
+          </button>
+          <button class="qbtn" onclick="setQuestEnd(6,6,2)" style="color:var(--gold);border-color:var(--gold-dim)">
+            อัพเดตล่าสุด 
+          </button>
+        </div>
         </div>
         <div class="range-info" id="ep-range-info"></div>
       </div>
@@ -1283,7 +1296,7 @@ function calcMode3() {
   const mT = ALL_MS.find(m => m.num === msTo);
   if (mF && mT)
     document.getElementById('ep-range-info').textContent =
-      `EP${mF.ep} ${mF.chName} M${mF.num} "${mF.name}" → EP${mT.ep} ${mT.chName} M${mT.num} "${mT.name}"`;
+      `EP${mF.ep} ${mF.chName} "${mF.name}" → EP${mT.ep} ${mT.chName} "${mT.name}"`;
 
   const msList          = ALL_MS.filter(m => m.num >= msFrom && m.num <= msTo);
   const totalQuestExp   = msList.reduce((s, m) => s + m.exp, 0);
@@ -1312,6 +1325,15 @@ function calcMode3() {
 
   // ── ตาราง EXP รายมิชชั่น ──
   renderQuestDetailTable(msList, msFrom, msTo, totalQuestExp);
+}
+// ── จบด่วน ──
+function setQuestEnd(epNum, chIdx, msIdx) {
+  document.getElementById('sel-ep-to').value = epNum;
+  onEpChange('to');
+  document.getElementById('sel-ch-to').value = chIdx;
+  onChChange('to');
+  document.getElementById('sel-ms-to').value = msIdx;
+  calcMode3();
 }
 
 // ─── render ตาราง EXP รายมิชชั่น (ใหม่) ─────────────────────────────
