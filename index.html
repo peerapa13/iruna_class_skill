@@ -559,7 +559,7 @@
   }
 
   // ===== Changelog Data =====
-  const SITE_VERSION_DATE = '20 พ.ค. 2025';
+  const SITE_VERSION_DATE = '22 พ.ค. 2025';
 
   const RECENT_UPDATES = [
     { tag: 'update', text: 'เพิ่มข้อมูลEXP จากเควส EP6 ล่าสุด' },
@@ -591,16 +591,16 @@
     const viewport = document.getElementById('view-port');
     document.querySelectorAll('.job-btn').forEach(b => b.classList.remove('active'));
 
-    const recentHTML = RECENT_UPDATES.map(item => `
-      <li class="patch-item">
-        <span class="patch-item-tag ${tagClass[item.tag]}">${tagLabel[item.tag]}</span>
-        <span>${item.text}</span>
-      </li>
-    `).join('');
-
     const upcomingHTML = UPCOMING.map(item => `
       <li class="upcoming-item">
         <span class="status-badge ${statusClass[item.status]}">${statusLabel[item.status]}</span>
+        <span>${item.text}</span>
+      </li>
+    `).join('');
+    
+    const recentHTML = RECENT_UPDATES.map(item => `
+      <li class="patch-item">
+        <span class="patch-item-tag ${tagClass[item.tag]}">${tagLabel[item.tag]}</span>
         <span>${item.text}</span>
       </li>
     `).join('');
