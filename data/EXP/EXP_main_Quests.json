@@ -339,17 +339,17 @@
             { "num": 94, "name": "ทางสู่เซลโทซัม", "exp": 48800000 },
             { "num": 95, "name": "นักล่ากลายพันธุ์", "exp": 50500000 },
             { "num": 96, "name": "วิหารแจนเนเชล", "exp": 53100000 },
-            { "num": 97, "name": "Mindless Wisdom", "exp": 55800000 },
-            { "num": 98, "name": "The Price of Greed", "exp": 56700000 },
-            { "num": 99, "name": "Souls of the Soulless", "exp": 58600000 },
-            { "num": 100, "name": "Futile Emotions", "exp": 70000000 }
+            { "num": 97, "name": "สติปัญญาที่ขาดการไตร่ตรอง", "exp": 55800000 },
+            { "num": 98, "name": "ค่าตอบแทนของความละโมบ", "exp": 56700000 },
+            { "num": 99, "name": "ผู้มีวิญญาณและผู้ไร้วิญญาณ ", "exp": 58600000 },
+            { "num": 100, "name": "ความปรารถที่ไม่สัมฤทธิ์ผล", "exp": 70000000 }
              ]
           },
           {
             "chapter": 10,
             "name": "บทสุดท้ายEP2",
             "missions": [
-            { "num": 101, "name": "Departure from the Dragonewt Realm", "exp": 37500000 }
+            { "num": 101, "name": "การจากไปจากอาณาจักรมังกร()", "exp": 37500000 }
              ]
           }
       ]
@@ -362,9 +362,9 @@
           "chapter": 1,
           "name": "บทที่ 1 อิลูน่าที่ไม่ใช่อิลูน่า" ,
           "missions": [
-            { "num": 102, "name": "The Bandaged Girl and the Mysterious Warriors", "exp": 65000000 },
+            { "num": 102, "name": "สาวน้อยที่มีผ้าพันแผลปริศนากับปริศนากองทัพนักรบ(ปลดหินสี)", "exp": 65000000 },
             { "num": 103, "name": "Familiar Faces and New Enemies", "exp": 67000000 },
-            { "num": 104, "name": "Apostolia and the God's Fragments(ปลดหินสี)", "exp": 69000000 }
+            { "num": 104, "name": "Apostolia and the God's Fragments", "exp": 69000000 }
           ]
         },
         {
