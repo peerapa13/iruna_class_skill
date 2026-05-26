@@ -7,230 +7,188 @@
 <title>ข้อมูลอาชีพ | Iruna Online</title>
 <meta name="description" content="ข้อมูลสกิลและรายละเอียดอาชีพ Iruna Online ภาษาไทย">
 <meta name="robots" content="index, follow">
-
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Noto+Sans+Thai:wght@300;400;600;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold: #d4a843;
-    --gold-light: #f0c96a;
-    --accent: #3fc8f9;
-    --deep: #0a0812;
-    --text: #e8e0f0;
-    --text-dim: #9d8fb8;
+    --gold: #d4a843; --gold-light: #f0c96a; --accent: #3fc8f9;
+    --deep: #0a0812; --text: #e8e0f0; --text-dim: #9d8fb8;
     --sidebar-width: 260px;
+    --card-bg: rgba(20,28,46,0.85);
+    --card-border: rgba(51,65,85,0.7);
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--deep); color: var(--text); font-family: 'Noto Sans Thai', sans-serif; font-size: 15px; line-height: 1.65; }
+  #stars { position: fixed; inset: 0; z-index: 0; background: radial-gradient(ellipse at 20% 50%, rgba(124,58,237,0.12) 0%, transparent 60%); }
 
-  body {
-    background: var(--deep);
-    color: var(--text);
-    font-family: 'Noto Sans Thai', sans-serif;
-  }
-
-  #stars {
-    position: fixed; inset: 0; z-index: 0;
-    background: radial-gradient(ellipse at 20% 50%, rgba(124,58,237,0.12) 0%, transparent 60%);
-  }
-
-  /* ===== Sidebar ===== */
-  .hamburger-btn {
-    position: fixed; top: 14px; left: 14px; z-index: 1001;
-    width: 42px; height: 42px;
-    background: rgba(10,8,18,0.9); border: 1px solid rgba(212,168,67,0.35);
-    border-radius: 8px; cursor: pointer;
-    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
-    transition: border-color .2s, background .2s; backdrop-filter: blur(8px);
-  }
+  /* ── Sidebar (unchanged) ── */
+  .hamburger-btn { position: fixed; top: 14px; left: 14px; z-index: 1001; width: 42px; height: 42px; background: rgba(10,8,18,0.9); border: 1px solid rgba(212,168,67,0.35); border-radius: 8px; cursor: pointer; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; transition: border-color .2s, background .2s; backdrop-filter: blur(8px); }
   .hamburger-btn:hover { border-color: var(--gold); background: rgba(212,168,67,0.08); }
-  .hamburger-btn span {
-    display: block; width: 18px; height: 2px;
-    background: var(--gold); border-radius: 2px; transition: transform .3s, opacity .3s;
-  }
+  .hamburger-btn span { display: block; width: 18px; height: 2px; background: var(--gold); border-radius: 2px; transition: transform .3s, opacity .3s; }
   .sidebar-open .hamburger-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .sidebar-open .hamburger-btn span:nth-child(2) { opacity: 0; }
   .sidebar-open .hamburger-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-  .sb-overlay {
-    position: fixed; inset: 0; z-index: 999;
-    background: rgba(0,0,0,0.6); backdrop-filter: blur(2px);
-    opacity: 0; pointer-events: none; transition: opacity .3s;
-  }
+  .sb-overlay { position: fixed; inset: 0; z-index: 999; background: rgba(0,0,0,0.6); backdrop-filter: blur(2px); opacity: 0; pointer-events: none; transition: opacity .3s; }
   .sidebar-open .sb-overlay { opacity: 1; pointer-events: all; }
-
-  .sidebar {
-    position: fixed; top: 0; left: 0; z-index: 1000;
-    width: var(--sidebar-width); height: 100vh;
-    background: rgba(12,10,22,0.97); border-right: 1px solid rgba(212,168,67,0.2);
-    display: flex; flex-direction: column; gap: 5px;
-    padding: 70px 12px 40px; overflow-y: auto;
-    transform: translateX(calc(-1 * var(--sidebar-width)));
-    transition: transform .3s cubic-bezier(.4,0,.2,1);
-    box-shadow: none;
-  }
+  .sidebar { position: fixed; top: 0; left: 0; z-index: 1000; width: var(--sidebar-width); height: 100vh; background: rgba(12,10,22,0.97); border-right: 1px solid rgba(212,168,67,0.2); display: flex; flex-direction: column; gap: 5px; padding: 70px 12px 40px; overflow-y: auto; transform: translateX(calc(-1 * var(--sidebar-width))); transition: transform .3s cubic-bezier(.4,0,.2,1); box-shadow: none; }
   .sidebar-open .sidebar { transform: translateX(0); box-shadow: 4px 0 32px rgba(0,0,0,0.6); }
+  .sidebar-title { font-family: 'Cinzel Decorative', serif; font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; padding-bottom: 10px; margin-bottom: 6px; border-bottom: 1px solid rgba(212,168,67,0.25); }
+  .sb-btn { display: block; width: 100%; text-align: left; padding: 9px 12px; background: rgba(30,41,59,0.5); border: 1px solid rgba(51,65,85,0.6); border-radius: 6px; color: var(--text-dim); font-family: 'Noto Sans Thai', sans-serif; font-size: 13px; cursor: pointer; text-decoration: none; transition: all .2s; }
+  .sb-btn:hover { background: rgba(63,200,249,0.08); border-color: var(--accent); color: var(--accent); }
+  .sb-btn.active { background: rgba(212,168,67,0.1); border-color: var(--gold); color: var(--gold-light); }
+  .sb-section-label { margin-top: 10px; font-size: 11px; color: var(--gold); letter-spacing: 1px; padding: 6px 0 4px; border-bottom: 1px solid rgba(212,168,67,0.2); }
 
-  .sidebar-title {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase;
-    padding-bottom: 10px; margin-bottom: 6px; border-bottom: 1px solid rgba(212,168,67,0.25);
+  /* ── Hero ── */
+  .hero { text-align: center; padding: 56px 20px 32px; position: relative; z-index: 1; }
+  .hero-title { font-family: 'Cinzel Decorative', serif; font-size: clamp(20px, 5vw, 32px); background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 6px; }
+  .hero-desc { color: var(--text-dim); font-size: 14px; }
+
+  /* ── Main ── */
+  .main-wrapper { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 16px 80px; }
+
+  /* ── Job header card ── */
+  .job-header-card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 12px; padding: 24px 28px; margin-bottom: 10px;
   }
-  .sb-btn {
-    display: block; width: 100%; text-align: left; padding: 9px 12px;
-    background: rgba(30,41,59,0.5); border: 1px solid rgba(51,65,85,0.6);
-    border-radius: 6px; color: var(--text-dim);
-    font-family: 'Noto Sans Thai', sans-serif; font-size: 13px;
-    cursor: pointer; text-decoration: none; transition: all .2s;
+  .job-name { font-size: clamp(20px,5vw,26px); font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+  .job-desc { color: var(--text-dim); font-size: 14px; line-height: 1.7; margin-bottom: 16px; }
+  .job-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+  .job-meta-item { font-size: 13px; color: var(--text-dim); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 5px 10px; }
+  .job-meta-item a { color: var(--accent); text-decoration: none; }
+  .job-meta-item a:hover { text-decoration: underline; }
+
+  .job-obtain { font-size: 13px; color: var(--text-dim); line-height: 1.7; margin-bottom: 14px; background: rgba(212,168,67,0.05); border: 1px solid rgba(212,168,67,0.18); border-radius: 8px; padding: 10px 14px; }
+  .job-obtain-label { display: block; font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+  .job-obtain a { color: var(--accent); text-decoration: none; }
+  .job-obtain a:hover { text-decoration: underline; }
+
+ /* ── Filter system ── */
+.filter-toggle-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; margin-bottom: 12px;
+  background: rgba(212,168,67,0.08); border: 1px solid rgba(212,168,67,0.3);
+  border-radius: 8px; color: var(--gold); font-family: inherit;
+  font-size: 13px; cursor: pointer; transition: all .2s;
+}
+.filter-toggle-btn:hover { background: rgba(212,168,67,0.16); }
+.filter-toggle-btn.open  { background: rgba(212,168,67,0.16); border-color: var(--gold); }
+
+.filter-panel {
+  background: rgba(15,20,35,0.9); border: 1px solid rgba(51,65,85,0.7);
+  border-radius: 10px; padding: 16px; margin-bottom: 16px;
+  display: none; flex-direction: column; gap: 14px;
+}
+.filter-panel.open { display: flex; }
+
+.filter-group-label {
+  font-size: 11px; font-weight: 700; color: var(--gold);
+  letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.filter-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.chip {
+  padding: 5px 12px; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: transparent; color: var(--text-dim);
+  font-family: inherit; font-size: 12px;
+  cursor: pointer; transition: all .18s;
+}
+.chip:hover { border-color: var(--accent); color: var(--accent); }
+.chip.active { background: rgba(63,200,249,0.12); border-color: var(--accent); color: var(--accent); }
+.chip[data-color="summon"].active  { background: rgba(180,130,255,0.12); border-color: #b482ff; color: #b482ff; }
+.chip[data-color="passive"].active { background: rgba(120,200,120,0.12); border-color: #78c878; color: #78c878; }
+.chip[data-color="buff"].active    { background: rgba(255,200,80,0.12);  border-color: #ffc850; color: #ffc850; }
+.chip[data-color="heal"].active    { background: rgba(100,220,150,0.12); border-color: #64dc96; color: #64dc96; }
+.chip[data-color="debuff"].active  { background: rgba(255,128,128,0.12); border-color: #ff8080; color: #ff8080; }
+.chip[data-color="obtain"].active  { background: rgba(240,201,106,0.12); border-color: #f0c96a; color: #f0c96a; }
+
+.filter-reset {
+  align-self: flex-start; padding: 5px 12px;
+  border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);
+  background: transparent; color: var(--text-dim);
+  font-family: inherit; font-size: 12px; cursor: pointer;
+  transition: all .18s;
+}
+.filter-reset:hover { border-color: #ff8080; color: #ff8080; }
+
+.filter-result-count {
+  font-size: 12px; color: var(--text-dim); margin-bottom: 8px;
+}
+  /* ── Skill card (list layout) ── */
+  .skills-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .skill-card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 10px; padding: 16px 18px;
+    transition: border-color .18s;
   }
-  .sb-btn:hover  { background: rgba(63,200,249,0.08); border-color: var(--accent); color: var(--accent); }
-  .sb-btn.active { background: rgba(212,168,67,0.1);  border-color: var(--gold);   color: var(--gold-light); }
-  .sb-section-label {
-    margin-top: 10px; font-size: 11px; color: var(--gold);
-    letter-spacing: 1px; padding: 6px 0 4px; border-bottom: 1px solid rgba(212,168,67,0.2);
+  .skill-card:hover { border-color: rgba(212,168,67,0.35); }
+  .skill-card.hidden { display: none; }
+
+  .skill-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .skill-icon { width: 40px; height: 40px; border-radius: 6px; object-fit: cover; flex-shrink: 0; background: rgba(255,255,255,0.05); }
+  .skill-icon-placeholder { width: 40px; height: 40px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; color: var(--text-dim); }
+  .skill-name-wrap { flex: 1; min-width: 0; }
+  .skill-name { font-size: 15px; font-weight: 700; color: var(--gold-light); line-height: 1.3; }
+  .skill-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 4px; }
+
+  /* ── Type tags ── */
+  .tag { display: inline-flex; align-items: center; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; border: 1px solid; letter-spacing: .3px; }
+  .tag-passive  { color: #78c878; border-color: rgba(120,200,120,0.4); background: rgba(120,200,120,0.08); }
+  .tag-active   { color: #3fc8f9; border-color: rgba(63,200,249,0.4);  background: rgba(63,200,249,0.08); }
+  .tag-summon   { color: #b482ff; border-color: rgba(180,130,255,0.4); background: rgba(180,130,255,0.08); }
+  .tag-buff     { color: #ffc850; border-color: rgba(255,200,80,0.4);  background: rgba(255,200,80,0.08); }
+  .tag-heal     { color: #64dc96; border-color: rgba(100,220,150,0.4); background: rgba(100,220,150,0.08); }
+  .tag-debuff   { color: #ff8080; border-color: rgba(255,128,128,0.4); background: rgba(255,128,128,0.08); }
+  .tag-special  { color: #f0c96a; border-color: rgba(240,201,106,0.4); background: rgba(240,201,106,0.08); }
+  .tag-default  { color: var(--text-dim); border-color: rgba(157,143,184,0.3); background: rgba(157,143,184,0.06); }
+
+  .skill-desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; margin-bottom: 10px; }
+
+  /* ── Skill level rows ── */
+  .skill-levels { display: flex; flex-direction: column; gap: 5px; }
+  .skill-lv-row {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 6px; padding: 7px 12px; font-size: 13px;
   }
+  .lv-badge { font-size: 11px; font-weight: 700; color: var(--deep); background: var(--gold); border-radius: 4px; padding: 2px 7px; flex-shrink: 0; }
+  .lv-loc { color: var(--text-dim); flex: 1; }
 
-  /* ===== Main Layout ===== */
-  .hero {
-    text-align: center;
-    padding: 60px 20px 40px;
-    position: relative;
-    z-index: 1;
-  }
+  /* ── Summon sub-skills ── */
+  .summon-block { margin-top: 12px; border-top: 1px solid rgba(180,130,255,0.2); padding-top: 10px; }
+  .summon-block-title { font-size: 12px; font-weight: 600; color: #b482ff; margin-bottom: 8px; letter-spacing: .5px; }
+  .summon-skills { display: flex; flex-direction: column; gap: 6px; }
+  .summon-skill-row { display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px; background: rgba(180,130,255,0.04); border: 1px solid rgba(180,130,255,0.15); border-radius: 7px; }
+  .summon-skill-icon { width: 28px; height: 28px; border-radius: 5px; object-fit: cover; flex-shrink: 0; }
+  .summon-skill-info { flex: 1; min-width: 0; }
+  .summon-skill-name { font-size: 13px; font-weight: 600; color: #c9a0ff; }
+  .summon-skill-desc { font-size: 12px; color: var(--text-dim); margin-top: 2px; line-height: 1.5; }
 
-  .hero-title {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 36px;
-    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 8px;
-  }
+  /* ── Section title ── */
+  .section-title { font-size: 13px; font-weight: 700; color: var(--gold); letter-spacing: .8px; text-transform: uppercase; margin: 20px 0 10px; padding-bottom: 6px; border-bottom: 1px solid rgba(212,168,67,0.18); }
 
-  .hero-desc { color: var(--text-dim); margin-bottom: 30px; }
+  /* ── back button ── */
+  .back-btn { display: inline-flex; align-items: center; gap: 6px; margin-top: 24px; padding: 9px 20px; background: rgba(212,168,67,0.08); border: 1px solid rgba(212,168,67,0.3); border-radius: 8px; color: var(--gold); text-decoration: none; font-size: 14px; transition: all .2s; }
+  .back-btn:hover { background: rgba(212,168,67,0.16); border-color: var(--gold); }
 
-  .main-wrapper {
-    position: relative; z-index: 1;
-    max-width: 1100px; margin: 0 auto;
-    padding: 0 24px 80px;
-  }
-
-  /* ===== Job Card ===== */
-  .card {
-    background: rgba(30, 41, 59, 0.8);
-    padding: 32px; border-radius: 8px;
-    border: 1px solid rgba(51, 65, 85, 0.8);
-  }
-
-  .job-title {
-    font-size: 28px; color: var(--accent);
-    margin-bottom: 16px;
-  }
-
-  .job-desc {
-    color: var(--text-dim); line-height: 1.7; margin-bottom: 20px;
-  }
-
-  .section-title {
-    color: var(--gold); font-size: 16px; font-weight: 600;
-    margin-top: 24px; margin-bottom: 10px;
-  }
-
-  .info-box {
-    background: rgba(15, 23, 42, 0.8); padding: 14px;
-    border-radius: 6px; border-left: 3px solid rgba(63, 200, 249, 0.5);
-    color: var(--text-dim); line-height: 1.6;
-  }
-
-  .req-item { padding: 6px 0; }
-
-  /* ===== Skills Grid ===== */
-  .skills-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 12px; margin-top: 12px;
-  }
-
-  .skill-btn {
-    padding: 14px; background: rgba(30, 41, 59, 0.6);
-    border: 2px solid rgba(212, 168, 67, 0.4);
-    border-radius: 8px; color: var(--text); cursor: pointer;
-    transition: all 0.3s; text-align: center;
-    font-family: 'Noto Sans Thai', sans-serif; font-size: 13px; font-weight: 600;
-  }
-  .skill-btn:hover {
-    background: rgba(212, 168, 67, 0.15); border-color: var(--gold-light);
-    transform: translateY(-2px); box-shadow: 0 4px 12px rgba(212, 168, 67, 0.2);
-  }
-  .skill-btn img { width: 32px; display: block; margin: 0 auto 8px; border-radius: 4px; }
-
-  /* ===== Modal ===== */
-  .modal {
-    background: rgba(10, 8, 18, 0.95); border: 2px solid var(--gold);
-    border-radius: 12px; color: var(--text); padding: 0;
-    max-width: 500px; max-height: 85vh; margin: auto;
-    box-shadow: 0 0 30px rgba(212, 168, 67, 0.3); overflow: hidden;
-  }
-  .modal::backdrop { background: rgba(0, 0, 0, 0.85); }
-
-  .modal-header {
-    background: linear-gradient(135deg, rgba(212, 168, 67, 0.15) 0%, rgba(63, 200, 249, 0.1) 100%);
-    color: var(--gold); font-family: 'Cinzel', serif;
-    border-bottom: 1px solid rgba(212, 168, 67, 0.3);
-    padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;
-  }
-  .modal-body { padding: 20px; overflow-y: auto; max-height: calc(85vh - 60px); }
-
-  .close-modal {
-    background: none; border: none; color: var(--text-dim);
-    cursor: pointer; font-size: 24px; transition: color 0.2s;
-  }
-  .close-modal:hover { color: var(--gold); }
-
-  .skill-detail-type {
-    font-size: 12px; color: var(--accent); margin-bottom: 12px;
-    background: rgba(63, 200, 249, 0.1); padding: 6px 10px;
-    border-radius: 4px; display: inline-block;
-  }
-
-  .skill-detail-desc {
-    background: rgba(15, 23, 42, 0.8); padding: 12px;
-    border-radius: 6px; border-left: 3px solid #77D77B;
-    margin-bottom: 16px; line-height: 1.6; font-size: 13px;
-  }
-
-  .skill-lv-tabs { display: flex; flex-direction: column; gap: 8px; }
-
-  .skill-lv-tab {
-    padding: 12px 14px; background: rgba(212, 168, 67, 0.05);
-    border: 1px solid rgba(212, 168, 67, 0.3);
-    border-radius: 6px; transition: all 0.2s;
-  }
-  .skill-lv-tab:hover { background: rgba(212, 168, 67, 0.15); border-color: var(--gold-light); color: var(--gold-light); }
-
-  .lv-header { font-weight: 600; color: var(--gold-light); margin-bottom: 4px; }
-  .lv-location { font-size: 12px; color: var(--text-dim); }
-  .loading { text-align: center; padding: 40px; color: var(--text-dim); }
-
-  /* ===== Not Found ===== */
-  .not-found {
-    text-align: center; padding: 60px 20px;
-  }
+  /* ── states ── */
+  .loading { text-align: center; padding: 60px 20px; color: var(--text-dim); font-size: 15px; }
+  .not-found { text-align: center; padding: 60px 20px; }
   .not-found-icon { font-size: 48px; margin-bottom: 16px; }
-  .not-found h2 { color: var(--gold); font-size: 22px; margin-bottom: 10px; }
-  .not-found p { color: var(--text-dim); margin-bottom: 24px; }
-  .back-btn {
-    display: inline-block; padding: 10px 24px;
-    background: rgba(212,168,67,0.1); border: 1px solid rgba(212,168,67,0.4);
-    border-radius: 8px; color: var(--gold); text-decoration: none;
-    transition: all .2s; font-size: 14px;
+  .not-found h2 { color: var(--gold); font-size: 20px; margin-bottom: 8px; }
+  .not-found p { color: var(--text-dim); margin-bottom: 20px; font-size: 14px; }
+
+  @media (max-width: 600px) {
+    .job-header-card { padding: 18px 16px; }
+    .skill-card { padding: 14px 14px; }
+    .skill-lv-row { flex-wrap: wrap; }
   }
-  .back-btn:hover { background: rgba(212,168,67,0.2); border-color: var(--gold); }
 </style>
 </head>
-
 <body>
 <div id="stars"></div>
-
 <div id="sb-root"></div>
 <script>
   fetch('sidebar.html')
@@ -238,201 +196,437 @@
     .then(html => {
       const root = document.getElementById('sb-root');
       root.innerHTML = html;
-      root.querySelectorAll('script').forEach(oldScript => {
-        const newScript = document.createElement('script');
-        newScript.textContent = oldScript.textContent;
-        document.body.appendChild(newScript);
+      root.querySelectorAll('script').forEach(s => {
+        const ns = document.createElement('script');
+        ns.textContent = s.textContent;
+        document.body.appendChild(ns);
       });
     })
-    .catch(() => console.warn('ไม่สามารถโหลด sidebar.html ได้'));
+    .catch(() => {});
 </script>
 
 <div class="hero">
-  <h1 class="hero-title" id="page-title">🐺 ข้อมูลอาชีพ</h1>
-  <p class="hero-desc" id="page-desc">กำลังโหลด...</p>
+  <h1 class="hero-title" id="page-title">ข้อมูลอาชีพ</h1>
+  <p class="hero-desc" id="page-desc"></p>
 </div>
 
 <div class="main-wrapper">
   <div id="view-port">
-    <div class="card"><div class="loading">⏳ กำลังโหลดข้อมูล...</div></div>
+    <div class="loading">⏳ กำลังโหลดข้อมูล...</div>
   </div>
 </div>
 
-<dialog id="skillModal" class="modal">
-  <div class="modal-header" id="modalHeader"></div>
-  <div class="modal-body" id="modalBody"></div>
-</dialog>
-
 <script>
-  const JOB_DATA_PATH = './data/jobs/';
+const JOB_DATA_PATH = './data/jobs/';
 
-  const jobFilesMap = {
-    'Summoner':    { file: 'summoner.json',    label: 'ซัมมอนเนอร์' },
-    'Paladin':     { file: 'paladin.json',     label: 'พาลาดิน' },
-    'Gladiator':   { file: 'gladiator.json',   label: 'จอมดาบ' },
-    'Beast Knight':{ file: 'beastknight.json', label: 'บีทไนท์' },
-    'Sniper':      { file: 'sniper.json',       label: 'นักแม่นธนู' },
-    'Assassin':    { file: 'assassin.json',     label: 'นักฆ่า' },
-    'High Wizard': { file: 'highwizard.json',   label: 'จอมขมังเวทย์' },
-    'Necromancer': { file: 'necromancer.json',  label: 'เนโครแมนเซอร์' },
-    'Enchanter':   { file: 'enchanter.json',    label: 'ผู้วิเศษ' },
-    'Bishop':      { file: 'bishop.json',       label: 'สังฆราช' },
-    'Monk':        { file: 'monk.json',         label: 'นักพรต' },
-    'Servant':     { file: 'servant.json',      label: 'เซอร์แวน' },
-    'Ninja':       { file: 'ninja.json',        label: 'นินจา' },
-    'Samurai':     { file: 'samurai.json',      label: 'ซามุไร' },
-    'Minstrel':    { file: 'minstrel.json',     label: 'นักดนตรี' },
-    'Alchemist':   { file: 'alchemist.json',    label: 'นักเล่นแร่แปรธาตุ' },
-  };
+/* ── jobFilesMap: ครบทุกอาชีพ รวมอาชีพย่อย ── */
+const jobFilesMap = {
+  /* ── Lv.1 ── */
+  'adventurer': { file: 'adventurer.json', label: 'นักผจญภัย' },
 
-  async function loadJobData(jobId) {
-    try {
-      const entry = jobFilesMap[jobId];
-      if (!entry) return null;
-      const response = await fetch(`${JOB_DATA_PATH}${entry.file}`);
-      if (!response.ok) return null;
-      return await response.json();
-    } catch (e) {
-      console.error(e);
-      return null;
+  /* ── สายนักรบ ── */
+  'apprentice_warrior': { file: 'apprentice_warrior.json', label: 'นักรบฝึกหัด' },
+  'warrior':            { file: 'warrior.json',            label: 'นักรบ' },
+
+  'apprentice_knight':  { file: 'apprentice_knight.json',  label: 'อัศวินฝึกหัด' },
+  'knight':             { file: 'knight.json',             label: 'อัศวิน' },
+
+  'apprentice_paladin':     { file: 'apprentice_paladin.json',     label: 'พาลาดินฝึกหัด' },
+  'paladin':                { file: 'paladin.json',                label: 'พาลาดิน' },
+  'apprentice_gladiator':   { file: 'apprentice_gladiator.json',   label: 'จอมดาบฝึกหัด' },
+  'gladiator':              { file: 'gladiator.json',              label: 'จอมดาบ' },
+  'apprentice_beastknight':{ file: 'apprentice_beastknight.json', label: 'บีทไนท์ฝึกหัด' },
+  'beastknight':           { file: 'beastknight.json',           label: 'บีทไนท์' },
+
+  /* ── สายนายพราน ── */
+  'apprentice_hunter': { file: 'apprentice_hunter.json', label: 'นายพรานฝึกหัด' },
+  'hunter':            { file: 'hunter.json',            label: 'นายพราน' },
+
+  'apprentice_assassin': { file: 'apprentice_assassin.json', label: 'นักฆ่าฝึกหัด' },
+  'assassin':            { file: 'assassin.json',            label: 'นักฆ่า' },
+  'apprentice_sniper':   { file: 'apprentice_sniper.json',   label: 'นักแม่นฝึกหัด' },
+  'sniper':              { file: 'sniper.json',              label: 'นักแม่น' },
+  'apprentice_summoner': { file: 'apprentice_summoner.json', label: 'ซัมมอนเนอร์ฝึกหัด' },
+  'summoner':            { file: 'summoner.json',            label: 'ซัมมอนเนอร์' },
+
+  /* ── สายเวทย์ ── */
+  'apprentice_mage': { file: 'apprentice_mage.json', label: 'นักเวทย์ฝึกหัด' },
+  'mage':            { file: 'mage.json',            label: 'นักเวทย์' },
+
+  'apprentice_wizard': { file: 'apprentice_wizard.json', label: 'จอมเวทย์ฝึกหัด' },
+  'wizard':            { file: 'wizard.json',            label: 'จอมเวทย์' },
+
+  'apprentice_highwizard': { file: 'apprentice_highwizard.json', label: 'จอมขมังเวทย์ฝึกหัด' },
+  'highwizard':            { file: 'highwizard.json',            label: 'จอมขมังเวทย์' },
+  'apprentice_enchanter':   { file: 'apprentice_enchanter.json',  label: 'ผู้วิเศษฝึกหัด' },
+  'enchanter':              { file: 'enchanter.json',             label: 'ผู้วิเศษ' },
+  'apprentice_necromancer': { file: 'apprentice_necromancer.json',label: 'เนโครแมนเซอร์ฝึกหัด' },
+  'necromancer':            { file: 'necromancer.json',           label: 'เนโครแมนเซอร์' },
+
+  /* ── สายบาทหลวง ── */
+  'apprentice_cleric': { file: 'apprentice_cleric.json', label: 'บาทหลวงฝึกหัด' },
+  'cleric':            { file: 'cleric.json',            label: 'บาทหลวง' },
+
+  'apprentice_bishop':  { file: 'apprentice_bishop.json',  label: 'สังฆราชฝึกหัด' },
+  'bishop':             { file: 'bishop.json',             label: 'สังฆราช' },
+  'apprentice_monk':    { file: 'apprentice_monk.json',    label: 'นักพรตฝึกหัด' },
+  'monk':               { file: 'monk.json',               label: 'นักพรต' },
+  'apprentice_servant': { file: 'apprentice_servant.json', label: 'เซอร์แวนฝึกหัด' },
+  'servant':            { file: 'servant.json',            label: 'เซอร์แวน' },
+
+  /* ── สายพิเศษ ── */
+  'ninja':      { file: 'ninja.json',      label: 'นินจา' },
+  'samurai':    { file: 'samurai.json',    label: 'ซามูไร' },
+  'minstrel':   { file: 'minstrel.json',  label: 'นักดนตรี' },
+  'alchemist':  { file: 'alchemist.json', label: 'นักเล่นแร่แปรธาตุ' },
+};
+
+
+function tagClass(type) {
+  if (!type) return 'tag-default';
+  const t = type.toLowerCase();
+  if (t.includes('passive') || t.includes('สกิลติดตัว')) return 'tag-passive';
+  if (t.includes('summon')  || t.includes('อัญเชิญ'))   return 'tag-summon';
+  if (t.includes('heal')    || t.includes('ฮีล'))        return 'tag-heal';
+  if (t.includes('buff')    || t.includes('บัฟ'))        return 'tag-buff';
+  if (t.includes('debuff')  || t.includes('ดีบัฟ'))      return 'tag-debuff';
+  if (t.includes('active')  || t.includes('สกิลกดใช้'))  return 'tag-active';
+  if (t.includes('special') || t.includes('พิเศษ'))      return 'tag-special';
+  return 'tag-default';
+}
+
+
+function normalizeTypes(type) {
+  if (!type) return [];
+  if (Array.isArray(type)) return type.map(t => t.trim()).filter(Boolean);
+  return type.split(',').map(t => t.trim()).filter(Boolean);
+}
+function buildTagHTML(type) {
+  return normalizeTypes(type)
+    .map(t => `<span class="tag ${tagClass(t)}">${t}</span>`)
+    .join('');
+}
+
+/* ── level rows ── */
+function buildLevels(lv, loc, obtainArr) {
+  const lvArr     = lv  ? lv.split(',')  : [];
+  const locArr    = loc ? loc.split(',') : [];
+  const obtainList = Array.isArray(obtainArr) ? obtainArr : [];
+  if (!lvArr.length) return '';
+  const activeObtain = filterState.obtain;
+  const activeLevel  = filterState.level;
+  const rows = lvArr.map((l, i) => {
+    const rowObtain = obtainList[i] ? obtainList[i].trim() : '';
+    if (activeObtain !== 'all' && rowObtain !== activeObtain) return '';
+    /* filter by level band */
+    if (activeLevel !== 'all') {
+      const n = parseInt(l.trim());
+      let band = null;
+      if (!isNaN(n)) {
+        if (n <= 10)       band = '10';
+        else if (n <= 20)  band = '20';
+        else if (n <= 50)  band = '50';
+        else if (n <= 120) band = '70–120';
+        else               band = '140+';
+      }
+      if (band !== activeLevel) return '';
     }
-  }
+    const locInfo = locArr[i] ? locArr[i].trim() : 'รอการอัปเดต';
+    return `<div class="skill-lv-row">
+      <span class="lv-badge">Lv.${i+1}</span>
+      <span class="lv-loc">ตัวละคร Lv.${l.trim()} &nbsp;·&nbsp; ${locInfo}</span>
+    </div>`;
+  }).join('');
+  return rows ? `<div class="skill-levels">${rows}</div>` : '';
+}
 
-  function openSkillDetailModal(skillName, skillType, skillDesc, skillLv, skillLoc, skillImage) {
-    const modal  = document.getElementById('skillModal');
-    const header = document.getElementById('modalHeader');
-    const body   = document.getElementById('modalBody');
-
-    const lvArray  = skillLv  ? skillLv.split(',')  : [];
-    const locArray = skillLoc ? skillLoc.split(',') : [];
-
-    let lvTabsHTML = '';
-    if (lvArray.length > 0) {
-      lvTabsHTML = '<div class="skill-lv-tabs">' +
-        lvArray.map((lv, idx) => {
-          const locInfo = locArray[idx] ? locArray[idx].trim() : 'รอการอัปเดต';
-          return `
-            <div class="skill-lv-tab">
-              <div class="lv-header">📍 Level ${idx + 1}</div>
-              <div>เลเวลตัวละคร: <strong>${lv.trim()}</strong></div>
-              <div class="lv-location">${locInfo}</div>
-            </div>
-          `;
-        }).join('') +
-      '</div>';
-    }
-
-    header.innerHTML = `
-      <div>
-        ${skillImage ? `<img src="${skillImage}" style="width:36px;vertical-align:middle;margin-right:8px;border-radius:4px;">` : ''}
-        ${skillName}
-      </div>
-      <button class="close-modal" onclick="document.getElementById('skillModal').close()">✕</button>
-    `;
-
-    body.innerHTML = `
-      <div class="skill-detail-type">${skillType}</div>
-      <div class="skill-detail-desc">${skillDesc}</div>
-      ${lvTabsHTML ? `<div style="margin-bottom: 8px; font-weight: 600; color: var(--gold);">วิธีการรับสกิล</div>${lvTabsHTML}` : ''}
-    `;
-
-    modal.showModal();
-  }
-
-  async function renderJob(jobId) {
-    const viewport = document.getElementById('view-port');
-    const entry = jobFilesMap[jobId];
-
-    if (!entry) {
-      document.getElementById('page-title').textContent = '❌ ไม่พบอาชีพ';
-      document.getElementById('page-desc').textContent = '';
-      viewport.innerHTML = `
-        <div class="not-found">
-          <div class="not-found-icon">🔍</div>
-          <h2>ไม่พบข้อมูลอาชีพ "${jobId}"</h2>
-          <p>อาชีพนี้ยังไม่มีในฐานข้อมูล หรืออาจสะกดผิด</p>
-          <a href="job_tree" class="back-btn">← กลับไปเส้นทางอาชีพ</a>
-        </div>`;
-      return;
-    }
-
-    document.getElementById('page-title').textContent = entry.label;
-    document.getElementById('page-desc').textContent = 'กำลังโหลด...';
-    viewport.innerHTML = '<div class="card"><div class="loading">⏳ กำลังโหลดข้อมูล...</div></div>';
-
-    const job = await loadJobData(jobId);
-    if (!job) {
-      document.getElementById('page-desc').textContent = 'ยังไม่มีข้อมูลในฐานข้อมูล';
-      viewport.innerHTML = `
-        <div class="card">
-          <h1 class="job-title">${entry.label}</h1>
-          <div class="info-box">⚠️ ยังไม่มีข้อมูลอาชีพนี้ในฐานข้อมูล กรุณารอการอัปเดต</div>
-          <div style="margin-top:20px">
-            <a href="job_tree" class="back-btn">← กลับไปเส้นทางอาชีพ</a>
-          </div>
-        </div>`;
-      return;
-    }
-
-    document.getElementById('page-title').textContent = job.name || entry.label;
-    document.getElementById('page-desc').textContent = '';
-
-    let skillsHTML = '';
-    if (job.skills && job.skills.length > 0) {
-      skillsHTML = '<div class="skills-grid">' +
-        [...job.skills]
-        .sort((a, b) => {
-          if (!a.image && b.image) return -1;
-          if (a.image && !b.image) return 1;
-          return 0;
-        })
-        .map(s => {
-          const esc = v => (v||'').replace(/'/g,"\\'").replace(/"/g,'\\"');
-          return `
-            <button class="skill-btn" onclick="openSkillDetailModal('${esc(s.name)}','${esc(s.type)}','${esc(s.desc)}','${esc(s.lv)}','${esc(s.loc)}','${esc(s.image)}')">
-              ${s.image ? `<img src="${s.image}">` : '🅿️'}
-              <span>${s.name}</span>
-            </button>
-          `;
-        }).join('') +
-      '</div>';
-    }
-
-    viewport.innerHTML = `
-      <div class="card">
-        <h1 class="job-title">${job.name}</h1>
-        <p class="job-desc">${job.desc}</p>
-        ${skillsHTML
-          ? `<div class="section-title">⚔️ ข้อมูลสกิล</div><div>${skillsHTML}</div>`
-          : '<div class="section-title">⚔️ สกิล</div><div class="info-box">ยังไม่มีข้อมูลสกิลในฐานข้อมูล</div>'}
-        <div class="section-title">✓ คำแนะนำสำหรับอาชีพ</div>
-        <div class="info-box">
-          ${job.prereq.map(r => `<div class="req-item">• ${r}</div>`).join("")}
+function buildSummonBlock(summonSkills) {
+  if (!summonSkills || summonSkills.length === 0) return '';
+  const rows = summonSkills.map(ss => `
+    <div class="summon-skill-row">
+      ${ss.image
+        ? `<img class="summon-skill-icon" src="${ss.image}" alt="">`
+        : `<div class="summon-skill-icon" style="background:rgba(180,130,255,0.1);border:1px solid rgba(180,130,255,0.2);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;">✦</div>`}
+      <div class="summon-skill-info">
+        <div class="summon-skill-name">
+          ${ss.name}
+          ${ss.type ? ` <span class="tag ${tagClass(ss.type)}" style="font-size:10px;">${ss.type}</span>` : ''}
+          ${ss.req ? ` <span style="font-size:10px;color:#ffc850;border:1px solid rgba(255,200,80,0.4);background:rgba(255,200,80,0.08);border-radius:8px;padding:1px 7px;">⚠ ${ss.req}</span>` : ''}
         </div>
-        <div style="margin-top:28px">
-          <a href="job_tree" class="back-btn">← กลับไปเส้นทางอาชีพ</a>
-        </div>
+        ${ss.desc ? `<div class="summon-skill-desc">${ss.desc}</div>` : ''}
       </div>
-    `;
-  }
+    </div>`).join('');
+  return `<div class="summon-block">
+    <div class="summon-block-title">✦ สกิลของตัวอัญเชิญ</div>
+    <div class="summon-skills">${rows}</div>
+  </div>`;
+}
 
-  document.addEventListener('DOMContentLoaded', function() {
-    const params = new URLSearchParams(location.search);
-    const jobParam = params.get('job');
-    if (jobParam) {
-      renderJob(jobParam);
-    } else {
-      document.getElementById('page-title').textContent = '🐺 ข้อมูลอาชีพ';
-      document.getElementById('page-desc').textContent = '';
-      document.getElementById('view-port').innerHTML = `
-        <div class="not-found">
-          <div class="not-found-icon">⚔️</div>
-          <h2>เลือกอาชีพที่ต้องการดู</h2>
-          <p>กลับไปที่หน้าเส้นทางอาชีพ แล้วกดเลือกอาชีพที่ต้องการ</p>
-          <a href="job_tree" class="back-btn">← เส้นทางอาชีพ</a>
-        </div>`;
+/* ── build skill card ── */
+function buildSkillCard(s) {
+  const types = normalizeTypes(s.type);       
+  const typeStr = types.join(',').toLowerCase();
+  const isSummon = typeStr.includes('summon') || typeStr.includes('อัญเชิญ');
+  const bands    = getLevelBands(s.lv).join(',');
+  const obtain = Array.isArray(s.obtain)
+    ? s.obtain.join(',')
+    : (s.obtain ? s.obtain.trim() : '');
+
+  return `<div class="skill-card" data-types="${typeStr}" data-levels="${bands}" data-obtain="${obtain}">
+    <div class="skill-card-header">
+      ${s.image
+        ? `<img class="skill-icon" src="${s.image}" alt="">`
+        : `<div class="skill-icon-placeholder">P</div>`}
+      <div class="skill-name-wrap">
+        <div class="skill-name">${s.name}</div>
+        <div class="skill-tags">${buildTagHTML(s.type)}</div>
+      </div>
+    </div>
+    ${s.desc ? `<div class="skill-desc">${s.desc}</div>` : ''}
+    ${buildLevels(s.lv, s.loc, s.obtain)}
+    ${isSummon && s.summonSkills ? buildSummonBlock(s.summonSkills) : ''}
+  </div>`;
+}
+
+/* ── filter system ── */
+let filterState = { type: 'all', level: 'all', obtain: 'all' };
+function getLevelBands(lvString) {
+  if (!lvString) return [];
+  return [...new Set(
+    lvString.split(',').map(l => {
+      const n = parseInt(l.trim());
+      if (isNaN(n)) return null;
+      if (n <= 10)  return '10';
+      if (n <= 20)  return '20';
+      if (n <= 50)  return '50';
+      if (n <= 120) return '70–120';
+      return '140+';
+    }).filter(Boolean)
+  )];
+}
+function applyFilters() {
+  const cards = document.querySelectorAll('.skill-card');
+  let visible = 0;
+  cards.forEach((card, idx) => {
+    const matchType   = filterState.type   === 'all' || card.dataset.types.includes(filterState.type.toLowerCase());
+    const matchLevel  = filterState.level  === 'all' || card.dataset.levels.includes(filterState.level);
+    const matchObtain = filterState.obtain === 'all' || card.dataset.obtain.includes(filterState.obtain);
+    const show = matchType && matchLevel && matchObtain;
+    card.classList.toggle('hidden', !show);
+    if (show) visible++;
+    /* re-render level rows to match obtain & level filter */
+    if (window._jobSkills && window._jobSkills[idx]) {
+      const s = window._jobSkills[idx];
+      const levelsEl = card.querySelector('.skill-levels');
+      const newLevels = buildLevels(s.lv, s.loc, s.obtain);
+      if (levelsEl) {
+        levelsEl.outerHTML = newLevels || '<div class="skill-levels"></div>';
+      } else if (newLevels) {
+        const descEl = card.querySelector('.skill-desc');
+        if (descEl) descEl.insertAdjacentHTML('afterend', newLevels);
+      }
     }
   });
+  const counter = document.getElementById('filter-result-count');
+  if (counter) counter.textContent = `แสดง ${visible} จาก ${cards.length} สกิล`;
+}
+
+function setupFilters(skills) {
+  /* collect unique values */
+  const types   = new Set();
+  const levels  = new Set();
+  const obtains = new Set();
+  skills.forEach(s => {
+    normalizeTypes(s.type).forEach(t => types.add(t));
+    const bands = getLevelBands(s.lv);
+    bands.forEach(b => levels.add(b));
+    if (s.obtain) {
+      const vals = Array.isArray(s.obtain) ? s.obtain : [s.obtain];
+      vals.forEach(v => obtains.add(v.trim()));
+    }
+  });
+  const bar = document.getElementById('filter-bar');
+  if (!bar) return;
+  /* ── type chip color hint ── */
+  function typeColor(t) {
+    const tl = t.toLowerCase();
+    if (tl.includes('summon') || tl.includes('อัญเชิญ'))  return 'summon';
+    if (tl.includes('passive')|| tl.includes('สกิลติดตัว'))return 'passive';
+    if (tl.includes('buff')   || tl.includes('บัฟ'))       return 'buff';
+    if (tl.includes('heal')   || tl.includes('ฮีล'))       return 'heal';
+    if (tl.includes('debuff') || tl.includes('ดีบัฟ'))     return 'debuff';
+    return 'active';
+  }
+  /* ── level band order ── */
+  const bandOrder = [...levels].sort((a, b) => parseInt(a) - parseInt(b));
+  bar.innerHTML = `
+    <button class="filter-toggle-btn" id="filter-toggle-btn">
+      ⚙ ตัวกรอง <span id="filter-active-dot" style="display:none;width:7px;height:7px;border-radius:50%;background:#f0c96a;display:inline-block;"></span>
+    </button>
+
+    <div class="filter-panel" id="filter-panel">
+
+      <div>
+        <div class="filter-group-label">ประเภทความสามารถ</div>
+        <div class="filter-chips" id="chips-type">
+          <button class="chip active" data-group="type" data-val="all">ทั้งหมด</button>
+          ${[...types].map(t =>
+            `<button class="chip" data-group="type" data-val="${t}" data-color="${typeColor(t)}">${t}</button>`
+          ).join('')}
+        </div>
+      </div>
+
+      <div>
+        <div class="filter-group-label">ช่วงเลเวล</div>
+        <div class="filter-chips" id="chips-level">
+          <button class="chip active" data-group="level" data-val="all">ทั้งหมด</button>
+          ${bandOrder.map(b =>
+            `<button class="chip" data-group="level" data-val="${b}">Lv.${b}</button>`
+          ).join('')}
+        </div>
+      </div>
+
+      <div>
+        <div class="filter-group-label">วิธีได้รับสกิล</div>
+        <div class="filter-chips" id="chips-obtain">
+          <button class="chip active" data-group="obtain" data-val="all">ทั้งหมด</button>
+          <button class="chip" data-group="obtain" data-val="เปลี่ยนอาชีพ" data-color="obtain">เปลี่ยนอาชีพ</button>
+          <button class="chip" data-group="obtain" data-val="เควส" data-color="obtain">เควส</button>
+          <button class="chip" data-group="obtain" data-val="ไอเทมดรอป" data-color="obtain">ไอเทมดรอป</button>
+          <button class="chip" data-group="obtain" data-val="ไอเทมซื้อร้านค้า" data-color="obtain">ไอเทมซื้อร้านค้า</button>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px;border-top:1px solid rgba(255,255,255,0.06);padding-top:10px;">
+        <button class="filter-reset" id="filter-reset-btn">↺ รีเซ็ตทั้งหมด</button>
+        <span class="filter-result-count" id="filter-result-count"></span>
+      </div>
+    </div>
+  `;
+  /* toggle open/close */
+  document.getElementById('filter-toggle-btn').addEventListener('click', () => {
+    const panel = document.getElementById('filter-panel');
+    const btn   = document.getElementById('filter-toggle-btn');
+    panel.classList.toggle('open');
+    btn.classList.toggle('open');
+  });
+  /* chip click */
+  bar.addEventListener('click', e => {
+    const chip = e.target.closest('.chip');
+    if (!chip) return;
+    const group = chip.dataset.group;
+    const val   = chip.dataset.val;
+    /* deactivate siblings */
+    bar.querySelectorAll(`.chip[data-group="${group}"]`).forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+
+    filterState[group] = val;
+    /* dot indicator */
+    const isDefault = filterState.type === 'all' && filterState.level === 'all' && filterState.obtain === 'all';
+    const dot = document.getElementById('filter-active-dot');
+    if (dot) dot.style.display = isDefault ? 'none' : 'inline-block';
+
+    applyFilters();
+  });
+  /* reset */
+  document.getElementById('filter-reset-btn').addEventListener('click', () => {
+    filterState = { type: 'all', level: 'all', obtain: 'all' };
+    bar.querySelectorAll('.chip').forEach(c => {
+      c.classList.toggle('active', c.dataset.val === 'all');
+    });
+    const dot = document.getElementById('filter-active-dot');
+    if (dot) dot.style.display = 'none';
+    applyFilters();
+  });
+
+  applyFilters();
+}
+
+/* ── fetch & render ── */
+async function renderJob(jobId) {
+  const vp = document.getElementById("view-port");
+  const matchedKey = Object.keys(jobFilesMap).find(k => k.toLowerCase() === jobId.toLowerCase());
+  const entry = matchedKey ? jobFilesMap[matchedKey] : null;
+
+
+
+
+  if (!entry) {
+    document.getElementById('page-title').textContent = 'ไม่พบอาชีพ';
+    vp.innerHTML = `<div class="not-found">
+      <div class="not-found-icon">🔍</div>
+      <h2>ไม่พบข้อมูลอาชีพ "${jobId}"</h2>
+      <p>อาชีพนี้ยังไม่มีในฐานข้อมูล หรืออาจสะกดผิด</p>
+      <a href="job_tree" class="back-btn">← กลับไปเส้นทางอาชีพ</a>
+    </div>`;
+    return;
+  }
+
+  document.getElementById('page-title').textContent = entry.label;
+  vp.innerHTML = '<div class="loading">⏳ กำลังโหลดข้อมูล...</div>';
+
+  let job = null;
+  try {
+    const r = await fetch(`${JOB_DATA_PATH}${entry.file}`);
+    if (r.ok) job = await r.json();
+  } catch(e) {}
+
+  if (!job) {
+    vp.innerHTML = `<div class="job-header-card">
+      <div class="job-name">${entry.label}</div>
+      <div class="job-desc">ยังไม่มีข้อมูลอาชีพนี้ในฐานข้อมูล กรุณารอการอัปเดต</div>
+      <a href="job_tree" class="back-btn">← กลับไปเส้นทางอาชีพ</a>
+    </div>`;
+    return;
+  }
+
+  document.getElementById('page-title').textContent = job.name || entry.label;
+
+  /* prereq meta pills */
+  const metaHTML = (job.prereq || []).map(r => `<span class="job-meta-item">${r}</span>`).join('');
+
+  /* obtain HTML — support inline <a> tags */
+  const obtainHTML = job.obtain
+    ? `<div class="job-obtain"><span class="job-obtain-label">วิธีเปลี่ยนอาชีพ</span>${job.obtain}</div>`
+    : '';
+
+  /* skills */
+  const skills = job.skills || [];
+  window._jobSkills = skills;
+  const skillsHTML = skills.length
+    ? `<div id="filter-bar" class="filter-bar"></div>
+       <div class="skills-list">${skills.map(buildSkillCard).join('')}</div>`
+    : `<div class="job-header-card" style="color:var(--text-dim);font-size:14px;">ยังไม่มีข้อมูลสกิล</div>`;
+
+  vp.innerHTML = `
+    <div class="job-header-card">
+      <div class="job-name">${job.name || entry.label}</div>
+      ${job.desc ? `<p class="job-desc">${job.desc}</p>` : ''}
+      ${obtainHTML}
+      ${metaHTML ? `<div class="job-meta">${metaHTML}</div>` : ''}
+    </div>
+    ${skills.length ? '<div class="section-title">⚔ สกิล</div>' : ''}
+    ${skillsHTML}
+    <a href="job_tree" class="back-btn">← กลับไปเส้นทางอาชีพ</a>
+  `;
+
+  if (skills.length) setupFilters(skills);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const job = new URLSearchParams(location.search).get('job');
+  if (job) {
+    renderJob(job);
+  } else {
+    document.getElementById('page-title').textContent = 'ข้อมูลอาชีพ';
+    document.getElementById('view-port').innerHTML = `<div class="not-found">
+      <div class="not-found-icon">⚔️</div>
+      <h2>เลือกอาชีพที่ต้องการดู</h2>
+      <p>กลับไปที่หน้าเส้นทางอาชีพ แล้วกดเลือกอาชีพที่ต้องการ</p>
+      <a href="job_tree" class="back-btn">← เส้นทางอาชีพ</a>
+    </div>`;
+  }
+});
 </script>
 </body>
 </html>
