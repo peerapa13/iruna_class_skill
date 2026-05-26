@@ -43,7 +43,7 @@
     background: radial-gradient(ellipse at 20% 50%, rgba(124,58,237,0.12) 0%, transparent 60%);
   }
 
-  /* ===== Sidebar (โหลดจาก sidebar.html — CSS ต้อง match) ===== */
+  /* ===== Sidebar ===== */
   .hamburger-btn {
     position: fixed; top: 14px; left: 14px; z-index: 1001;
     width: 42px; height: 42px;
@@ -94,26 +94,6 @@
   }
   .sb-btn:hover  { background: rgba(63,200,249,0.08); border-color: var(--accent); color: var(--accent); }
   .sb-btn.active { background: rgba(212,168,67,0.1);  border-color: var(--gold);   color: var(--gold-light); }
-  .sb-group-header {
-    width: 100%; text-align: left; padding: 9px 12px;
-    background: rgba(212,168,67,0.08); border: 1px solid rgba(212,168,67,0.22);
-    border-radius: 6px; color: var(--gold);
-    font-family: 'Noto Sans Thai', sans-serif; font-size: 13px; font-weight: 700;
-    cursor: pointer; display: flex; justify-content: space-between; align-items: center;
-    transition: background .2s;
-  }
-  .sb-group-header:hover { background: rgba(212,168,67,0.15); }
-  .sb-arrow { font-size: 9px; transition: transform .25s; }
-  .sb-group.open .sb-arrow { transform: rotate(180deg); }
-  .sb-group-content {
-    display: none; flex-direction: column; gap: 4px;
-    padding-left: 10px; margin-top: 4px; border-left: 1px solid rgba(63,200,249,0.25);
-  }
-  .sb-group.open .sb-group-content { display: flex; }
-  .sb-sub-label {
-    font-size: 10px; color: var(--accent);
-    letter-spacing: 1px; text-transform: uppercase; padding: 6px 6px 2px;
-  }
   .sb-section-label {
     margin-top: 10px; font-size: 11px; color: var(--gold);
     letter-spacing: 1px; padding: 6px 0 4px; border-bottom: 1px solid rgba(212,168,67,0.2);
@@ -149,169 +129,6 @@
     margin: 0 auto;
     padding: 0 24px 80px;
   }
-
-  /* ===== Cards ===== */
-  .card {
-    background: rgba(30, 41, 59, 0.8);
-    padding: 32px;
-    border-radius: 8px;
-    border: 1px solid rgba(51, 65, 85, 0.8);
-  }
-
-  .job-title {
-    font-size: 28px;
-    color: var(--accent);
-    margin-bottom: 16px;
-  }
-
-  .job-desc {
-    color: var(--text-dim);
-    line-height: 1.7;
-    margin-bottom: 20px;
-  }
-
-  .section-title {
-    color: var(--gold);
-    font-size: 16px;
-    font-weight: 600;
-    margin-top: 24px;
-    margin-bottom: 10px;
-  }
-
-  .info-box {
-    background: rgba(15, 23, 42, 0.8);
-    padding: 14px;
-    border-radius: 6px;
-    border-left: 3px solid rgba(63, 200, 249, 0.5);
-    color: var(--text-dim);
-    line-height: 1.6;
-  }
-
-  .req-item {
-    padding: 6px 0;
-  }
-
-  /* ===== Skills Grid ===== */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 12px;
-    margin-top: 12px;
-  }
-
-  .skill-btn {
-    padding: 14px;
-    background: rgba(30, 41, 59, 0.6);
-    border: 2px solid rgba(212, 168, 67, 0.4);
-    border-radius: 8px;
-    color: var(--text);
-    cursor: pointer;
-    transition: all 0.3s;
-    text-align: center;
-    font-family: 'Noto Sans Thai', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-  }
-
-  .skill-btn:hover {
-    background: rgba(212, 168, 67, 0.15);
-    border-color: var(--gold-light);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(212, 168, 67, 0.2);
-  }
-
-  .skill-btn img {
-    width: 32px;
-    display: block;
-    margin: 0 auto 8px;
-    border-radius: 4px;
-  }
-
-  /* ===== Modal ===== */
-  .modal {
-    background: rgba(10, 8, 18, 0.95);
-    border: 2px solid var(--gold);
-    border-radius: 12px;
-    color: var(--text);
-    padding: 0;
-    max-width: 500px;
-    max-height: 85vh;
-    margin: auto;
-    box-shadow: 0 0 30px rgba(212, 168, 67, 0.3);
-    overflow: hidden;
-  }
-
-  .modal::backdrop {
-    background: rgba(0, 0, 0, 0.85);
-  }
-
-  .modal-header {
-    background: linear-gradient(135deg, rgba(212, 168, 67, 0.15) 0%, rgba(63, 200, 249, 0.1) 100%);
-    color: var(--gold);
-    font-family: 'Cinzel', serif;
-    border-bottom: 1px solid rgba(212, 168, 67, 0.3);
-    padding: 16px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .modal-body {
-    padding: 20px;
-    overflow-y: auto;
-    max-height: calc(85vh - 60px);
-  }
-
-  .close-modal {
-    background: none;
-    border: none;
-    color: var(--text-dim);
-    cursor: pointer;
-    font-size: 24px;
-    transition: color 0.2s;
-  }
-
-  .close-modal:hover { color: var(--gold); }
-
-  .skill-detail-type {
-    font-size: 12px;
-    color: var(--accent);
-    margin-bottom: 12px;
-    background: rgba(63, 200, 249, 0.1);
-    padding: 6px 10px;
-    border-radius: 4px;
-    display: inline-block;
-  }
-
-  .skill-detail-desc {
-    background: rgba(15, 23, 42, 0.8);
-    padding: 12px;
-    border-radius: 6px;
-    border-left: 3px solid #77D77B;
-    margin-bottom: 16px;
-    line-height: 1.6;
-    font-size: 13px;
-  }
-
-  .skill-lv-tabs { display: flex; flex-direction: column; gap: 8px; }
-
-  .skill-lv-tab {
-    padding: 12px 14px;
-    background: rgba(212, 168, 67, 0.05);
-    border: 1px solid rgba(212, 168, 67, 0.3);
-    border-radius: 6px;
-    transition: all 0.2s;
-  }
-
-  .skill-lv-tab:hover {
-    background: rgba(212, 168, 67, 0.15);
-    border-color: var(--gold-light);
-    color: var(--gold-light);
-  }
-
-  .lv-header { font-weight: 600; color: var(--gold-light); margin-bottom: 4px; }
-  .lv-location { font-size: 12px; color: var(--text-dim); }
-  .loading { text-align: center; padding: 40px; color: var(--text-dim); }
 
   /* ===== Home / Changelog ===== */
   .home-header {
@@ -482,18 +299,6 @@
         newScript.textContent = oldScript.textContent;
         document.body.appendChild(newScript);
       });
-      // ผูก event ให้ปุ่มอาชีพใน sidebar โหลด job data แทนการ navigate
-      root.querySelectorAll('.sb-job-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-          const url = new URL(this.href, location.href);
-          const jobId = url.searchParams.get('job');
-          if (jobId && location.pathname.includes('index')) {
-            e.preventDefault();
-            renderJob(jobId);
-            document.body.classList.remove('sidebar-open');
-          }
-        });
-      });
     })
     .catch(() => console.warn('ไม่สามารถโหลด sidebar.html ได้'));
 </script>
@@ -508,56 +313,7 @@
   <div id="view-port"></div>
 </div>
 
-<dialog id="skillModal" class="modal">
-  <div class="modal-header" id="modalHeader"></div>
-  <div class="modal-body" id="modalBody"></div>
-</dialog>
-
 <script>
-  const JOB_DATA_PATH = './data/jobs/';
-  const jobFilesMap = {
-    'Summoner': 'summoner.json',
-    'Paladin': 'paladin.json',
-    'Gladiator': 'gladiator.json',
-    'Beast Knight': 'beastknight.json',
-    'Sniper': 'sniper.json',
-    'Assassin': 'assassin.json',
-    'High Wizard': 'highwizard.json',
-    'Necromancer': 'necromancer.json',
-    'Enchanter': 'enchanter.json',
-    'Bishop': 'bishop.json',
-    'Monk': 'monk.json',
-    'Servant': 'servant.json',
-    'Ninja': 'ninja.json',
-    'Samurai': 'samurai.json',
-    'Minstrel': 'minstrel.json',
-    'Alchemist': 'alchemist.json'
-  };
-
-  // ===== Sidebar Toggle (ใช้ร่วมกับ sidebar.html) =====
-  function closeSidebar() {
-    document.body.classList.remove('sidebar-open');
-  }
-
-  // ปิด sidebar เมื่อกด ESC
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeSidebar();
-  });
-
-  // ===== Load Job Data =====
-  async function loadJobData(jobId) {
-    try {
-      const fileName = jobFilesMap[jobId];
-      if (!fileName) return null;
-      const response = await fetch(`${JOB_DATA_PATH}${fileName}`);
-      if (!response.ok) return null;
-      return await response.json();
-    } catch (error) {
-      console.error(`เกิดข้อผิดพลาด: ${error}`);
-      return null;
-    }
-  }
-
   // ===== Changelog Data =====
   const SITE_VERSION_DATE = '22 พ.ค. 2025';
 
@@ -589,7 +345,6 @@
 
   function renderChangelog() {
     const viewport = document.getElementById('view-port');
-    document.querySelectorAll('.job-btn').forEach(b => b.classList.remove('active'));
 
     const upcomingHTML = UPCOMING.map(item => `
       <li class="upcoming-item">
@@ -643,108 +398,8 @@
     `;
   }
 
-  async function renderJob(jobId) {
-    const viewport = document.getElementById('view-port');
-    viewport.innerHTML = '<div class="card"><div class="loading">⏳ กำลังโหลดข้อมูล...</div></div>';
-    
-    const job = await loadJobData(jobId);
-    if (!job) {
-      viewport.innerHTML = '<div class="card"><div class="loading">❌ ไม่สามารถโหลดข้อมูลได้</div></div>';
-      return;
-    }
-
-    document.querySelectorAll('.job-btn').forEach(b => b.classList.remove('active'));
-    const activeBtn = document.querySelector(`[data-job="${jobId}"]`);
-    if (activeBtn) activeBtn.classList.add('active');
-
-    let skillsHTML = '';
-    if (job.skills && job.skills.length > 0) {
-      skillsHTML = '<div class="skills-grid">' +
-        [...job.skills]
-        .sort((a, b) => {
-          if (!a.image && b.image) return -1;
-          if (a.image && !b.image) return 1;
-          return 0;
-        })
-        .map(s => {
-          const skillNameEsc = s.name.replace(/'/g, "\\'").replace(/"/g, '\\"');
-          const skillTypeEsc = s.type.replace(/'/g, "\\'").replace(/"/g, '\\"');
-          const skillDescEsc = s.desc.replace(/'/g, "\\'").replace(/"/g, '\\"');
-          const skillLvEsc   = (s.lv || '').replace(/'/g, "\\'").replace(/"/g, '\\"');
-          const skillLocEsc  = (s.loc || '').replace(/'/g, "\\'").replace(/"/g, '\\"');
-          const skillImgEsc  = (s.image || '').replace(/'/g, "\\'").replace(/"/g, '\\"');
-          return `
-            <button class="skill-btn" onclick="openSkillDetailModal('${skillNameEsc}', '${skillTypeEsc}', '${skillDescEsc}', '${skillLvEsc}', '${skillLocEsc}', '${skillImgEsc}')">
-              ${s.image ? `<img src="${s.image}">` : '🅿️'}
-              <span>${s.name}</span>
-            </button>
-          `;
-        }).join('') +
-      '</div>';
-    }
-
-    viewport.innerHTML = `
-      <div class="card">
-        <h1 class="job-title">${job.name}</h1>
-        <p class="job-desc">${job.desc}</p>
-        ${skillsHTML ? `<div class="section-title">⚔️ ข้อมูลสกิล</div><div>${skillsHTML}</div>` :
-          '<div class="section-title">⚔️ สกิล</div><div class="info-box">ยังไม่มีข้อมูลสกิลในฐานข้อมูล</div>'}
-        <div class="section-title">✓ คำแนะนำสำหรับอาชีพ</div>
-        <div class="info-box">
-          ${job.prereq.map(r => `<div class="req-item">• ${r}</div>`).join("")}
-        </div>
-      </div>
-    `;
-  }
-
-  function openSkillDetailModal(skillName, skillType, skillDesc, skillLv, skillLoc, skillImage) {
-    const modal  = document.getElementById('skillModal');
-    const header = document.getElementById('modalHeader');
-    const body   = document.getElementById('modalBody');
-
-    const lvArray  = skillLv  ? skillLv.split(',')  : [];
-    const locArray = skillLoc ? skillLoc.split(',') : [];
-
-    let lvTabsHTML = '';
-    if (lvArray.length > 0) {
-      lvTabsHTML = '<div class="skill-lv-tabs">' +
-        lvArray.map((lv, idx) => {
-          const locInfo = locArray[idx] ? locArray[idx].trim() : 'รอการอัปเดต';
-          return `
-            <div class="skill-lv-tab">
-              <div class="lv-header">📍 Level ${idx + 1}</div>
-              <div>เลเวลตัวละคร: <strong>${lv.trim()}</strong></div>
-              <div class="lv-location">${locInfo}</div>
-            </div>
-          `;
-        }).join('') +
-      '</div>';
-    }
-
-    header.innerHTML = `
-      <div>
-        ${skillImage ? `<img src="${skillImage}" style="width:36px;vertical-align:middle;margin-right:8px;border-radius:4px;">` : ''}
-        ${skillName}
-      </div>
-      <button class="close-modal" onclick="document.getElementById('skillModal').close()">✕</button>
-    `;
-
-    body.innerHTML = `
-      <div class="skill-detail-type">${skillType}</div>
-      <div class="skill-detail-desc">${skillDesc}</div>
-      ${lvTabsHTML ? `<div style="margin-bottom: 8px; font-weight: 600; color: var(--gold);">วิธีการรับสกิล</div>${lvTabsHTML}` : ''}
-    `;
-
-    modal.showModal();
-  }
-
   document.addEventListener('DOMContentLoaded', function() {
     renderChangelog();
-
-    // รับ ?job= param จาก URL (เมื่อมาจากหน้าอื่นผ่าน sidebar link)
-    const params = new URLSearchParams(location.search);
-    const jobParam = params.get('job');
-    if (jobParam) renderJob(jobParam);
   });
 </script>
 </body>

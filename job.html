@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="https://iruna-online.com/img/fankit/Colon_orange.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ข้อมูลอาชีพ | Iruna Online</title>
+<meta name="description" content="ข้อมูลสกิลและรายละเอียดอาชีพ Iruna Online ภาษาไทย">
+<meta name="robots" content="index, follow">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Noto+Sans+Thai:wght@300;400;600;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #d4a843;
+    --gold-light: #f0c96a;
+    --accent: #3fc8f9;
+    --deep: #0a0812;
+    --text: #e8e0f0;
+    --text-dim: #9d8fb8;
+    --sidebar-width: 260px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--deep);
+    color: var(--text);
+    font-family: 'Noto Sans Thai', sans-serif;
+  }
+
+  #stars {
+    position: fixed; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(124,58,237,0.12) 0%, transparent 60%);
+  }
+
+  /* ===== Sidebar ===== */
+  .hamburger-btn {
+    position: fixed; top: 14px; left: 14px; z-index: 1001;
+    width: 42px; height: 42px;
+    background: rgba(10,8,18,0.9); border: 1px solid rgba(212,168,67,0.35);
+    border-radius: 8px; cursor: pointer;
+    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+    transition: border-color .2s, background .2s; backdrop-filter: blur(8px);
+  }
+  .hamburger-btn:hover { border-color: var(--gold); background: rgba(212,168,67,0.08); }
+  .hamburger-btn span {
+    display: block; width: 18px; height: 2px;
+    background: var(--gold); border-radius: 2px; transition: transform .3s, opacity .3s;
+  }
+  .sidebar-open .hamburger-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .sidebar-open .hamburger-btn span:nth-child(2) { opacity: 0; }
+  .sidebar-open .hamburger-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .sb-overlay {
+    position: fixed; inset: 0; z-index: 999;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(2px);
+    opacity: 0; pointer-events: none; transition: opacity .3s;
+  }
+  .sidebar-open .sb-overlay { opacity: 1; pointer-events: all; }
+
+  .sidebar {
+    position: fixed; top: 0; left: 0; z-index: 1000;
+    width: var(--sidebar-width); height: 100vh;
+    background: rgba(12,10,22,0.97); border-right: 1px solid rgba(212,168,67,0.2);
+    display: flex; flex-direction: column; gap: 5px;
+    padding: 70px 12px 40px; overflow-y: auto;
+    transform: translateX(calc(-1 * var(--sidebar-width)));
+    transition: transform .3s cubic-bezier(.4,0,.2,1);
+    box-shadow: none;
+  }
+  .sidebar-open .sidebar { transform: translateX(0); box-shadow: 4px 0 32px rgba(0,0,0,0.6); }
+
+  .sidebar-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase;
+    padding-bottom: 10px; margin-bottom: 6px; border-bottom: 1px solid rgba(212,168,67,0.25);
+  }
+  .sb-btn {
+    display: block; width: 100%; text-align: left; padding: 9px 12px;
+    background: rgba(30,41,59,0.5); border: 1px solid rgba(51,65,85,0.6);
+    border-radius: 6px; color: var(--text-dim);
+    font-family: 'Noto Sans Thai', sans-serif; font-size: 13px;
+    cursor: pointer; text-decoration: none; transition: all .2s;
+  }
+  .sb-btn:hover  { background: rgba(63,200,249,0.08); border-color: var(--accent); color: var(--accent); }
+  .sb-btn.active { background: rgba(212,168,67,0.1);  border-color: var(--gold);   color: var(--gold-light); }
+  .sb-section-label {
+    margin-top: 10px; font-size: 11px; color: var(--gold);
+    letter-spacing: 1px; padding: 6px 0 4px; border-bottom: 1px solid rgba(212,168,67,0.2);
+  }
+
+  /* ===== Main Layout ===== */
+  .hero {
+    text-align: center;
+    padding: 60px 20px 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 36px;
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+
+  .hero-desc { color: var(--text-dim); margin-bottom: 30px; }
+
+  .main-wrapper {
+    position: relative; z-index: 1;
+    max-width: 1100px; margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ===== Job Card ===== */
+  .card {
+    background: rgba(30, 41, 59, 0.8);
+    padding: 32px; border-radius: 8px;
+    border: 1px solid rgba(51, 65, 85, 0.8);
+  }
+
+  .job-title {
+    font-size: 28px; color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .job-desc {
+    color: var(--text-dim); line-height: 1.7; margin-bottom: 20px;
+  }
+
+  .section-title {
+    color: var(--gold); font-size: 16px; font-weight: 600;
+    margin-top: 24px; margin-bottom: 10px;
+  }
+
+  .info-box {
+    background: rgba(15, 23, 42, 0.8); padding: 14px;
+    border-radius: 6px; border-left: 3px solid rgba(63, 200, 249, 0.5);
+    color: var(--text-dim); line-height: 1.6;
+  }
+
+  .req-item { padding: 6px 0; }
+
+  /* ===== Skills Grid ===== */
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px; margin-top: 12px;
+  }
+
+  .skill-btn {
+    padding: 14px; background: rgba(30, 41, 59, 0.6);
+    border: 2px solid rgba(212, 168, 67, 0.4);
+    border-radius: 8px; color: var(--text); cursor: pointer;
+    transition: all 0.3s; text-align: center;
+    font-family: 'Noto Sans Thai', sans-serif; font-size: 13px; font-weight: 600;
+  }
+  .skill-btn:hover {
+    background: rgba(212, 168, 67, 0.15); border-color: var(--gold-light);
+    transform: translateY(-2px); box-shadow: 0 4px 12px rgba(212, 168, 67, 0.2);
+  }
+  .skill-btn img { width: 32px; display: block; margin: 0 auto 8px; border-radius: 4px; }
+
+  /* ===== Modal ===== */
+  .modal {
+    background: rgba(10, 8, 18, 0.95); border: 2px solid var(--gold);
+    border-radius: 12px; color: var(--text); padding: 0;
+    max-width: 500px; max-height: 85vh; margin: auto;
+    box-shadow: 0 0 30px rgba(212, 168, 67, 0.3); overflow: hidden;
+  }
+  .modal::backdrop { background: rgba(0, 0, 0, 0.85); }
+
+  .modal-header {
+    background: linear-gradient(135deg, rgba(212, 168, 67, 0.15) 0%, rgba(63, 200, 249, 0.1) 100%);
+    color: var(--gold); font-family: 'Cinzel', serif;
+    border-bottom: 1px solid rgba(212, 168, 67, 0.3);
+    padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .modal-body { padding: 20px; overflow-y: auto; max-height: calc(85vh - 60px); }
+
+  .close-modal {
+    background: none; border: none; color: var(--text-dim);
+    cursor: pointer; font-size: 24px; transition: color 0.2s;
+  }
+  .close-modal:hover { color: var(--gold); }
+
+  .skill-detail-type {
+    font-size: 12px; color: var(--accent); margin-bottom: 12px;
+    background: rgba(63, 200, 249, 0.1); padding: 6px 10px;
+    border-radius: 4px; display: inline-block;
+  }
+
+  .skill-detail-desc {
+    background: rgba(15, 23, 42, 0.8); padding: 12px;
+    border-radius: 6px; border-left: 3px solid #77D77B;
+    margin-bottom: 16px; line-height: 1.6; font-size: 13px;
+  }
+
+  .skill-lv-tabs { display: flex; flex-direction: column; gap: 8px; }
+
+  .skill-lv-tab {
+    padding: 12px 14px; background: rgba(212, 168, 67, 0.05);
+    border: 1px solid rgba(212, 168, 67, 0.3);
+    border-radius: 6px; transition: all 0.2s;
+  }
+  .skill-lv-tab:hover { background: rgba(212, 168, 67, 0.15); border-color: var(--gold-light); color: var(--gold-light); }
+
+  .lv-header { font-weight: 600; color: var(--gold-light); margin-bottom: 4px; }
+  .lv-location { font-size: 12px; color: var(--text-dim); }
+  .loading { text-align: center; padding: 40px; color: var(--text-dim); }
+
+  /* ===== Not Found ===== */
+  .not-found {
+    text-align: center; padding: 60px 20px;
+  }
+  .not-found-icon { font-size: 48px; margin-bottom: 16px; }
+  .not-found h2 { color: var(--gold); font-size: 22px; margin-bottom: 10px; }
+  .not-found p { color: var(--text-dim); margin-bottom: 24px; }
+  .back-btn {
+    display: inline-block; padding: 10px 24px;
+    background: rgba(212,168,67,0.1); border: 1px solid rgba(212,168,67,0.4);
+    border-radius: 8px; color: var(--gold); text-decoration: none;
+    transition: all .2s; font-size: 14px;
+  }
+  .back-btn:hover { background: rgba(212,168,67,0.2); border-color: var(--gold); }
+</style>
+</head>
+
+<body>
+<div id="stars"></div>
+
+<div id="sb-root"></div>
+<script>
+  fetch('sidebar.html')
+    .then(r => r.text())
+    .then(html => {
+      const root = document.getElementById('sb-root');
+      root.innerHTML = html;
+      root.querySelectorAll('script').forEach(oldScript => {
+        const newScript = document.createElement('script');
+        newScript.textContent = oldScript.textContent;
+        document.body.appendChild(newScript);
+      });
+    })
+    .catch(() => console.warn('ไม่สามารถโหลด sidebar.html ได้'));
+</script>
+
+<div class="hero">
+  <h1 class="hero-title" id="page-title">🐺 ข้อมูลอาชีพ</h1>
+  <p class="hero-desc" id="page-desc">กำลังโหลด...</p>
+</div>
+
+<div class="main-wrapper">
+  <div id="view-port">
+    <div class="card"><div class="loading">⏳ กำลังโหลดข้อมูล...</div></div>
+  </div>
+</div>
+
+<dialog id="skillModal" class="modal">
+  <div class="modal-header" id="modalHeader"></div>
+  <div class="modal-body" id="modalBody"></div>
+</dialog>
+
+<script>
+  const JOB_DATA_PATH = './data/jobs/';
+
+  const jobFilesMap = {
+    'Summoner':    { file: 'summoner.json',    label: 'ซัมมอนเนอร์' },
+    'Paladin':     { file: 'paladin.json',     label: 'พาลาดิน' },
+    'Gladiator':   { file: 'gladiator.json',   label: 'จอมดาบ' },
+    'Beast Knight':{ file: 'beastknight.json', label: 'บีทไนท์' },
+    'Sniper':      { file: 'sniper.json',       label: 'นักแม่นธนู' },
+    'Assassin':    { file: 'assassin.json',     label: 'นักฆ่า' },
+    'High Wizard': { file: 'highwizard.json',   label: 'จอมขมังเวทย์' },
+    'Necromancer': { file: 'necromancer.json',  label: 'เนโครแมนเซอร์' },
+    'Enchanter':   { file: 'enchanter.json',    label: 'ผู้วิเศษ' },
+    'Bishop':      { file: 'bishop.json',       label: 'สังฆราช' },
+    'Monk':        { file: 'monk.json',         label: 'นักพรต' },
+    'Servant':     { file: 'servant.json',      label: 'เซอร์แวน' },
+    'Ninja':       { file: 'ninja.json',        label: 'นินจา' },
+    'Samurai':     { file: 'samurai.json',      label: 'ซามุไร' },
+    'Minstrel':    { file: 'minstrel.json',     label: 'นักดนตรี' },
+    'Alchemist':   { file: 'alchemist.json',    label: 'นักเล่นแร่แปรธาตุ' },
+  };
+
+  async function loadJobData(jobId) {
+    try {
+      const entry = jobFilesMap[jobId];
+      if (!entry) return null;
+      const response = await fetch(`${JOB_DATA_PATH}${entry.file}`);
+      if (!response.ok) return null;
+      return await response.json();
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
+  }
+
+  function openSkillDetailModal(skillName, skillType, skillDesc, skillLv, skillLoc, skillImage) {
+    const modal  = document.getElementById('skillModal');
+    const header = document.getElementById('modalHeader');
+    const body   = document.getElementById('modalBody');
+
+    const lvArray  = skillLv  ? skillLv.split(',')  : [];
+    const locArray = skillLoc ? skillLoc.split(',') : [];
+
+    let lvTabsHTML = '';
+    if (lvArray.length > 0) {
+      lvTabsHTML = '<div class="skill-lv-tabs">' +
+        lvArray.map((lv, idx) => {
+          const locInfo = locArray[idx] ? locArray[idx].trim() : 'รอการอัปเดต';
+          return `
+            <div class="skill-lv-tab">
+              <div class="lv-header">📍 Level ${idx + 1}</div>
+              <div>เลเวลตัวละคร: <strong>${lv.trim()}</strong></div>
+              <div class="lv-location">${locInfo}</div>
+            </div>
+          `;
+        }).join('') +
+      '</div>';
+    }
+
+    header.innerHTML = `
+      <div>
+        ${skillImage ? `<img src="${skillImage}" style="width:36px;vertical-align:middle;margin-right:8px;border-radius:4px;">` : ''}
+        ${skillName}
+      </div>
+      <button class="close-modal" onclick="document.getElementById('skillModal').close()">✕</button>
+    `;
+
+    body.innerHTML = `
+      <div class="skill-detail-type">${skillType}</div>
+      <div class="skill-detail-desc">${skillDesc}</div>
+      ${lvTabsHTML ? `<div style="margin-bottom: 8px; font-weight: 600; color: var(--gold);">วิธีการรับสกิล</div>${lvTabsHTML}` : ''}
+    `;
+
+    modal.showModal();
+  }
+
+  async function renderJob(jobId) {
+    const viewport = document.getElementById('view-port');
+    const entry = jobFilesMap[jobId];
+
+    if (!entry) {
+      document.getElementById('page-title').textContent = '❌ ไม่พบอาชีพ';
+      document.getElementById('page-desc').textContent = '';
+      viewport.innerHTML = `
+        <div class="not-found">
+          <div class="not-found-icon">🔍</div>
+          <h2>ไม่พบข้อมูลอาชีพ "${jobId}"</h2>
+          <p>อาชีพนี้ยังไม่มีในฐานข้อมูล หรืออาจสะกดผิด</p>
+          <a href="job_tree" class="back-btn">← กลับไปเส้นทางอาชีพ</a>
+        </div>`;
+      return;
+    }
+
+    document.getElementById('page-title').textContent = entry.label;
+    document.getElementById('page-desc').textContent = 'กำลังโหลด...';
+    viewport.innerHTML = '<div class="card"><div class="loading">⏳ กำลังโหลดข้อมูล...</div></div>';
+
+    const job = await loadJobData(jobId);
+    if (!job) {
+      document.getElementById('page-desc').textContent = 'ยังไม่มีข้อมูลในฐานข้อมูล';
+      viewport.innerHTML = `
+        <div class="card">
+          <h1 class="job-title">${entry.label}</h1>
+          <div class="info-box">⚠️ ยังไม่มีข้อมูลอาชีพนี้ในฐานข้อมูล กรุณารอการอัปเดต</div>
+          <div style="margin-top:20px">
+            <a href="job_tree" class="back-btn">← กลับไปเส้นทางอาชีพ</a>
+          </div>
+        </div>`;
+      return;
+    }
+
+    document.getElementById('page-title').textContent = job.name || entry.label;
+    document.getElementById('page-desc').textContent = '';
+
+    let skillsHTML = '';
+    if (job.skills && job.skills.length > 0) {
+      skillsHTML = '<div class="skills-grid">' +
+        [...job.skills]
+        .sort((a, b) => {
+          if (!a.image && b.image) return -1;
+          if (a.image && !b.image) return 1;
+          return 0;
+        })
+        .map(s => {
+          const esc = v => (v||'').replace(/'/g,"\\'").replace(/"/g,'\\"');
+          return `
+            <button class="skill-btn" onclick="openSkillDetailModal('${esc(s.name)}','${esc(s.type)}','${esc(s.desc)}','${esc(s.lv)}','${esc(s.loc)}','${esc(s.image)}')">
+              ${s.image ? `<img src="${s.image}">` : '🅿️'}
+              <span>${s.name}</span>
+            </button>
+          `;
+        }).join('') +
+      '</div>';
+    }
+
+    viewport.innerHTML = `
+      <div class="card">
+        <h1 class="job-title">${job.name}</h1>
+        <p class="job-desc">${job.desc}</p>
+        ${skillsHTML
+          ? `<div class="section-title">⚔️ ข้อมูลสกิล</div><div>${skillsHTML}</div>`
+          : '<div class="section-title">⚔️ สกิล</div><div class="info-box">ยังไม่มีข้อมูลสกิลในฐานข้อมูล</div>'}
+        <div class="section-title">✓ คำแนะนำสำหรับอาชีพ</div>
+        <div class="info-box">
+          ${job.prereq.map(r => `<div class="req-item">• ${r}</div>`).join("")}
+        </div>
+        <div style="margin-top:28px">
+          <a href="job_tree" class="back-btn">← กลับไปเส้นทางอาชีพ</a>
+        </div>
+      </div>
+    `;
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const params = new URLSearchParams(location.search);
+    const jobParam = params.get('job');
+    if (jobParam) {
+      renderJob(jobParam);
+    } else {
+      document.getElementById('page-title').textContent = '🐺 ข้อมูลอาชีพ';
+      document.getElementById('page-desc').textContent = '';
+      document.getElementById('view-port').innerHTML = `
+        <div class="not-found">
+          <div class="not-found-icon">⚔️</div>
+          <h2>เลือกอาชีพที่ต้องการดู</h2>
+          <p>กลับไปที่หน้าเส้นทางอาชีพ แล้วกดเลือกอาชีพที่ต้องการ</p>
+          <a href="job_tree" class="back-btn">← เส้นทางอาชีพ</a>
+        </div>`;
+    }
+  });
+</script>
+</body>
+</html>
