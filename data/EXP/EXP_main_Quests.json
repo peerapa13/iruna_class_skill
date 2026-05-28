@@ -364,60 +364,60 @@
           "missions": [
             { "num": 102, "name": "สาวน้อยที่มีผ้าพันแผลปริศนากับปริศนากองทัพนักรบ(ปลดหินสี)", "exp": 65000000 },
             { "num": 103, "name": "ใบหน้าที่คุ้นเคยกัยศัตรูใหม่", "exp": 67000000 },
-            { "num": 104, "name": "Apostolia and the God's Fragments", "exp": 69000000 }
+            { "num": 104, "name": "อโพสโทเรียกับเศษเสี้ยวแห่งเทพ", "exp": 69000000 }
           ]
         },
         {
           "chapter": 2,
           "name": "บทที่ 2 เศษเสี้ยวแห่งเทพกับมิโกะมังกร" ,
           "missions": [
-            { "num": 105, "name": "God's Fragments and the Ancient Dragon", "exp": 71500000 },
-            { "num": 106, "name": "The God's Fragments and Gido's Small Box", "exp": 74000000 },
-            { "num": 107, "name": "The God's Fragments and Dragon Priestess", "exp": 76000000 }
+            { "num": 105, "name": "เศษเสี้ยวแห่งเทพกับมังกรดึกดำบรรพ์", "exp": 71500000 },
+            { "num": 106, "name": "เศษเสี้ยวแห่งเทพกับกล่องใบน้อยของกิโดะ", "exp": 74000000 },
+            { "num": 107, "name": "เศษเสี้ยวแห่งเทพกับมิโกะมังกร", "exp": 76000000 }
           ]
         },
         {
           "chapter": 3,
           "name": "บทที่ 3 ประเทศบนต้นไม้" ,
           "missions": [
-            { "num": 108, "name": "President and Al Crysta", "exp": 77000000 },
-            { "num": 109, "name": "The Mountain Dragon and God's Fragments", "exp": 79700000 },
-            { "num": 110, "name": "Unchosen and Ineligible", "exp": 83200000 }
+            { "num": 108, "name": "ประธานาธิบดีกับอัลคริสตา", "exp": 77000000 },
+            { "num": 109, "name": "มังกรภูเขากับเศษเสี้ยวแห่งเทพ", "exp": 79700000 },
+            { "num": 110, "name": "คนที่ใช้ไม่ได้กับพวกหัวรุนแรง", "exp": 83200000 }
           ]
         },
         {
           "chapter": 4,
           "name": "บทที่ 4 แผนการร้ายทำลายมิสลูน่า" ,
           "missions": [
-            { "num": 111, "name": "The Lake Dragon and Bandit Girl", "exp": 86100000 },
-            { "num": 112, "name": "Evil Prophet and Temple", "exp": 88800000 },
-            { "num": 113, "name": "The Crisis Under Sateria", "exp": 92800000 }
+            { "num": 111, "name": "มังกรทะเลกับจอมโจรสาว", "exp": 86100000 },
+            { "num": 112, "name": "นักพยากรณ์ที่ตกต่ำกับวัดปีศาจ", "exp": 88800000 },
+            { "num": 113, "name": "วิกฤตกาารณ์ของแซทเทอเรียกับการต่อสู้อันดุเดือด", "exp": 92800000 }
           ]
          },
          {
           "chapter": 5,
           "name": "บทที่ 5 ประเทศแห่งเวทมนตร์ที่เต็มไปด้วยละอองทราย" ,
           "missions": [
-            { "num": 114, "name": "The Three Trials and Wild Dragon", "exp": 94000000 },
-            { "num": 115, "name": "ยังไม่ทราบรอข้อมูล", "exp": 95500000 },
-            { "num": 116, "name": "The Heavy Armor Knights and Deep Mystery", "exp": 98500000 }
+            { "num": 114, "name": "บททดสอบสามประการกับมังกรทุ่งราบ", "exp": 94000000 },
+            { "num": 115, "name": "วงเวทย์กับการใส่ร้ายป้ายสี", "exp": 95500000 },
+            { "num": 116, "name": "กองทหารม้าหนักกับปริศนาที่เพิ่มพูน", "exp": 98500000 }
           ]
          },
          {
           "chapter": 6,
           "name": "บทที่ 6 ความจริงของวงเวทย์" ,
           "missions": [
-            { "num": 117, "name": "The God's Fragments and Magic Circle", "exp": 100000000 },
-            { "num": 118, "name": "Innocence and Chain Reaction", "exp": 103000000 },
-            { "num": 119, "name": "The Sacred Plains and National Ruin", "exp": 106000000 }
+            { "num": 117, "name": "เศษเสี้ยวแห่งเทพกับตัวตนที่แท้จริงของวงเวทย์", "exp": 100000000 },
+            { "num": 118, "name": "การล้างมลทินกับวิกฤตการณ์ที่เชื่อมโยงเป็นลูกโซ่", "exp": 103000000 },
+            { "num": 119, "name": "ทุ่งศักดิ์สิทธิ์กับวิกฤตการณ์ของประเทศที่ถูกทำลาย", "exp": 106000000 }
           ]
          },
          {
           "chapter": 7,
           "name": "บทที่ 7 จักรวรรดิที่หยิ่งยโส" ,
           "missions": [
-            { "num": 120, "name": "The Desolated City and Ouvel's Shadow", "exp": 114000000 },
-            { "num": 121, "name": "The Underground Town and Monsters' Den", "exp": 117000000 },
+            { "num": 120, "name": "เมืองที่ถูกทำลายกับเงาของอูเบล", "exp": 114000000 },
+            { "num": 121, "name": "เมืองใต้ดินกับรั้งสัตว์ประหลาด", "exp": 117000000 },
             { "num": 122, "name": "The Sea Dragon and Devil's Island", "exp": 121000000 }
           ]
          },
