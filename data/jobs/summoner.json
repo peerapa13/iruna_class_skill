@@ -2,7 +2,7 @@
   "jobId": "Summoner",
   "name": "ซัมมอนเนอร์",
   "desc": "ผู้อัญเชิญปาร์ตี้ส่วนตัว",
-  "obtain": "นักรบ -> นายพราน -> ซัมมอนเนอร์ ",
+  "obtain": "<a href='job?job=Apprentice_Warrior'>นักรบฝึกหัด</a> -> <a href='job?job=Warrior'>นักรบ</a> -> <a href='job?job=Apprentice_hunter'>นายพรานฝึกหัด</a> -> <a href='job?job=Hunter'>นายพราน</a> -> <a href='job?job=Summoner_Apprentice'>ซัมมอนเนอร์ฝึกหัด</a>",
   "skills": [
     {
       "lv": "10,20,20",
