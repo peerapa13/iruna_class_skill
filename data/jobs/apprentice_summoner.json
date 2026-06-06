@@ -2,7 +2,7 @@
   "jobId": "Apprentice_Summoner",
   "name": "ซัมมอนเนอร์ฝึกหัด",
   "desc": "ผู้อัญเชิญปาร์ตี้ส่วนตัว",
-  "obtain": "เปลี่ยนอาชีพที่ซอร์ฟ ที่เมืองซาเทริกา <br> จำเป็นต้องมีLV.120 <br><a href='job?job=Hunter'>จำเป็นต้องเป็นฮันเตอร์</a> <br><a href='job?job=Apprentice_Hunter'>จำเป็นต้องมีแอโรเรนLV.2</a><br><a href='job?job=Apprentice_Hunter'>จำเป็นต้องมีเวนอมแอทแท็คLV.3</a><br><a href='job?job=Apprentice_Hunter'>จำเป็นต้องมีเอเนซิสLV.1</a>",
+  "obtain": "เปลี่ยนอาชีพที่ซอร์ฟ ที่เมืองซาเทริกา <br> จำเป็นต้องมีLV.120 <br><a href='job?job=Hunter'>จำเป็นต้องเป็นนายพราน</a> <br><a href='job?job=Apprentice_Hunter'>จำเป็นต้องมีแอโรเรนLV.2</a><br><a href='job?job=Apprentice_Hunter'>จำเป็นต้องมีเวนอมแอทแท็คLV.3</a><br><a href='job?job=Apprentice_Hunter'>จำเป็นต้องมีเอเนซิสLV.1</a>",
   "skills": [
     {
       "lv": "10,20,20",
