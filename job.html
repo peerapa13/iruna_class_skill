@@ -425,10 +425,10 @@ function buildTagHTML(type) {
 
 // ── NPC id map: ชื่อ NPC
 let NPC_ID_MAP = {};
-const NPC_BASE = './data/npc/';
+const NPC_BASE = './data/NPC/';
 
 // โหลดข้อมูลจากไฟล์ JSON
-fetch('./NPC/npc_id_map.json')
+fetch('./data/NPC/npc_id_map.json')
   .then(res => res.json())
   .then(data => {
      NPC_ID_MAP = data;
