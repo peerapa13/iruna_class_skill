@@ -147,12 +147,56 @@
   .skill-desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; margin-bottom: 10px; }
 
   /* ── Skill level rows ── */
-  .skill-levels { display: flex; flex-direction: column; gap: 5px; }
-  .skill-lv-row {
-    display: flex; align-items: center; gap: 10px;
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 6px; padding: 7px 12px; font-size: 13px;
-  }
+div.skill-lv-row {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  margin-bottom: 5px;
+  background: rgba(255, 255, 255, 0.02); 
+  border-radius: 6px;
+  border-left: 3px solid transparent;   
+}
+div.skill-lv-row .lv-badge {
+  background: rgba(157, 143, 184, 0.2); 
+  color: var(--text-dim);                 
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 2px 7px;
+  flex-shrink: 0;
+}
+a.skill-lv-row.clickable {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  margin-bottom: 5px;
+  background: rgba(63, 200, 249, 0.04);   
+  border-radius: 6px;
+  border-left: 3px solid var(--accent);  
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+a.skill-lv-row.clickable .lv-badge {
+  background: var(--gold);               
+  color: var(--deep);                    
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 2px 7px;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(214, 168, 67, 0.4); 
+}
+a.skill-lv-row.clickable:hover {
+  background: rgba(214, 168, 67, 0.15); 
+  border-left-color: var(--gold);       
+  transform: translateX(4px);           
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+a.skill-lv-row.clickable:hover .lv-loc {
+  color: #fff;
+}
   .lv-badge { font-size: 11px; font-weight: 700; color: var(--deep); background: var(--gold); border-radius: 4px; padding: 2px 7px; flex-shrink: 0; }
   .lv-loc { color: var(--text-dim); flex: 1; }
 
@@ -185,6 +229,47 @@
     .skill-card { padding: 14px 14px; }
     .skill-lv-row { flex-wrap: wrap; }
   }
+
+  /* ── NPC link & popup ── */
+  .npc-link {
+    color: var(--accent); cursor: pointer;
+    text-decoration: underline; text-underline-offset: 2px;
+    font-weight: 600; white-space: nowrap;
+  }
+  .npc-link:hover { opacity: 0.75; }
+
+  .npc-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+    display: none; align-items: center; justify-content: center;
+  }
+  .npc-overlay.open { display: flex; }
+
+  .npc-popup {
+    background: rgba(12,10,22,0.97); border: 1px solid rgba(212,168,67,0.3);
+    border-radius: 14px; padding: 20px 22px;
+    max-width: 400px; width: 92%; position: relative;
+  }
+  .npc-popup-header {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 14px;
+  }
+  .npc-popup-title { font-size: 15px; font-weight: 700; color: var(--gold-light); }
+  .npc-popup-close {
+    background: none; border: none; cursor: pointer;
+    color: var(--text-dim); font-size: 20px; line-height: 1;
+    padding: 2px 6px; border-radius: 6px; transition: color .2s;
+  }
+  .npc-popup-close:hover { color: var(--text); }
+  .npc-popup-img-wrap {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px; overflow: hidden;
+    min-height: 140px; display: flex; align-items: center; justify-content: center;
+  }
+  .npc-popup-img-wrap img { width: 100%; display: block; border-radius: 10px; }
+  .npc-popup-loading { font-size: 13px; color: var(--text-dim); padding: 2rem; text-align: center; }
+  .npc-popup-error { font-size: 13px; color: #ff8080; padding: 1.5rem; text-align: center; }
+  .npc-popup-info { margin-top: 10px; font-size: 12px; color: var(--text-dim); line-height: 1.7; }
 </style>
 </head>
 <body>
@@ -217,7 +302,38 @@
 </div>
 
 <script>
-const JOB_DATA_PATH = './data/jobs/';
+const JOB_DATA_PATH   = './data/jobs/';
+const SKILLS_DATA_PATH = './data/skills.json';
+
+/* cache skills master data (โหลดครั้งเดียว) */
+let _skillsMaster = null;
+async function getSkillsMaster() {
+  if (_skillsMaster) return _skillsMaster;
+  try {
+    const r = await fetch(SKILLS_DATA_PATH);
+    if (r.ok) _skillsMaster = await r.json();
+  } catch(e) {}
+  return _skillsMaster || {};
+}
+
+/* merge: รับ skills array จาก job file + master map
+   คืน array พร้อม name/desc/type/image/summonSkills ครบ */
+function mergeSkills(jobSkills, master) {
+  return jobSkills.map(s => {
+    const m = master[s.skillId] || {};
+    return {
+      skillId:     s.skillId,
+      name:        m.name        || s.skillId,
+      type:        m.type        || [],
+      desc:        m.desc        || '',
+      image:       m.image       || null,
+      summonSkills:m.summonSkills|| null,
+      lv:          s.lv,
+      obtain:      s.obtain,
+      loc:         s.loc,
+    };
+  });
+}
 
 /* ── jobFilesMap: ครบทุกอาชีพ รวมอาชีพย่อย ── */
 const jobFilesMap = {
@@ -307,8 +423,37 @@ function buildTagHTML(type) {
     .join('');
 }
 
+// ── NPC id map: ชื่อ NPC
+let NPC_ID_MAP = {};
+const NPC_BASE = './data/npc/';
+
+// โหลดข้อมูลจากไฟล์ JSON
+fetch('./NPC/npc_id_map.json')
+  .then(res => res.json())
+  .then(data => {
+     NPC_ID_MAP = data;
+  });
+
+function renderLoc(locString) {
+  if (!locString) return 'รอการอัปเดต';
+  return locString.split(',').map(part => {
+    part = part.trim();
+    /* จับชื่อ NPC จากรูปแบบ "...กับXXX ที่YYY" หรือ "...กับXXX YYY" */
+    const m = part.match(/กับ([^\s,]+(?:\s[^\s,]+)?)/);
+    if (m) {
+      const npcName = m[1].trim();
+      const npcId = NPC_ID_MAP[npcName];
+      if (npcId) {
+        const label = part.replace(/.*กับ/, '').trim();
+        return `<span class="npc-link" onclick="showNpcPopup('${npcId}','${label.replace(/'/g,"\\'")}')">📍 ${label}</span>`;
+      }
+    }
+    return `<span>${part}</span>`;
+  }).join(' &nbsp;·&nbsp; ');
+}
+
 /* ── level rows ── */
-function buildLevels(lv, loc, obtainArr) {
+function buildLevels(lv, loc, obtainArr, skillId) {
   const lvArr     = lv  ? lv.split(',')  : [];
   const locArr    = loc ? loc.split(',') : [];
   const obtainList = Array.isArray(obtainArr) ? obtainArr : [];
@@ -331,11 +476,25 @@ function buildLevels(lv, loc, obtainArr) {
       }
       if (band !== activeLevel) return '';
     }
-    const locInfo = locArr[i] ? locArr[i].trim() : 'รอการอัปเดต';
-    return `<div class="skill-lv-row">
-      <span class="lv-badge">Lv.${i+1}</span>
-      <span class="lv-loc">ตัวละคร Lv.${l.trim()} &nbsp;·&nbsp; ${locInfo}</span>
-    </div>`;
+    const locRaw = locArr[i] ? locArr[i].trim() : '';
+    const locInfo = renderLoc(locRaw);
+    const skillLv = i + 1;       /* สกิล Lv (1-based) */
+    const charLv  = l.trim();    /* ตัวละคร Lv */
+    // ── ตรวจสอบเงื่อนไขการกด (เควส, ไอเทมดรอป, ไอเทมซื้อร้านค้า) ──
+    const clickableTypes = ['เควส', 'ไอเทมดรอป', 'ไอเทมซื้อร้านค้า'];
+    const isClickable = clickableTypes.includes(rowObtain);
+    if (isClickable) {
+      const url = `obtain.html?skill=${encodeURIComponent(skillId)}&lv=${skillLv}&clv=${encodeURIComponent(charLv)}&type=${encodeURIComponent(rowObtain)}`;
+      return `<a href="${url}" target="_blank" class="skill-lv-row clickable" title="คลิกเพื่อดูลายละเอียดวิธีการได้สกิลนี้">
+        <span class="lv-badge">Lv.${skillLv}</span>
+        <span class="lv-loc">ตัวละคร Lv.${charLv} &nbsp;·&nbsp; ${locInfo}</span>
+      </a>`;
+    } else {
+      return `<div class="skill-lv-row">
+        <span class="lv-badge">Lv.${skillLv}</span>
+        <span class="lv-loc">ตัวละคร Lv.${charLv} &nbsp;·&nbsp; ${locInfo}</span>
+      </div>`;
+    }
   }).join('');
   return rows ? `<div class="skill-levels">${rows}</div>` : '';
 }
@@ -383,7 +542,8 @@ function buildSkillCard(s) {
       </div>
     </div>
     ${s.desc ? `<div class="skill-desc">${s.desc}</div>` : ''}
-    ${buildLevels(s.lv, s.loc, s.obtain)}
+    ${s.loc && !s.lv ? `<div class="skill-desc" style="font-size:12px;margin-bottom:0;">📍 ${renderLoc(s.loc)}</div>` : ''}
+    ${buildLevels(s.lv, s.loc, s.obtain, s.skillId)}
     ${isSummon && s.summonSkills ? buildSummonBlock(s.summonSkills) : ''}
   </div>`;
 }
@@ -418,7 +578,7 @@ function applyFilters() {
     if (window._jobSkills && window._jobSkills[idx]) {
       const s = window._jobSkills[idx];
       const levelsEl = card.querySelector('.skill-levels');
-      const newLevels = buildLevels(s.lv, s.loc, s.obtain);
+      const newLevels = buildLevels(s.lv, s.loc, s.obtain, s.skillId);
       if (levelsEl) {
         levelsEl.outerHTML = newLevels || '<div class="skill-levels"></div>';
       } else if (newLevels) {
@@ -542,6 +702,14 @@ function setupFilters(skills) {
   applyFilters();
 }
 
+/* ── parse [label](npcId) in obtain text ── */
+function parseObtainText(text) {
+  if (!text) return text;
+  return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label, npcId) => {
+    return `<span class="npc-link" onclick="showNpcPopup('${npcId}','${label.replace(/'/g,"\\'")}')">${label}</span>`;
+  });
+}
+
 /* ── fetch & render ── */
 async function renderJob(jobId) {
   const vp = document.getElementById("view-port");
@@ -587,11 +755,12 @@ async function renderJob(jobId) {
 
   /* obtain HTML — support inline <a> tags */
   const obtainHTML = job.obtain
-    ? `<div class="job-obtain"><span class="job-obtain-label">วิธีเปลี่ยนอาชีพ</span>${job.obtain}</div>`
+    ? `<div class="job-obtain"><span class="job-obtain-label">วิธีเปลี่ยนอาชีพ</span>${parseObtainText(job.obtain)}</div>`
     : '';
 
-  /* skills */
-  const skills = job.skills || [];
+  /* โหลด skills master แล้ว merge กับ job skills */
+  const master = await getSkillsMaster();
+  const skills = mergeSkills(job.skills || [], master);
   window._jobSkills = skills;
   const skillsHTML = skills.length
     ? `<div id="filter-bar" class="filter-bar"></div>
@@ -627,6 +796,48 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>`;
   }
 });
+</script>
+<!-- NPC Location Popup -->
+<div class="npc-overlay" id="npcOverlay" onclick="if(event.target===this)closeNpcPopup()">
+  <div class="npc-popup" onclick="event.stopPropagation()">
+    <div class="npc-popup-header">
+      <span class="npc-popup-title" id="npcPopupTitle">ที่อยู่ NPC</span>
+      <button class="npc-popup-close" onclick="closeNpcPopup()" aria-label="ปิด">✕</button>
+    </div>
+    <div class="npc-popup-img-wrap" id="npcPopupImgWrap">
+      <div class="npc-popup-loading" id="npcPopupLoading">⏳ กำลังโหลด...</div>
+    </div>
+    <div class="npc-popup-info" id="npcPopupInfo"></div>
+  </div>
+</div>
+
+<script>
+async function showNpcPopup(npcId, label) {
+  document.getElementById('npcPopupTitle').textContent = label;
+  document.getElementById('npcPopupInfo').textContent = '';
+  const wrap = document.getElementById('npcPopupImgWrap');
+  wrap.innerHTML = '<div class="npc-popup-loading">⏳ กำลังโหลด...</div>';
+  document.getElementById('npcOverlay').classList.add('open');
+  try {
+    const res = await fetch(NPC_BASE + npcId + '.json');
+    if (!res.ok) throw new Error('not found');
+    const data = await res.json();
+    let html = '';
+    if (data.image) html += `<img src="${data.image}" alt="${label}" />`;
+    else html = '<div class="npc-popup-loading" style="color:var(--text-dim)">ไม่มีรูปภาพ</div>';
+    wrap.innerHTML = html;
+    let info = '';
+    if (data.location) info += '📍 ' + data.location;
+    if (data.desc) info += (info ? '\n' : '') + data.desc;
+    document.getElementById('npcPopupInfo').textContent = info;
+  } catch {
+    wrap.innerHTML = `<div class="npc-popup-error">⚠ ยังไม่มีข้อมูล NPC นี้<br><small style="opacity:.6">${npcId}.json</small></div>`;
+  }
+}
+function closeNpcPopup() {
+  document.getElementById('npcOverlay').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNpcPopup(); });
 </script>
 </body>
 </html>

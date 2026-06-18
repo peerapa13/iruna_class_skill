@@ -1,0 +1,14 @@
+{
+  "skillId": "double_attack_2",
+  "lv" : 2,
+  "questName": "ท่าไม้ตายของทิเรีย",
+  "npcName": "ทิเรีย",
+  "location": "ฐานทัพไบลุน",
+  "conditions": [
+    { "type": "kill",    "text": "กำจัด Goblin Warrior x5"},
+    { "type": "collect", "text": "เก็บ Goblin Fang x3"}
+  ],
+  "submitNpc": "ทิเรีย",
+  "submitLocation": "ฐานทัพไบลุน",
+  "photo": null
+}
