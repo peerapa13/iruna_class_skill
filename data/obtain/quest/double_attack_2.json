@@ -5,8 +5,8 @@
   "npcName": "ทิเรีย",
   "location": "ฐานทัพไบลุน",
   "conditions": [
-    { "type": "kill",    "text": "กำจัด Goblin Warrior x5"},
-    { "type": "collect", "text": "เก็บ Goblin Fang x3"}
+    { "type": "kill",    "text": "...."},
+    { "type": "collect", "text": "...."}
   ],
   "submitNpc": "ทิเรีย",
   "submitLocation": "ฐานทัพไบลุน",

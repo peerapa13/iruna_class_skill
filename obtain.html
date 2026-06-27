@@ -394,7 +394,7 @@ function buildQuestSection(data, lvChar, lvNum) {
     taskHTML = `<div class="task-list">` +
       data.conditions.map(c =>
         `<div class="task-item ${c.type}">
-          <span class="task-icon">${c.icon || (c.type === 'kill' ? '⚔' : '🌿')}</span>
+          <span class="task-icon">${c.icon || (c.type === 'kill' ? '⚔' : '')}</span>
           <span>${c.text}</span>
         </div>`
       ).join('') +
@@ -414,7 +414,7 @@ function buildQuestSection(data, lvChar, lvNum) {
   steps += tlStep(stepNum++, cc,
     'ส่งเควส',
     submitNpc ? npcChip(submitNpc) : 'ส่งเควสกับ NPC ที่รับมา',
-    submitLocation ? `📍 ${submitLocation}` : null,
+    submitLocation ? ` ${submitLocation}` : null,
     null
   );
 
@@ -451,7 +451,7 @@ function buildDropSection(data, lvChar, lvNum) {
 
   steps += tlStep(stepNum++, cc,
     'ล่ามอนสเตอร์',
-    data.monster ? `🐉 <strong>${data.monster}</strong>` : 'มอนสเตอร์ที่ดรอปไอเทม',
+    data.monster ? ` <strong>${data.monster}</strong>` : 'มอนสเตอร์ที่ดรอปไอเทม',
     monsterSub,
     data.photo || null
   );

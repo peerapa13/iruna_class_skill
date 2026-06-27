@@ -328,9 +328,8 @@ function mergeSkills(jobSkills, master) {
       desc:        m.desc        || '',
       image:       m.image       || null,
       summonSkills:m.summonSkills|| null,
-      lv:          s.lv,
+      lv:          s.obtain,   // obtain array carries lv per-entry
       obtain:      s.obtain,
-      loc:         s.loc,
     };
   });
 }
@@ -453,19 +452,19 @@ function renderLoc(locString) {
 }
 
 /* ── level rows ── */
-function buildLevels(lv, loc, obtainArr, skillId) {
-  const lvArr     = lv  ? lv.split(',')  : [];
-  const locArr    = loc ? loc.split(',') : [];
-  const obtainList = Array.isArray(obtainArr) ? obtainArr : [];
-  if (!lvArr.length) return '';
+// obtain is now array of {method, lv, loc}
+function buildLevels(obtain, skillId) {
+  if (!Array.isArray(obtain) || !obtain.length) return '';
   const activeObtain = filterState.obtain;
   const activeLevel  = filterState.level;
-  const rows = lvArr.map((l, i) => {
-    const rowObtain = obtainList[i] ? obtainList[i].trim() : '';
+  const rows = obtain.map((entry, i) => {
+    const rowObtain = (typeof entry === 'object' ? entry.method : entry) || '';
+    const charLv    = String(typeof entry === 'object' ? entry.lv : '').trim();
+    const locRaw    = (typeof entry === 'object' ? entry.loc  : '') || '';
     if (activeObtain !== 'all' && rowObtain !== activeObtain) return '';
     /* filter by level band */
     if (activeLevel !== 'all') {
-      const n = parseInt(l.trim());
+      const n = parseInt(charLv);
       let band = null;
       if (!isNaN(n)) {
         if (n <= 10)       band = '10';
@@ -476,11 +475,8 @@ function buildLevels(lv, loc, obtainArr, skillId) {
       }
       if (band !== activeLevel) return '';
     }
-    const locRaw = locArr[i] ? locArr[i].trim() : '';
     const locInfo = renderLoc(locRaw);
-    const skillLv = i + 1;       /* สกิล Lv (1-based) */
-    const charLv  = l.trim();    /* ตัวละคร Lv */
-    // ── ตรวจสอบเงื่อนไขการกด (เควส, ไอเทมดรอป, ไอเทมซื้อร้านค้า) ──
+    const skillLv = i + 1;   /* สกิล Lv (1-based) */
     const clickableTypes = ['เควส', 'ไอเทมดรอป', 'ไอเทมซื้อร้านค้า'];
     const isClickable = clickableTypes.includes(rowObtain);
     if (isClickable) {
@@ -526,10 +522,10 @@ function buildSkillCard(s) {
   const types = normalizeTypes(s.type);       
   const typeStr = types.join(',').toLowerCase();
   const isSummon = typeStr.includes('summon') || typeStr.includes('อัญเชิญ');
-  const bands    = getLevelBands(s.lv).join(',');
+  const bands    = getLevelBands(s.obtain).join(',');
   const obtain = Array.isArray(s.obtain)
-    ? s.obtain.join(',')
-    : (s.obtain ? s.obtain.trim() : '');
+    ? s.obtain.map(o => (typeof o === 'object' ? o.method : o)).join(',')
+    : (s.obtain ? String(s.obtain).trim() : '');
 
   return `<div class="skill-card" data-types="${typeStr}" data-levels="${bands}" data-obtain="${obtain}">
     <div class="skill-card-header">
@@ -542,19 +538,20 @@ function buildSkillCard(s) {
       </div>
     </div>
     ${s.desc ? `<div class="skill-desc">${s.desc}</div>` : ''}
-    ${s.loc && !s.lv ? `<div class="skill-desc" style="font-size:12px;margin-bottom:0;">📍 ${renderLoc(s.loc)}</div>` : ''}
-    ${buildLevels(s.lv, s.loc, s.obtain, s.skillId)}
+    ${buildLevels(s.obtain, s.skillId)}
     ${isSummon && s.summonSkills ? buildSummonBlock(s.summonSkills) : ''}
   </div>`;
 }
 
 /* ── filter system ── */
 let filterState = { type: 'all', level: 'all', obtain: 'all' };
-function getLevelBands(lvString) {
-  if (!lvString) return [];
+function getLevelBands(lv) {
+  if (!lv || !lv.length) return [];
+  // lv is now array of objects [{method,lv,loc}] — extract .lv numbers
+  const nums = lv.map(entry => (typeof entry === 'object' ? entry.lv : entry));
   return [...new Set(
-    lvString.split(',').map(l => {
-      const n = parseInt(l.trim());
+    nums.map(n => {
+      n = parseInt(n);
       if (isNaN(n)) return null;
       if (n <= 10)  return '10';
       if (n <= 20)  return '20';
@@ -578,7 +575,7 @@ function applyFilters() {
     if (window._jobSkills && window._jobSkills[idx]) {
       const s = window._jobSkills[idx];
       const levelsEl = card.querySelector('.skill-levels');
-      const newLevels = buildLevels(s.lv, s.loc, s.obtain, s.skillId);
+      const newLevels = buildLevels(s.obtain, s.skillId);
       if (levelsEl) {
         levelsEl.outerHTML = newLevels || '<div class="skill-levels"></div>';
       } else if (newLevels) {
@@ -598,11 +595,11 @@ function setupFilters(skills) {
   const obtains = new Set();
   skills.forEach(s => {
     normalizeTypes(s.type).forEach(t => types.add(t));
-    const bands = getLevelBands(s.lv);
+    const bands = getLevelBands(s.obtain);
     bands.forEach(b => levels.add(b));
     if (s.obtain) {
       const vals = Array.isArray(s.obtain) ? s.obtain : [s.obtain];
-      vals.forEach(v => obtains.add(v.trim()));
+      vals.forEach(v => obtains.add((typeof v === 'object' ? v.method : v).trim()));
     }
   });
   const bar = document.getElementById('filter-bar');
